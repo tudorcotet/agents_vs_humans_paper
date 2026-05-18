@@ -1,0 +1,43 @@
+[1] Hit rate x cohort (top-100)
+                      Human      Agent
+              Hit       25         12
+             Miss       40         23
+  Fisher OR=1.198  p=0.8285
+
+[2] Non-expression x cohort (top-100)
+                      Human      Agent
+          NonExpr        5          6
+        Expressed       60         29
+  Fisher OR=0.403  p=0.1857
+
+[6] Method family x cohort (top-100)
+is_human       False  True 
+method_family              
+BindCraft          0      2
+BoltzGen           0      5
+Hallucination      0      8
+Mosaic             0      6
+Other              7      2
+PPIFLOW            0      5
+PXDesign          27     11
+RFDiffusion        0     26
+RFPeptides         1      0
+  chi2=58.807  dof=8  p=7.984e-10
+
+[7] Per-team hit rate (top-100)
+             team  is_human  n_lab  n_binders  n_expressed  hit_rate
+            MRAZS      True      8          5            8  0.625000
+       1000Tokens      True      7          4            6  0.571429
+          GPT 5.2     False      7          4            7  0.571429
+claude-sonnet-4.6     False      8          4            8  0.500000
+         BraiNSEY      True      5          2            4  0.400000
+         EuroBros      True     10          4           10  0.400000
+             crow      True     10          4           10  0.400000
+    grok-4.1-fast     False      5          2            3  0.400000
+         StanFold      True      9          3            9  0.333333
+            GLM 5     False      4          1            4  0.250000
+         BART.bio      True      5          1            4  0.200000
+           NovoFy      True     10          2            9  0.200000
+    qwen-3.5-plus     False      5          1            4  0.200000
+           DeNovo      True      1          0            0  0.000000
+   Gemini 3.1 Pro     False      6          0            3  0.000000

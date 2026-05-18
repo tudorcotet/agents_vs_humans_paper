@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "muni × Adaptyv TREM2 hackathon: paper data and analyses"
+message: "If you use this dataset or code, please cite the entry below."
+type: dataset
+authors:
+  - given-names: Tudor-Stefan
+    family-names: Cotet
+    email: tudor@adaptyvbio.com
+    affiliation: Adaptyv Bio
+keywords:
+  - protein design
+  - TREM2
+  - AI agents
+  - BLI affinity assay
+  - de novo design
+  - hackathon
+license: Apache-2.0
+version: 0.1.0
+date-released: "2026-05-18"
+url: "https://github.com/adaptyvbio/muni_trem2_paper"

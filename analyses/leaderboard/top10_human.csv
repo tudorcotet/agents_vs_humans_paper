@@ -1,0 +1,11 @@
+rank,design_id,name,team,is_human,design_method,design_method_normalized,sequence_length,kd_arith_mean_nM_all,pkd,n_replicates_pushed,weird_replicates_flag,submitted_ipsae,binding_label,binding_strength
+1,17,17_MRAZS_mosaic,MRAZS,True,mosaic,Mosaic,88,1.11345,8.953329280391634,2.0,False,0.879268,binder,strong
+2,13,13_MRAZS_mosaic,MRAZS,True,mosaic,Mosaic,93,1.2511,8.902707975908104,2.0,False,0.945735,binder,strong
+3,74,74_BraiNSEY_BindCraft,BraiNSEY,True,BindCraft,BindCraft,112,1.9082,8.719376108487088,3.0,False,0.733392,binder,strong
+4,34,34_StanFold_PXDesign_ProteinMPNN,StanFold,True,PXDesign + ProteinMPNN,PXDesign+MPNN,100,12.47215,7.904058674616798,2.0,False,0.878916,binder,strong
+5,79,79_BraiNSEY_Struct_Evo,BraiNSEY,True,Struct_Evo,Struct_Evo,245,21.6617,7.664307463147091,2.0,False,0.862584,binder,strong
+6,35,35_StanFold_PXDesign_ProteinMPNN,StanFold,True,PXDesign + ProteinMPNN,PXDesign+MPNN,100,27.389000000000003,7.56242382398591,2.0,False,0.913015,binder,strong
+7,45,45_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,PXDesign + Protenix + AF2,PXDesign+Protenix+AF2,85,32.12065,7.493215674833053,2.0,False,0.903413,binder,strong
+8,47,47_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,PXDesign + Protenix + AF2,PXDesign+Protenix+AF2,85,46.148300000000006,7.335844292779298,2.0,False,0.723769,binder,strong
+9,33,33_StanFold_PXDesign_ProteinMPNN,StanFold,True,PXDesign + ProteinMPNN,PXDesign+MPNN,100,69.7498,7.156457033344987,2.0,False,0.898846,binder,medium
+10,15,15_MRAZS_mosaic,MRAZS,True,mosaic,Mosaic,91,72.87365,7.137429477556856,2.0,False,0.90295,binder,medium

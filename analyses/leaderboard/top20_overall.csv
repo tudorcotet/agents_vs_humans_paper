@@ -1,0 +1,21 @@
+rank,design_id,name,team,is_human,design_method,design_method_normalized,sequence_length,kd_arith_mean_nM_all,pkd,n_replicates_pushed,weird_replicates_flag,submitted_ipsae,binding_label,binding_strength
+1,17,17_MRAZS_mosaic,MRAZS,True,mosaic,Mosaic,88,1.11345,8.953329280391634,2.0,False,0.879268,binder,strong
+2,13,13_MRAZS_mosaic,MRAZS,True,mosaic,Mosaic,93,1.2511,8.902707975908104,2.0,False,0.945735,binder,strong
+3,74,74_BraiNSEY_BindCraft,BraiNSEY,True,BindCraft,BindCraft,112,1.9082,8.719376108487088,3.0,False,0.733392,binder,strong
+4,132,132_GPT_5_2_PXDesign,GPT 5.2,False,PXDesign,PXDesign,100,3.636133333333333,8.439360200018488,3.0,False,0.909331,binder,strong
+5,102,102_grok_4_1_fast_PXDesign,grok-4.1-fast,False,PXDesign,PXDesign,100,6.8485499999999995,8.16440136918759,2.0,False,0.907648,binder,strong
+6,34,34_StanFold_PXDesign_ProteinMPNN,StanFold,True,PXDesign + ProteinMPNN,PXDesign+MPNN,100,12.47215,7.904058674616798,2.0,False,0.878916,binder,strong
+7,79,79_BraiNSEY_Struct_Evo,BraiNSEY,True,Struct_Evo,Struct_Evo,245,21.6617,7.664307463147091,2.0,False,0.862584,binder,strong
+8,35,35_StanFold_PXDesign_ProteinMPNN,StanFold,True,PXDesign + ProteinMPNN,PXDesign+MPNN,100,27.389000000000003,7.56242382398591,2.0,False,0.913015,binder,strong
+9,45,45_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,PXDesign + Protenix + AF2,PXDesign+Protenix+AF2,85,32.12065,7.493215674833053,2.0,False,0.903413,binder,strong
+10,103,103_grok_4_1_fast_PXDesign,grok-4.1-fast,False,PXDesign,PXDesign,100,34.53495,7.461741168432695,2.0,False,0.847931,binder,strong
+11,82,82_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,PXDesign,PXDesign,80,34.906400000000005,7.4570949389473284,2.0,False,0.880691,binder,strong
+12,47,47_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,PXDesign + Protenix + AF2,PXDesign+Protenix+AF2,85,46.148300000000006,7.335844292779298,2.0,False,0.723769,binder,strong
+13,138,138_GPT_5_2_PXDesign,GPT 5.2,False,PXDesign,PXDesign,90,46.2453,7.334932398877083,2.0,False,0.900982,binder,strong
+14,33,33_StanFold_PXDesign_ProteinMPNN,StanFold,True,PXDesign + ProteinMPNN,PXDesign+MPNN,100,69.7498,7.156457033344987,2.0,False,0.898846,binder,medium
+15,15,15_MRAZS_mosaic,MRAZS,True,mosaic,Mosaic,91,72.87365,7.137429477556856,2.0,False,0.90295,binder,medium
+16,137,137_GPT_5_2_PXDesign,GPT 5.2,False,PXDesign,PXDesign,100,80.96844999999999,7.091684174455946,2.0,False,0.738767,binder,medium
+17,14,14_MRAZS_mosaic,MRAZS,True,mosaic,Mosaic,81,81.97735,7.086306124797006,2.0,False,0.937456,binder,medium
+18,21,21_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,AF Hallucination + ProteinMPNN + Pyrosetta + Boltz2,AFHall+MPNN+PyR+Boltz2,89,86.49924999999999,7.062987658110602,2.0,False,0.84706,binder,medium
+19,25,25_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,AF Hallucination + ProteinMPNN + Pyrosetta + Boltz2,AFHall+MPNN+PyR+Boltz2,89,97.1946,7.012357863215175,2.0,False,0.70384,binder,medium
+20,95,95_qwen_3_5_plus_PXDesign,qwen-3.5-plus,False,PXDesign,PXDesign,90,137.75336666666666,6.86089777827009,3.0,False,0.819015,binder,medium

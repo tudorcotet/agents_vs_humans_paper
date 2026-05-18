@@ -1,0 +1,142 @@
+design_id,name,team,is_human,sequence_length,kmer_entropy_k3
+1,1_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,100,5.848448783607044
+2,2_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,90,5.691830766118727
+3,3_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,116,6.291008983368107
+4,4_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,56,5.532665279941245
+5,5_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,116,6.291008983368107
+6,6_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,90,5.811482186720782
+7,7_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,56,5.333500696567849
+8,8_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,56,5.532665279941245
+9,9_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,90,5.729151362881729
+10,10_NovoFy_RFDiffusion_LigandMPNN_Boltz,NovoFy,True,116,6.231755584226321
+11,11_MRAZS_PXDesign,MRAZS,True,80,6.096236994475544
+12,12_MRAZS_PXDesign,MRAZS,True,40,5.247927513443589
+13,13_MRAZS_mosaic,MRAZS,True,93,6.2714234863049985
+14,14_MRAZS_mosaic,MRAZS,True,81,6.031505115210942
+15,15_MRAZS_mosaic,MRAZS,True,91,5.950397616335358
+16,16_MRAZS_mosaic,MRAZS,True,89,6.227370076283627
+17,17_MRAZS_mosaic,MRAZS,True,88,6.245918533721553
+18,18_MRAZS_mosaic,MRAZS,True,60,5.685567202024123
+19,19_MRAZS_BoltzGen,MRAZS,True,84,6.226394839957557
+20,20_MRAZS_BoltzGen,MRAZS,True,84,6.138039809496136
+21,21_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,89,6.396966484354469
+22,22_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,91,6.3773639084701905
+23,23_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,65,5.945533891753888
+24,24_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,131,6.9647156275162585
+25,25_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,89,6.296335593525005
+26,26_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,62,5.873557262275184
+27,27_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,131,6.995723379454243
+28,28_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,EuroBros,True,68,5.9420473390226505
+29,29_EuroBros_RFDiffusion2_with_common_fold_conditionnning_ProteinMPNN_Boltz2,EuroBros,True,65,5.913787860007857
+30,30_EuroBros_RFDiffusion2_with_common_fold_conditionnning_ProteinMPNN_Boltz2,EuroBros,True,52,5.483856189774728
+31,31_DeNovo_RFDiffusion3_ProteinMPNN_RosettaFold,DeNovo,True,78,4.526199983883962
+32,32_DeNovo_RFDiffusion3_ProteinMPNN_RosettaFold,DeNovo,True,81,4.052581404778574
+33,33_StanFold_PXDesign_ProteinMPNN,StanFold,True,100,6.1659938395127964
+34,34_StanFold_PXDesign_ProteinMPNN,StanFold,True,100,6.333997854275146
+35,35_StanFold_PXDesign_ProteinMPNN,StanFold,True,100,6.109508058356777
+36,36_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,StanFold,True,122,6.8235572622752
+37,37_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,StanFold,True,126,6.889680181354603
+38,38_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,StanFold,True,107,6.5737227795502715
+39,39_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,StanFold,True,67,5.991598582259227
+40,40_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,StanFold,True,62,5.84022392894185
+41,41_StanFold_Boltzgen,StanFold,True,122,6.840223928941867
+42,42_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,StanFold,True,123,6.8465087951079635
+43,43_1000Tokens_BoltzGen,1000Tokens,True,113,6.646987686380747
+44,44_1000Tokens_Protpardelle,1000Tokens,True,104,6.613601812559735
+45,45_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,85,6.221366087947372
+46,46_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,90,6.1143801643577556
+47,47_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,85,6.058597714401262
+48,48_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,75,6.052838257510162
+49,49_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,85,6.115885515632149
+50,50_1000Tokens_PXDesign_Protenix_AF2,1000Tokens,True,80,6.003350936810973
+51,51_1000Tokens_BoltzGen_Boltz2_ipSAE,1000Tokens,True,81,6.2531478367847
+52,52_1000Tokens_BoltzGen_Boltz2,1000Tokens,True,67,5.868521659182304
+53,53_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.939690266734055
+54,54_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.973286455784832
+55,55_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.857313589878403
+56,56_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,6.089259321691257
+57,57_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.939690266734057
+58,58_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,6.153224108250241
+59,59_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.628595449608115
+60,60_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.848107644730069
+61,61_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.875725480175074
+62,62_crow_RFDiffusion_ProteinMPNN_Boltz2,crow,True,84,5.972068584198123
+63,63_BART_bio_BoltzGen_Boltz2,BART.bio,True,80,6.060917923934987
+64,64_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,BART.bio,True,62,5.660975803905793
+65,65_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,BART.bio,True,62,5.760975803905792
+66,66_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,BART.bio,True,62,5.627642470572459
+67,67_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,BART.bio,True,62,5.448394345536402
+68,68_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,BART.bio,True,62,5.581727678869735
+69,69_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,BART.bio,True,62,5.540223928941851
+70,70_BART_bio_ProteinMPNN_Boltz2,BART.bio,True,120,6.848744744277086
+71,71_BART_bio_ProteinMPNN_Boltz2,BART.bio,True,120,6.848744744277086
+72,72_BART_bio_ProteinMPNN_Boltz2,BART.bio,True,120,6.848744744277086
+73,73_BraiNSEY_BoltzGen,BraiNSEY,True,93,6.345653019295805
+74,74_BraiNSEY_BindCraft,BraiNSEY,True,112,6.719951645323182
+75,75_BraiNSEY_BindCraft,BraiNSEY,True,108,6.671316680978278
+76,76_BraiNSEY_BoltzGen,BraiNSEY,True,119,6.8703647195833835
+77,77_BraiNSEY_evo_ESM,BraiNSEY,True,247,7.602286318754049
+78,78_BraiNSEY_Struct_Evo,BraiNSEY,True,197,7.576561082980416
+79,79_BraiNSEY_Struct_Evo,BraiNSEY,True,245,7.590815551100703
+80,80_BraiNSEY_evo_ESM,BraiNSEY,True,115,6.802479847370959
+81,81_Marcel_Alphafold_PXDesign_Boltz2,Marcel,True,55,5.652448756449988
+82,82_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,80,5.8973937251893
+83,83_claude_sonnet_4_6_Foundry,claude-sonnet-4.6,False,78,6.043851526544551
+84,84_claude_sonnet_4_6_Foundry,claude-sonnet-4.6,False,84,5.401815677272665
+85,85_claude_sonnet_4_6_Foundry,claude-sonnet-4.6,False,65,5.119283926594993
+86,86_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,80,6.08027401373405
+87,87_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,80,5.942390840629391
+88,88_claude_sonnet_4_6_Foundry,claude-sonnet-4.6,False,81,5.868786723156848
+89,89_claude_sonnet_4_6_Foundry,claude-sonnet-4.6,False,64,5.243888245591589
+90,90_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,80,5.98271452047204
+91,91_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,80,5.881430744447807
+92,92_qwen_3_5_plus_PXDesign,qwen-3.5-plus,False,90,6.269035169749084
+93,93_qwen_3_5_plus_PXDesign,qwen-3.5-plus,False,90,5.810347351833168
+94,94_qwen_3_5_plus_Foundry,qwen-3.5-plus,False,100,5.9629312422690175
+95,95_qwen_3_5_plus_PXDesign,qwen-3.5-plus,False,90,6.200853351567264
+96,96_qwen_3_5_plus_Foundry,qwen-3.5-plus,False,100,5.091666824860029
+97,97_qwen_3_5_plus_Foundry,qwen-3.5-plus,False,100,6.002728533390347
+98,98_qwen_3_5_plus_PXDesign,qwen-3.5-plus,False,90,6.124093266315407
+99,99_qwen_3_5_plus_Foundry,qwen-3.5-plus,False,99,6.254451244204385
+100,100_qwen_3_5_plus_Foundry,qwen-3.5-plus,False,100,6.5330771910539935
+101,101_qwen_3_5_plus_Foundry,qwen-3.5-plus,False,100,6.464149767562528
+102,102_grok_4_1_fast_PXDesign,grok-4.1-fast,False,100,6.206546578809094
+103,103_grok_4_1_fast_PXDesign,grok-4.1-fast,False,100,6.285478594048988
+104,104_grok_4_1_fast_PXDesign,grok-4.1-fast,False,100,6.362108951235998
+105,105_grok_4_1_fast_PXDesign,grok-4.1-fast,False,100,6.211548874683308
+106,106_grok_4_1_fast_PXDesign,grok-4.1-fast,False,100,6.091401553144356
+107,107_grok_4_1_fast_BoltzGen,grok-4.1-fast,False,63,5.897950452316981
+108,108_grok_4_1_fast_BoltzGen,grok-4.1-fast,False,50,5.5849625007211605
+109,109_grok_4_1_fast_RFPeptides,grok-4.1-fast,False,12,3.321928094887362
+110,110_grok_4_1_fast_RFPeptides,grok-4.1-fast,False,12,3.321928094887362
+111,111_grok_4_1_fast_RFPeptides,grok-4.1-fast,False,12,3.321928094887362
+112,112_Gemini_3_1_Pro_PXDesign,Gemini 3.1 Pro,False,80,6.12187802011657
+113,113_Gemini_3_1_Pro_PXDesign,Gemini 3.1 Pro,False,80,6.054632988093024
+114,114_Gemini_3_1_Pro_PXDesign,Gemini 3.1 Pro,False,80,5.958353821370884
+115,115_Gemini_3_1_Pro_PXDesign,Gemini 3.1 Pro,False,80,6.009635872652935
+116,116_Gemini_3_1_Pro_BoltzGen,Gemini 3.1 Pro,False,84,6.104443620445362
+117,117_Gemini_3_1_Pro_BoltzGen,Gemini 3.1 Pro,False,61,5.814846439192345
+118,118_Gemini_3_1_Pro_BoltzGen,Gemini 3.1 Pro,False,80,6.234120167580205
+119,119_Gemini_3_1_Pro_Foundry,Gemini 3.1 Pro,False,65,4.989361971793132
+120,120_Gemini_3_1_Pro_Foundry,Gemini 3.1 Pro,False,65,4.801758393167061
+121,121_Gemini_3_1_Pro_Foundry,Gemini 3.1 Pro,False,65,4.471438313331372
+122,122_GLM_5_PXDesign,GLM 5,False,80,5.759510552084639
+123,123_GLM_5_PXDesign,GLM 5,False,80,6.054632988093025
+124,124_GLM_5_PXDesign,GLM 5,False,80,5.84611167390725
+125,125_GLM_5_PXDesign,GLM 5,False,80,5.862074654648744
+126,126_GLM_5_PXDesign,GLM 5,False,80,6.147519045757596
+127,127_GLM_5_BoltzGen,GLM 5,False,81,6.006188659514739
+128,128_GLM_5_BoltzGen,GLM 5,False,81,6.227831381088497
+129,129_GLM_5_BoltzGen,GLM 5,False,70,6.087462841250345
+130,130_GLM_5_Foundry,GLM 5,False,80,5.865467763706312
+131,131_GLM_5_Foundry,GLM 5,False,80,6.044954943193493
+132,132_GPT_5_2_PXDesign,GPT 5.2,False,100,6.30088446144008
+133,133_GPT_5_2_PXDesign,GPT 5.2,False,90,6.254886164091849
+134,134_GPT_5_2_PXDesign,GPT 5.2,False,100,6.2432162527216795
+135,135_GPT_5_2_Foundry,GPT 5.2,False,85,4.889216388787266
+136,136_GPT_5_2_PXDesign,GPT 5.2,False,90,6.34579525500094
+137,137_GPT_5_2_PXDesign,GPT 5.2,False,100,6.3952223440710645
+138,138_GPT_5_2_PXDesign,GPT 5.2,False,90,6.323067982273668
+139,139_GPT_5_2_PXDesign,GPT 5.2,False,90,6.192275084497226
+140,140_GPT_5_2_PXDesign,GPT 5.2,False,100,6.431036374727462
+141,141_GPT_5_2_PXDesign,GPT 5.2,False,90,6.186704345910032

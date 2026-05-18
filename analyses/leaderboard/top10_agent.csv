@@ -1,0 +1,11 @@
+rank,design_id,name,team,is_human,design_method,design_method_normalized,sequence_length,kd_arith_mean_nM_all,pkd,n_replicates_pushed,weird_replicates_flag,submitted_ipsae,binding_label,binding_strength
+1,132,132_GPT_5_2_PXDesign,GPT 5.2,False,PXDesign,PXDesign,100,3.636133333333333,8.439360200018488,3.0,False,0.909331,binder,strong
+2,102,102_grok_4_1_fast_PXDesign,grok-4.1-fast,False,PXDesign,PXDesign,100,6.8485499999999995,8.16440136918759,2.0,False,0.907648,binder,strong
+3,103,103_grok_4_1_fast_PXDesign,grok-4.1-fast,False,PXDesign,PXDesign,100,34.53495,7.461741168432695,2.0,False,0.847931,binder,strong
+4,82,82_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,PXDesign,PXDesign,80,34.906400000000005,7.4570949389473284,2.0,False,0.880691,binder,strong
+5,138,138_GPT_5_2_PXDesign,GPT 5.2,False,PXDesign,PXDesign,90,46.2453,7.334932398877083,2.0,False,0.900982,binder,strong
+6,137,137_GPT_5_2_PXDesign,GPT 5.2,False,PXDesign,PXDesign,100,80.96844999999999,7.091684174455946,2.0,False,0.738767,binder,medium
+7,95,95_qwen_3_5_plus_PXDesign,qwen-3.5-plus,False,PXDesign,PXDesign,90,137.75336666666666,6.86089777827009,3.0,False,0.819015,binder,medium
+8,134,134_GPT_5_2_PXDesign,GPT 5.2,False,PXDesign,PXDesign,100,177.59050000000002,6.750580270020979,2.0,False,0.855302,binder,medium
+9,91,91_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,PXDesign,PXDesign,80,204.40915,6.689499667707734,2.0,False,0.829435,binder,medium
+10,86,86_claude_sonnet_4_6_PXDesign,claude-sonnet-4.6,False,PXDesign,PXDesign,80,214.5512,6.668469052084836,3.0,False,0.731221,binder,medium

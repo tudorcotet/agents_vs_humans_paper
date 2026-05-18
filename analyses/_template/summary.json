@@ -1,0 +1,8 @@
+{
+  "n_screened": 100,
+  "n_human": 65,
+  "n_agent": 35,
+  "hit_rate_overall": 0.37,
+  "hit_rate_human": 0.38461538461538464,
+  "hit_rate_agent": 0.34285714285714286
+}

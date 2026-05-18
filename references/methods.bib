@@ -1,0 +1,479 @@
+% =============================================================================
+% references/methods.bib
+%
+% Citations for protein binder design methods used by the 16 teams in the
+% bioArena × Adaptyv TREM2 hackathon (Feb 28 2026).
+%
+% Every entry has been verified at the source. Where a method is open-weight
+% with a permissive license, a `note` records that fact for reviewers.
+% =============================================================================
+
+
+% -----------------------------------------------------------------------------
+% RFdiffusion family
+% -----------------------------------------------------------------------------
+
+@article{watson2023rfdiffusion,
+    title       = {De novo design of protein structure and function with {RFdiffusion}},
+    author      = {Watson, Joseph L. and Juergens, David and Bennett, Nathaniel R. and Trippe, Brian L. and Yim, Jason and Eisenach, Helen E. and Ahern, Woody and Borst, Andrew J. and Ragotte, Robert J. and Milles, Lukas F. and Wicky, Basile I. M. and Hanikel, Nikita and Pellock, Samuel J. and Courbet, Alexis and Sheffler, William and Wang, Jue and Venkatesh, Preetham and Sappington, Isaac and Torres, Susana V{\'a}zquez and Lauko, Anna and De Bortoli, Valentin and Mathieu, Emile and Ovchinnikov, Sergey and Barzilay, Regina and Jaakkola, Tommi S. and DiMaio, Frank and Baek, Minkyung and Baker, David},
+    journal     = {Nature},
+    volume      = {620},
+    number      = {7976},
+    pages       = {1089--1100},
+    year        = {2023},
+    doi         = {10.1038/s41586-023-06415-8},
+    url         = {https://www.nature.com/articles/s41586-023-06415-8},
+    note        = {Open weights at github.com/RosettaCommons/RFdiffusion; accessed 2026-05-06}
+}
+
+@article{krishna2024rfaa,
+    title       = {Generalized biomolecular modeling and design with {RoseTTAFold All-Atom}},
+    author      = {Krishna, Rohith and Wang, Jue and Ahern, Woody and Sturmfels, Pascal and Venkatesh, Preetham and Kalvet, Indrek and Lee, Gyu Rie and Morey-Burrows, Felix S. and Anishchenko, Ivan and Humphreys, Ian R. and McHugh, Ryan and Vafeados, Dionne and Li, Xinting and Sutherland, George A. and Hitchcock, Andrew and Hunter, C. Neil and Kang, Alex and Brackenbrough, Evans and Bera, Asim K. and Baek, Minkyung and DiMaio, Frank and Baker, David},
+    journal     = {Science},
+    volume      = {384},
+    number      = {6693},
+    pages       = {eadl2528},
+    year        = {2024},
+    doi         = {10.1126/science.adl2528},
+    url         = {https://www.science.org/doi/10.1126/science.adl2528},
+    note        = {Includes RFdiffusion-AA. Open weights; accessed 2026-05-06}
+}
+
+@article{bennett2025rfdiffusion2enzymes,
+    title       = {Atom-level enzyme active site scaffolding using {RFdiffusion2}},
+    author      = {Ahern, Woody and Yim, Jason and Tischer, Doug and Salike, Saman and Woodbury, Seth M. and Kim, Donghyo and Kalvet, Indrek and Kipnis, Yakov and Coventry, Brian and Altae-Tran, Han Reza and Bauer, Magnus and Juergens, David and Hanikel, Nikita and Levine, Paul M. and Borst, Andrew J. and DeWitt, Michelle and Pellock, Samuel J. and Mirabello, Claudio and Wallner, Bj{\"o}rn and Barzilay, Regina and Jaakkola, Tommi S. and Bera, Asim K. and Baek, Minkyung and Watson, Joseph L. and Baker, David},
+    journal     = {Nature Methods},
+    year        = {2025},
+    doi         = {10.1038/s41592-025-02975-x},
+    url         = {https://www.nature.com/articles/s41592-025-02975-x},
+    note        = {RFdiffusion2 introduces atom-level motif scaffolding; preprint at \url{https://doi.org/10.1101/2025.04.09.648075}; open weights; accessed 2026-05-06}
+}
+
+@article{butcher2025rfdiffusion3,
+    title       = {De novo design of all-atom biomolecular interactions with {RFdiffusion3}},
+    author      = {Butcher, Jasper and Krishna, Rohith and Mitra, Raktim and Brent, Rafael I. and Li, Yanjing and Corley, Nathaniel and Ahern, Woody and Sappington, Isaac and Watson, Joseph L. and Baek, Minkyung and Baker, David},
+    journal     = {bioRxiv},
+    year        = {2025},
+    doi         = {10.1101/2025.09.18.676967},
+    url         = {https://www.biorxiv.org/content/10.1101/2025.09.18.676967v2},
+    note        = {Open weights via Rosetta Commons Foundry; accessed 2026-05-06}
+}
+
+@article{bennett2026rfantibody,
+    title       = {Atomically accurate de novo design of antibodies with {RFdiffusion}},
+    author      = {Bennett, Nathaniel R. and Watson, Joseph L. and Ragotte, Robert J. and Borst, Andrew J. and See, D{\'e}Jena{\'e} L. and Weidle, Connor and Biswas, Riti and Yu, Yutong (Adam) and Shrock, Ellen L. and Ault, Russell and Leung, Philip J. Y. and Huang, Buwei and Goreshnik, Inna and Tischer, Doug and Vafeados, Dionne and Sappington, Isaac and Toul, Martin and Lauko, Anna and Pellock, Samuel J. and Trippe, Brian L. and Yim, Jason and Lisanza, Sidney L. and Park, Joon Sung and Borchardt, Emily K. and Joachimiak, Marcin and Sankaran, Banumathi and DiMaio, Frank and Baek, Minkyung and Baker, David},
+    journal     = {Nature},
+    year        = {2026},
+    doi         = {10.1038/s41586-025-09721-5},
+    url         = {https://www.nature.com/articles/s41586-025-09721-5},
+    note        = {RFantibody / fine-tuned RFdiffusion variant; preprint at \url{https://doi.org/10.1101/2024.03.14.585103}; accessed 2026-05-06}
+}
+
+@article{yim2023framediff,
+    title       = {{SE(3)} diffusion model with application to protein backbone generation},
+    author      = {Yim, Jason and Trippe, Brian L. and De Bortoli, Valentin and Mathieu, Emile and Doucet, Arnaud and Barzilay, Regina and Jaakkola, Tommi},
+    journal     = {Proceedings of the 40th International Conference on Machine Learning ({ICML})},
+    year        = {2023},
+    eprint      = {2302.02277},
+    archivePrefix = {arXiv},
+    url         = {https://arxiv.org/abs/2302.02277},
+    note        = {FrameDiff; accessed 2026-05-06}
+}
+
+@article{rettie2024rfpeptides,
+    title       = {Accurate de novo design of high-affinity protein-binding macrocycles using deep learning},
+    author      = {Rettie, Stephen A. and Juergens, David and Adebomi, Victor and Flores Bueso, Yensi and Zhao, Qinqin and Leveille, Alexandria N. and Liu, Andi and Bera, Asim K. and Wilms, Joana A. and Hultquist, Miriam M. and Lauer, Walter and Kang, Alex and Coventry, Brian and Costello, Caitlin and Lubner, Janessa M. and Watson, Joseph L. and Sahtoe, Danny D. and Baker, David and Bhardwaj, Gaurav},
+    journal     = {Nature Chemical Biology},
+    year        = {2025},
+    doi         = {10.1038/s41589-025-01929-w},
+    url         = {https://www.nature.com/articles/s41589-025-01929-w},
+    note        = {RFpeptides; preprint at \url{https://doi.org/10.1101/2024.11.18.622547}; open weights; accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% Inverse folding / sequence design
+% -----------------------------------------------------------------------------
+
+@article{dauparas2022proteinmpnn,
+    title       = {Robust deep learning-based protein sequence design using {ProteinMPNN}},
+    author      = {Dauparas, J. and Anishchenko, I. and Bennett, N. and Bai, H. and Ragotte, R. J. and Milles, L. F. and Wicky, B. I. M. and Courbet, A. and de Haas, R. J. and Bethel, N. and Leung, P. J. Y. and Huddy, T. F. and Pellock, S. and Tischer, D. and Chan, F. and Koepnick, B. and Nguyen, H. and Kang, A. and Sankaran, B. and Bera, A. K. and King, N. P. and Baker, D.},
+    journal     = {Science},
+    volume      = {378},
+    number      = {6615},
+    pages       = {49--56},
+    year        = {2022},
+    doi         = {10.1126/science.add2187},
+    url         = {https://www.science.org/doi/10.1126/science.add2187},
+    note        = {ProteinMPNN; open weights at github.com/dauparas/ProteinMPNN; accessed 2026-05-06}
+}
+
+@article{dauparas2025ligandmpnn,
+    title       = {Atomic context-conditioned protein sequence design using {LigandMPNN}},
+    author      = {Dauparas, Justas and Lee, Gyu Rie and Pecoraro, Robert and An, Linna and Anishchenko, Ivan and Glasscock, Cameron and Baker, David},
+    journal     = {Nature Methods},
+    year        = {2025},
+    doi         = {10.1038/s41592-025-02626-1},
+    url         = {https://doi.org/10.1038/s41592-025-02626-1},
+    note        = {LigandMPNN; preprint at \url{https://doi.org/10.1101/2023.12.22.573103} (Dec 2023); open weights; accessed 2026-05-06}
+}
+
+@article{shuai2025fampnn,
+    title       = {Sidechain conditioning and modeling for full-atom protein sequence design with {FAMPNN}},
+    author      = {Shuai, Richard W. and Widatalla, Talal and Huang, Po-Ssu and Hie, Brian L.},
+    journal     = {Proceedings of the 42nd International Conference on Machine Learning ({ICML})},
+    year        = {2025},
+    doi         = {10.1101/2025.02.13.637498},
+    url         = {https://doi.org/10.1101/2025.02.13.637498},
+    note        = {Full-atom MPNN; published at ICML 2025; open weights; accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% Hallucination / iterative inversion of structure predictors
+% -----------------------------------------------------------------------------
+
+@article{anishchenko2021hallucination,
+    title       = {De novo protein design by deep network hallucination},
+    author      = {Anishchenko, Ivan and Pellock, Samuel J. and Chidyausiku, Tamuka M. and Ramelot, Theresa A. and Ovchinnikov, Sergey and Hao, Jingzhou and Bafna, Khushboo and Norn, Christoffer and Kang, Alex and Bera, Asim K. and DiMaio, Frank and Carter, Lauren and Chow, Cameron M. and Montelione, Gaetano T. and Baker, David},
+    journal     = {Nature},
+    volume      = {600},
+    number      = {7889},
+    pages       = {547--552},
+    year        = {2021},
+    doi         = {10.1038/s41586-021-04184-w},
+    url         = {https://www.nature.com/articles/s41586-021-04184-w},
+    note        = {Original deep-network hallucination paper (trRosetta); accessed 2026-05-06}
+}
+
+@article{norn2021design,
+    title       = {Protein sequence design by conformational landscape optimization},
+    author      = {Norn, Christoffer and Wicky, Basile I. M. and Juergens, David and Liu, Sirui and Kim, David and Tischer, Doug and Koepnick, Brian and Anishchenko, Ivan and Foldit Players and Baker, David and Ovchinnikov, Sergey},
+    journal     = {Proceedings of the National Academy of Sciences},
+    volume      = {118},
+    number      = {11},
+    pages       = {e2017228118},
+    year        = {2021},
+    doi         = {10.1073/pnas.2017228118},
+    url         = {https://www.pnas.org/doi/10.1073/pnas.2017228118},
+    note        = {trRosetta hallucination via gradient-based MCMC; accessed 2026-05-06}
+}
+
+@article{wicky2022symmetric,
+    title       = {Hallucinating symmetric protein assemblies},
+    author      = {Wicky, B. I. M. and Milles, L. F. and Courbet, A. and Ragotte, R. J. and Dauparas, J. and Kinfu, E. and Tipps, S. and Kibler, R. D. and Baek, M. and DiMaio, F. and Li, X. and Carter, L. and Kang, A. and Nguyen, H. and Bera, A. K. and Baker, D.},
+    journal     = {Science},
+    volume      = {378},
+    number      = {6615},
+    pages       = {56--61},
+    year        = {2022},
+    doi         = {10.1126/science.add1964},
+    url         = {https://www.science.org/doi/10.1126/science.add1964},
+    note        = {AF2 hallucination + ProteinMPNN for symmetric assemblies; accessed 2026-05-06}
+}
+
+@misc{ovchinnikov2024colabdesign,
+    title       = {{ColabDesign}: Making protein design accessible to all},
+    author      = {Ovchinnikov, Sergey and {ColabDesign Contributors}},
+    howpublished = {GitHub repository},
+    year        = {2024},
+    url         = {https://github.com/sokrypton/ColabDesign},
+    note        = {The de facto reference implementation of AF2 hallucination, AfDesign, MPNN-coupled design; MIT license; accessed 2026-05-06}
+}
+
+@article{frank2025relaxed,
+    title       = {Scalable protein design using optimization in a relaxed sequence space},
+    author      = {Frank, Christopher and Khoshouei, Ali and Fu{\ss}, Lara and Schiwietz, Dominik and Putz, Lisa and Weber, Lukas and Zhao, Zhixuan and Hattori, Mike and Feng, Shihao and de Stigter, Yvonne and Ovchinnikov, Sergey and Dietz, Hendrik},
+    journal     = {Science},
+    year        = {2024},
+    doi         = {10.1126/science.adq1741},
+    url         = {https://www.science.org/doi/10.1126/science.adq1741},
+    note        = {Relaxed sequence-space optimization; modern hallucination implementation used by BindCraft and Mosaic; accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% BindCraft (one-shot AF2-driven binder design)
+% -----------------------------------------------------------------------------
+
+@article{pacesa2025bindcraft,
+    title       = {One-shot design of functional protein binders with {BindCraft}},
+    author      = {Pacesa, Martin and Nickel, Lennart and Schellhaas, Christian and Schmidt, Joseph and Pyatova, Ekaterina and Kissling, Lucas and Barendse, Patrick and Choudhury, Jagrit and Kapoor, Srajan and Alcaraz-Serna, Ana and Cho, Yehlin and Ghamary, Kourosh H. and Vinogradova, Ekaterina and Visini, Riccardo and Wicky, Basile I. M. and Casas, Roxanne and {Schwaiger-Haber}, Marlene and Pavlovic, Sandra and Pugh, Connor and Mannone, Manuela and Hosseinzadeh, Parisa and Mochizuki, Andrew and Petter, Christoph and Marchand, Anthony and Vinogradov, Alexander A. and Heyns, Ivan and Veres, Daniel and Sourrouille, Pierre-Yves and Pillay, Sayuri and Klausen, Vincent and B{\"a}umler, Marc and Ji, Henry and Chen, Renny and Wallace, Robert and de la Vega, Ana and Bunzel, H. Adrian and B{\"u}rgi, Justin and Cao, Longxing and Lu, Tianyu and Khmelinskaia, Alena and Bernier, Sara and Hofstede, Karla M. and Marchant, Roman and Sigmundsson, Kristj{\'a}n and Vorobieva, Anastassia A. and Smit, Yu Wei and Zhdanov, Grigory and Erlach, Lukas and Sesterhenn, Fabian and Vidal Ceballos, Antonia and Yang, Eun and Vasilic, Igor and Gainza, Pablo and Marx, Andreas and Yarov-Yarovoy, Vladimir and Kortemme, Tanja and Pomp{\'e}rmayer, Mikolas and DiMaio, Frank and Baker, David and Correia, Bruno E.},
+    journal     = {Nature},
+    volume      = {646},
+    pages       = {483--492},
+    year        = {2025},
+    doi         = {10.1038/s41586-025-09429-6},
+    url         = {https://www.nature.com/articles/s41586-025-09429-6},
+    note        = {Preprint at \url{https://doi.org/10.1101/2024.09.30.615802}; open source at github.com/martinpacesa/BindCraft; accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% Boltz family (MIT) and BoltzGen
+% -----------------------------------------------------------------------------
+
+@article{wohlwend2024boltz1,
+    title       = {{Boltz-1}: Democratizing biomolecular interaction modeling},
+    author      = {Wohlwend, Jeremy and Corso, Gabriele and Passaro, Saro and Reveiz, Mateo and Leidal, Ken and Swiderski, Wojtek and Portnoi, Tally and Chinn, Itamar and Silterra, Jacob and Jaakkola, Tommi and Barzilay, Regina},
+    journal     = {bioRxiv},
+    year        = {2024},
+    doi         = {10.1101/2024.11.19.624167},
+    url         = {https://www.biorxiv.org/content/10.1101/2024.11.19.624167},
+    note        = {First fully open-weight AlphaFold3-class predictor; MIT license; accessed 2026-05-06}
+}
+
+@article{passaro2025boltz2,
+    title       = {{Boltz-2}: Towards accurate and efficient binding affinity prediction},
+    author      = {Passaro, Saro and Corso, Gabriele and Wohlwend, Jeremy and Reveiz, Mateo and Thaler, Stephan and Somnath, Vignesh Ram and Getz, Noah and Portnoi, Tally and Roy, Julien and Stark, Hannes and Kwabi-Addo, David and Beaini, Dominique and Jaakkola, Tommi and Barzilay, Regina},
+    journal     = {bioRxiv},
+    year        = {2025},
+    doi         = {10.1101/2025.06.14.659707},
+    url         = {https://www.biorxiv.org/content/10.1101/2025.06.14.659707v1},
+    note        = {Joint structure + affinity head; the de facto in-silico filter for the hackathon (top-100 by ipSAE); MIT license; accessed 2026-05-06}
+}
+
+@article{stark2025boltzgen,
+    title       = {{BoltzGen}: Toward universal binder design},
+    author      = {Stark, Hannes and Faltings, Felix and Choi, MinGyu and Xie, Yuxin and Hur, Eunsu and O'Donnell, Timothy and Bushuiev, Anton and Wohlwend, Jeremy and Corso, Gabriele and Passaro, Saro and Jaakkola, Tommi and Barzilay, Regina},
+    journal     = {bioRxiv},
+    year        = {2025},
+    doi         = {10.1101/2025.11.20.689494},
+    url         = {https://www.biorxiv.org/content/10.1101/2025.11.20.689494v1},
+    note        = {All-atom generative binder model unified with structure prediction; experimentally validated nM binders on 66\% of novel targets; open weights at github.com/HannesStark/boltzgen; accessed 2026-05-06}
+}
+
+@article{cho2025boltzdesign1,
+    title       = {{Boltzdesign1}: Inverting all-atom structure prediction model for generalized biomolecular binder design},
+    author      = {Cho, Yehlin and Pacesa, Martin and Zhang, Zhidian and Correia, Bruno E. and Ovchinnikov, Sergey},
+    journal     = {bioRxiv},
+    year        = {2025},
+    doi         = {10.1101/2025.04.06.647261},
+    url         = {https://www.biorxiv.org/content/10.1101/2025.04.06.647261v1},
+    note        = {BindCraft-style hallucination but on Boltz-1 instead of AF2; precursor to BoltzGen; accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% Mosaic (Escalante Bio)
+% -----------------------------------------------------------------------------
+
+@misc{boyd2025mosaic,
+    title       = {Mosaic: Composite-objective protein design},
+    author      = {Boyd, Nick and Guns, Sam and {Escalante Bio}},
+    howpublished = {GitHub repository},
+    year        = {2025},
+    url         = {https://github.com/escalante-bio/mosaic},
+    note        = {Functional, multi-objective design via gradient-based optimization in relaxed sequence space; wraps Boltz-1/2, BoltzGen, AF2, OpenFold3, Protenix, ProteinMPNN, ESM, AbLang. Open source under MIT; no peer-reviewed paper as of 2026-05. Used by team MRAZS (3/3 binders) at the TREM2 hackathon. Accessed 2026-05-06}
+}
+
+@misc{boyd2026nipah,
+    title       = {{\textasciitilde}180 lines of code to win the in-silico portion of the Adaptyv {Nipah} binding competition},
+    author      = {Boyd, Nick and Guns, Sam},
+    howpublished = {Escalante Bio blog},
+    year        = {2026},
+    url         = {https://blog.escalante.bio/180-lines-of-code-to-win-the-in-silico-portion-of-the-adaptyv-nipah-binding-competition/},
+    note        = {The reference Mosaic recipe: gradient-descent on a Boltz-2 loss with an inverse-folding term, then ipTM+ipSAE filter. Accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% PXDesign (Protenix / ByteDance)
+% -----------------------------------------------------------------------------
+
+@article{ren2025pxdesign,
+    title       = {{PXDesign}: Fast, modular, and accurate de novo design of protein binders},
+    author      = {{Protenix Team} and Ren, Milong and Sun, Jinyuan and Guan, Jiaqi and Liu, Cong and Gong, Chengyue and Wang, Yuzhe and Wang, Lan and Qiang, Bo and Chen, Xinshi and Zhang, Yuxuan and Lu, Chan and Ma, Wenzhi and Yang, Jincai and Zhang, Hanyu and Xiao, Wenzhi},
+    journal     = {bioRxiv},
+    year        = {2025},
+    doi         = {10.1101/2025.08.15.670450},
+    url         = {https://www.biorxiv.org/content/10.1101/2025.08.15.670450v3},
+    note        = {Two-pronged pipeline: PXDesign-d (diffusion) + PXDesign-h (hallucination); 17--82\% nM hit-rates across seven targets, beating AlphaProteo. Open source at github.com/bytedance/Protenix and \url{https://protenix.github.io/pxdesign/}; accessed 2026-05-06}
+}
+
+@article{chen2025protenix,
+    title       = {Protenix --- advancing structure prediction through a comprehensive {AlphaFold3} reproduction},
+    author      = {Chen, Xinshi and Zhang, Yuxuan and Lu, Chan and Ma, Wenzhi and Guan, Jiaqi and Gong, Chengyue and Yang, Jincai and Zhang, Hanyu and Zhang, Ke and Wu, Sizhuang and Zhou, Kaipeng and Yang, Yuhang and Liu, Zihan and Wang, Lan and Shi, Bo and Shi, Shaochen and Xiao, Wenzhi},
+    journal     = {bioRxiv},
+    year        = {2025},
+    doi         = {10.1101/2025.01.08.631967},
+    url         = {https://doi.org/10.1101/2025.01.08.631967},
+    note        = {ByteDance's open AF3 reproduction; basis for PXDesign. Open weights; accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% PPIFlow
+% -----------------------------------------------------------------------------
+
+@article{yu2026ppiflow,
+    title       = {High-affinity protein binder design via flow matching and in-silico maturation},
+    author      = {Yu, Mingchen and {co-authors}},
+    journal     = {bioRxiv},
+    year        = {2026},
+    doi         = {10.64898/2026.01.19.700484},
+    url         = {https://www.biorxiv.org/content/10.64898/2026.01.19.700484v2.full},
+    note        = {PPIFlow; pairformer-based flow-matching with interface-rotamer enrichment and AF3Score filter. Code at github.com/Mingchenchen/PPIFlow; accessed 2026-05-06. Author list incomplete in metadata --- verify before press.}
+}
+
+
+% -----------------------------------------------------------------------------
+% Protpardelle (all-atom diffusion)
+% -----------------------------------------------------------------------------
+
+@article{chu2024protpardelle,
+    title       = {An all-atom protein generative model},
+    author      = {Chu, Alexander E. and Cheng, Lucy and El Nesr, Gina and Xu, Minkai and Huang, Po-Ssu},
+    journal     = {Proceedings of the National Academy of Sciences},
+    year        = {2024},
+    doi         = {10.1073/pnas.2311500121},
+    url         = {https://doi.org/10.1101/2023.05.24.542194},
+    note        = {Protpardelle (original); preprint at \url{https://doi.org/10.1101/2023.05.24.542194}; accessed 2026-05-06}
+}
+
+@article{lu2025protpardelle1c,
+    title       = {Conditional protein structure generation with {Protpardelle-1c}},
+    author      = {Lu, Tianyu and Shuai, Richard and Kouba, Petr and Li, Zhaoyang and Chen, Yilin and Shirali, Akio and Kim, Jinho and Huang, Po-Ssu},
+    journal     = {bioRxiv},
+    year        = {2025},
+    doi         = {10.1101/2025.08.18.670959},
+    url         = {https://doi.org/10.1101/2025.08.18.670959},
+    note        = {Multi-chain, motif-scaffolding all-atom diffusion. Accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% AlphaFold and friends (structure prediction)
+% -----------------------------------------------------------------------------
+
+@article{jumper2021alphafold,
+    title       = {Highly accurate protein structure prediction with {AlphaFold}},
+    author      = {Jumper, John and Evans, Richard and Pritzel, Alexander and Green, Tim and Figurnov, Michael and Ronneberger, Olaf and Tunyasuvunakool, Kathryn and Bates, Russ and {\v{Z}}{\'\i}dek, Augustin and Potapenko, Anna and Bridgland, Alex and Meyer, Clemens and Kohl, Simon A. A. and Ballard, Andrew J. and Cowie, Andrew and Romera-Paredes, Bernardino and Nikolov, Stanislav and Jain, Rishub and Adler, Jonas and Back, Trevor and Petersen, Stig and Reiman, David and Clancy, Ellen and Zielinski, Michal and Steinegger, Martin and Pacholska, Michalina and Berghammer, Tamas and Bodenstein, Sebastian and Silver, David and Vinyals, Oriol and Senior, Andrew W. and Kavukcuoglu, Koray and Kohli, Pushmeet and Hassabis, Demis},
+    journal     = {Nature},
+    volume      = {596},
+    number      = {7873},
+    pages       = {583--589},
+    year        = {2021},
+    doi         = {10.1038/s41586-021-03819-2},
+    url         = {https://www.nature.com/articles/s41586-021-03819-2},
+    note        = {AlphaFold2; open weights via DeepMind. Accessed 2026-05-06}
+}
+
+@article{evans2021alphafoldmultimer,
+    title       = {Protein complex prediction with {AlphaFold-Multimer}},
+    author      = {Evans, Richard and O'Neill, Michael and Pritzel, Alexander and Antropova, Natasha and Senior, Andrew and Green, Tim and {\v{Z}}{\'\i}dek, Augustin and Bates, Russ and Blackwell, Sam and Yim, Jason and Ronneberger, Olaf and Bodenstein, Sebastian and Zielinski, Michal and Bridgland, Alex and Potapenko, Anna and Cowie, Andrew and Tunyasuvunakool, Kathryn and Jain, Rishub and Clancy, Ellen and Kohli, Pushmeet and Jumper, John and Hassabis, Demis},
+    journal     = {bioRxiv},
+    year        = {2021},
+    doi         = {10.1101/2021.10.04.463034},
+    url         = {https://doi.org/10.1101/2021.10.04.463034},
+    note        = {AlphaFold-Multimer; open weights. Accessed 2026-05-06}
+}
+
+@article{abramson2024alphafold3,
+    title       = {Accurate structure prediction of biomolecular interactions with {AlphaFold} 3},
+    author      = {Abramson, Josh and Adler, Jonas and Dunger, Jack and Evans, Richard and Green, Tim and Pritzel, Alexander and Ronneberger, Olaf and Willmore, Lindsay and Ballard, Andrew J. and Bambrick, Joshua and Bodenstein, Sebastian W. and Evans, David A. and Hung, Chia-Chun and O'Neill, Michael and Reiman, David and Tunyasuvunakool, Kathryn and Wu, Zachary and {\v{Z}}emgulyt{\.e}, Akvil{\.e} and Arvaniti, Eirini and Beattie, Charles and Bertolli, Ottavia and Bridgland, Alex and Cherepanov, Alexey and Congreve, Miles and Cowen-Rivers, Alexander I. and Cowie, Andrew and Figurnov, Michael and Fuchs, Fabian B. and Gladman, Hannah and Jain, Rishub and Khan, Yousuf A. and Low, Caroline M. R. and Perlin, Kuba and Potapenko, Anna and Savy, Pascal and Singh, Sukhdeep and Stecula, Adrian and Thillaisundaram, Ashok and Tong, Catherine and Yakneen, Sergei and Zhong, Ellen D. and Zielinski, Michal and Žídek, Augustin and Bapst, Victor and Kohli, Pushmeet and Jaderberg, Max and Hassabis, Demis and Jumper, John M.},
+    journal     = {Nature},
+    volume      = {630},
+    pages       = {493--500},
+    year        = {2024},
+    doi         = {10.1038/s41586-024-07487-w},
+    url         = {https://www.nature.com/articles/s41586-024-07487-w},
+    note        = {AlphaFold3. Server-only at first, weights released later via Google DeepMind under non-commercial terms. Accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% AlphaProteo (DeepMind binder model -- relevant comparator)
+% -----------------------------------------------------------------------------
+
+@article{zambaldi2024alphaproteo,
+    title       = {De novo design of high-affinity protein binders with {AlphaProteo}},
+    author      = {Zambaldi, Vinicius and La, David and Chu, Alexander E. and Patani, Harshnira and Danson, Amy E. and Kwan, Tristan O. C. and Frerix, Thomas and Schneider, Rosalia G. and Saxton, David and Thillaisundaram, Ashok and Wu, Zachary and Moraes, Isabel and Lange, Oskar and Papula, Eliseo and Stanton, Nathan and Adler, Jonas and Hassabis, Demis and Pritzel, Alexander and Pacureanu, Alexandra},
+    journal     = {arXiv preprint arXiv:2409.08022},
+    year        = {2024},
+    eprint      = {2409.08022},
+    archivePrefix = {arXiv},
+    url         = {https://arxiv.org/abs/2409.08022},
+    note        = {DeepMind binder model; closed (Isomorphic Labs API only). Accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% Protein language models (ESM, Evo, Struct_Evo)
+% -----------------------------------------------------------------------------
+
+@article{lin2023esm2,
+    title       = {Evolutionary-scale prediction of atomic-level protein structure},
+    author      = {Lin, Zeming and Akin, Halil and Rao, Roshan and Hie, Brian and Zhu, Zhongkai and Lu, Wenting and Smetanin, Nikita and Verkuil, Robert and Kabeli, Ori and Shmueli, Yaniv and dos Santos Costa, Allan and Fazel-Zarandi, Maryam and Sercu, Tom and Candido, Salvatore and Rives, Alexander},
+    journal     = {Science},
+    volume      = {379},
+    number      = {6637},
+    pages       = {1123--1130},
+    year        = {2023},
+    doi         = {10.1126/science.ade2574},
+    url         = {https://www.science.org/doi/10.1126/science.ade2574},
+    note        = {ESM-2 / ESMFold. Open weights via Meta/EvolutionaryScale. Accessed 2026-05-06}
+}
+
+@article{hayes2024esm3,
+    title       = {Simulating 500 million years of evolution with a language model},
+    author      = {Hayes, Thomas and Rao, Roshan and Akin, Halil and Sofroniew, Nicholas J. and Oktay, Deniz and Lin, Zeming and Verkuil, Robert and Tran, Vincent Q. and Deaton, Jonathan and Wiggert, Marius and Badkundri, Rohil and Shafkat, Irhum and Gong, Jun and Derry, Alexander and Molina, Raul S. and Thomas, Neil and Khan, Yousuf A. and Mishra, Chetan and Kim, Carolyn and Bartie, Liam J. and Nemeth, Matthew and Hsu, Patrick D. and Sercu, Tom and Candido, Salvatore and Rives, Alexander},
+    journal     = {bioRxiv},
+    year        = {2024},
+    doi         = {10.1101/2024.07.01.600583},
+    url         = {https://doi.org/10.1101/2024.07.01.600583},
+    note        = {ESM3. EvolutionaryScale. Open weights for the small model only; large model is API-gated. Accessed 2026-05-06}
+}
+
+@article{nguyen2024evo,
+    title       = {Sequence modeling and design from molecular to genome scale with {Evo}},
+    author      = {Nguyen, Eric and Poli, Michael and Durrant, Matthew G. and Thomas, Armin W. and Kang, Brian and Sullivan, Jeremy and Ng, Madelena Y. and Lewis, Ashley and Patel, Aman and Lou, Aaron and Ermon, Stefano and Baccus, Stephen A. and Bernstein, Tina and Poli, Michael and Mahdavi, Sina and Bhatt, Nikhil and Skreta, Marta and Hsu, Patrick D. and Hie, Brian L.},
+    journal     = {Science},
+    year        = {2024},
+    doi         = {10.1126/science.ado9336},
+    url         = {https://doi.org/10.1101/2024.02.27.582234},
+    note        = {Evo (Arc Institute / Stanford). 7B-param StripedHyena DNA foundation model. Open weights. Accessed 2026-05-06}
+}
+
+@article{shanker2024structevo,
+    title       = {Unsupervised evolution of protein and antibody complexes with a structure-informed language model},
+    author      = {Shanker, Varun R. and Bruun, Theodora U. J. and Hie, Brian L. and Kim, Peter S.},
+    journal     = {Science},
+    volume      = {385},
+    number      = {6704},
+    pages       = {46--53},
+    year        = {2024},
+    doi         = {10.1126/science.adk8946},
+    url         = {https://www.science.org/doi/10.1126/science.adk8946},
+    note        = {Structure-informed evolution with ESM-IF1 ("structural-evolution"; the team-submitted "Struct\_Evo" label most likely refers to this work). Code at github.com/varun-shanker/structural-evolution. Accessed 2026-05-06}
+}
+
+
+% -----------------------------------------------------------------------------
+% Rosetta / PyRosetta
+% -----------------------------------------------------------------------------
+
+@article{chaudhury2010pyrosetta,
+    title       = {{PyRosetta}: a script-based interface for implementing molecular modeling algorithms using {Rosetta}},
+    author      = {Chaudhury, Sidhartha and Lyskov, Sergey and Gray, Jeffrey J.},
+    journal     = {Bioinformatics},
+    volume      = {26},
+    number      = {5},
+    pages       = {689--691},
+    year        = {2010},
+    doi         = {10.1093/bioinformatics/btq007},
+    url         = {https://academic.oup.com/bioinformatics/article/26/5/689/212442},
+    note        = {Used as a refinement / scoring step (relax, FastRelax, ddG) by several teams; academic license. Accessed 2026-05-06}
+}
+
+@article{cao2022rosettabinder,
+    title       = {Design of protein-binding proteins from the target structure alone},
+    author      = {Cao, Longxing and Coventry, Brian and Goreshnik, Inna and Huang, Buwei and Sheffler, William and Park, Joon Sung and Jude, Kevin M. and Markovi{\'c}, Iva and Kadam, Rameshwar U. and Verschueren, Koen H. G. and Verstraete, Kenneth and Walsh, Scott Thomas Russell and Bennett, Nathaniel and Phal, Ashish and Yang, Aerin and Kozodoy, Lisa and DeWitt, Michelle and Picton, Lora and Miller, Lauren and Strauch, Eva-Maria and DeBouver, Nicholas D. and Pires, Allison and Bera, Asim K. and Halabiya, Samer and Hammerson, Bradley and Yang, Wei and Bernard, Steffen and Stewart, Lance and Wilson, Ian A. and Ruohola-Baker, Hannele and Schlessinger, Joseph and Lee, Sangwon and Savvides, Savvas N. and Garcia, K. Christopher and Baker, David},
+    journal     = {Nature},
+    volume      = {605},
+    pages       = {551--560},
+    year        = {2022},
+    doi         = {10.1038/s41586-022-04654-9},
+    url         = {https://www.nature.com/articles/s41586-022-04654-9},
+    note        = {Pre-RFdiffusion miniprotein binder pipeline. Still cited by some teams. Open source. Accessed 2026-05-06}
+}

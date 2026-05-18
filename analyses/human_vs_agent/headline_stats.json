@@ -1,0 +1,333 @@
+{
+  "hit_rate_x_cohort": {
+    "n_human": 65,
+    "n_agent": 35,
+    "hits_human": 25,
+    "hits_agent": 12,
+    "rate_human": 0.38461538461538464,
+    "rate_agent": 0.34285714285714286,
+    "diff_human_minus_agent": 0.041758241758241776,
+    "fisher_odds_ratio": 1.1979166666666667,
+    "fisher_p_two_sided": 0.8284654765643875,
+    "boot_diff_mean": 0.04202417582417585,
+    "boot_diff_ci_2_5": -0.14725274725274723,
+    "boot_diff_ci_97_5": 0.23516483516483522,
+    "boot_n": 1000
+  },
+  "nonexpression_x_cohort": {
+    "nonexpressed_human": 5,
+    "nonexpressed_agent": 6,
+    "expressed_human": 60,
+    "expressed_agent": 29,
+    "rate_nonexpression_human": 0.07692307692307693,
+    "rate_nonexpression_agent": 0.17142857142857143,
+    "fisher_odds_ratio": 0.4027777777777778,
+    "fisher_p_two_sided": 0.1857497359912429
+  },
+  "mannwhitney_pkd_binders": {
+    "n_human_binders": 24,
+    "n_agent_binders": 12,
+    "median_pkd_human": 7.037672760662888,
+    "iqr_pkd_human": [
+      6.219467991932355,
+      7.510517712121267
+    ],
+    "median_pkd_agent": 6.976290976363018,
+    "iqr_pkd_agent": [
+      6.6842420138020096,
+      7.45825649631867
+    ],
+    "U": 134.0,
+    "p_two_sided": 0.7498788409049186,
+    "median_kd_nM_human": 91.69111191413276,
+    "median_kd_nM_agent": 105.61096809177378
+  },
+  "spearman_ipsae_vs_pkd": {
+    "binders_only": {
+      "n": 36,
+      "rho": 0.3974259974259975,
+      "p": 0.016386200265705735,
+      "ci_2_5": 0.08446623791478769,
+      "ci_97_5": 0.6600388197359178
+    },
+    "top100_excluding_nonbinders": {
+      "n": 36,
+      "rho": 0.3974259974259975,
+      "p": 0.016386200265705735
+    },
+    "top100_left_censored_at_10uM": {
+      "n": 100,
+      "floor_kd_nM": 10000.0,
+      "rho": 0.32479800057419755,
+      "p": 0.0009771922091727852,
+      "ci_2_5": 0.12396270601483166,
+      "ci_97_5": 0.4991012294251807
+    }
+  },
+  "mannwhitney_sequence_length_all141": {
+    "n_human": 81,
+    "n_agent": 60,
+    "median_human": 85.0,
+    "median_agent": 80.5,
+    "U": 2834.0,
+    "p_two_sided": 0.09130497467897758
+  },
+  "chi_square_method_family_x_cohort": {
+    "n": 100,
+    "chi2": 58.80727459674828,
+    "p": 7.984099486292746e-10,
+    "dof": 8,
+    "table": {
+      "false": {
+        "BindCraft": 0,
+        "BoltzGen": 0,
+        "Hallucination": 0,
+        "Mosaic": 0,
+        "Other": 7,
+        "PPIFLOW": 0,
+        "PXDesign": 27,
+        "RFDiffusion": 0,
+        "RFPeptides": 1
+      },
+      "true": {
+        "BindCraft": 2,
+        "BoltzGen": 5,
+        "Hallucination": 8,
+        "Mosaic": 6,
+        "Other": 2,
+        "PPIFLOW": 5,
+        "PXDesign": 11,
+        "RFDiffusion": 26,
+        "RFPeptides": 0
+      }
+    },
+    "high_contribution_cells": [
+      {
+        "method_family": "BoltzGen",
+        "cohort": "agent",
+        "observed": 0,
+        "expected": 1.75,
+        "contribution": 1.75,
+        "direction": "under"
+      },
+      {
+        "method_family": "Hallucination",
+        "cohort": "agent",
+        "observed": 0,
+        "expected": 2.8,
+        "contribution": 2.8,
+        "direction": "under"
+      },
+      {
+        "method_family": "Hallucination",
+        "cohort": "human",
+        "observed": 8,
+        "expected": 5.2,
+        "contribution": 1.5076923076923074,
+        "direction": "over"
+      },
+      {
+        "method_family": "Mosaic",
+        "cohort": "agent",
+        "observed": 0,
+        "expected": 2.1,
+        "contribution": 2.1,
+        "direction": "under"
+      },
+      {
+        "method_family": "Mosaic",
+        "cohort": "human",
+        "observed": 6,
+        "expected": 3.9,
+        "contribution": 1.1307692307692307,
+        "direction": "over"
+      },
+      {
+        "method_family": "Other",
+        "cohort": "agent",
+        "observed": 7,
+        "expected": 3.15,
+        "contribution": 4.705555555555557,
+        "direction": "over"
+      },
+      {
+        "method_family": "Other",
+        "cohort": "human",
+        "observed": 2,
+        "expected": 5.85,
+        "contribution": 2.5337606837606836,
+        "direction": "under"
+      },
+      {
+        "method_family": "PPIFLOW",
+        "cohort": "agent",
+        "observed": 0,
+        "expected": 1.75,
+        "contribution": 1.75,
+        "direction": "under"
+      },
+      {
+        "method_family": "PXDesign",
+        "cohort": "agent",
+        "observed": 27,
+        "expected": 13.3,
+        "contribution": 14.112030075187967,
+        "direction": "over"
+      },
+      {
+        "method_family": "PXDesign",
+        "cohort": "human",
+        "observed": 11,
+        "expected": 24.7,
+        "contribution": 7.598785425101213,
+        "direction": "under"
+      },
+      {
+        "method_family": "RFDiffusion",
+        "cohort": "agent",
+        "observed": 0,
+        "expected": 9.1,
+        "contribution": 9.1,
+        "direction": "under"
+      },
+      {
+        "method_family": "RFDiffusion",
+        "cohort": "human",
+        "observed": 26,
+        "expected": 16.9,
+        "contribution": 4.900000000000002,
+        "direction": "over"
+      },
+      {
+        "method_family": "RFPeptides",
+        "cohort": "agent",
+        "observed": 1,
+        "expected": 0.35,
+        "contribution": 1.2071428571428573,
+        "direction": "over"
+      }
+    ]
+  },
+  "team_hit_rates": [
+    {
+      "team": "MRAZS",
+      "is_human": true,
+      "n_lab": 8,
+      "n_binders": 5,
+      "n_expressed": 8,
+      "hit_rate": 0.625
+    },
+    {
+      "team": "1000Tokens",
+      "is_human": true,
+      "n_lab": 7,
+      "n_binders": 4,
+      "n_expressed": 6,
+      "hit_rate": 0.5714285714285714
+    },
+    {
+      "team": "GPT 5.2",
+      "is_human": false,
+      "n_lab": 7,
+      "n_binders": 4,
+      "n_expressed": 7,
+      "hit_rate": 0.5714285714285714
+    },
+    {
+      "team": "claude-sonnet-4.6",
+      "is_human": false,
+      "n_lab": 8,
+      "n_binders": 4,
+      "n_expressed": 8,
+      "hit_rate": 0.5
+    },
+    {
+      "team": "BraiNSEY",
+      "is_human": true,
+      "n_lab": 5,
+      "n_binders": 2,
+      "n_expressed": 4,
+      "hit_rate": 0.4
+    },
+    {
+      "team": "EuroBros",
+      "is_human": true,
+      "n_lab": 10,
+      "n_binders": 4,
+      "n_expressed": 10,
+      "hit_rate": 0.4
+    },
+    {
+      "team": "crow",
+      "is_human": true,
+      "n_lab": 10,
+      "n_binders": 4,
+      "n_expressed": 10,
+      "hit_rate": 0.4
+    },
+    {
+      "team": "grok-4.1-fast",
+      "is_human": false,
+      "n_lab": 5,
+      "n_binders": 2,
+      "n_expressed": 3,
+      "hit_rate": 0.4
+    },
+    {
+      "team": "StanFold",
+      "is_human": true,
+      "n_lab": 9,
+      "n_binders": 3,
+      "n_expressed": 9,
+      "hit_rate": 0.3333333333333333
+    },
+    {
+      "team": "GLM 5",
+      "is_human": false,
+      "n_lab": 4,
+      "n_binders": 1,
+      "n_expressed": 4,
+      "hit_rate": 0.25
+    },
+    {
+      "team": "BART.bio",
+      "is_human": true,
+      "n_lab": 5,
+      "n_binders": 1,
+      "n_expressed": 4,
+      "hit_rate": 0.2
+    },
+    {
+      "team": "NovoFy",
+      "is_human": true,
+      "n_lab": 10,
+      "n_binders": 2,
+      "n_expressed": 9,
+      "hit_rate": 0.2
+    },
+    {
+      "team": "qwen-3.5-plus",
+      "is_human": false,
+      "n_lab": 5,
+      "n_binders": 1,
+      "n_expressed": 4,
+      "hit_rate": 0.2
+    },
+    {
+      "team": "DeNovo",
+      "is_human": true,
+      "n_lab": 1,
+      "n_binders": 0,
+      "n_expressed": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "team": "Gemini 3.1 Pro",
+      "is_human": false,
+      "n_lab": 6,
+      "n_binders": 0,
+      "n_expressed": 3,
+      "hit_rate": 0.0
+    }
+  ]
+}

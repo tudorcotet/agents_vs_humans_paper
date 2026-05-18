@@ -1,0 +1,53 @@
+# macOS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+.python-version
+
+# uv
+uv.lock.local
+
+# Outputs that should be reproducible — keep them out of git, regenerate with `make analysis-all`.
+# Curated outputs (the report.md and headline JSON we ship with the paper) ARE checked in;
+# the broad `analyses/**/scratch/` carve-out below is what we ignore.
+analyses/**/scratch/
+analyses/**/_scratch/
+
+# Figures: keep `figures/paper/` in git, ignore `figures/exploration/`.
+figures/exploration/
+figures/**/*.tmp.*
+
+# Per-collaborator scratch
+analyses/*/notebooks/.ipynb_checkpoints/
+
+# Large derived intermediates (regenerate from data/designs.parquet)
+# NOTE: do NOT ignore data/proteinbase/ — that lives in Git LFS and ships
+# with the repo. Only true scratch/derived dirs go here.
+data/folding/
+data/structures/
+data/_cache/
+
+# Scratch CIFs from local re-folding runs — never commit these.
+*.tmp.cif
+
+# Git LFS local cache (some setups create this; harmless to ignore).
+.lfs-cache/
+
+# Secrets / local config
+.env
+.env.local
+.envrc
+*.pem
+.doppler.yaml

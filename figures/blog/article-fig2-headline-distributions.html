@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fig 2 — Headline distributions · TREM2 hackathon</title>
+<style>
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Variable.woff2") format("woff2-variations"),
+         url("fonts/Geist-Variable.woff2") format("woff2");
+    font-weight: 100 900; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Medium.woff2") format("woff2");
+    font-weight: 500; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Bold.woff2") format("woff2");
+    font-weight: 700; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "GT Pressura Extended";
+    src: url("fonts/GT-Pressura-Extended-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+
+  :root {
+    --text:        #111827;
+    --text-mute:   #4B5563;
+    --text-dim:    #6B7280;
+    --line:        #D1D5DB;
+    --line-soft:   #E5E7EB;
+    --brand-black: #142933;
+    --brand-cyan:  #30C5F5;
+    --cyan-soft:   #9EDFFF;
+    --human:       #142933;
+    --human-soft:  #4B5563;
+    --agent:       #30C5F5;
+    --agent-soft:  #9EDFFF;
+    --lavender:    #8B90DD;
+    --lavender-soft: #C4B2FB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #FFFFFF;
+    color: var(--brand-black);
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .canvas {
+    width: 1920px; height: 1080px;
+    position: relative; overflow: hidden;
+    background: #FFFFFF;
+    padding: 40px 88px 48px;
+    display: flex; flex-direction: column;
+  }
+
+  .canvas::before { content: none; }
+  .canvas::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 1100px 800px at 100% 0%, rgba(48,197,245,0.13) 0%, transparent 55%),
+      radial-gradient(ellipse 900px 700px at 0% 100%, rgba(139,144,221,0.08) 0%, transparent 55%);
+  }
+  .riso-bg { display: none; }
+
+/* Top row */
+  .top-row {
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .lockup { display: flex; align-items: center; gap: 26px; }
+  .lockup img.adaptyv { height: 30px; width: auto; display: block; }
+  .lockup img.muni    { height: 36px; width: auto; display: block; }
+  .lockup .x { color: var(--brand-black); opacity: 0.30; font-size: 24px; font-weight: 300; }
+  .top-meta {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand-black);
+  }
+
+  /* Main body layout: hero column LEFT + panel stack RIGHT */
+  .body {
+    flex: 1;
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: 0.62fr 1fr;
+    gap: 56px;
+    position: relative; z-index: 1;
+    min-height: 0;
+  }
+
+  /* LEFT — hero column: text-group (top) + Fisher card (bottom), mirrors the right's 2-panel grid. */
+  .hero-col {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    padding-top: 4px;
+    min-height: 0;
+  }
+  .hero-col .text-group {
+    display: flex; flex-direction: column;
+    justify-content: flex-start;
+  }
+  .fig-tag {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand-cyan);
+    margin-bottom: 18px;
+  }
+  .hero-head {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 70px; font-weight: 400;
+    line-height: 1.02; letter-spacing: -0.03em;
+    color: var(--brand-black);
+  }
+  .hero-head .cy { color: var(--brand-cyan); }
+  .hero-sub {
+    margin-top: 22px;
+    font-family: "Geist", sans-serif;
+    font-size: 19px; font-weight: 400;
+    line-height: 1.45; color: var(--text-mute);
+    max-width: 620px;
+  }
+  .hero-p {
+    padding: 32px 34px 28px;
+    background: #FFFFFF;
+    border: 1px solid rgba(15,20,25,0.10);
+    border-radius: 16px;
+    box-shadow: 0 24px 56px rgba(15,20,25,0.07);
+    max-width: 620px;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  /* Cohort hit-rate comparison rows */
+  .hero-p .rates {
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .hero-p .rate-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 70px;
+    gap: 16px;
+    align-items: center;
+  }
+  .hero-p .rate-row .rate-label {
+    display: flex; align-items: center; gap: 10px;
+    font-family: "Geist", sans-serif;
+    font-size: 14px; font-weight: 600;
+    color: var(--brand-black);
+  }
+  .hero-p .rate-row .rate-label svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .hero-p .rate-row .rate-label .n {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 11px; font-weight: 400;
+    color: var(--text-mute);
+  }
+  .hero-p .rate-row .rate-bar {
+    height: 28px;
+    background: rgba(20,41,51,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-p .rate-row .rate-bar .fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+  .hero-p .rate-row .rate-bar .fill.human { background: var(--human); }
+  .hero-p .rate-row .rate-bar .fill.agent { background: var(--agent); }
+  .hero-p .rate-row .rate-pct {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 24px;
+    color: var(--brand-black);
+    letter-spacing: -0.02em;
+    text-align: right;
+    line-height: 1;
+  }
+
+  /* Hit-rate axis under the bars */
+  .hero-p .axis {
+    margin-top: 6px;
+    display: grid;
+    grid-template-columns: 120px 1fr 70px;
+    gap: 16px;
+  }
+  .hero-p .axis .ticks {
+    display: flex; justify-content: space-between;
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 10px; color: var(--text-dim);
+  }
+
+  /* Stats footer */
+  .hero-p .stats {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    display: flex; flex-direction: column;
+    gap: 8px;
+  }
+  .hero-p .stats .stat {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "Geist", sans-serif;
+    font-size: 13px;
+  }
+  .hero-p .stats .stat .lab {
+    color: var(--text-mute);
+  }
+  .hero-p .stats .stat .lab b {
+    color: var(--brand-black); font-weight: 600;
+  }
+  .hero-p .stats .stat .pv {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 14px; font-weight: 700;
+    color: var(--brand-cyan);
+  }
+
+  .hero-p .cohorts {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-soft);
+    display: flex; gap: 22px; flex-wrap: wrap;
+    font-family: "Geist", sans-serif;
+    font-size: 13px; color: var(--brand-black);
+  }
+  .hero-p .cohorts .row { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-p .cohorts .row b {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-weight: 700;
+  }
+
+  /* RIGHT — vertically stacked panels */
+  .stack {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    min-height: 0;
+  }
+  .panel { display: flex; flex-direction: column; min-height: 0; }
+  .panel-idx {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 10px;
+  }
+  .panel-idx .num {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 16px; letter-spacing: 0.04em; color: var(--brand-cyan);
+    font-weight: 400; line-height: 1;
+  }
+  .panel-idx .name {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 16px; letter-spacing: 0.04em; color: var(--brand-black);
+    font-weight: 400; line-height: 1; text-transform: uppercase;
+  }
+  .panel-idx .rule {
+    flex: 1; height: 2px; background: var(--brand-cyan); opacity: 0.45;
+  }
+  .card-frame {
+    flex: 1;
+    background: #FFFFFF;
+    border: 1px solid rgba(15,20,25,0.08);
+    border-radius: 14px;
+    box-shadow: 0 18px 42px rgba(15,20,25,0.06);
+    padding: 16px 22px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .card-frame svg { width: 100%; height: 100%; display: block; }
+
+  /* Bottom caption */
+  .bottom {
+    margin-top: 22px;
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="body">
+
+    <!-- LEFT: hero headline + p-value card -->
+    <div class="hero-col">
+      <div class="text-group">
+        <div class="hero-head">Agents <span class="cy">tied</span> humans<br>on hit rate and affinity.</div>
+        <div class="hero-sub">
+          65 human and 35 agent designs went through the same BLI screen at Adaptyv.
+        </div>
+      </div>
+
+      <div class="hero-p">
+        <div class="rates">
+          <!-- Humans hit rate bar -->
+          <div class="rate-row">
+            <div class="rate-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#142933" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="7" r="3"/>
+                <path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/>
+              </svg>
+              Humans <span class="n">25 / 65</span>
+            </div>
+            <div class="rate-bar">
+              <div class="fill human" style="width: 55%;"></div>
+            </div>
+            <div class="rate-pct">38.5%</div>
+          </div>
+
+          <!-- Agents hit rate bar -->
+          <div class="rate-row">
+            <div class="rate-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#30C5F5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+                <rect x="9.5" y="9.5" width="5" height="5"/>
+                <line x1="12" y1="3" x2="12" y2="5"/>
+                <line x1="12" y1="19" x2="12" y2="21"/>
+                <line x1="3" y1="12" x2="5" y2="12"/>
+                <line x1="19" y1="12" x2="21" y2="12"/>
+              </svg>
+              Agents <span class="n">12 / 35</span>
+            </div>
+            <div class="rate-bar">
+              <div class="fill agent" style="width: 49%;"></div>
+            </div>
+            <div class="rate-pct">34.3%</div>
+          </div>
+        </div>
+
+        <!-- Hit-rate axis (0 to 70%) -->
+        <div class="axis">
+          <div></div>
+          <div class="ticks">
+            <span>0%</span><span>35%</span><span>70%</span>
+          </div>
+          <div></div>
+        </div>
+
+        <!-- Stats footer — small, supports the visual -->
+        <div class="stats">
+          <div class="stat">
+            <span class="lab"><b>Hit rate</b> · Fisher exact, two-sided</span>
+            <span class="pv">p = 0.83</span>
+          </div>
+          <div class="stat">
+            <span class="lab"><b>pK<sub>D</sub> affinity</b> · Mann-Whitney · medians 7.04 vs 6.98</span>
+            <span class="pv">p = 0.75</span>
+          </div>
+        </div>
+
+        <!-- Cohort legend -->
+        <div class="cohorts">
+          <span class="row">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#142933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="7" r="3"/>
+              <path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/>
+            </svg>
+            10 humans, <b>n = 65</b>
+          </span>
+          <span class="row">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#30C5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+              <rect x="9.5" y="9.5" width="5" height="5"/>
+              <line x1="12" y1="3" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="21"/>
+              <line x1="3" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="21" y2="12"/>
+            </svg>
+            6 agents, <b>n = 35</b>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: 3 stacked panels -->
+    <div class="stack">
+
+      <!-- A — Cohort hit rate Cleveland dots with Wilson CI -->
+      <div class="panel">
+        <div class="panel-idx"><span class="num">A</span><span class="name">Cohort hit rate, Wilson 95% CI</span><span class="rule"></span></div>
+        <div class="card-frame">
+          <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMid meet">
+            <!-- Plot area: x in [0, 70] %, mapped to [180, 870] -->
+            <!-- gridlines at 0, 10, 20, 30, 40, 50, 60 -->
+            <g stroke="#E5E7EB" stroke-width="1">
+              <line x1="180" y1="40"  x2="180" y2="190"/>
+              <line x1="278" y1="40"  x2="278" y2="190"/>
+              <line x1="377" y1="40"  x2="377" y2="190"/>
+              <line x1="476" y1="40"  x2="476" y2="190"/>
+              <line x1="574" y1="40"  x2="574" y2="190"/>
+              <line x1="673" y1="40"  x2="673" y2="190"/>
+              <line x1="772" y1="40"  x2="772" y2="190"/>
+              <line x1="870" y1="40"  x2="870" y2="190"/>
+            </g>
+
+            <!-- x-axis labels -->
+            <g font-family="Geist Mono, Menlo, monospace" font-size="11" fill="#6B7280" text-anchor="middle">
+              <text x="180" y="210">0%</text>
+              <text x="278" y="210">10%</text>
+              <text x="377" y="210">20%</text>
+              <text x="476" y="210">30%</text>
+              <text x="574" y="210">40%</text>
+              <text x="673" y="210">50%</text>
+              <text x="772" y="210">60%</text>
+              <text x="870" y="210">70%</text>
+            </g>
+
+            <!-- Cohort labels on left, single line, with icon -->
+            <g font-family="Geist" font-size="14" font-weight="700" fill="#142933" text-anchor="end">
+              <!-- Human row at y=85 -->
+              <g transform="translate(38 85)">
+                <g fill="none" stroke="#142933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="6" cy="-3" r="2.7"/>
+                  <path d="M0 8 C0 3, 3 2, 6 2 C9 2, 12 3, 12 8"/>
+                </g>
+              </g>
+              <text x="165" y="89">Humans (n = 65)</text>
+
+              <!-- Agent row at y=150 -->
+              <g transform="translate(38 150)">
+                <g fill="none" stroke="#30C5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="0" y="-7" width="12" height="12" rx="1.5"/>
+                  <rect x="3" y="-4" width="6" height="6"/>
+                </g>
+              </g>
+              <text x="165" y="154">Agents (n = 35)</text>
+            </g>
+
+            <!-- Human: 38.5%, CI [27.4%, 50.9%]
+                 38.5% -> x = 180 + 38.5*9.857 = 180 + 379.5 = 559.5
+                 27.4% -> x = 180 + 27.4*9.857 = 180 + 270.1 = 450.1
+                 50.9% -> x = 180 + 50.9*9.857 = 180 + 501.7 = 681.7 -->
+            <g>
+              <!-- Wilson CI band -->
+              <rect x="450" y="79" width="232" height="12" fill="#142933" opacity="0.15" rx="6"/>
+              <!-- CI line -->
+              <line x1="450" y1="85" x2="682" y2="85" stroke="#142933" stroke-width="2" opacity="0.85"/>
+              <!-- CI endpoints -->
+              <line x1="450" y1="78" x2="450" y2="92" stroke="#142933" stroke-width="2"/>
+              <line x1="682" y1="78" x2="682" y2="92" stroke="#142933" stroke-width="2"/>
+              <!-- Marker (filled circle) -->
+              <circle cx="560" cy="85" r="22" fill="#142933"/>
+              <text x="560" y="90" font-family="Geist Mono, Menlo, monospace" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">38.5%</text>
+              <!-- 25/65 annotation right -->
+              <text x="694" y="89" font-family="Geist Mono, Menlo, monospace" font-size="12" fill="#4B5563">25 / 65 · CI 27–51%</text>
+            </g>
+
+            <!-- Agent: 34.3%, CI [20.8%, 50.4%]
+                 34.3% -> x = 180 + 34.3*9.857 = 180 + 338.1 = 518.1
+                 20.8% -> x = 180 + 20.8*9.857 = 180 + 205.0 = 385.0
+                 50.4% -> x = 180 + 50.4*9.857 = 180 + 496.8 = 676.8 -->
+            <g>
+              <rect x="385" y="144" width="292" height="12" fill="#30C5F5" opacity="0.18" rx="6"/>
+              <line x1="385" y1="150" x2="677" y2="150" stroke="#30C5F5" stroke-width="2" opacity="0.85"/>
+              <line x1="385" y1="143" x2="385" y2="157" stroke="#30C5F5" stroke-width="2"/>
+              <line x1="677" y1="143" x2="677" y2="157" stroke="#30C5F5" stroke-width="2"/>
+              <circle cx="518" cy="150" r="22" fill="#30C5F5"/>
+              <text x="518" y="155" font-family="Geist Mono, Menlo, monospace" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">34.3%</text>
+              <text x="694" y="154" font-family="Geist Mono, Menlo, monospace" font-size="12" fill="#4B5563">12 / 35 · CI 21–50%</text>
+            </g>
+
+            <!-- Vertical reference: the two markers literally overlap in CI -->
+          </svg>
+        </div>
+      </div>
+
+      <!-- B — pK_D density overlay -->
+      <div class="panel">
+        <div class="panel-idx"><span class="num">B</span><span class="name">Binder pK<sub>D</sub> density, kernel estimate</span><span class="rule"></span></div>
+        <div class="card-frame">
+          <svg viewBox="0 0 920 270" preserveAspectRatio="xMidYMid meet">
+            <!-- Plot area inside chart: density area uses local x [0, 580], y [0, 220] -->
+            <!-- Translate the density group so plot starts at (140, 18), width 580, height 220 -->
+
+            <!-- y-axis label (single line, rotated only on label) -->
+            <text x="62" y="135" font-family="Geist" font-size="13" font-weight="500" fill="#142933" text-anchor="middle" transform="rotate(-90 62 135)">Density (kernel)</text>
+
+            <!-- gridlines -->
+            <g stroke="#E5E7EB" stroke-width="1">
+              <!-- y baseline -->
+              <line x1="140" y1="238" x2="720" y2="238"/>
+              <!-- x ticks 5..9 -->
+              <line x1="140" y1="18"  x2="140" y2="238"/>
+              <line x1="268.9" y1="234" x2="268.9" y2="238"/>
+              <line x1="397.8" y1="234" x2="397.8" y2="238"/>
+              <line x1="526.7" y1="234" x2="526.7" y2="238"/>
+              <line x1="655.6" y1="234" x2="655.6" y2="238"/>
+            </g>
+
+            <!-- x-axis tick labels (pKD) and KD nM converted underneath -->
+            <g font-family="Geist Mono, Menlo, monospace" font-size="11" fill="#6B7280" text-anchor="middle">
+              <text x="140"   y="252">5</text>
+              <text x="268.9" y="252">6</text>
+              <text x="397.8" y="252">7</text>
+              <text x="526.7" y="252">8</text>
+              <text x="655.6" y="252">9</text>
+            </g>
+            <g font-family="Geist Mono, Menlo, monospace" font-size="10" fill="#9CA3AF" text-anchor="middle">
+              <text x="140"   y="265">10 µM</text>
+              <text x="268.9" y="265">1 µM</text>
+              <text x="397.8" y="265">100 nM</text>
+              <text x="526.7" y="265">10 nM</text>
+              <text x="655.6" y="265">1 nM</text>
+            </g>
+
+            <!-- x-axis title -->
+            <text x="430" y="22" font-family="GT Pressura Extended" font-size="12" fill="#142933" letter-spacing="0.04em" text-anchor="end">pK_D    →   tighter</text>
+
+            <!-- Density paths, translated into plot area -->
+            <g transform="translate(140 18)">
+              <!-- Agent density (filled lavender-cyan blend, drawn FIRST so human sits on top) -->
+              <path d="M 0.00 220 L 0.00 212.24 L 2.91 211.42 L 5.83 210.54 L 8.74 209.59 L 11.66 208.57 L 14.57 207.49 L 17.49 206.33 L 20.40 205.10 L 23.32 203.80 L 26.23 202.42 L 29.15 200.98 L 32.06 199.46 L 34.97 197.87 L 37.89 196.21 L 40.80 194.48 L 43.72 192.69 L 46.63 190.84 L 49.55 188.92 L 52.46 186.95 L 55.38 184.93 L 58.29 182.87 L 61.21 180.76 L 64.12 178.61 L 67.04 176.43 L 69.95 174.23 L 72.86 172.00 L 75.78 169.75 L 78.69 167.49 L 81.61 165.22 L 84.52 162.95 L 87.44 160.67 L 90.35 158.39 L 93.27 156.12 L 96.18 153.86 L 99.10 151.60 L 102.01 149.35 L 104.92 147.10 L 107.84 144.87 L 110.75 142.64 L 113.67 140.41 L 116.58 138.18 L 119.50 135.95 L 122.41 133.71 L 125.33 131.46 L 128.24 129.19 L 131.16 126.91 L 134.07 124.60 L 136.98 122.25 L 139.90 119.88 L 142.81 117.46 L 145.73 115.00 L 148.64 112.49 L 151.56 109.94 L 154.47 107.33 L 157.39 104.67 L 160.30 101.95 L 163.22 99.19 L 166.13 96.37 L 169.05 93.50 L 171.96 90.59 L 174.87 87.63 L 177.79 84.65 L 180.70 81.64 L 183.62 78.61 L 186.53 75.57 L 189.45 72.53 L 192.36 69.50 L 195.28 66.50 L 198.19 63.53 L 201.11 60.61 L 204.02 57.75 L 206.93 54.95 L 209.85 52.25 L 212.76 49.63 L 215.68 47.13 L 218.59 44.75 L 221.51 42.49 L 224.42 40.38 L 227.34 38.43 L 230.25 36.63 L 233.17 35.00 L 236.08 33.54 L 238.99 32.27 L 241.91 31.18 L 244.82 30.29 L 247.74 29.59 L 250.65 29.10 L 253.57 28.80 L 256.48 28.70 L 259.40 28.80 L 262.31 29.09 L 265.23 29.59 L 268.14 30.28 L 271.06 31.16 L 273.97 32.22 L 276.88 33.47 L 279.80 34.89 L 282.71 36.48 L 285.63 38.23 L 288.54 40.14 L 291.46 42.20 L 294.37 44.39 L 297.29 46.71 L 300.20 49.15 L 303.12 51.71 L 306.03 54.36 L 308.94 57.11 L 311.86 59.93 L 314.77 62.82 L 317.69 65.77 L 320.60 68.76 L 323.52 71.79 L 326.43 74.84 L 329.35 77.91 L 332.26 80.98 L 335.18 84.03 L 338.09 87.07 L 341.01 90.08 L 343.92 93.05 L 346.83 95.97 L 349.75 98.84 L 352.66 101.65 L 355.58 104.38 L 358.49 107.04 L 361.41 109.63 L 364.32 112.13 L 367.24 114.54 L 370.15 116.87 L 373.07 119.11 L 375.98 121.26 L 378.89 123.33 L 381.81 125.32 L 384.72 127.23 L 387.64 129.06 L 390.55 130.82 L 393.47 132.52 L 396.38 134.16 L 399.30 135.75 L 402.21 137.29 L 405.13 138.80 L 408.04 140.27 L 410.95 141.73 L 413.87 143.17 L 416.78 144.60 L 419.70 146.03 L 422.61 147.46 L 425.53 148.91 L 428.44 150.37 L 431.36 151.85 L 434.27 153.36 L 437.19 154.89 L 440.10 156.46 L 443.02 158.05 L 445.93 159.68 L 448.84 161.34 L 451.76 163.04 L 454.67 164.76 L 457.59 166.51 L 460.50 168.29 L 463.42 170.09 L 466.33 171.91 L 469.25 173.74 L 472.16 175.58 L 475.08 177.43 L 477.99 179.28 L 480.90 181.12 L 483.82 182.95 L 486.73 184.76 L 489.65 186.56 L 492.56 188.32 L 495.48 190.06 L 498.39 191.76 L 501.31 193.42 L 504.22 195.03 L 507.14 196.60 L 510.05 198.12 L 512.96 199.58 L 515.88 200.99 L 518.79 202.34 L 521.71 203.63 L 524.62 204.86 L 527.54 206.03 L 530.45 207.14 L 533.37 208.19 L 536.28 209.17 L 539.20 210.10 L 542.11 210.97 L 545.03 211.78 L 547.94 212.54 L 550.85 213.24 L 553.77 213.89 L 556.68 214.49 L 559.60 215.04 L 562.51 215.55 L 565.43 216.02 L 568.34 216.44 L 571.26 216.83 L 574.17 217.18 L 577.09 217.50 L 580.00 217.79 L 580.00 220 Z"
+                    fill="#30C5F5" fill-opacity="0.30"/>
+              <path d="M 0.00 212.24 L 2.91 211.42 L 5.83 210.54 L 8.74 209.59 L 11.66 208.57 L 14.57 207.49 L 17.49 206.33 L 20.40 205.10 L 23.32 203.80 L 26.23 202.42 L 29.15 200.98 L 32.06 199.46 L 34.97 197.87 L 37.89 196.21 L 40.80 194.48 L 43.72 192.69 L 46.63 190.84 L 49.55 188.92 L 52.46 186.95 L 55.38 184.93 L 58.29 182.87 L 61.21 180.76 L 64.12 178.61 L 67.04 176.43 L 69.95 174.23 L 72.86 172.00 L 75.78 169.75 L 78.69 167.49 L 81.61 165.22 L 84.52 162.95 L 87.44 160.67 L 90.35 158.39 L 93.27 156.12 L 96.18 153.86 L 99.10 151.60 L 102.01 149.35 L 104.92 147.10 L 107.84 144.87 L 110.75 142.64 L 113.67 140.41 L 116.58 138.18 L 119.50 135.95 L 122.41 133.71 L 125.33 131.46 L 128.24 129.19 L 131.16 126.91 L 134.07 124.60 L 136.98 122.25 L 139.90 119.88 L 142.81 117.46 L 145.73 115.00 L 148.64 112.49 L 151.56 109.94 L 154.47 107.33 L 157.39 104.67 L 160.30 101.95 L 163.22 99.19 L 166.13 96.37 L 169.05 93.50 L 171.96 90.59 L 174.87 87.63 L 177.79 84.65 L 180.70 81.64 L 183.62 78.61 L 186.53 75.57 L 189.45 72.53 L 192.36 69.50 L 195.28 66.50 L 198.19 63.53 L 201.11 60.61 L 204.02 57.75 L 206.93 54.95 L 209.85 52.25 L 212.76 49.63 L 215.68 47.13 L 218.59 44.75 L 221.51 42.49 L 224.42 40.38 L 227.34 38.43 L 230.25 36.63 L 233.17 35.00 L 236.08 33.54 L 238.99 32.27 L 241.91 31.18 L 244.82 30.29 L 247.74 29.59 L 250.65 29.10 L 253.57 28.80 L 256.48 28.70 L 259.40 28.80 L 262.31 29.09 L 265.23 29.59 L 268.14 30.28 L 271.06 31.16 L 273.97 32.22 L 276.88 33.47 L 279.80 34.89 L 282.71 36.48 L 285.63 38.23 L 288.54 40.14 L 291.46 42.20 L 294.37 44.39 L 297.29 46.71 L 300.20 49.15 L 303.12 51.71 L 306.03 54.36 L 308.94 57.11 L 311.86 59.93 L 314.77 62.82 L 317.69 65.77 L 320.60 68.76 L 323.52 71.79 L 326.43 74.84 L 329.35 77.91 L 332.26 80.98 L 335.18 84.03 L 338.09 87.07 L 341.01 90.08 L 343.92 93.05 L 346.83 95.97 L 349.75 98.84 L 352.66 101.65 L 355.58 104.38 L 358.49 107.04 L 361.41 109.63 L 364.32 112.13 L 367.24 114.54 L 370.15 116.87 L 373.07 119.11 L 375.98 121.26 L 378.89 123.33 L 381.81 125.32 L 384.72 127.23 L 387.64 129.06 L 390.55 130.82 L 393.47 132.52 L 396.38 134.16 L 399.30 135.75 L 402.21 137.29 L 405.13 138.80 L 408.04 140.27 L 410.95 141.73 L 413.87 143.17 L 416.78 144.60 L 419.70 146.03 L 422.61 147.46 L 425.53 148.91 L 428.44 150.37 L 431.36 151.85 L 434.27 153.36 L 437.19 154.89 L 440.10 156.46 L 443.02 158.05 L 445.93 159.68 L 448.84 161.34 L 451.76 163.04 L 454.67 164.76 L 457.59 166.51 L 460.50 168.29 L 463.42 170.09 L 466.33 171.91 L 469.25 173.74 L 472.16 175.58 L 475.08 177.43 L 477.99 179.28 L 480.90 181.12 L 483.82 182.95 L 486.73 184.76 L 489.65 186.56 L 492.56 188.32 L 495.48 190.06 L 498.39 191.76 L 501.31 193.42 L 504.22 195.03 L 507.14 196.60 L 510.05 198.12 L 512.96 199.58 L 515.88 200.99 L 518.79 202.34 L 521.71 203.63 L 524.62 204.86 L 527.54 206.03 L 530.45 207.14 L 533.37 208.19 L 536.28 209.17 L 539.20 210.10 L 542.11 210.97 L 545.03 211.78 L 547.94 212.54 L 550.85 213.24 L 553.77 213.89 L 556.68 214.49 L 559.60 215.04 L 562.51 215.55 L 565.43 216.02 L 568.34 216.44 L 571.26 216.83 L 574.17 217.18 L 577.09 217.50 L 580.00 217.79"
+                    fill="none" stroke="#30C5F5" stroke-width="2.4"/>
+
+              <!-- Human density (brand-black, on top with lavender overlap tint via opacity) -->
+              <path d="M 0.00 220 L 0.00 210.18 L 2.91 209.09 L 5.83 207.91 L 8.74 206.63 L 11.66 205.24 L 14.57 203.74 L 17.49 202.13 L 20.40 200.41 L 23.32 198.56 L 26.23 196.59 L 29.15 194.50 L 32.06 192.28 L 34.97 189.92 L 37.89 187.44 L 40.80 184.83 L 43.72 182.08 L 46.63 179.21 L 49.55 176.21 L 52.46 173.09 L 55.38 169.85 L 58.29 166.50 L 61.21 163.05 L 64.12 159.49 L 67.04 155.84 L 69.95 152.12 L 72.86 148.32 L 75.78 144.46 L 78.69 140.55 L 81.61 136.60 L 84.52 132.64 L 87.44 128.66 L 90.35 124.69 L 93.27 120.74 L 96.18 116.82 L 99.10 112.96 L 102.01 109.16 L 104.92 105.44 L 107.84 101.81 L 110.75 98.29 L 113.67 94.90 L 116.58 91.63 L 119.50 88.52 L 122.41 85.56 L 125.33 82.77 L 128.24 80.16 L 131.16 77.72 L 134.07 75.48 L 136.98 73.43 L 139.90 71.58 L 142.81 69.92 L 145.73 68.47 L 148.64 67.20 L 151.56 66.13 L 154.47 65.25 L 157.39 64.55 L 160.30 64.02 L 163.22 63.66 L 166.13 63.45 L 169.05 63.38 L 171.96 63.45 L 174.87 63.64 L 177.79 63.93 L 180.70 64.32 L 183.62 64.78 L 186.53 65.31 L 189.45 65.90 L 192.36 66.52 L 195.28 67.17 L 198.19 67.83 L 201.11 68.50 L 204.02 69.15 L 206.93 69.79 L 209.85 70.41 L 212.76 70.99 L 215.68 71.54 L 218.59 72.04 L 221.51 72.50 L 224.42 72.91 L 227.34 73.27 L 230.25 73.59 L 233.17 73.86 L 236.08 74.09 L 238.99 74.29 L 241.91 74.46 L 244.82 74.60 L 247.74 74.73 L 250.65 74.85 L 253.57 74.97 L 256.48 75.10 L 259.40 75.25 L 262.31 75.43 L 265.23 75.65 L 268.14 75.92 L 271.06 76.25 L 273.97 76.64 L 276.88 77.11 L 279.80 77.66 L 282.71 78.30 L 285.63 79.04 L 288.54 79.88 L 291.46 80.83 L 294.37 81.89 L 297.29 83.07 L 300.20 84.36 L 303.12 85.77 L 306.03 87.29 L 308.94 88.93 L 311.86 90.69 L 314.77 92.56 L 317.69 94.53 L 320.60 96.61 L 323.52 98.79 L 326.43 101.07 L 329.35 103.42 L 332.26 105.86 L 335.18 108.37 L 338.09 110.94 L 341.01 113.56 L 343.92 116.23 L 346.83 118.93 L 349.75 121.66 L 352.66 124.41 L 355.58 127.16 L 358.49 129.90 L 361.41 132.64 L 364.32 135.34 L 367.24 138.02 L 370.15 140.65 L 373.07 143.23 L 375.98 145.74 L 378.89 148.19 L 381.81 150.56 L 384.72 152.84 L 387.64 155.03 L 390.55 157.12 L 393.47 159.11 L 396.38 160.98 L 399.30 162.75 L 402.21 164.39 L 405.13 165.91 L 408.04 167.32 L 410.95 168.60 L 413.87 169.75 L 416.78 170.79 L 419.70 171.70 L 422.61 172.49 L 425.53 173.17 L 428.44 173.74 L 431.36 174.21 L 434.27 174.57 L 437.19 174.84 L 440.10 175.03 L 443.02 175.13 L 445.93 175.17 L 448.84 175.14 L 451.76 175.06 L 454.67 174.94 L 457.59 174.79 L 460.50 174.61 L 463.42 174.42 L 466.33 174.22 L 469.25 174.03 L 472.16 173.86 L 475.08 173.70 L 477.99 173.58 L 480.90 173.50 L 483.82 173.46 L 486.73 173.48 L 489.65 173.56 L 492.56 173.70 L 495.48 173.91 L 498.39 174.19 L 501.31 174.54 L 504.22 174.98 L 507.14 175.49 L 510.05 176.07 L 512.96 176.74 L 515.88 177.47 L 518.79 178.29 L 521.71 179.17 L 524.62 180.11 L 527.54 181.12 L 530.45 182.19 L 533.37 183.31 L 536.28 184.47 L 539.20 185.68 L 542.11 186.91 L 545.03 188.18 L 547.94 189.47 L 550.85 190.78 L 553.77 192.09 L 556.68 193.41 L 559.60 194.72 L 562.51 196.03 L 565.43 197.32 L 568.34 198.60 L 571.26 199.85 L 574.17 201.07 L 577.09 202.26 L 580.00 203.42 L 580.00 220 Z"
+                    fill="#142933" fill-opacity="0.15"/>
+              <path d="M 0.00 210.18 L 2.91 209.09 L 5.83 207.91 L 8.74 206.63 L 11.66 205.24 L 14.57 203.74 L 17.49 202.13 L 20.40 200.41 L 23.32 198.56 L 26.23 196.59 L 29.15 194.50 L 32.06 192.28 L 34.97 189.92 L 37.89 187.44 L 40.80 184.83 L 43.72 182.08 L 46.63 179.21 L 49.55 176.21 L 52.46 173.09 L 55.38 169.85 L 58.29 166.50 L 61.21 163.05 L 64.12 159.49 L 67.04 155.84 L 69.95 152.12 L 72.86 148.32 L 75.78 144.46 L 78.69 140.55 L 81.61 136.60 L 84.52 132.64 L 87.44 128.66 L 90.35 124.69 L 93.27 120.74 L 96.18 116.82 L 99.10 112.96 L 102.01 109.16 L 104.92 105.44 L 107.84 101.81 L 110.75 98.29 L 113.67 94.90 L 116.58 91.63 L 119.50 88.52 L 122.41 85.56 L 125.33 82.77 L 128.24 80.16 L 131.16 77.72 L 134.07 75.48 L 136.98 73.43 L 139.90 71.58 L 142.81 69.92 L 145.73 68.47 L 148.64 67.20 L 151.56 66.13 L 154.47 65.25 L 157.39 64.55 L 160.30 64.02 L 163.22 63.66 L 166.13 63.45 L 169.05 63.38 L 171.96 63.45 L 174.87 63.64 L 177.79 63.93 L 180.70 64.32 L 183.62 64.78 L 186.53 65.31 L 189.45 65.90 L 192.36 66.52 L 195.28 67.17 L 198.19 67.83 L 201.11 68.50 L 204.02 69.15 L 206.93 69.79 L 209.85 70.41 L 212.76 70.99 L 215.68 71.54 L 218.59 72.04 L 221.51 72.50 L 224.42 72.91 L 227.34 73.27 L 230.25 73.59 L 233.17 73.86 L 236.08 74.09 L 238.99 74.29 L 241.91 74.46 L 244.82 74.60 L 247.74 74.73 L 250.65 74.85 L 253.57 74.97 L 256.48 75.10 L 259.40 75.25 L 262.31 75.43 L 265.23 75.65 L 268.14 75.92 L 271.06 76.25 L 273.97 76.64 L 276.88 77.11 L 279.80 77.66 L 282.71 78.30 L 285.63 79.04 L 288.54 79.88 L 291.46 80.83 L 294.37 81.89 L 297.29 83.07 L 300.20 84.36 L 303.12 85.77 L 306.03 87.29 L 308.94 88.93 L 311.86 90.69 L 314.77 92.56 L 317.69 94.53 L 320.60 96.61 L 323.52 98.79 L 326.43 101.07 L 329.35 103.42 L 332.26 105.86 L 335.18 108.37 L 338.09 110.94 L 341.01 113.56 L 343.92 116.23 L 346.83 118.93 L 349.75 121.66 L 352.66 124.41 L 355.58 127.16 L 358.49 129.90 L 361.41 132.64 L 364.32 135.34 L 367.24 138.02 L 370.15 140.65 L 373.07 143.23 L 375.98 145.74 L 378.89 148.19 L 381.81 150.56 L 384.72 152.84 L 387.64 155.03 L 390.55 157.12 L 393.47 159.11 L 396.38 160.98 L 399.30 162.75 L 402.21 164.39 L 405.13 165.91 L 408.04 167.32 L 410.95 168.60 L 413.87 169.75 L 416.78 170.79 L 419.70 171.70 L 422.61 172.49 L 425.53 173.17 L 428.44 173.74 L 431.36 174.21 L 434.27 174.57 L 437.19 174.84 L 440.10 175.03 L 443.02 175.13 L 445.93 175.17 L 448.84 175.14 L 451.76 175.06 L 454.67 174.94 L 457.59 174.79 L 460.50 174.61 L 463.42 174.42 L 466.33 174.22 L 469.25 174.03 L 472.16 173.86 L 475.08 173.70 L 477.99 173.58 L 480.90 173.50 L 483.82 173.46 L 486.73 173.48 L 489.65 173.56 L 492.56 173.70 L 495.48 173.91 L 498.39 174.19 L 501.31 174.54 L 504.22 174.98 L 507.14 175.49 L 510.05 176.07 L 512.96 176.74 L 515.88 177.47 L 518.79 178.29 L 521.71 179.17 L 524.62 180.11 L 527.54 181.12 L 530.45 182.19 L 533.37 183.31 L 536.28 184.47 L 539.20 185.68 L 542.11 186.91 L 545.03 188.18 L 547.94 189.47 L 550.85 190.78 L 553.77 192.09 L 556.68 193.41 L 559.60 194.72 L 562.51 196.03 L 565.43 197.32 L 568.34 198.60 L 571.26 199.85 L 574.17 201.07 L 577.09 202.26 L 580.00 203.42"
+                    fill="none" stroke="#142933" stroke-width="2.4"/>
+
+              <!-- Median tick: human at pK_D=7.04 -> x=262.6, agent at 6.98 -> x=254.7 -->
+              <line x1="262.6" y1="18" x2="262.6" y2="220" stroke="#142933" stroke-width="1.4" stroke-dasharray="3,3" opacity="0.7"/>
+              <line x1="254.7" y1="18" x2="254.7" y2="220" stroke="#30C5F5" stroke-width="1.4" stroke-dasharray="3,3" opacity="0.8"/>
+
+              <!-- Median labels just above the median tick anchors, inside plot -->
+              <g font-family="Geist Mono, Menlo, monospace" font-size="10" font-weight="700">
+                <text x="266" y="14" fill="#142933" text-anchor="start">med 7.04 · 92 nM</text>
+                <text x="251" y="28" fill="#30C5F5" text-anchor="end">med 6.98 · 106 nM</text>
+              </g>
+            </g>
+
+            <!-- Legend, top-right of chart -->
+            <g transform="translate(740 24)" font-family="Geist" font-size="13" fill="#142933">
+              <g transform="translate(0 0)">
+                <line x1="0" y1="6" x2="22" y2="6" stroke="#142933" stroke-width="2.4"/>
+                <rect x="0" y="11" width="22" height="6" fill="#142933" fill-opacity="0.15"/>
+                <text x="30" y="10" font-weight="700">Human</text>
+                <text x="30" y="24" font-family="Geist Mono, Menlo, monospace" font-size="11" fill="#4B5563">n = 24 binders</text>
+              </g>
+              <g transform="translate(0 50)">
+                <line x1="0" y1="6" x2="22" y2="6" stroke="#30C5F5" stroke-width="2.4"/>
+                <rect x="0" y="11" width="22" height="6" fill="#30C5F5" fill-opacity="0.30"/>
+                <text x="30" y="10" font-weight="700">Agent</text>
+                <text x="30" y="24" font-family="Geist Mono, Menlo, monospace" font-size="11" fill="#4B5563">n = 12 binders</text>
+              </g>
+              <g transform="translate(0 100)">
+                <text x="0" y="0" font-family="Geist Mono, Menlo, monospace" font-size="11" fill="#4B5563">Mann-Whitney p = 0.75</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

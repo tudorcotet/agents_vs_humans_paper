@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>muni × Adaptyv TREM2 — Fig 4. Per-team winners</title>
+<style>
+  @font-face { font-family: "Geist"; src: url("fonts/Geist-Variable.woff2") format("woff2-variations"), url("fonts/Geist-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: block; }
+  @font-face { font-family: "Geist"; src: url("fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: block; }
+  @font-face { font-family: "Geist"; src: url("fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: block; }
+  @font-face { font-family: "Geist"; src: url("fonts/Geist-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: block; }
+  @font-face { font-family: "GT Pressura Extended"; src: url("fonts/GT-Pressura-Extended-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: block; }
+
+  :root {
+    --brand-black: #142933;
+    --brand-cyan:  #30C5F5;
+    --cyan-soft:   #9EDFFF;
+    --human:       #142933;            /* brand-black, grounded */
+    --human-soft:  #E5E7EB;
+    --agent:       #30C5F5;            /* brand-cyan, focal */
+    --agent-soft:  #D4F1FB;
+    --winner:      #30C5F5;
+    --winner-ring: #142933;
+    --accent:      #DC7A73;
+    --text-mute:   #4B5563;
+    --text-dim:    #6B7280;
+    --line:        #D1D5DB;
+    --line-soft:   #E5E7EB;
+    --no-bind:     #E5E7EB;
+    --lavender:    #8B90DD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #FFFFFF; color: var(--brand-black);
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .canvas {
+    width: 1920px; height: 1080px;
+    position: relative; overflow: hidden;
+    background: #FFFFFF;
+    padding: 40px 88px 48px;
+    display: flex; flex-direction: column;
+  }
+
+  .canvas::before { content: none; }
+  .canvas::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 1100px 800px at 100% 0%, rgba(48,197,245,0.13) 0%, transparent 55%),
+      radial-gradient(ellipse 900px 700px at 0% 100%, rgba(139,144,221,0.08) 0%, transparent 55%);
+  }
+  .riso-bg { display: none; }
+
+  /* Subtle ambient gradient — cyan top-right, lavender bottom-left. */
+/* No top-row on internal figures. Slug lives in the footer instead. */
+  .hero { margin-top: 0; margin-bottom: 32px; position: relative; z-index: 1; }
+  .hero h1 { font-family: "GT Pressura Extended", sans-serif; font-size: 72px; font-weight: 400; line-height: 1.02; letter-spacing: -0.03em; color: var(--brand-black); max-width: 1620px; }
+  .hero h1 .cy { color: var(--brand-cyan); }
+  .hero .sub { margin-top: 16px; font-family: "Geist", sans-serif; font-size: 20px; line-height: 1.4; color: var(--text-mute); max-width: 1100px; }
+
+  .panels { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; position: relative; z-index: 1; min-height: 0; }
+  .panel { display: flex; flex-direction: column; min-height: 0; }
+  .panel-idx { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+  .panel-idx .num { font-family: "GT Pressura Extended", sans-serif; font-size: 18px; letter-spacing: 0.04em; color: var(--brand-cyan); font-weight: 400; line-height: 1; }
+  .panel-idx .name { font-family: "GT Pressura Extended", sans-serif; font-size: 18px; letter-spacing: 0.04em; color: var(--brand-black); font-weight: 400; line-height: 1; text-transform: uppercase; }
+  .panel-idx .rule { flex: 1; height: 2px; background: var(--brand-cyan); opacity: 0.45; }
+  .card-frame { flex: 1; background: #FFFFFF; border: 1px solid rgba(15,20,25,0.08); border-radius: 16px; box-shadow: 0 24px 56px rgba(15,20,25,0.07); padding: 26px 28px; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* Panel B portfolio bars */
+  .port { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .port .cohort-label {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-mute); margin: 0 0 4px 0;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .port .cohort-label .swatch {
+    width: 12px; height: 12px; border-radius: 2px;
+  }
+  .port .cohort-label .rule {
+    flex: 1; height: 1px; background: var(--line-soft);
+  }
+  .port .cohort-divider {
+    height: 18px; /* breathing room between AGENTS and HUMAN TEAMS */
+  }
+  .port .bar-row {
+    display: grid;
+    grid-template-columns: 175px 1fr 96px;
+    gap: 14px;
+    align-items: center;
+    height: 34px;
+  }
+  .port .bar-row .team {
+    font-family: "Geist", sans-serif;
+    font-size: 15px;
+    color: var(--brand-black);
+    font-weight: 400;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .port .bar-row.winner .team {
+    color: var(--brand-cyan); font-weight: 700;
+  }
+  .port .bar-row .track {
+    display: flex; height: 26px; gap: 1px;
+  }
+  .port .bar-row .track .seg-bound {
+    height: 100%; display: flex; align-items: center; justify-content: center;
+    font-family: "Geist Mono", "Menlo", monospace; font-size: 13px;
+    font-weight: 700; color: white;
+    position: relative;
+  }
+  .port .bar-row .track .seg-nobind {
+    height: 100%; background: var(--no-bind); display: flex; align-items: center;
+    padding-left: 10px;
+    font-family: "Geist Mono", "Menlo", monospace; font-size: 12px;
+    color: var(--text-mute);
+  }
+  /* Winner — outer hairline halo in the contrasting brand colour. Renders
+     as a clean 2px outline OUTSIDE the bar, with offset so it doesn't
+     mask the fill. */
+  .port .bar-row.winner.agent .track .seg-bound  { outline: 2px solid var(--brand-black); outline-offset: 1.5px; border-radius: 1px; }
+  .port .bar-row.winner.human .track .seg-bound  { outline: 2px solid var(--brand-cyan);  outline-offset: 1.5px; border-radius: 1px; }
+  .port .bar-row.winner:not(.agent):not(.human) .track .seg-bound { outline: 2px solid var(--brand-black); outline-offset: 1.5px; border-radius: 1px; }
+  .port .bar-row .kd {
+    font-family: "Geist Mono", "Menlo", monospace; font-size: 14px;
+    color: var(--brand-black); text-align: right;
+  }
+  .port .bar-row.winner .kd { color: var(--brand-cyan); font-weight: 700; }
+
+  .bottom { margin-top: 16px; position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: baseline; font-family: "GT Pressura Extended", sans-serif; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); }
+
+</style>
+</head>
+<body>
+<div class="canvas">
+
+<div class="hero">
+    <h1>The tie hid the <span class="cy">agent variance.</span></h1>
+    <div class="sub">MRAZS led overall at 5/8 and 1.11 nM. GPT 5.2 led the agents at 4/7. Gemini scored 0/6 on the same toolkit.</div>
+  </div>
+
+  <div class="panels">
+
+    <!-- 01 SCATTER -->
+    <div class="panel">
+      <div class="panel-idx"><span class="num">01</span><span class="name">Hit rate × best K<sub>D</sub></span><span class="rule"></span></div>
+      <div class="card-frame">
+        <svg viewBox="0 0 760 600" preserveAspectRatio="xMidYMid meet" style="flex: 1;">
+          <!-- Axes -->
+          <line x1="80" y1="40" x2="80" y2="500" stroke="#142933" stroke-width="0.8"/>
+          <line x1="80" y1="500" x2="720" y2="500" stroke="#142933" stroke-width="0.8"/>
+
+          <!-- X axis ticks: 0, 20, 40, 60 -->
+          <g font-family="Geist Mono, Menlo, monospace" font-size="13" fill="#142933">
+            <text x="80" y="520" text-anchor="middle">0</text>
+            <text x="250" y="520" text-anchor="middle">20</text>
+            <text x="420" y="520" text-anchor="middle">40</text>
+            <text x="590" y="520" text-anchor="middle">60</text>
+          </g>
+          <text x="400" y="550" font-family="Geist" font-size="14" fill="#4B5563" text-anchor="middle" font-weight="500">Hit rate (binders / lab-tested, %)</text>
+
+          <!-- Y axis ticks: 1, 10, 100, 1000 (log scale, lower = better at top) -->
+          <g font-family="Geist Mono, Menlo, monospace" font-size="13" fill="#142933" text-anchor="end">
+            <text x="70" y="68">1</text><line x1="74" y1="65" x2="80" y2="65" stroke="#142933" stroke-width="0.6"/>
+            <text x="70" y="178">10</text><line x1="74" y1="175" x2="80" y2="175" stroke="#142933" stroke-width="0.6"/>
+            <text x="70" y="288">100</text><line x1="74" y1="285" x2="80" y2="285" stroke="#142933" stroke-width="0.6"/>
+            <text x="70" y="398">1k</text><line x1="74" y1="395" x2="80" y2="395" stroke="#142933" stroke-width="0.6"/>
+          </g>
+          <text x="22" y="270" font-family="Geist" font-size="14" fill="#4B5563" text-anchor="middle" transform="rotate(-90 22 270)" font-weight="500">Best K_D (nM, log scale)</text>
+
+          <!-- No binders dashed line and label -->
+          <line x1="80" y1="470" x2="720" y2="470" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="720" y="465" font-family="Geist Mono, Menlo, monospace" font-size="12" fill="#6B7280" text-anchor="end">no binders</text>
+
+          <!-- Helper function: y(kd) ≈ 65 + (log10(kd)-0) * (395-65)/3
+               x(hp) ≈ 80 + hp * (720-80) / 70 = 80 + hp * 9.14
+               (we use 70% max for plot space, so x range is 0..70)
+          -->
+
+          <!-- HUMAN teams (brand-black) -->
+          <!-- MRAZS  hit=62.5 kd=1.11  -> marker (651, 80); pill above-left with clean leader. -->
+          <circle cx="651" cy="80" r="15" fill="#142933" stroke="#30C5F5" stroke-width="3"/>
+          <line x1="643" y1="68" x2="610" y2="40" stroke="#142933" stroke-width="0.8" opacity="0.55"/>
+          <g>
+            <rect x="436" y="22" rx="14" ry="14" width="174" height="32" fill="white" stroke="#142933" stroke-width="1.2"/>
+            <text x="448" y="43" font-family="Geist" font-size="13.5" fill="#142933" font-weight="700">MRAZS · 1.11 nM</text>
+          </g>
+
+          <!-- 1000Tokens  hit=57.1 kd=32.12 -> x=602, y=230 (label below to clear claude-sonnet-4.6) -->
+          <circle cx="602" cy="230" r="11" fill="#142933"/>
+          <text x="602" y="220" font-family="Geist" font-size="14" fill="#142933" text-anchor="middle">1000Tokens</text>
+
+          <!-- BraiNSEY  hit=40 kd=1.91 -> x=446, y=110 -->
+          <circle cx="446" cy="110" r="11" fill="#142933"/>
+          <text x="430" y="100" font-family="Geist" font-size="14" fill="#142933" text-anchor="end">BraiNSEY</text>
+
+          <!-- EuroBros  hit=40 kd=86.5 -> x=446, y=280 -->
+          <circle cx="446" cy="280" r="11" fill="#142933"/>
+          <text x="430" y="270" font-family="Geist" font-size="14" fill="#142933" text-anchor="end">EuroBros</text>
+
+          <!-- crow  hit=40 kd=591 -> x=446, y=372 -->
+          <circle cx="446" cy="372" r="11" fill="#142933"/>
+          <text x="463" y="376" font-family="Geist" font-size="14" fill="#142933">crow</text>
+
+          <!-- StanFold  hit=33.3 kd=12.47 -> x=383, y=192 -->
+          <circle cx="383" cy="192" r="11" fill="#142933"/>
+          <text x="367" y="182" font-family="Geist" font-size="14" fill="#142933" text-anchor="end">StanFold</text>
+
+          <!-- NovoFy  hit=20 kd=706 -> x=263, y=385 -->
+          <circle cx="263" cy="385" r="11" fill="#142933"/>
+          <text x="247" y="375" font-family="Geist" font-size="14" fill="#142933" text-anchor="end">NovoFy</text>
+
+          <!-- BART.bio  hit=20 kd=1155 -> x=263, y=420 -->
+          <circle cx="263" cy="420" r="11" fill="#142933"/>
+          <text x="247" y="424" font-family="Geist" font-size="14" fill="#142933" text-anchor="end">BART.bio</text>
+
+          <!-- AGENT teams (brand-cyan) -->
+          <!-- GPT 5.2 hit=57.1 kd=3.64 -> marker (602, 139); pill below the marker, in the gap between grok and 1000Tokens, clear of MRAZS. -->
+          <circle cx="602" cy="139" r="15" fill="#30C5F5" stroke="#142933" stroke-width="3"/>
+          <line x1="602" y1="154" x2="602" y2="170" stroke="#142933" stroke-width="0.8" opacity="0.55"/>
+          <g>
+            <rect x="515" y="170" rx="14" ry="14" width="174" height="32" fill="white" stroke="#30C5F5" stroke-width="1.2"/>
+            <text x="527" y="191" font-family="Geist" font-size="13.5" fill="#142933" font-weight="700">GPT 5.2 · 3.64 nM</text>
+          </g>
+
+          <!-- claude-sonnet-4.6  hit=50 kd=34.91 -> x=537, y=234 (label left of marker) -->
+          <circle cx="537" cy="234" r="11" fill="#30C5F5"/>
+          <text x="523" y="238" font-family="Geist" font-size="14" fill="#142933" text-anchor="end">claude-sonnet-4.6</text>
+
+          <!-- grok-4.1-fast  hit=40 kd=6.85 -> x=446, y=158 -->
+          <circle cx="446" cy="158" r="11" fill="#30C5F5"/>
+          <text x="463" y="162" font-family="Geist" font-size="14" fill="#142933">grok-4.1-fast</text>
+
+          <!-- GLM 5  hit=25 kd=1387 -> x=309, y=423 -->
+          <circle cx="309" cy="423" r="11" fill="#30C5F5"/>
+          <text x="326" y="427" font-family="Geist" font-size="14" fill="#142933">GLM 5</text>
+
+          <!-- qwen-3.5-plus  hit=20 kd=138 -> x=263, y=302 -->
+          <circle cx="263" cy="302" r="11" fill="#30C5F5"/>
+          <text x="278" y="306" font-family="Geist" font-size="14" fill="#142933">qwen-3.5-plus</text>
+
+          <!-- NO BINDER teams along the dashed line — both at the same y (open markers, side by side). -->
+          <!-- DeNovo (human) -->
+          <circle cx="68" cy="475" r="10" fill="white" stroke="#142933" stroke-width="2"/>
+          <text x="84" y="479" font-family="Geist" font-size="13" fill="#142933">DeNovo</text>
+
+          <!-- Gemini 3.1 Pro (agent) — same y, offset x so circles don't overlap -->
+          <circle cx="166" cy="475" r="10" fill="white" stroke="#30C5F5" stroke-width="2"/>
+          <text x="182" y="479" font-family="Geist" font-size="13" fill="#142933">Gemini 3.1 Pro</text>
+        </svg>
+        <!-- Legend — colored markers matching the scatter (color = cohort) -->
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); display: flex; gap: 28px; align-items: center; font-family: 'Geist', sans-serif; font-size: 13px; color: var(--brand-black);">
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <span style="display: inline-block; width: 14px; height: 14px; background: var(--human); border-radius: 50%;"></span>
+            humans
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <span style="display: inline-block; width: 14px; height: 14px; background: var(--agent); border-radius: 50%;"></span>
+            agents
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <span style="display: inline-block; width: 14px; height: 14px; background: white; border: 2px solid var(--brand-black); border-radius: 50%;"></span>
+            no binders
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 PORTFOLIO -->
+    <div class="panel">
+      <div class="panel-idx"><span class="num">02</span><span class="name">Portfolio strength</span><span class="rule"></span></div>
+      <div class="card-frame">
+        <div class="port">
+          <div class="cohort-label">
+            <span class="swatch" style="background: var(--agent);"></span>
+            <span>Agents</span>
+            <span class="rule"></span>
+          </div>
+
+          <div class="bar-row winner agent">
+            <div class="team">GPT 5.2</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 4; background: #30C5F5;">4</div>
+              <div class="seg-nobind" style="flex: 3;">/ 7</div>
+            </div>
+            <div class="kd">3.64 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">claude-sonnet-4.6</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 4; background: #30C5F5;">4</div>
+              <div class="seg-nobind" style="flex: 4;">/ 8</div>
+            </div>
+            <div class="kd">34.9 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">grok-4.1-fast</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 2; background: #30C5F5;">2</div>
+              <div class="seg-nobind" style="flex: 3;">/ 5</div>
+            </div>
+            <div class="kd">6.85 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">GLM 5</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 1; background: #30C5F5;">1</div>
+              <div class="seg-nobind" style="flex: 3;">/ 4</div>
+            </div>
+            <div class="kd">1.4 µM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">qwen-3.5-plus</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 1; background: #30C5F5;">1</div>
+              <div class="seg-nobind" style="flex: 4;">/ 5</div>
+            </div>
+            <div class="kd">138 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">Gemini 3.1 Pro</div>
+            <div class="track">
+              <div class="seg-nobind" style="flex: 6;">0 / 6</div>
+            </div>
+            <div class="kd" style="color: var(--text-mute);">n/a</div>
+          </div>
+
+          <div class="cohort-divider"></div>
+
+          <div class="cohort-label">
+            <span class="swatch" style="background: var(--human);"></span>
+            <span>Human teams</span>
+            <span class="rule"></span>
+          </div>
+
+          <div class="bar-row winner human">
+            <div class="team">MRAZS</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 5; background: #142933;">5</div>
+              <div class="seg-nobind" style="flex: 3;">/ 8</div>
+            </div>
+            <div class="kd">1.11 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">1000Tokens</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 4; background: #142933;">4</div>
+              <div class="seg-nobind" style="flex: 3;">/ 7</div>
+            </div>
+            <div class="kd">32.1 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">BraiNSEY</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 2; background: #142933;">2</div>
+              <div class="seg-nobind" style="flex: 3;">/ 5</div>
+            </div>
+            <div class="kd">1.91 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">EuroBros</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 4; background: #142933;">4</div>
+              <div class="seg-nobind" style="flex: 6;">/ 10</div>
+            </div>
+            <div class="kd">86.5 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">crow</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 4; background: #142933;">4</div>
+              <div class="seg-nobind" style="flex: 6;">/ 10</div>
+            </div>
+            <div class="kd">592 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">StanFold</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 3; background: #142933;">3</div>
+              <div class="seg-nobind" style="flex: 6;">/ 9</div>
+            </div>
+            <div class="kd">12.5 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">BART.bio</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 1; background: #142933;">1</div>
+              <div class="seg-nobind" style="flex: 4;">/ 5</div>
+            </div>
+            <div class="kd">1.2 µM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">NovoFy</div>
+            <div class="track">
+              <div class="seg-bound" style="flex: 2; background: #142933;">2</div>
+              <div class="seg-nobind" style="flex: 8;">/ 10</div>
+            </div>
+            <div class="kd">706 nM</div>
+          </div>
+          <div class="bar-row">
+            <div class="team">DeNovo</div>
+            <div class="track">
+              <div class="seg-nobind" style="flex: 1;">0 / 1</div>
+            </div>
+            <div class="kd" style="color: var(--text-mute);">n/a</div>
+          </div>
+        </div>
+        <!-- Legend -->
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); display: flex; gap: 26px; align-items: center; font-family: 'Geist', sans-serif; font-size: 13px; color: var(--brand-black);">
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#142933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="7.5" r="3"/>
+              <path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/>
+            </svg>
+            humans
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#30C5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+              <rect x="9.5" y="9.5" width="5" height="5"/>
+              <line x1="12" y1="3" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="21"/>
+              <line x1="3" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="21" y2="12"/>
+            </svg>
+            agents
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 7px;">
+            <span style="display: inline-block; width: 18px; height: 10px; border: 2px solid var(--brand-black); border-radius: 1px; background: var(--agent); box-sizing: border-box;"></span>
+            outline = cohort winner
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

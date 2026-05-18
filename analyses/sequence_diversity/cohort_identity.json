@@ -1,0 +1,23 @@
+{
+  "pairwise_identity": {
+    "n_human_pairs": 200,
+    "n_agent_pairs": 200,
+    "median_identity_human": 0.21374184191443074,
+    "median_identity_agent": 0.26,
+    "mean_identity_human": 0.2390664984958512,
+    "mean_identity_agent": 0.2611730995674623,
+    "mannwhitney_U": 15700.0,
+    "p": 0.00019993338552473284,
+    "implementation": "DP fallback"
+  },
+  "kmer_entropy_k3": {
+    "n_human": 81,
+    "n_agent": 60,
+    "median_human": 6.089259321691257,
+    "median_agent": 6.044403234869022,
+    "mean_human": 6.134352986161404,
+    "mean_agent": 5.8134245740094865,
+    "mannwhitney_U": 2832.0,
+    "p": 0.0940828350366939
+  }
+}

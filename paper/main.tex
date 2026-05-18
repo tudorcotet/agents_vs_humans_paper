@@ -1,0 +1,59 @@
+% muni × Adaptyv TREM2 hackathon — manuscript
+% Compile: latexmk -pdf main.tex
+%
+% Sections are authored in markdown under sections/ and converted to .tex
+% on demand. main.tex \input{}s the .tex files (regenerate via pandoc).
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{authblk}
+
+% Brand cyan (loosely matches theme/palettes.json — keep in sync if changed)
+\definecolor{adaptyvcyan}{HTML}{30C5F5}
+\hypersetup{colorlinks=true, linkcolor=adaptyvcyan, citecolor=adaptyvcyan, urlcolor=adaptyvcyan}
+
+\graphicspath{{../figures/paper/}{figures/}}
+
+\title{Designing TREM2 binders on a one-day clock:\\
+human teams vs.\ autonomous AI agents}
+
+\author[1]{Tudor-Stefan Cotet}
+\author[1]{(authors --- TBD)}
+\affil[1]{Adaptyv Bio}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/introduction}
+
+\section{Methods}\label{sec:methods}
+\input{sections/methods}
+
+\section{Results}\label{sec:results}
+\input{sections/results}
+
+\section{Discussion}\label{sec:discussion}
+\input{sections/discussion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

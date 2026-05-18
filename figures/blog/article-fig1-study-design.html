@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>muni × Adaptyv TREM2 — Fig 1 Study design</title>
+<style>
+  /* Same chassis as the graphical abstract (article-graphical-abstract.html).
+     Layout differs: vertical title block on the left, three stacked panels
+     on the right (cascade · per-team submissions · TREM2 target schematic). */
+
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Variable.woff2") format("woff2-variations"),
+         url("fonts/Geist-Variable.woff2") format("woff2");
+    font-weight: 100 900; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Medium.woff2") format("woff2");
+    font-weight: 500; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Bold.woff2") format("woff2");
+    font-weight: 700; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "GT Pressura Extended";
+    src: url("fonts/GT-Pressura-Extended-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+
+  :root {
+    --text:        #111827;
+    --text-mute:   #4B5563;
+    --text-dim:    #6B7280;
+    --line:        #D1D5DB;
+    --line-soft:   #E5E7EB;
+    --brand-black: #142933;
+    --brand-cyan:  #30C5F5;
+    --cyan-soft:   #9EDFFF;
+    --human:       #142933;
+    --human-soft:  #4B5563;
+    --agent:       #30C5F5;
+    --agent-soft:  #9EDFFF;
+    --winner:      #30C5F5;
+    --winner-ring: #142933;
+    --accent:      #DC7A73;
+    --lavender:    #8B90DD;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #FFFFFF;
+    color: var(--brand-black);
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .canvas {
+    width: 1920px; height: 1080px;
+    position: relative; overflow: hidden;
+    background: #FFFFFF;
+    padding: 40px 88px 48px;
+    display: flex; flex-direction: column;
+  }
+
+    .canvas::before { content: none; }
+  .canvas::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 1100px 800px at 100% 0%, rgba(48,197,245,0.13) 0%, transparent 55%),
+      radial-gradient(ellipse 900px 700px at 0% 100%, rgba(139,144,221,0.08) 0%, transparent 55%);
+  }
+  .riso-bg { display: none; }
+
+/* Top row */
+  .top-row {
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .lockup { display: flex; align-items: center; gap: 26px; }
+  .lockup img.adaptyv { height: 30px; width: auto; display: block; }
+  .lockup img.muni    { height: 36px; width: auto; display: block; }
+  .lockup .x { color: var(--brand-black); opacity: 0.30; font-size: 24px; font-weight: 300; }
+  .top-meta {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand-black);
+  }
+
+  /* Hero — full width at top, fig4 chassis. */
+  .hero { margin-top: 0; margin-bottom: 28px; position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 72px; font-weight: 400;
+    line-height: 1.02; letter-spacing: -0.03em;
+    color: var(--brand-black);
+    max-width: 1620px;
+  }
+  .hero h1 .cy { color: var(--brand-cyan); }
+  .hero .sub {
+    margin-top: 16px;
+    font-family: "Geist", sans-serif;
+    font-size: 20px; font-weight: 400;
+    line-height: 1.4; color: var(--text-mute);
+    max-width: 1300px;
+  }
+  .hero .sub b { color: var(--brand-black); font-weight: 600; }
+
+  /* Panels: two stacked panels filling the rest of the canvas. */
+  .panels {
+    flex: 1;
+    display: grid;
+    grid-template-rows: 1.15fr 1fr;
+    gap: 24px;
+    position: relative; z-index: 1;
+    min-height: 0;
+  }
+  .panel { display: flex; flex-direction: column; min-height: 0; }
+  .panel-idx {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 10px;
+  }
+  .panel-idx .num {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 16px; letter-spacing: 0.04em; color: var(--brand-cyan);
+    font-weight: 400; line-height: 1;
+  }
+  .panel-idx .name {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 16px; letter-spacing: 0.04em; color: var(--brand-black);
+    font-weight: 400; line-height: 1; text-transform: uppercase;
+  }
+  .panel-idx .rule {
+    flex: 1; height: 2px; background: var(--brand-cyan); opacity: 0.45;
+  }
+  .card-frame {
+    flex: 1;
+    background: #FFFFFF;
+    border: 1px solid rgba(15,20,25,0.08);
+    border-radius: 16px;
+    box-shadow: 0 24px 56px rgba(15,20,25,0.07);
+    padding: 22px 24px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Panel 01 — Sankey funnel (humans top, agents bottom flowing through 4 stages). */
+  .sankey-wrap {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; min-height: 0;
+  }
+  .sankey-wrap svg { width: 100%; height: 100%; display: block; }
+
+  /* Panel 02 — per-team submissions (two-side bars). */
+  .teams-wrap {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 36px;
+    min-height: 0;
+  }
+  .teams-side { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+  .teams-side .hdr {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: var(--brand-black);
+  }
+  .teams-side .hdr .ico { display: inline-flex; align-items: center; gap: 8px; }
+  .teams-side .hdr .ico svg { width: 16px; height: 16px; }
+  .teams-side .hdr .key {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: "Geist", sans-serif;
+    font-size: 11px; font-weight: 400;
+    color: var(--text-mute);
+    letter-spacing: 0.01em; text-transform: none;
+  }
+  .teams-side .hdr .key .item { display: inline-flex; align-items: center; gap: 6px; }
+  .teams-side .hdr .key .sw {
+    display: inline-block; width: 14px; height: 10px; border-radius: 2px;
+  }
+  .teams-side.humans .hdr .key .sw.selected { background: var(--human); }
+  .teams-side.humans .hdr .key .sw.cut      { background: rgba(20,41,51,0.22); }
+  .teams-side.agents .hdr .key .sw.selected { background: var(--agent); }
+  .teams-side.agents .hdr .key .sw.cut      { background: rgba(48,197,245,0.30); }
+  .teams-list {
+    flex: 1;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+  }
+  .team-row { display: flex; align-items: center; gap: 10px; }
+  .team-row .team {
+    width: 130px;
+    white-space: nowrap;
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 11px; color: var(--brand-black);
+    text-align: right;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .team-row .barwrap {
+    flex: 1; height: 14px;
+    background: rgba(20,41,51,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+  }
+  .team-row .barwrap .bar { height: 100%; }
+  .team-row .barwrap .bar.selected.human   { background: var(--human); }
+  .team-row .barwrap .bar.submitted.human  { background: rgba(20,41,51,0.22); }
+  .team-row .barwrap .bar.selected.agent   { background: var(--agent); }
+  .team-row .barwrap .bar.submitted.agent  { background: rgba(48,197,245,0.30); }
+  .team-row .n {
+    width: 46px;
+    text-align: right;
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 11px;
+    color: var(--brand-black);
+  }
+  .team-row .n .sel { font-weight: 700; }
+  .team-row .n .div { color: var(--text-dim); margin: 0 2px; }
+  .team-row .n .sub { color: var(--text-mute); }
+
+  /* Panel 03 — TREM2 target schematic. */
+  .target-wrap {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.0fr 0.8fr;
+    column-gap: 24px;
+    align-items: stretch;
+    min-height: 0;
+  }
+  .target-svg-wrap {
+    flex: 1; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .target-svg-wrap svg {
+    width: 100%; height: 100%; max-height: 160px;
+    display: block;
+  }
+  .target-meta {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 8px;
+  }
+  .target-meta .row {
+    display: flex; justify-content: space-between;
+    align-items: baseline;
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 11px;
+    color: var(--text-mute);
+    padding: 4px 0;
+    border-bottom: 1px dotted rgba(20,41,51,0.18);
+    white-space: nowrap;
+  }
+  .target-meta .row .k { color: var(--text-mute); }
+  .target-meta .row .v { color: var(--brand-black); font-weight: 700; }
+  .target-meta .lead {
+    font-family: "Geist", sans-serif;
+    font-size: 12px;
+    line-height: 1.42; color: var(--text-mute);
+    margin-top: 6px;
+  }
+  .target-meta .lead b { color: var(--brand-black); font-weight: 600; }
+
+  /* Bottom caption */
+  .bottom {
+    margin-top: 18px;
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="hero">
+    <h1>10 human teams against 6 <span class="cy">autonomous agents.</span></h1>
+    <div class="sub">141 designs against TREM2 in a single day in SF. The top 100 by Boltz-2 ipSAE went to the Adaptyv wet lab, where <b>37 of 100 bound</b>.</div>
+  </div>
+
+  <div class="panels">
+
+      <!-- 01 SANKEY FUNNEL — humans (top, brand-black) + agents (bottom, cyan) -->
+      <div class="panel" style="flex: 1.1;">
+        <div class="panel-idx"><span class="num">01</span><span class="name">Funnel · designs to binders</span><span class="rule"></span></div>
+        <div class="card-frame">
+          <div class="sankey-wrap">
+            <svg viewBox="0 0 1400 320" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="band-human" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%"   stop-color="#142933" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#142933" stop-opacity="0.88"/>
+                </linearGradient>
+                <linearGradient id="band-agent" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%"   stop-color="#30C5F5" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#30C5F5" stop-opacity="0.88"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Human flow bands (top, brand-black) -->
+              <g fill="url(#band-human)">
+                <path d="M 94 60 C 277 60, 277 89.08, 456 89.08 L 456 181.25 C 277 181.25, 277 174.9, 94 174.9 Z"/>
+                <path d="M 464 89.08 C 645 89.08, 645 96.88, 826 96.88 L 826 181.96 C 645 181.96, 645 181.25, 464 181.25 Z"/>
+                <path d="M 834 96.88 C 1015 96.88, 1015 133.76, 1196 133.76 L 1196 169.21 C 1015 169.21, 1015 181.96, 834 181.96 Z"/>
+              </g>
+
+              <!-- Agent flow bands (bottom, brand-cyan) -->
+              <g fill="url(#band-agent)">
+                <path d="M 94 174.9 C 277 174.9, 277 181.25, 456 181.25 L 456 230.89 C 277 230.89, 277 260, 94 260 Z"/>
+                <path d="M 464 181.25 C 645 181.25, 645 181.96, 826 181.96 L 826 223.08 C 645 223.08, 645 230.89, 464 230.89 Z"/>
+                <path d="M 834 181.96 C 1015 181.96, 1015 169.21, 1196 169.21 L 1196 186.23 C 1015 186.23, 1015 223.08, 834 223.08 Z"/>
+              </g>
+
+              <!-- Cohort separator (thin white line along H/A boundary) -->
+              <g fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.55">
+                <path d="M 94 174.9 C 277 174.9, 277 181.25, 460 181.25 C 645 181.25, 645 181.96, 830 181.96 C 1015 181.96, 1015 169.21, 1200 169.21"/>
+              </g>
+
+              <!-- Stage node bars (thin verticals) -->
+              <g>
+                <rect x="86" y="60"     width="8" height="114.9" fill="#142933"/>
+                <rect x="86" y="174.9"  width="8" height="85.1"  fill="#30C5F5"/>
+                <rect x="456" y="89.08" width="8" height="92.17" fill="#142933"/>
+                <rect x="456" y="181.25" width="8" height="49.64" fill="#30C5F5"/>
+                <rect x="826" y="96.88" width="8" height="85.08" fill="#142933"/>
+                <rect x="826" y="181.96" width="8" height="41.12" fill="#30C5F5"/>
+                <rect x="1196" y="133.76" width="8" height="35.45" fill="#142933"/>
+                <rect x="1196" y="169.21" width="8" height="17.02" fill="#30C5F5"/>
+              </g>
+
+              <!-- Stage numbers + labels (above the bands) -->
+              <g text-anchor="middle">
+                <text x="90"   y="32" font-family="GT Pressura Extended, sans-serif" font-size="38" fill="#142933" letter-spacing="-0.03em">141</text>
+                <text x="460"  y="32" font-family="GT Pressura Extended, sans-serif" font-size="38" fill="#142933" letter-spacing="-0.03em">100</text>
+                <text x="830"  y="32" font-family="GT Pressura Extended, sans-serif" font-size="38" fill="#142933" letter-spacing="-0.03em">89</text>
+                <text x="1200" y="32" font-family="GT Pressura Extended, sans-serif" font-size="38" fill="#30C5F5" letter-spacing="-0.03em">37</text>
+
+                <text x="90"   y="52" font-family="GT Pressura Extended, sans-serif" font-size="11" fill="#142933" opacity="0.65" letter-spacing="0.14em">SUBMITTED</text>
+                <text x="460"  y="52" font-family="GT Pressura Extended, sans-serif" font-size="11" fill="#142933" opacity="0.65" letter-spacing="0.14em">TO LAB</text>
+                <text x="830"  y="52" font-family="GT Pressura Extended, sans-serif" font-size="11" fill="#142933" opacity="0.65" letter-spacing="0.14em">EXPRESSED</text>
+                <text x="1200" y="52" font-family="GT Pressura Extended, sans-serif" font-size="11" fill="#142933" opacity="0.65" letter-spacing="0.14em">BINDERS</text>
+              </g>
+
+              <!-- Sub-labels under bands -->
+              <g font-family="Geist, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">
+                <text x="90"   y="288">one day in SF</text>
+                <text x="460"  y="288">Boltz-2 ipSAE top</text>
+                <text x="830"  y="288">intact protein</text>
+                <text x="1200" y="288">confirmed K_D</text>
+              </g>
+
+              <!-- Attrition annotations between stages -->
+              <g font-family="Geist Mono, Menlo, monospace" font-size="11" fill="#9CA3AF" text-anchor="middle" letter-spacing="0.04em">
+                <text x="275"  y="305">−41 cut at ipSAE</text>
+                <text x="645"  y="305">−11 no expression</text>
+                <text x="1015" y="305">−52 non-binders</text>
+              </g>
+
+              <!-- Cohort labels — at every stage, inside the bands (white text) -->
+              <g font-family="Geist Mono, Menlo, monospace" font-weight="700" fill="white">
+                <!-- Stage 1 — full cohort labels for legend role -->
+                <text x="118" y="124" font-size="14">81 humans</text>
+                <text x="118" y="222" font-size="14">60 agents</text>
+
+                <!-- Stage 2 — numbers only -->
+                <text x="488" y="142" font-size="13">65</text>
+                <text x="488" y="212" font-size="13">35</text>
+
+                <!-- Stage 3 — numbers only -->
+                <text x="858" y="146" font-size="13">60</text>
+                <text x="858" y="208" font-size="13">29</text>
+              </g>
+
+              <!-- Stage 4 cohort numbers — outside the narrow nodes -->
+              <g font-family="Geist Mono, Menlo, monospace" font-size="13" font-weight="700">
+                <text x="1213" y="156" fill="#142933">25</text>
+                <text x="1213" y="183" fill="#30C5F5">12</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 PER-TEAM SUBMISSIONS (full width) -->
+      <div class="panel" style="flex: 1;">
+          <div class="panel-idx"><span class="num">02</span><span class="name">Submissions per team</span><span class="rule"></span></div>
+          <div class="card-frame">
+            <div class="teams-wrap">
+
+              <!-- HUMAN teams — sorted by selected desc; bar shows selected / submitted -->
+              <div class="teams-side humans">
+                <div class="hdr">
+                  <span class="ico">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#142933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="7" r="3"/>
+                      <path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/>
+                    </svg>
+                    <span>Humans</span>
+                  </span>
+                  <span class="key">
+                    <span class="item"><span class="sw selected"></span>selected for lab</span>
+                    <span class="item"><span class="sw cut"></span>cut at ipSAE</span>
+                  </span>
+                </div>
+                <div class="teams-list">
+                  <div class="team-row"><span class="team">EuroBros</span>       <span class="barwrap"><div class="bar selected human"  style="width: 100%;"></div><div class="bar submitted human" style="width: 0%;"></div></span>  <span class="n"><span class="sel">10</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">NovoFy</span>         <span class="barwrap"><div class="bar selected human"  style="width: 100%;"></div><div class="bar submitted human" style="width: 0%;"></div></span>  <span class="n"><span class="sel">10</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">crow</span>           <span class="barwrap"><div class="bar selected human"  style="width: 100%;"></div><div class="bar submitted human" style="width: 0%;"></div></span>  <span class="n"><span class="sel">10</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">StanFold</span>       <span class="barwrap"><div class="bar selected human"  style="width: 90%;"></div><div class="bar submitted human" style="width: 10%;"></div></span> <span class="n"><span class="sel">9</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">MRAZS</span>          <span class="barwrap"><div class="bar selected human"  style="width: 80%;"></div><div class="bar submitted human" style="width: 20%;"></div></span> <span class="n"><span class="sel">8</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">1000Tokens</span>     <span class="barwrap"><div class="bar selected human"  style="width: 70%;"></div><div class="bar submitted human" style="width: 30%;"></div></span> <span class="n"><span class="sel">7</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">BART.bio</span>       <span class="barwrap"><div class="bar selected human"  style="width: 50%;"></div><div class="bar submitted human" style="width: 50%;"></div></span> <span class="n"><span class="sel">5</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">BraiNSEY</span>       <span class="barwrap"><div class="bar selected human"  style="width: 50%;"></div><div class="bar submitted human" style="width: 30%;"></div></span> <span class="n"><span class="sel">5</span><span class="div">/</span><span class="sub">8</span></span></div>
+                  <div class="team-row"><span class="team">DeNovo</span>         <span class="barwrap"><div class="bar selected human"  style="width: 10%;"></div><div class="bar submitted human" style="width: 10%;"></div></span> <span class="n"><span class="sel">1</span><span class="div">/</span><span class="sub">2</span></span></div>
+                  <div class="team-row"><span class="team">Marcel</span>         <span class="barwrap"><div class="bar selected human"  style="width: 0%;"></div><div class="bar submitted human"  style="width: 10%;"></div></span> <span class="n"><span class="sel">0</span><span class="div">/</span><span class="sub">1</span></span></div>
+                </div>
+              </div>
+
+              <!-- AGENT teams — sorted by selected desc -->
+              <div class="teams-side agents">
+                <div class="hdr">
+                  <span class="ico">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#30C5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+                      <rect x="9.5" y="9.5" width="5" height="5"/>
+                      <line x1="12" y1="3" x2="12" y2="5"/>
+                      <line x1="12" y1="19" x2="12" y2="21"/>
+                      <line x1="3" y1="12" x2="5" y2="12"/>
+                      <line x1="19" y1="12" x2="21" y2="12"/>
+                    </svg>
+                    <span>Agents</span>
+                  </span>
+                  <span class="key">
+                    <span class="item"><span class="sw selected"></span>selected for lab</span>
+                    <span class="item"><span class="sw cut"></span>cut at ipSAE</span>
+                  </span>
+                </div>
+                <div class="teams-list">
+                  <div class="team-row"><span class="team">claude-sonnet-4.6</span><span class="barwrap"><div class="bar selected agent" style="width: 80%;"></div><div class="bar submitted agent" style="width: 20%;"></div></span> <span class="n"><span class="sel">8</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">GPT 5.2</span>          <span class="barwrap"><div class="bar selected agent" style="width: 70%;"></div><div class="bar submitted agent" style="width: 30%;"></div></span> <span class="n"><span class="sel">7</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">Gemini 3.1 Pro</span>   <span class="barwrap"><div class="bar selected agent" style="width: 60%;"></div><div class="bar submitted agent" style="width: 40%;"></div></span> <span class="n"><span class="sel">6</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">grok-4.1-fast</span>    <span class="barwrap"><div class="bar selected agent" style="width: 50%;"></div><div class="bar submitted agent" style="width: 50%;"></div></span> <span class="n"><span class="sel">5</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">qwen-3.5-plus</span>    <span class="barwrap"><div class="bar selected agent" style="width: 50%;"></div><div class="bar submitted agent" style="width: 50%;"></div></span> <span class="n"><span class="sel">5</span><span class="div">/</span><span class="sub">10</span></span></div>
+                  <div class="team-row"><span class="team">GLM 5</span>            <span class="barwrap"><div class="bar selected agent" style="width: 40%;"></div><div class="bar submitted agent" style="width: 60%;"></div></span> <span class="n"><span class="sel">4</span><span class="div">/</span><span class="sub">10</span></span></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

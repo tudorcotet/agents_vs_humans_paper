@@ -1,0 +1,62 @@
+# =============================================================================
+# .gitattributes
+# =============================================================================
+# This repo uses Git LFS for all large binary data (structures, sensorgrams,
+# images, parquet, fonts, raw lab CSVs).
+#
+# Fresh clone:
+#   git lfs install
+#   git lfs pull        # ~162 MB across ~620 files
+#
+# Without LFS, the tracked binary files are pointer stubs of <200 bytes.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Line endings: enforce LF for source code, leave binaries alone.
+# -----------------------------------------------------------------------------
+*.py    text eol=lf
+*.md    text eol=lf
+*.toml  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.json  text eol=lf
+*.tex   text eol=lf
+*.csv   text eol=lf
+
+# -----------------------------------------------------------------------------
+# Binary flags (so Git doesn't try to diff). The LFS rules below also imply
+# -text for the specific paths they cover; these catch the remaining files.
+# -----------------------------------------------------------------------------
+*.jpg   binary
+*.pdf   binary
+
+# -----------------------------------------------------------------------------
+# Git LFS — data artefacts (~162 MB, ~620 files)
+# -----------------------------------------------------------------------------
+# ProteinBase mirror
+data/proteinbase/boltz2/*.cif      filter=lfs diff=lfs merge=lfs -text
+data/proteinbase/esmfold/*.cif     filter=lfs diff=lfs merge=lfs -text
+data/proteinbase/pae/*.json        filter=lfs diff=lfs merge=lfs -text
+data/proteinbase/images/*.png      filter=lfs diff=lfs merge=lfs -text
+data/proteinbase/sensorgrams/*.json filter=lfs diff=lfs merge=lfs -text
+
+# Top-level parquet (designs.parquet)
+data/*.parquet                     filter=lfs diff=lfs merge=lfs -text
+
+# Raw lab CSVs (small, but conceptually raw data — keep them behind LFS too)
+data/raw_lab/*.csv                 filter=lfs diff=lfs merge=lfs -text
+
+# Blog figure assets
+figures/blog/assets/structures/*.png filter=lfs diff=lfs merge=lfs -text
+figures/blog/fonts/*.woff          filter=lfs diff=lfs merge=lfs -text
+figures/blog/fonts/*.woff2         filter=lfs diff=lfs merge=lfs -text
+
+# -----------------------------------------------------------------------------
+# Git LFS — catch-all for future binary types anywhere in the repo.
+# Anything >100 KB binary should land on LFS automatically.
+# -----------------------------------------------------------------------------
+*.pdb   filter=lfs diff=lfs merge=lfs -text
+*.cif   filter=lfs diff=lfs merge=lfs -text
+*.npy   filter=lfs diff=lfs merge=lfs -text
+*.npz   filter=lfs diff=lfs merge=lfs -text
+*.zip   filter=lfs diff=lfs merge=lfs -text

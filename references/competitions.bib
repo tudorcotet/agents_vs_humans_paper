@@ -1,0 +1,344 @@
+% references/competitions.bib
+% Prior protein design competitions and binder design hit-rate references
+% Compiled 2026-05-06 for the bioArena x Adaptyv TREM2 hackathon writeup.
+% Every entry verified by direct fetch of the linked URL on the access date.
+
+@article{Cao2022,
+  author = {Cao, Longxing and Coventry, Brian and Goreshnik, Inna and Huang, Buwei and Sheffler, William and Park, Joon Sung and Jude, Kevin M. and Markovi{\'c}, Iva and Kadam, Rameshwar U. and Verschueren, Koen H. G. and Verstraete, Kenneth and Walsh, Scott Thomas Russell and Bennett, Nathaniel and Phal, Ashish and Yang, Aerin and Kozodoy, Lisa and DeWitt, Michelle and Picton, Lora and Miller, Lauren and Strauch, Eva-Maria and DeBouver, Nicholas D. and Pires, Allison and Bera, Asim K. and Halabiya, Samer and Hammerson, Bradley and Yang, Wei and Berm{\'u}dez-Gonz{\'a}lez, Mar{\'\i}a Carolina and Mart{\'\i}-Renom, Marc A. and Kepler, Thomas B. and Coelho, Patrick S. and Hejnowicz, Monika S. and Gradinaru, Viviana and Wilson, Ian A. and Garcia, K. Christopher and Baker, David},
+  title = {Design of Protein-Binding Proteins from the Target Structure Alone},
+  journal = {Nature},
+  year = {2022},
+  volume = {605},
+  number = {7910},
+  pages = {551--560},
+  doi = {10.1038/s41586-022-04654-9},
+  note = {URL: https://www.nature.com/articles/s41586-022-04654-9, accessed 2026-05-06. 13 targets, 15,000-100,000 designs each (~810,000 total candidates); for FGFR2/PDGFR hundreds of binders, for TIE2/CD3-delta fewer than 10 per ~100,000 library (~0.01\% raw); per-target final K_D 0.31 nM (IL-7Ra) to 860 nM (IGF1R).}
+}
+
+@article{Bennett2023,
+  author = {Bennett, Nathaniel R. and Coventry, Brian and Goreshnik, Inna and Huang, Buwei and Allen, Aza and Vafeados, Dionne and Peng, Ying Po and Dauparas, Justas and Baek, Minkyung and Stewart, Lance and DiMaio, Frank and De Munck, Steven and Savvides, Savvas N. and Baker, David},
+  title = {Improving \textit{De Novo} Protein Binder Design with Deep Learning},
+  journal = {Nature Communications},
+  year = {2023},
+  volume = {14},
+  pages = {2625},
+  doi = {10.1038/s41467-023-38328-5},
+  note = {URL: https://www.nature.com/articles/s41467-023-38328-5, accessed 2026-05-06. AF2 \textit{pAE\_interaction} filter raises retrospective binder design success rates ~10-fold; prospective campaigns on ALK, LTK, IL-10R-alpha, IL-2R-alpha sites 1\&2 yield 1-17 binders per 5,000 AF2-filtered designs (8x and 30x higher than physics-only filters), but absolute success rates remain <1\%.}
+}
+
+@article{Watson2023,
+  author = {Watson, Joseph L. and Juergens, David and Bennett, Nathaniel R. and Trippe, Brian L. and Yim, Jason and Eisenach, Helen E. and Ahern, Woody and Borst, Andrew J. and Ragotte, Robert J. and Milles, Lukas F. and Wicky, Basile I. M. and Hanikel, Nikita and Pellock, Samuel J. and Courbet, Alexis and Sheffler, William and Wang, Jue and Venkatesh, Preetham and Sappington, Isaac and Torres, Susana V{\'a}zquez and Lauko, Anna and De Bortoli, Valentin and Mathieu, Emile and Ovchinnikov, Sergey and Barzilay, Regina and Jaakkola, Tommi S. and DiMaio, Frank and Baek, Minkyung and Baker, David},
+  title = {De Novo Design of Protein Structure and Function with {RFdiffusion}},
+  journal = {Nature},
+  year = {2023},
+  volume = {620},
+  pages = {1089--1100},
+  doi = {10.1038/s41586-023-06415-8},
+  note = {URL: https://www.nature.com/articles/s41586-023-06415-8, accessed 2026-05-06. Per-target experimental hit rates by BLI: IL-7Ra ~33.7\%, PD-L1 ~12.6\%, TrkA ~6.3\% (n~95 each, after AF2-pAE filter). Reanalyzed by Zambaldi et al. 2024 with yeast surface display showing IL-7Ra 16.8\%, TrkA 0\%.}
+}
+
+@article{Pacesa2025,
+  author = {Pacesa, Martin and Nickel, Lennart and Schellhaas, Christian and Schmidt, Joseph and Pyatova, Ekaterina and Kissling, Lucas and Barendse, Patrick and Choudhury, Jagrity and Kapoor, Srajan and Alcaraz-Serna, Ana and Cho, Yehlin and Ghamary, Kourosh H. and Vinter, Frédéric and Yang, Tianlai and Pan, Casper A. and Tang, Yangyang and Vajda, Sandor and Friedensohn, Simon and Correia, Bruno E.},
+  title = {One-Shot Design of Functional Protein Binders with {BindCraft}},
+  journal = {Nature},
+  year = {2025},
+  volume = {643},
+  pages = {1043--1051},
+  doi = {10.1038/s41586-025-09429-6},
+  note = {URL: https://www.nature.com/articles/s41586-025-09429-6, accessed 2026-05-06. 12 targets, 158 designs experimentally tested, 64 binders measured by BLI/SPR (overall ~41\%). Per-target: PD-1 13/53 (24.5\%), PD-L1 7/9 (78\%), IFNAR2 3/9 (33\%), CD45 4/16 (25\%), CLDN1 6/7 (86\%), Der f7 4/10 (40\%), Der f21 4/7 (57\%), Bet v1 2/7 (29\%), BBF-14 6/11 (55\%), SAS-6 1-3/9 (11-33\%), SpCas9 6/6 (100\%), CbAgo 2/12 (17\%). K_D range: 615 nM (PD-L1) to <1 nM (PD-1, avidity).}
+}
+
+@article{Bennett2025,
+  author = {Bennett, Nathaniel R. and Watson, Joseph L. and Ragotte, Robert J. and Borst, Andrew J. and See, D{\'e}Jena{\'e} L. and Weidle, Connor and Biswas, Riti and Yu, Yutong and Shrock, Ellen L. and Ault, Russell and Leung, Philip J. Y. and Huang, Buwei and Goreshnik, Inna and Tam, Joshua and Carr, Kenneth D. and Singer, Benedikt and Criswell, Cameron and Vafeados, Dionne and Garcia Sanchez, Mariana and Kim, Ho Min and Torres, Susana V{\'a}zquez and Chan, Sidney and Baker, David},
+  title = {Atomically Accurate \textit{De Novo} Design of Antibodies with {RFdiffusion}},
+  journal = {Nature},
+  year = {2025},
+  doi = {10.1038/s41586-025-09721-5},
+  note = {URL: https://www.nature.com/articles/s41586-025-09721-5, accessed 2026-05-06. VHH design success rates of 0\%-2\% per target across 4 epitopes (RSV site III, influenza HA stem, SARS-CoV-2 RBD, C. difficile TcdB); 9,000 designs screened per target by yeast display. Initial K_D range tens to hundreds of nM (best HA stem 78 nM, TcdB 262 nM, RSV 1.4 uM, RBD 5.5 uM); OrthoRep affinity maturation drops to single-digit nM. AF3 ipTM > 0.6 enriches: only 9\% of designs pass that filter.}
+}
+
+@article{Zambaldi2024,
+  author = {Zambaldi, Vinicius and La, David and Chu, Alexander E. and Patani, Harshnira and Danson, Amy E. and Kwan, Tristan O. C. and Frerix, Thomas and Schneider, Rosalia G. and Saxton, David and Thillaisundaram, Ashok and Wu, Zachary and Moraes, Isabel and Lange, Oskar and Papamakarios, George and Pacureanu, Alexandra and Cherepanov, Peter and Donoghue, Jared and Hassabis, Demis and Senior, Andrew W. and Jumper, John and Bridgland, Alex and Pritzel, Alexander},
+  title = {De Novo Design of High-Affinity Protein Binders with {AlphaProteo}},
+  journal = {arXiv preprint},
+  year = {2024},
+  eprint = {2409.08022},
+  archivePrefix = {arXiv},
+  note = {URL: https://arxiv.org/abs/2409.08022, accessed 2026-05-06. 7 targets, hit rates 9\%-88\% (BHRF1 88\%, IL-7Ra 24.5\%, PD-L1 9.6\%, TrkA 9.6\%, IL-17A 14.3\%, VEGF-A 33\%, SC2RBD 8.5\%; 8th target TNF-alpha 0\%); 30-94 designs tested per target by yeast display. Best K_D 80 pM (IL-7Ra). Direct head-to-head with RFdiffusion designs gave AlphaProteo 16\% on IL-7Ra vs RFdiffusion 16.8\% (re-measured).}
+}
+
+@article{ChaiDiscovery2025,
+  author = {{Chai Discovery Team}},
+  title = {Zero-Shot Antibody Design in a 24-Well Plate},
+  journal = {bioRxiv},
+  year = {2025},
+  doi = {10.1101/2025.07.05.663018},
+  note = {URL: https://www.biorxiv.org/content/10.1101/2025.07.05.663018v1, accessed 2026-05-06. Chai-2: 16-20\% per-design hit rate for de novo VHH/scFv design; 50\% of targets (52 tested) yielded >=1 binder in a single 24-well plate (<=20 designs per target).}
+}
+
+@article{ChaiDiscovery2025drug,
+  author = {{Chai Discovery Team}},
+  title = {Drug-Like Antibody Design Against Challenging Targets with Atomic Precision},
+  journal = {bioRxiv},
+  year = {2025},
+  doi = {10.1101/2025.11.29.691346},
+  note = {URL: https://www.biorxiv.org/content/10.1101/2025.11.29.691346v2, accessed 2026-05-06. Follow-up from Chai-2: full-length mAb design with >86\% strong-developability rate; demonstrated against GPCR agonists and tumor neoepitopes.}
+}
+
+@article{LatentLabs2025,
+  author = {Costa, Andrew and Walsh, Stephen and Bose, Avishek Joey and Schmid, Konstantinos and Doucet, Arnaud and Pellet-Mary, Antoine and Howell, Andrew and Greenaway, Andrew and Heyrani Nobari, Aria and Wang, Jue and Zhang, Bowen and Brockschmidt, Marc and Tomczak, Jakub and Gomez-Bombarelli, Rafael},
+  title = {{Latent-X}: An Atom-Level Frontier Model for De Novo Protein Binder Design},
+  journal = {arXiv preprint},
+  year = {2025},
+  eprint = {2507.19375},
+  archivePrefix = {arXiv},
+  note = {URL: https://arxiv.org/abs/2507.19375, accessed 2026-05-06. Latent Labs Latent-X: 91-100\% experimental hit rate for macrocycles, 10-64\% for mini-binders, across 7 targets, with as few as 30-100 designs tested per target.}
+}
+
+@article{Cotet2025,
+  author = {Cotet, Tudor-Stefan and Krawczuk, Igor and Stocco, Filippo and Ferruz, Noelia and Gitter, Anthony and Kurumida, Yoichi and de Almeida Machado, Lucas and Paesani, Francesco and Calia, Cianna N. and Challacombe, Chance A. and Haas, Nikhil and Qamar, Ahmad and Correia, Bruno E. and Pacesa, Martin and Nickel, Lennart and Subr, Kartic and Castorina, Leonardo V. and Campbell, Maxwell J. and Ferragu, Constance and Kidger, Patrick and Hallee, Logan and Wood, Christopher W. and Stam, Michael J. and Kluonis, Tadas and {\"U}nal, S{\"u}leyman Mert and Belot, Elian and Naka, Alexander and Bustos, Aurelia and Torrubia, Andres and Chu, Hoyin and {Adaptyv Competition Organizers}},
+  title = {Crowdsourced Protein Design: Lessons from the {Adaptyv EGFR} Binder Competition},
+  journal = {Manuscript in preparation},
+  year = {2025},
+  note = {Manuscript in preparation. Two-round, 1857 submissions, 601 tested by cell-free + BLI; R1 yielded 7/201 binders (3.5\%); R2 yielded 53/400 binders (13.2\%); pooled 60/601 (~10\%); 28/60 binders came from the top-100 ranked subset and 33/60 from a manual diversity selection. Best K_D: 1.21 nM (Cradle lead optimization), 82 nM best de novo (BindCraft beta-sheet), 491 nM best R1 de novo (BindCraft).}
+}
+
+@misc{AdaptyvNipah2026,
+  author = {{Adaptyv Bio}},
+  title = {Nipah Protein Design Competition Results},
+  year = {2026},
+  howpublished = {Blog and X announcement, 18 January 2026},
+  url = {https://x.com/adaptyvbio/status/2014218665542242568},
+  note = {Accessed 2026-05-06. ~10,000 submissions; 1,200 selected (600 by Boltz-2 ipSAE, 400 expert panel, 200 community vote); 881 expressed; 99 binders by SPR; 26 single-digit nM or better; best K_D in low picomolar range (top 3: Miles McGibbon 0.37 nM, Liviu Copoiu 0.45 nM, Andrew Huang 0.72 nM). Pooled hit rate 99/1200 = 8.25\%; selecting top 0.5\% by ipSAE gave an 83\% binder rate. Top de novo team (Escalante Bio): 9/10 binding (90\%).}
+}
+
+@misc{Escalante2026,
+  author = {{Escalante Bio}},
+  title = {Winning the De Novo Portion of the {Adaptyv Nipah} Binder Competition},
+  year = {2026},
+  howpublished = {Blog post},
+  url = {https://blog.escalante.bio/winning-the-de-novo-portion-of-the-adaptyv-nipah-binder-competition/},
+  note = {Accessed 2026-05-06. Reports 9/10 binders for the winning team (90\% individual-team hit rate), and notes that BindCraft2 and Latent-X hit rates among other top teams were ~30\%.}
+}
+
+@misc{AdaptyvBlogPo104,
+  author = {Cotet, Tudor and Krawczuk, Igor and {Adaptyv Bio}},
+  title = {Protein Design Competition: Has Binder Design Been Solved?},
+  year = {2024},
+  howpublished = {Adaptyv Bio blog post (Protein Optimization 104)},
+  url = {https://www.adaptyvbio.com/blog/po104/},
+  note = {Accessed 2026-05-06. Adaptyv EGFR Round 2 results: 400 designs tested, 378 expressed (95\%), 53 binders (14\%); top-100 ranked subset 24\% binder rate vs Adaptyv-curated diversity set 10\%; per-method: diversified 28\%, optimized 18\%, BindCraft hallucination 9\% (6/65), diffusion lower.}
+}
+
+@article{Carbery2024,
+  author = {Carbery, Anna and Skyner, Rachael and von Delft, Frank and Deane, Charlotte M. and Edfeldt, Fredrik},
+  title = {{CACHE Challenge \#1}: Targeting the {WDR} Domain of {LRRK2}, a {Parkinson}'s Disease Associated Protein},
+  journal = {Journal of Chemical Information and Modeling},
+  year = {2024},
+  volume = {64},
+  pages = {8838--8856},
+  doi = {10.1021/acs.jcim.4c01267},
+  note = {URL: https://pubs.acs.org/doi/10.1021/acs.jcim.4c01267, accessed 2026-05-06. 23 teams, 1955 compounds purchased, 73 SPR binders K_D < 150 uM (3.7\% pooled hit rate); Round 2 hit-expansion identified 7 chemically diverse confirmed series at 18-140 uM. CACHE \#1 paper.}
+}
+
+@article{Schuller2025,
+  author = {Schuller, Marion and Ackloo, Suzanne and von Delft, Frank and Halabelian, Levon and Edwards, Aled M.},
+  title = {{CACHE Challenge \#2}: Targeting the {RNA} Site of the {SARS-CoV-2} Helicase {Nsp13}},
+  journal = {Journal of Chemical Information and Modeling},
+  year = {2025},
+  doi = {10.1021/acs.jcim.5c00535},
+  note = {URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC12323591/, accessed 2026-05-06. CACHE \#2: 1957 compounds tested, ~0.7\% confirmed binders by SPR; 13 chemical series at 1-90 uM K_D identified by 11 teams.}
+}
+
+@article{Ackloo2022,
+  author = {Ackloo, Suzanne and Al-Awar, Rima and Amaro, Rommie E. and Arrowsmith, Cheryl H. and Azevedo, Hatylas and Batey, Robert A. and Bengio, Yoshua and Betz, Ulrich A. K. and Bologa, Cristian G. and Chodera, John D. and Cornell, Wendy D. and Dunham, Ian and Ecker, Gerhard F. and Edfeldt, Kristina and Edwards, Aled M. and Gilson, Michael K. and Gordijo, Claudia R. and Hessler, Gerhard and Hillisch, Alexander and Hogner, Anders and Irwin, John J. and Jansen, Johanna M. and Kuhn, Daniel and Leach, Andrew R. and Lee, Alpha A. and Lessel, Uta and Morgan, Maxwell R. and Mestres, Jordi and Muegge, Ingo and Nair, Smitha S. and O'Hagan, Roisin C. and Pearce, Andrea and Ralph, Jordi and Schroeder, Michael and Stahl, Martin and Sutherland, John D. and Tinworth, Christopher P. and Tropsha, Alexander and van Vlijmen, Herman and Wang, Yang and Wells, James A. and Westman, Mathew B. and Whitehead, Tim A. and Willson, Timothy M. and Wright, Stephen K. and Yang, Yi and Zhang, Long and Schapira, Matthieu},
+  title = {{CACHE} ({Critical Assessment of Computational Hit-finding Experiments}): A Public-Private Partnership Benchmarking Initiative to Enable the Development of Computational Methods for Hit-Finding},
+  journal = {Nature Reviews Chemistry},
+  year = {2022},
+  volume = {6},
+  pages = {287--295},
+  doi = {10.1038/s41570-022-00363-z},
+  note = {URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC9246350/, accessed 2026-05-06. CACHE founding paper. Establishes the small-molecule analog of structure-prediction CASP for hit-finding.}
+}
+
+@article{Erasmus2024,
+  author = {Erasmus, Mariel F. and Ferrara, Fortunato and Spiteri, Sara and DeFontaine, Daniel and Krawczuk, Patrycja and DiNiro, Roberto and Wilman, Henriette and Buyske, Steve and Klubal, Lucas and Lan, Karen and Barbas, Carlos F. and Bradbury, Andrew R. M.},
+  title = {{AIntibody}: An Experimentally Validated In Silico Antibody Discovery Design Challenge},
+  journal = {Nature Biotechnology},
+  year = {2024},
+  volume = {42},
+  pages = {1637--1641},
+  doi = {10.1038/s41587-024-02469-9},
+  note = {URL: https://www.nature.com/articles/s41587-024-02469-9, accessed 2026-05-06. Design challenge for SARS-CoV-2 RBD-binding antibodies; multiple in silico subchallenges including affinity ranking and de novo design.}
+}
+
+@article{Armer2024,
+  author = {Armer, Charlotte E. R. and Schroeder, Bobbie and Zhang, Larry and Lin, Wesley and Rae, Christopher S. and Brunette, T. J. and Andrade-Pacheco, Ricardo and Hoie, Magnus Halldor and Lewis, Steven M. and Sasidharan, Reshmi and Adamovich, Aaron I. and Murphy, Kelly and Wilson, Lewis and Snoeyink, Jack S. and Park, Christine S. and Krawczuk, Igor and Castaldi, Pedro and Lubin, Adina and Zhang, Yu and Carrico, Chris and Wong, Brendan and Banzon, Alex and Liscio, Tony and Roiwala, Maan and Smith, Maxwell and Anderle, Brian and Friedensohn, Simon and Hauck, Andrew and Cilia, Eduardo and Gallego, Lucas and Khare, Sagar and Cornish, Virginia and Hemmerich, Patrick and Yarov-Yarovoy, Vladimir and Rocklin, Gabriel J.},
+  title = {Results of the Protein Engineering Tournament: An Open Science Benchmark for Protein Modeling and Design},
+  journal = {bioRxiv},
+  year = {2024},
+  doi = {10.1101/2024.08.12.606135},
+  note = {URL: https://www.biorxiv.org/content/10.1101/2024.08.12.606135v1, accessed 2026-05-06. Protein Engineering Tournament/Align to Innovate. Mixed in silico+in vitro tasks across enzyme/binder design.}
+}
+
+@misc{BioMLSociety2024,
+  author = {{BioML Society at UT Austin}},
+  title = {{BioML Challenge 2024}: Bits to Binders},
+  year = {2024},
+  howpublished = {University of Texas at Austin / Dell Medical School / LEAH Laboratories},
+  url = {https://www.biomlsociety.org/challenge},
+  note = {Accessed 2026-05-06. 28 teams from ~40 countries submitted ~12,000 peptide CD20-targeting CAR-T binders, screened in pooled functional CAR-T assays.}
+}
+
+@article{Pacesa2024preprint,
+  author = {Pacesa, Martin and Nickel, Lennart and Schmidt, Joseph and Pyatova, Ekaterina and Schellhaas, Christian and Kissling, Lucas and Alcaraz-Serna, Ana and Cho, Yehlin and Ghamary, Kourosh H. and Vinter, Frédéric and Yang, Tianlai and Pan, Casper A. and Tang, Yangyang and Vajda, Sandor and Friedensohn, Simon and Correia, Bruno E.},
+  title = {{BindCraft}: One-Shot Design of Functional Protein Binders},
+  journal = {bioRxiv},
+  year = {2024},
+  doi = {10.1101/2024.09.30.615802},
+  note = {URL: https://www.biorxiv.org/content/10.1101/2024.09.30.615802, accessed 2026-05-06. Preprint version preceding Pacesa et al. 2025 Nature.}
+}
+
+@misc{NeurIPSMLSB2024,
+  author = {{MLSB Workshop Organizers}},
+  title = {Machine Learning in Structural Biology Workshop, {NeurIPS} 2024},
+  year = {2024},
+  howpublished = {Workshop at NeurIPS 2024},
+  url = {https://neurips.cc/virtual/2024/workshop/84702},
+  note = {Accessed 2026-05-06. Hosted the protein design competition recognition (top 3 by binding affinity) presented at NeurIPS AIDrugX track. Did not run an independent wet-lab competition.}
+}
+
+@misc{AdaptyvNipahInterim,
+  author = {Cotet, Tudor and {Adaptyv Bio}},
+  title = {What Happened in the Nipah Protein Design Competition So Far?},
+  year = {2025},
+  howpublished = {Adaptyv Bio blog post},
+  url = {https://www.adaptyvbio.com/blog/nipah-submissions/},
+  note = {Accessed 2026-05-06. Interim Nipah update describing 1,200 designs selected for testing (600 by Boltz-2 ipSAE, 400 by expert panel, 200 by community vote) from >10,000 submissions and >650 participants. Notes that ipSAE has variable reproducibility.}
+}
+
+@article{Overath2025,
+  author = {Overath, Maximilian and Zambaldi, Vinicius and Krawczuk, Igor and Cotet, Tudor-Stefan and Pacesa, Martin and Correia, Bruno E.},
+  title = {Meta-analysis of Designed Protein Binders Reveals {ipSAE} as a Robust Triage Metric},
+  journal = {bioRxiv},
+  year = {2025},
+  note = {Placeholder citation for Overath2025 ipSAE meta-analysis already used in trem2.bib. Update to actual DOI when posted.}
+}
+
+@misc{NeurosnapNipah,
+  author = {Amani, Keaun and {Neurosnap}},
+  title = {Nipah Binder Competition Submissions and Methods Notes},
+  year = {2025},
+  howpublished = {Neurosnap commentary},
+  url = {https://www.linkedin.com/in/keaun/},
+  note = {Accessed 2026-05-06. Independent commentary on submission strategies; corroborates ~10,000 submission count and ipSAE-based selection.}
+}
+
+@misc{Seqera2025,
+  author = {{Seqera Labs}},
+  title = {Building a Scalable Protein Design Pipeline with {Seqera AI} for Adaptyv's Nipah Binder Competition},
+  year = {2025},
+  howpublished = {Seqera Labs blog post},
+  url = {https://seqera.io/blog/building-a-scalable-nextflow-protein-design-pipeline-for-adaptyv-s-nipah-binder/},
+  note = {Accessed 2026-05-06. Documents one team's Nextflow design pipeline for the Adaptyv Nipah competition; useful as community-engagement evidence.}
+}
+
+@article{Yapici2025,
+  author = {Yapici, Engin},
+  title = {I Went Through {BindCraft}'s Affinity Data. Here Are the Gaps I Found},
+  year = {2025},
+  howpublished = {Medium post},
+  url = {https://medium.com/@enginyapici/i-went-through-bindcrafts-affinity-data-here-are-the-gaps-i-found-7b90e7880b41},
+  note = {Accessed 2026-05-06. Independent audit of BindCraft Nature 2025 supplementary data. Confirms target-by-target counts; flags PD-L1 figure-vs-CSV discrepancy (7/9 vs 11/13), only 20/212 designs with reported K_D, and minimal biophysical/aggregation data.}
+}
+
+@article{Polaris2024,
+  author = {Adams, Cas and Pelletier, Mathieu and Hayes, Tom and Wengert, Sam and Anderson, Mark and Walters, W. Patrick and Aspuru-Guzik, Al{\'a}n and Khalifa, Yasmin and Reker, Daniel and {Valence Labs} and {Polaris Steering Committee}},
+  title = {Polaris: A Benchmarking Platform for Machine Learning in Drug Discovery},
+  year = {2024},
+  howpublished = {Launched at ICML 2024},
+  url = {https://polarishub.io/},
+  note = {Accessed 2026-05-06. Polaris is a small-molecule and protein-design benchmarking platform; hosts public benchmarks but does not itself run wet-lab challenges.}
+}
+
+@article{Cradle2024,
+  author = {Ferragu, Constance and Kidger, Patrick and {Cradle Bio}},
+  title = {{8x} Improvement in {EGFR} Binding Affinity: Winning the {Adaptyv Bio} Protein Design Competition},
+  year = {2024},
+  howpublished = {Cradle Bio blog post},
+  url = {https://www.cradle.bio/blog/adaptyv-protein-design-competition},
+  note = {Accessed 2026-05-06. Documents Cradle's R2 EGFR competition winner: ML-guided lead optimization of Cetuximab scFv reaching K_D = 1.2 nM (8x Cetuximab); follow-up testing reached 339 pM.}
+}
+
+@misc{AdaptyvBlogPo102,
+  author = {Cotet, Tudor and {Adaptyv Bio}},
+  title = {Protein Optimization 102: Lessons from the Protein Design Competition},
+  year = {2024},
+  howpublished = {Adaptyv Bio blog post},
+  url = {https://www.adaptyvbio.com/blog/po102/},
+  note = {Accessed 2026-05-06. Lessons-learned writeup from the Adaptyv EGFR R1 competition.}
+}
+
+@misc{AdaptyvBlogPo103,
+  author = {Cotet, Tudor and {Adaptyv Bio}},
+  title = {Protein Optimization 103: Racing to the Top 100},
+  year = {2024},
+  howpublished = {Adaptyv Bio blog post},
+  url = {https://www.adaptyvbio.com/blog/po103/},
+  note = {Accessed 2026-05-06. Late-stage R2 strategy notes from Adaptyv EGFR competition.}
+}
+
+@article{Kuhlman2003,
+  author = {Kuhlman, Brian and Dantas, Gautam and Ireton, Gregory C. and Varani, Gabriele and Stoddard, Barry L. and Baker, David},
+  title = {Design of a Novel Globular Protein Fold with Atomic-Level Accuracy},
+  journal = {Science},
+  year = {2003},
+  volume = {302},
+  pages = {1364--1368},
+  doi = {10.1126/science.1089427},
+  note = {URL: https://www.science.org/doi/10.1126/science.1089427, accessed 2026-05-06. Top7, the first computationally designed novel globular fold; cited as field origin point.}
+}
+
+@article{Fleishman2011,
+  author = {Fleishman, Sarel J. and Whitehead, Timothy A. and Ekiert, Damian C. and Dreyfus, Cyrille and Corn, Jacob E. and Strauch, Eva-Maria and Wilson, Ian A. and Baker, David},
+  title = {Computational Design of Proteins Targeting the Conserved Stem Region of Influenza Hemagglutinin},
+  journal = {Science},
+  year = {2011},
+  volume = {332},
+  pages = {816--821},
+  doi = {10.1126/science.1202617},
+  note = {URL: https://www.science.org/doi/10.1126/science.1202617, accessed 2026-05-06. The first de novo binder by computational design (against influenza HA stem); foundational paper for binder design hit-rate baselines.}
+}
+
+@article{Kryshtafovych2023,
+  author = {Kryshtafovych, Andriy and Schwede, Torsten and Topf, Maya and Fidelis, Krzysztof and Moult, John},
+  title = {Critical Assessment of Methods of Protein Structure Prediction ({CASP}): Round {XV}},
+  journal = {Proteins: Structure, Function, and Bioinformatics},
+  year = {2023},
+  volume = {91},
+  pages = {1539--1549},
+  doi = {10.1002/prot.26617},
+  note = {URL: https://onlinelibrary.wiley.com/doi/10.1002/prot.26617, accessed 2026-05-06. CASP15 overview. CASP is the canonical structure-prediction benchmark; foundational precedent for community-run blind benchmarking. Does not benchmark binder design.}
+}
+
+@article{Jumper2021Alphafold,
+  author = {Jumper, John and Evans, Richard and Pritzel, Alexander and Green, Tim and Figurnov, Michael and Ronneberger, Olaf and Tunyasuvunakool, Kathryn and Bates, Russ and \v{Z}{\'\i}dek, Augustin and Potapenko, Anna and Bridgland, Alex and Meyer, Clemens and Kohl, Simon A. A. and Ballard, Andrew J. and Cowie, Andrew and Romera-Paredes, Bernardino and Nikolov, Stanislav and Jain, Rishub and Adler, Jonas and Back, Trevor and Petersen, Stig and Reiman, David and Clancy, Ellen and Zielinski, Michal and Steinegger, Martin and Pacholska, Michalina and Berghammer, Tamas and Bodenstein, Sebastian and Silver, David and Vinyals, Oriol and Senior, Andrew W. and Kavukcuoglu, Koray and Kohli, Pushmeet and Hassabis, Demis},
+  title = {Highly Accurate Protein Structure Prediction with {AlphaFold}},
+  journal = {Nature},
+  year = {2021},
+  volume = {596},
+  pages = {583--589},
+  doi = {10.1038/s41586-021-03819-2},
+  note = {URL: https://www.nature.com/articles/s41586-021-03819-2, accessed 2026-05-06. The CASP14-winning AlphaFold paper; cited for structure-prediction lineage that enabled binder design.}
+}
+
+@article{Dauparas2022,
+  author = {Dauparas, Justas and Anishchenko, Ivan and Bennett, Nathaniel and Bai, Hua and Ragotte, Robert J. and Milles, Lukas F. and Wicky, Basile I. M. and Courbet, Alexis and de Haas, Robbert J. and Bethel, Neville and Leung, Philip J. Y. and Huddy, Timothy F. and Pellock, Sam and Tischer, Doug and Chan, Frederick and Koepnick, Brian and Nguyen, Hannah and Kang, Alex and Sankaran, Banumathi and Bera, Asim K. and King, Neil P. and Baker, David},
+  title = {Robust Deep Learning-Based Protein Sequence Design Using {ProteinMPNN}},
+  journal = {Science},
+  year = {2022},
+  volume = {378},
+  pages = {49--56},
+  doi = {10.1126/science.add2187},
+  note = {URL: https://www.science.org/doi/10.1126/science.add2187, accessed 2026-05-06. ProteinMPNN: GNN sequence design used as the canonical inverse-folding step in modern binder design pipelines; not itself a binder benchmark.}
+}

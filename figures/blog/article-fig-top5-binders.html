@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>muni × Adaptyv TREM2 — Top 5 binders by K_D</title>
+<style>
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Variable.woff2") format("woff2-variations"),
+         url("fonts/Geist-Variable.woff2") format("woff2");
+    font-weight: 100 900; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Medium.woff2") format("woff2");
+    font-weight: 500; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Bold.woff2") format("woff2");
+    font-weight: 700; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "GT Pressura Extended";
+    src: url("fonts/GT-Pressura-Extended-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+
+  :root {
+    --text:        #111827;
+    --text-mute:   #4B5563;
+    --text-dim:    #6B7280;
+    --line:        #D1D5DB;
+    --line-soft:   #E5E7EB;
+    --brand-black: #142933;
+    --brand-cyan:  #30C5F5;
+    --cyan-soft:   #9EDFFF;
+    --human:       #142933;
+    --human-soft:  #4B5563;
+    --agent:       #30C5F5;
+    --agent-soft:  #9EDFFF;
+    --winner:      #30C5F5;
+    --winner-ring: #142933;
+    --accent:      #DC7A73;
+    --lavender:    #8B90DD;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #FFFFFF;
+    color: var(--brand-black);
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .canvas {
+    width: 1920px; height: 1080px;
+    position: relative; overflow: hidden;
+    background: #FFFFFF;
+    padding: 40px 88px 48px;
+    display: flex; flex-direction: column;
+  }
+
+  .canvas::before { content: none; }
+  .canvas::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 1100px 800px at 100% 0%, rgba(48,197,245,0.13) 0%, transparent 55%),
+      radial-gradient(ellipse 900px 700px at 0% 100%, rgba(139,144,221,0.08) 0%, transparent 55%);
+  }
+  .riso-bg { display: none; }
+
+/* Top row */
+  .top-row {
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .lockup { display: flex; align-items: center; gap: 26px; }
+  .lockup img.adaptyv { height: 30px; width: auto; display: block; }
+  .lockup img.muni    { height: 36px; width: auto; display: block; }
+  .lockup .x { color: var(--brand-black); opacity: 0.30; font-size: 24px; font-weight: 300; }
+  .top-meta {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand-black);
+  }
+
+  /* Main split: vertical title block (left) + leaderboard (right) */
+  .body-split {
+    flex: 1;
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 0.42fr 1.58fr;
+    gap: 48px;
+    position: relative; z-index: 1;
+    min-height: 0;
+  }
+
+  /* LEFT — vertical title block */
+  .title-col {
+    display: flex; flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 12px;
+    border-right: 1px solid rgba(20,41,51,0.12);
+  }
+  .title-stack {
+    display: flex; flex-direction: column;
+    gap: 0;
+  }
+  .title-stack .word {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 104px; font-weight: 400;
+    line-height: 0.94; letter-spacing: -0.035em;
+    color: var(--brand-black);
+    white-space: nowrap;
+  }
+  .title-stack .word.cy { color: var(--brand-cyan); }
+  .title-stack .word.indent { margin-left: 0; }
+  .title-stack .word .dot {
+    display: inline-block;
+    width: 16px; height: 16px;
+    background: var(--brand-cyan);
+    border-radius: 50%;
+    margin-left: 6px;
+    vertical-align: 12px;
+  }
+  .title-subhead {
+    margin-top: 24px;
+    font-family: "Geist", sans-serif;
+    font-size: 20px; font-weight: 400;
+    line-height: 1.4; color: var(--text-mute);
+    max-width: 560px;
+  }
+  .title-meta-block {
+    margin-top: 28px;
+    display: flex; flex-direction: column; gap: 14px;
+    font-family: "Geist", sans-serif;
+    font-size: 13px; color: var(--brand-black);
+  }
+  .title-meta-row { display: flex; align-items: center; gap: 12px; }
+  .title-meta-row .lab {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-dim);
+    width: 96px;
+  }
+  .title-meta-row .val {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 13px; color: var(--brand-black);
+  }
+  .title-foot {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* Cohort leaders spotlight — fills the bottom-left below metadata. */
+  .cohort-leaders {
+    margin-top: 32px;
+    padding: 20px 22px 18px;
+    background: #FFFFFF;
+    border: 1px solid rgba(20,41,51,0.08);
+    border-radius: 14px;
+    box-shadow: 0 12px 24px rgba(15,20,25,0.04);
+  }
+  .cohort-leaders .eyebrow {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .leader-row {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 10px 0;
+  }
+  .leader-row + .leader-row {
+    border-top: 1px solid var(--line-soft);
+  }
+  .leader-row .leader-icon { display: flex; align-items: center; justify-content: center; }
+  .leader-row .leader-icon svg { width: 22px; height: 22px; display: block; }
+  .leader-info .who {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .leader-info .name {
+    margin-top: 3px;
+    font-family: "Geist", sans-serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--brand-black);
+    line-height: 1.1;
+  }
+  .leader-info .method {
+    margin-top: 2px;
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 12px; color: var(--text-mute);
+  }
+  .leader-kd {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 28px; font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--brand-black);
+    line-height: 1;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .leader-row.agent .leader-kd { color: var(--brand-cyan); }
+  .leader-kd .unit {
+    font-size: 12px; color: var(--text-mute);
+    margin-left: 3px;
+    letter-spacing: 0.04em;
+  }
+  .leader-row.agent .leader-kd .unit { color: var(--brand-cyan); opacity: 0.7; }
+
+  .gap-row {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .gap-row .lab {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .gap-row .val {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 26px;
+    color: var(--brand-cyan);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  /* Cohort chip in subhead */
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 3px 12px 3px 10px;
+    border: 1px solid currentColor;
+    border-radius: 12px;
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 12px; font-weight: 600;
+    line-height: 1.4;
+  }
+  .chip svg { width: 14px; height: 14px; display: block; flex-shrink: 0; }
+  .chip.human { color: var(--human); }
+  .chip.agent { color: var(--agent); }
+
+  /* RIGHT — leaderboard */
+  .board {
+    flex: 1;
+    display: grid;
+    grid-template-rows: auto repeat(5, 1fr);
+    gap: 18px;
+    min-height: 0;
+  }
+  .board-head {
+    display: grid;
+    grid-template-columns: 72px 1fr 200px 180px 360px;
+    gap: 32px;
+    align-items: center;
+    padding: 0 26px 8px 26px;
+    border-bottom: 1px solid rgba(20,41,51,0.12);
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .board-head .right { text-align: right; }
+
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 72px 1fr 200px 180px 360px;
+    gap: 32px;
+    align-items: center;
+    padding: 18px 26px;
+    background: #FFFFFF;
+    border: 1px solid rgba(20,41,51,0.08);
+    border-radius: 14px;
+    box-shadow: 0 12px 24px rgba(15,20,25,0.04);
+    min-height: 0;
+  }
+  .row.r1 {
+    border: 2px solid var(--brand-cyan);
+    background: rgba(158, 223, 255, 0.12);
+    box-shadow: 0 16px 36px rgba(48,197,245,0.16);
+  }
+
+  .row .rank {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 28px; font-weight: 500;
+    color: var(--text-mute);
+    line-height: 1;
+  }
+  .row.r1 .rank { color: var(--brand-cyan); font-weight: 700; }
+
+  .id-block { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .id-block .did {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 16px; font-weight: 600; color: var(--brand-black);
+    line-height: 1.2;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .id-block .meta {
+    font-family: "Geist", sans-serif;
+    font-size: 13px; color: var(--text-mute);
+    line-height: 1.2;
+  }
+
+  .team-cell {
+    display: flex; align-items: center; gap: 10px;
+    font-family: "Geist", sans-serif;
+    font-size: 18px; font-weight: 500; color: var(--brand-black);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .team-cell .cohort-ico { width: 20px; height: 20px; flex-shrink: 0; display: block; }
+
+  .method-cell {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 14px; font-weight: 500;
+    color: var(--brand-black);
+    line-height: 1.2;
+    padding: 5px 12px;
+    border: 1px solid rgba(20,41,51,0.18);
+    border-radius: 12px;
+    background: #FFFFFF;
+    justify-self: start;
+    white-space: nowrap;
+  }
+
+  .kd-cell {
+    display: flex; align-items: center; justify-content: flex-end;
+    gap: 18px;
+  }
+  .kd-cell .bar {
+    height: 12px;
+    background: rgba(20,41,51,0.10);
+    border-radius: 6px;
+    flex: 1;
+    max-width: 130px;
+    overflow: hidden;
+    position: relative;
+  }
+  .kd-cell .bar .fill {
+    height: 100%;
+    background: var(--brand-black);
+    border-radius: 6px;
+  }
+  .row.r1 .kd-cell .bar .fill { background: var(--brand-cyan); }
+  .kd-cell .num {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 68px; font-weight: 400;
+    line-height: 1;
+    color: var(--brand-black);
+    letter-spacing: -0.03em;
+    text-align: right;
+    min-width: 150px;
+  }
+  .row.r1 .kd-cell .num {
+    font-size: 84px;
+    color: var(--brand-cyan);
+  }
+  .kd-cell .unit {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 16px; color: var(--text-mute);
+    letter-spacing: 0.04em;
+    margin-left: -6px;
+    align-self: flex-end;
+    padding-bottom: 10px;
+  }
+  .row.r1 .kd-cell .unit { color: var(--brand-cyan); padding-bottom: 14px; }
+
+  /* Bottom caption */
+  .bottom {
+    margin-top: 22px;
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="body-split">
+
+    <!-- LEFT — vertical title -->
+    <div class="title-col">
+      <div class="title-stack">
+        <div class="word">2 LLMs</div>
+        <div class="word">ranked</div>
+        <div class="word"><span class="cy">top 5<span class="dot"></span></span></div>
+      </div>
+      <div class="title-subhead">
+        GPT 5.2 at rank 4 (3.64 nM) and grok-4.1-fast at rank 5 (6.85 nM). MRAZS still led overall at 1.11 nM.
+      </div>
+
+      <div class="title-meta-block">
+        <div class="title-meta-row">
+          <span class="lab">Cohorts</span>
+          <span class="chip human">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="7.5" r="3"/>
+              <path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/>
+            </svg>
+            Human
+          </span>
+          <span class="chip agent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+              <rect x="9.5" y="9.5" width="5" height="5"/>
+              <line x1="12" y1="3" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="21"/>
+              <line x1="3" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="21" y2="12"/>
+            </svg>
+            Agent
+          </span>
+        </div>
+        <div class="title-meta-row">
+          <span class="lab">N tested</span>
+          <span class="val">100 designs · 37 binders</span>
+        </div>
+        <div class="title-meta-row">
+          <span class="lab">Assay</span>
+          <span class="val">BLI · SPR · n = 2 replicates</span>
+        </div>
+        <div class="title-foot">Lower K_D = tighter binder</div>
+      </div>
+
+      <div class="cohort-leaders">
+        <div class="eyebrow">Cohort leaders</div>
+
+        <div class="leader-row human">
+          <span class="leader-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#142933" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="7.5" r="3"/>
+              <path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/>
+            </svg>
+          </span>
+          <span class="leader-info">
+            <div class="who">Best human</div>
+            <div class="name">MRAZS</div>
+            <div class="method">Mosaic</div>
+          </span>
+          <span class="leader-kd">1.11<span class="unit">nM</span></span>
+        </div>
+
+        <div class="leader-row agent">
+          <span class="leader-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#30C5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+              <rect x="9.5" y="9.5" width="5" height="5"/>
+              <line x1="12" y1="3" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="21"/>
+              <line x1="3" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="21" y2="12"/>
+            </svg>
+          </span>
+          <span class="leader-info">
+            <div class="who">Best agent</div>
+            <div class="name">GPT 5.2</div>
+            <div class="method">PXDesign</div>
+          </span>
+          <span class="leader-kd">3.64<span class="unit">nM</span></span>
+        </div>
+
+        <div class="gap-row">
+          <span class="lab">Agent gap</span>
+          <span class="val">3.3×</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — leaderboard -->
+    <div class="board">
+      <div class="board-head">
+        <span>Rank</span>
+        <span>Design</span>
+        <span>Team</span>
+        <span>Method</span>
+        <span class="right">K_D (nM)</span>
+      </div>
+
+      <div class="row r1">
+        <div class="rank">01</div>
+        <div class="id-block">
+          <div class="did">17_MRAZS_mosaic</div>
+          <div class="meta">winner · podium</div>
+        </div>
+        <div class="team-cell"><svg class="cohort-ico" viewBox="0 0 24 24" fill="none" stroke="#142933" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3"/><path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/></svg>MRAZS</div>
+        <div class="method-cell">Mosaic</div>
+        <div class="kd-cell">
+          <div class="bar"><div class="fill" style="width: 100%;"></div></div>
+          <div class="num">1.11</div>
+          <div class="unit">nM</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="rank">02</div>
+        <div class="id-block">
+          <div class="did">13_MRAZS_mosaic</div>
+          <div class="meta">tight binder</div>
+        </div>
+        <div class="team-cell"><svg class="cohort-ico" viewBox="0 0 24 24" fill="none" stroke="#142933" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3"/><path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/></svg>MRAZS</div>
+        <div class="method-cell">Mosaic</div>
+        <div class="kd-cell">
+          <div class="bar"><div class="fill" style="width: 89%;"></div></div>
+          <div class="num">1.25</div>
+          <div class="unit">nM</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="rank">03</div>
+        <div class="id-block">
+          <div class="did">74_BraiNSEY_BindCraft</div>
+          <div class="meta">single-digit nM</div>
+        </div>
+        <div class="team-cell"><svg class="cohort-ico" viewBox="0 0 24 24" fill="none" stroke="#142933" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3"/><path d="M5 21 C5 14, 9 13, 12 13 C15 13, 19 14, 19 21"/></svg>BraiNSEY</div>
+        <div class="method-cell">BindCraft</div>
+        <div class="kd-cell">
+          <div class="bar"><div class="fill" style="width: 58%;"></div></div>
+          <div class="num">1.91</div>
+          <div class="unit">nM</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="rank">04</div>
+        <div class="id-block">
+          <div class="did">132_GPT_5_2_PXDesign</div>
+          <div class="meta">top agent design</div>
+        </div>
+        <div class="team-cell"><svg class="cohort-ico" viewBox="0 0 24 24" fill="none" stroke="#30C5F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5"/><line x1="12" y1="3" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="3" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/></svg>GPT 5.2</div>
+        <div class="method-cell">PXDesign</div>
+        <div class="kd-cell">
+          <div class="bar"><div class="fill" style="width: 30%;"></div></div>
+          <div class="num">3.64</div>
+          <div class="unit">nM</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="rank">05</div>
+        <div class="id-block">
+          <div class="did">102_grok_4_1_fast_PXDesign</div>
+          <div class="meta">second agent in top 5</div>
+        </div>
+        <div class="team-cell"><svg class="cohort-ico" viewBox="0 0 24 24" fill="none" stroke="#30C5F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5"/><line x1="12" y1="3" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="3" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/></svg>grok-4.1-fast</div>
+        <div class="method-cell">PXDesign</div>
+        <div class="kd-cell">
+          <div class="bar"><div class="fill" style="width: 16%;"></div></div>
+          <div class="num">6.85</div>
+          <div class="unit">nM</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

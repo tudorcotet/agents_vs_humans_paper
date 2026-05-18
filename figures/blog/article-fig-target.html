@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fig — Target · TREM2 IgSF V-set</title>
+<style>
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Variable.woff2") format("woff2-variations"),
+         url("fonts/Geist-Variable.woff2") format("woff2");
+    font-weight: 100 900; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Medium.woff2") format("woff2");
+    font-weight: 500; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist-Bold.woff2") format("woff2");
+    font-weight: 700; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "GT Pressura Extended";
+    src: url("fonts/GT-Pressura-Extended-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+
+  :root {
+    --text:        #111827;
+    --text-mute:   #4B5563;
+    --text-dim:    #6B7280;
+    --line-soft:   #E5E7EB;
+    --brand-black: #142933;
+    --brand-cyan:  #30C5F5;
+    --lavender:    #8B90DD;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #FFFFFF;
+    color: var(--brand-black);
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .canvas {
+    width: 1920px; height: 1080px;
+    position: relative; overflow: hidden;
+    background: #FFFFFF;
+    padding: 60px 88px;
+    display: flex;
+  }
+
+  .canvas::before { content: none; }
+  .canvas::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 1100px 800px at 100% 0%, rgba(48,197,245,0.13) 0%, transparent 55%),
+      radial-gradient(ellipse 900px 700px at 0% 100%, rgba(139,144,221,0.08) 0%, transparent 55%);
+  }
+  .riso-bg { display: none; }
+
+  .body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 0.95fr 1fr;
+    column-gap: 72px;
+    position: relative; z-index: 1;
+    min-height: 0;
+  }
+
+  /* LEFT — title + structure */
+  .left {
+    display: flex; flex-direction: column;
+    min-height: 0;
+  }
+  .left h1 {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 104px; font-weight: 400;
+    line-height: 0.94; letter-spacing: -0.035em;
+    color: var(--brand-black);
+  }
+  .left h1 .cy { color: var(--brand-cyan); display: block; }
+  .left .lede {
+    margin-top: 20px;
+    font-family: "Geist", sans-serif;
+    font-size: 19px; line-height: 1.45; color: var(--text-mute);
+    max-width: 580px;
+  }
+  .left .lede b { color: var(--brand-black); font-weight: 600; }
+
+  .struct-wrap {
+    flex: 1;
+    margin-top: 12px;
+    display: flex; align-items: flex-end; justify-content: center;
+    min-height: 0;
+  }
+  .struct-img {
+    width: 100%; max-height: 100%;
+    object-fit: contain; object-position: center bottom;
+    display: block;
+    filter: drop-shadow(0 28px 64px rgba(20,41,51,0.10));
+  }
+
+  /* RIGHT — three cards */
+  .right {
+    display: flex; flex-direction: column;
+    gap: 22px;
+    min-height: 0;
+    justify-content: center;
+  }
+
+  .panel { display: flex; flex-direction: column; }
+  .panel-idx {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 10px;
+  }
+  .panel-idx .num {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 14px; letter-spacing: 0.04em; color: var(--brand-cyan);
+    font-weight: 400; line-height: 1;
+  }
+  .panel-idx .name {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 14px; letter-spacing: 0.04em; color: var(--brand-black);
+    font-weight: 400; line-height: 1; text-transform: uppercase;
+  }
+  .panel-idx .rule {
+    flex: 1; height: 2px; background: var(--brand-cyan); opacity: 0.45;
+  }
+  .card {
+    background: #FFFFFF;
+    border: 1px solid rgba(15,20,25,0.08);
+    border-radius: 14px;
+    box-shadow: 0 18px 44px rgba(15,20,25,0.07);
+    padding: 22px 28px;
+  }
+
+  /* Spec table */
+  .spec {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 36px;
+    row-gap: 14px;
+  }
+  .spec .cell {
+    display: flex; flex-direction: column;
+    gap: 5px;
+    border-bottom: 1px dotted rgba(20,41,51,0.16);
+    padding-bottom: 10px;
+  }
+  .spec .k {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brand-black); opacity: 0.55;
+  }
+  .spec .v {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 17px; font-weight: 700; color: var(--brand-black);
+    letter-spacing: 0.02em;
+  }
+  .spec .v .small {
+    font-family: "Geist", sans-serif;
+    font-size: 13px; font-weight: 400; color: var(--text-mute);
+    margin-left: 8px; letter-spacing: 0;
+  }
+
+  /* Therapeutic context */
+  .ctx-lead {
+    font-family: "Geist", sans-serif;
+    font-size: 17px; line-height: 1.5; color: var(--brand-black);
+  }
+  .ctx-lead b { color: var(--brand-black); font-weight: 600; }
+
+  /* Controls strip */
+  .ctrl-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+  .ctrl {
+    display: flex; flex-direction: column;
+    gap: 6px;
+    padding: 18px 20px;
+    background: rgba(48,197,245,0.04);
+    border: 1px solid rgba(48,197,245,0.18);
+    border-radius: 12px;
+  }
+  .ctrl .name {
+    font-family: "GT Pressura Extended", sans-serif;
+    font-size: 20px; letter-spacing: 0.02em;
+    color: var(--brand-black);
+  }
+  .ctrl .who {
+    font-family: "Geist Mono", "Menlo", monospace;
+    font-size: 12px; color: var(--text-mute);
+    letter-spacing: 0.02em;
+  }
+  .ctrl .status {
+    margin-top: 4px;
+    font-family: "Geist", sans-serif;
+    font-size: 13px; line-height: 1.45;
+    color: var(--text-mute);
+  }
+  .ctrl .status b { color: var(--brand-black); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="body">
+
+    <!-- LEFT — title + structure -->
+    <div class="left">
+      <h1>
+        <span class="cy">TREM2.</span>
+      </h1>
+      <div class="lede">
+        <b>~115-residue β-sandwich</b> on a microglial receptor at an
+        <b>Alzheimer's risk locus</b>. Same construct AL002 and VHB937 bind.
+      </div>
+
+      <div class="struct-wrap">
+        <img class="struct-img" src="assets/structures/trem2-structure.png"
+             alt="TREM2 IgSF V-set domain, β-sandwich Ig fold">
+      </div>
+    </div>
+
+    <!-- RIGHT — spec + therapeutic context + controls -->
+    <div class="right">
+
+      <div class="panel">
+        <div class="panel-idx"><span class="num">01</span><span class="name">Construct</span><span class="rule"></span></div>
+        <div class="card">
+          <div class="spec">
+            <div class="cell"><span class="k">Gene</span><span class="v">TREM2</span></div>
+            <div class="cell"><span class="k">Fold</span><span class="v">IgSF V-set <span class="small">9-strand β-sandwich</span></span></div>
+            <div class="cell"><span class="k">Residues</span><span class="v">19–132 <span class="small">extracellular</span></span></div>
+            <div class="cell"><span class="k">Mass</span><span class="v">~15 kDa <span class="small">monomer</span></span></div>
+            <div class="cell"><span class="k">Product</span><span class="v">Acro TR2-H5257</span></div>
+            <div class="cell"><span class="k">Reference</span><span class="v">PDB 5ELI</span></div>
+            <div class="cell"><span class="k">Tag</span><span class="v">C-term His · Avi-biotin</span></div>
+            <div class="cell"><span class="k">Assay</span><span class="v">BLI · Gator</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-idx"><span class="num">02</span><span class="name">Why it matters</span><span class="rule"></span></div>
+        <div class="card">
+          <div class="ctx-lead">
+            <b>R47H</b> variant carriers face 2–4× higher Alzheimer's risk.
+            Microglial signalling collapses when TREM2 is impaired.
+            Agonists of the V-set domain push microglia into a damage-clearing state.
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-idx"><span class="num">03</span><span class="name">Known binders</span><span class="rule"></span></div>
+        <div class="ctrl-strip">
+          <div class="ctrl">
+            <div class="name">AL002</div>
+            <div class="who">Alector · IgG</div>
+            <div class="status"><b>Failed Phase 2</b>, 2024.<br>Binds the V-set, agonist mechanism.</div>
+          </div>
+          <div class="ctrl">
+            <div class="name">VHB937</div>
+            <div class="who">Novartis · IgG</div>
+            <div class="status"><b>Phase 2</b>, ongoing.<br>Stalk-region binder, different epitope.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

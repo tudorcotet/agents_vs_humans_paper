@@ -1,0 +1,93 @@
+## Agents vs humans (TREM2 paper) — task runner
+##
+## Every analysis enters the canon as a `mise run analysis:<name>` task.
+## Install once:
+##
+##     curl https://mise.run | sh        # or: brew install mise
+##     mise install                       # installs python + uv from [tools]
+##     mise run setup                     # installs Python deps via uv
+##     mise run analysis:all              # runs every canonical analysis
+##
+## To add your own analysis: copy analyses/_template/ to analyses/<yourname>/,
+## edit main.py (it must load via `from scripts.utils import load_designs` and
+## read `data/designs.csv` — never a hard-coded path), then add a block under
+## `[tasks."analysis:<yourname>"]` below.
+
+[tools]
+python = "3.11"
+uv = "latest"
+
+[env]
+PYTHONPATH = "{{ config_root }}"
+MPLBACKEND = "Agg"
+
+# ---------------------------------------------------------------------------
+# Setup + dev tasks
+# ---------------------------------------------------------------------------
+
+[tasks.setup]
+description = "Install Python deps via uv (one-time after clone)"
+run = "uv sync"
+
+[tasks.lint]
+description = "Lint with ruff"
+run = "uv run ruff check ."
+
+[tasks.format]
+description = "Auto-format with ruff"
+run = "uv run ruff format ."
+
+# ---------------------------------------------------------------------------
+# Canonical analyses — re-run after data changes
+#
+# Naming: every analysis is `analysis:<short-name>` and reads its data from
+# `data/designs.csv` via `scripts.utils.load_designs()`. Outputs land in
+# `analyses/<name>/` only — never elsewhere.
+# ---------------------------------------------------------------------------
+
+[tasks."analysis:human-vs-agent"]
+description = "Headline cohort stats: Fisher, Mann-Whitney, Spearman, chi-square"
+run = "uv run python analyses/human_vs_agent/headline_stats.py"
+
+[tasks."analysis:leaderboard"]
+description = "Per-design top-N leaderboards"
+run = "uv run python analyses/leaderboard/build_leaderboards.py"
+
+[tasks."analysis:diversity"]
+description = "Per-team and cohort sequence diversity"
+run = "uv run python analyses/sequence_diversity/diversity.py"
+
+[tasks."analysis:methods"]
+description = "Design method × outcome cross-tabs"
+run = "uv run python analyses/methods/method_outcome_xtab.py"
+
+[tasks."analysis:all"]
+description = "Run every canonical analysis end-to-end"
+depends = [
+    "analysis:human-vs-agent",
+    "analysis:leaderboard",
+    "analysis:diversity",
+    "analysis:methods",
+]
+
+# ---------------------------------------------------------------------------
+# Figures
+# ---------------------------------------------------------------------------
+
+[tasks."figures:blog"]
+description = "Serve the 7 blog-post HTML figures on http://localhost:8080"
+run = "python -m http.server -d figures/blog 8080"
+
+# ---------------------------------------------------------------------------
+# Per-collaborator analyses — ADD YOURS BELOW
+#
+# Template for a new analysis:
+#
+# [tasks."analysis:yourname"]
+# description = "One-sentence answer to: what does my analysis tell us?"
+# run = "uv run python analyses/yourname/main.py"
+#
+# Then (optional) add `"analysis:yourname"` to the `depends = [...]` list of
+# `[tasks."analysis:all"]` above if your analysis is load-bearing for the
+# paper and should run on every `mise run analysis:all`.
+# ---------------------------------------------------------------------------
