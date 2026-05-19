@@ -553,6 +553,58 @@ def fig_epitope(df) -> Path | None:
     return _save(fig, "fig_epitope_regions")
 
 
+# Blog "Design Class Distribution" pie palette (image #4), for the model-type
+# pie which has more slices than the 5-category taxonomy.
+_PIE_PALETTE = ["#8FD3EA", "#8B86CE", "#3C9BD9", "#6FA995", "#BCD8CE",
+                "#D3D3D3", "#2E6E73", "#A9B8E0", "#5FB0C9"]
+
+
+def fig_hit_pies(df) -> Path:
+    """Two blog-style pies: where the 37 wet-lab hits came from."""
+    d = df.copy()
+    d["category"] = d.design_method_normalized.map(METHOD_TO_CATEGORY).fillna(
+        "Rational/Hybrid")
+    hits = d[d.is_hit.fillna(False)]
+    n_hits = len(hits)
+
+    tax = (hits.category.value_counts()
+           .reindex(CATEGORY_ORDER).dropna().astype(int))
+    tax = tax[tax > 0]
+    mdl = hits.method_family.value_counts().astype(int)
+    mdl = mdl[mdl > 0]
+
+    def _autopct(total):
+        return lambda p: f"{round(p / 100 * total)}\n({p:.0f}%)"
+
+    fig, (axt, axm) = plt.subplots(1, 2, figsize=(9.2, 4.6))
+    for ax, series, colours, sub in [
+        (axt, tax, [CATEGORY_COLOR[c] for c in tax.index],
+         "By taxonomy category"),
+        (axm, mdl, _PIE_PALETTE[: len(mdl)], "By model type"),
+    ]:
+        wedges, _, autotexts = ax.pie(
+            series.to_numpy(), colors=colours, startangle=90,
+            counterclock=False, autopct=_autopct(int(series.sum())),
+            pctdistance=0.74,
+            wedgeprops={"edgecolor": "white", "linewidth": 1.2},
+            textprops={"fontsize": 7, "color": INK})
+        for t in autotexts:
+            t.set_fontsize(6.5)
+        ax.set_aspect("equal")
+        ax.axis("off")
+        ax.legend(wedges, [f"{i}  (n={v})" for i, v in series.items()],
+                  frameon=False, fontsize=6.5, loc="upper center",
+                  bbox_to_anchor=(0.5, -0.02), ncol=2, handletextpad=0.4,
+                  columnspacing=1.0)
+        _subtitle(ax, sub)
+
+    fig.suptitle(f"Where the {n_hits} wet-lab hits came from", fontsize=11,
+                 fontweight="medium", color=_TITLE_GREY,
+                 fontfamily=["GT Pressura Extended", "Geist", "DejaVu Sans"],
+                 y=1.02)
+    return _save(fig, "fig_hit_pies")
+
+
 def fig_cohort_funnel(df) -> Path | None:
     """The selection funnel + the gap that collapses (reads cohort_funnel json)."""
     sp = HERE / "cohort_funnel_summary.json"
@@ -679,7 +731,7 @@ def main() -> None:
         fig_identity_heatmap(df),
     ]
     for builder in (fig_foldseek_clustering, fig_epitope, fig5_esm2_umap,
-                    fig_cohort_funnel):
+                    fig_cohort_funnel, fig_hit_pies):
         out = builder(df)
         if out is not None:
             written.append(out)

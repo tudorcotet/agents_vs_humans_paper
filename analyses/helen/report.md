@@ -18,6 +18,7 @@
 - `figures/paper/fig_epitope_regions.svg`
 - `figures/paper/fig5_esm2_umap.svg`
 - `figures/paper/fig_cohort_funnel.svg`
+- `figures/paper/fig_hit_pies.svg`
 
 ## Caveats
 
