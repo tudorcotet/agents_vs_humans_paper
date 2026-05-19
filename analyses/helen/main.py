@@ -67,30 +67,20 @@ METHOD_TO_CATEGORY = {
     "evo+ESM": "Diversified",          # pLM-guided sequence diversification
 }
 CATEGORY_ORDER = ["De novo", "Hallucination", "Optimized", "Diversified", "Rational/Hybrid"]
-# Well-separated brand hues so the *light* fills (see _lighten) stay
-# distinguishable; the saturated hue is used as the outline.
+# Solid mid-tone palette taken from the Adaptyv "Design Class Distribution"
+# blog pie (image #4): no dark outline, thin white separators between stacks.
 CATEGORY_COLOR = {
-    "De novo": "#30C5F5",        # cyan
-    "Hallucination": "#142933",  # navy ink
-    "Optimized": "#FFB547",      # amber (core.warn)
-    "Diversified": "#1FE48F",    # green (core.good)
-    "Rational/Hybrid": "#5C6773",  # slate
+    "De novo": "#8FD3EA",        # light sky blue (Miniprotein)
+    "Hallucination": "#8B86CE",  # lavender (Other)
+    "Optimized": "#3C9BD9",      # medium blue (Peptide)
+    "Diversified": "#6FA995",    # teal-green (Nanobody)
+    "Rational/Hybrid": "#D3D3D3",  # light grey (scFv)
 }
 
 # Bars/histograms: light fill + dark outline, same two cohort hues as the
 # sequence-length figure (Human navy, Agent cyan).
 COHORT_FILL = {"Human": HUMAN_SOFT, "Agent": AGENT_SOFT}
 COHORT_EDGE = {"Human": HUMAN, "Agent": AGENT}
-
-
-def _lighten(hex_colour: str, amount: float = 0.62) -> str:
-    """Blend toward white -> a pale tint for bar fills."""
-    import matplotlib.colors as mcolors
-
-    r, g, b = mcolors.to_rgb(hex_colour)
-    return mcolors.to_hex((r + (1 - r) * amount,
-                           g + (1 - g) * amount,
-                           b + (1 - b) * amount))
 
 
 def _style() -> None:
@@ -279,8 +269,7 @@ def fig4_design_methods(df) -> Path:
             vals.append(int((d[mask].category == cat).sum()))
         vals = np.array(vals)
         ax.bar(x, vals, 0.55, bottom=bottoms, label=cat,
-               color=_lighten(CATEGORY_COLOR[cat]),
-               edgecolor=CATEGORY_COLOR[cat], linewidth=1.1)
+               color=CATEGORY_COLOR[cat], edgecolor="white", linewidth=1.4)
         for xi, v, b in zip(x, vals, bottoms, strict=False):
             if v > 0:
                 ax.text(xi, b + v / 2, str(v), ha="center", va="center",
