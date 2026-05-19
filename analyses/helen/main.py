@@ -368,6 +368,8 @@ def fig5_esm2_umap(df) -> Path | None:
     xy = reducer.fit_transform(X)
 
     fig, (axc, axt) = plt.subplots(1, 2, figsize=(8.4, 4.0))
+    for a in (axc, axt):  # UMAP coords are arbitrary — no grid
+        a.grid(False)
 
     for label, colour in [("Human", HUMAN), ("Agent", AGENT)]:
         m = (d.is_human.fillna(False) == (label == "Human")).to_numpy()
