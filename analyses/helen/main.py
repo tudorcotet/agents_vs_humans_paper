@@ -231,9 +231,9 @@ def fig2_expression_binding(df) -> Path:
     fig, ax = plt.subplots(figsize=(4.6, 3.4))
     metrics = ["Expression rate", "Hit rate"]
     x = np.arange(len(metrics))
-    width = 0.36
+    width = 0.34
 
-    for offset, label in [(-width / 2, "Human"), (width / 2, "Agent")]:
+    for offset, label in [(-0.20, "Human"), (0.20, "Agent")]:
         sub = scr[scr.is_human.fillna(False) == (label == "Human")]
         n = len(sub)
         expr_k = int(sub.expressed.fillna(False).sum())
