@@ -86,11 +86,32 @@ def _style() -> None:
     mpl.rcParams["axes.labelcolor"] = INK
     mpl.rcParams["xtick.color"] = INK
     mpl.rcParams["ytick.color"] = INK
+    # Airy Plotly-style frame (Nipah blog): faint horizontal grid behind data,
+    # no left spine — the grid carries the y-scale.
+    mpl.rcParams["axes.grid"] = True
+    mpl.rcParams["axes.grid.axis"] = "y"
+    mpl.rcParams["axes.axisbelow"] = True
+    mpl.rcParams["grid.color"] = "#E5E7EB"
+    mpl.rcParams["grid.linewidth"] = 0.6
+    mpl.rcParams["axes.spines.left"] = False
+    mpl.rcParams["ytick.major.size"] = 0
+
+
+# Soft neutral title grey (blog uses a medium-weight near-black, not pure ink).
+_TITLE_GREY = "#2A2F35"
+_SUBTITLE = "#36B7F6"  # brand cyan-deep — blog panel-subtitle accent
 
 
 def _title(ax, text: str) -> None:
     ax.set_title(text, fontfamily=["GT Pressura Extended", "Geist", "DejaVu Sans"],
-                 fontsize=10, fontweight="bold", loc="center", pad=16)
+                 fontsize=10, fontweight="medium", color=_TITLE_GREY,
+                 loc="center", pad=16)
+
+
+def _subtitle(ax, text: str) -> None:
+    """Panel sub-title in the blog's muted-cyan accent."""
+    ax.set_title(text, fontfamily=["Geist", "DejaVu Sans"], fontsize=8.5,
+                 fontweight="medium", color=_SUBTITLE, loc="center", pad=8)
 
 
 _FONT_DIR = repo_root() / "figures" / "blog" / "fonts"
@@ -353,7 +374,7 @@ def fig5_esm2_umap(df) -> Path | None:
         axc.scatter(xy[m, 0], xy[m, 1], s=22, c=colour, alpha=0.8,
                     edgecolors="white", linewidths=0.4, label=f"{label} (n={m.sum()})")
     axc.legend(frameon=False, fontsize=7, loc="best")
-    axc.set_title("By cohort", fontsize=8.5, pad=8)
+    _subtitle(axc, "By cohort")
     axc.set_xlabel("UMAP-1")
     axc.set_ylabel("UMAP-2")
 
@@ -363,12 +384,15 @@ def fig5_esm2_umap(df) -> Path | None:
         m = (d.team == t).to_numpy()
         axt.scatter(xy[m, 0], xy[m, 1], s=22, color=cmap(k % 20), alpha=0.85,
                     edgecolors="white", linewidths=0.4, label=t)
-    axt.legend(frameon=False, fontsize=5.5, loc="center left",
-               bbox_to_anchor=(1.0, 0.5), ncol=1)
-    axt.set_title("By team", fontsize=8.5, pad=8)
+    # Team legend below the panel, multi-column, so the 16 names aren't clipped.
+    axt.legend(frameon=False, fontsize=6, loc="upper center",
+               bbox_to_anchor=(0.5, -0.16), ncol=4, columnspacing=1.0,
+               handletextpad=0.4)
+    _subtitle(axt, "By team")
     axt.set_xlabel("UMAP-1")
     axt.set_ylabel("UMAP-2")
-    fig.suptitle("ESM-2 embedding UMAP", fontsize=11, fontweight="bold",
+    fig.suptitle("ESM-2 embedding UMAP", fontsize=11, fontweight="medium",
+                 color=_TITLE_GREY,
                  fontfamily=["GT Pressura Extended", "Geist", "DejaVu Sans"],
                  y=1.02)
     return _save(fig, "fig5_esm2_umap")
@@ -498,15 +522,19 @@ def fig_epitope(df) -> Path | None:
     axf.set_xlabel("TREM2 residue (author numbering)")
     axf.set_ylabel("Fraction of cohort contacting")
     axf.legend(frameon=False, fontsize=7, loc="upper right")
-    _title(axf, "TREM2 epitope usage by cohort")
+    _subtitle(axf, "Contact frequency by residue")
 
     axb.bar(["Human", "Agent"], [n_h, n_a], color=[HUMAN, AGENT],
-            edgecolor=INK, linewidth=0.4, width=0.6)
+            edgecolor="none", width=0.6)
     for i, v in enumerate([n_h, n_a]):
         axb.text(i, v + 0.1, str(v), ha="center", va="bottom", fontsize=8)
     axb.set_ylabel("Distinct epitope patches")
     axb.set_ylim(0, max(n_h, n_a) + 1.5)
-    _title(axb, "patches (Jaccard < 0.7)")
+    _subtitle(axb, "Distinct patches (Jaccard < 0.7)")
+    fig.suptitle("TREM2 epitope usage by cohort", fontsize=11,
+                 fontweight="medium", color=_TITLE_GREY,
+                 fontfamily=["GT Pressura Extended", "Geist", "DejaVu Sans"],
+                 y=1.02)
     return _save(fig, "fig_epitope_regions")
 
 
