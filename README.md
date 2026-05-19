@@ -122,8 +122,9 @@ in [`docs/ANALYSES.md`](docs/ANALYSES.md). Style guide in
   an assumption.
 - **Per-team N is thin.** Marcel = 1 design. DeNovo = 2. Per-team
   rankings are anecdotes; per-cohort numbers are the load-bearing claim.
-- **Method labels are self-reported.** `Foundry` means "the agent picked
-  its own tools." It is not a single algorithm. Bucket as `Other`.
+- **Method labels are self-reported.** `Foundry` is the team-naming for
+  the Baker lab's RFdiffusion3 pipeline (17 designs across 5 agents); it
+  buckets into the `RFDiffusion` family.
 - **One hit has no KD fit.** Design 5 (NovoFy/RFDiffusion) is labelled
   `weak` by the curator but no replicate yielded a fittable curve.
   Filter on `kd_arith_mean_nM_all.notna()` for KD analyses; on

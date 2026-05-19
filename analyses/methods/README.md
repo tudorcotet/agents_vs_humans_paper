@@ -39,5 +39,6 @@ mise run analysis:methods
 
 - Many methods are used by ≤3 designs. We mark a method as a "winner"
   only when `n_in_top100 ≥ 3`.
-- `Foundry` is a wild-west bucket meaning "the agent chose its own
-  tools." Don't read it as a single algorithm.
+- `Foundry` is the team-naming for the Baker lab's RFdiffusion3 pipeline
+  (17 designs across 5 agent teams). It rolls up into the `RFDiffusion`
+  family.

@@ -74,8 +74,8 @@
   },
   "chi_square_method_family_x_cohort": {
     "n": 100,
-    "chi2": 58.80727459674828,
-    "p": 7.984099486292746e-10,
+    "chi2": 41.40245719193087,
+    "p": 1.7527282029651775e-06,
     "dof": 8,
     "table": {
       "false": {
@@ -83,10 +83,10 @@
         "BoltzGen": 0,
         "Hallucination": 0,
         "Mosaic": 0,
-        "Other": 7,
+        "Other": 0,
         "PPIFLOW": 0,
         "PXDesign": 27,
-        "RFDiffusion": 0,
+        "RFDiffusion": 7,
         "RFPeptides": 1
       },
       "true": {
@@ -143,22 +143,6 @@
         "direction": "over"
       },
       {
-        "method_family": "Other",
-        "cohort": "agent",
-        "observed": 7,
-        "expected": 3.15,
-        "contribution": 4.705555555555557,
-        "direction": "over"
-      },
-      {
-        "method_family": "Other",
-        "cohort": "human",
-        "observed": 2,
-        "expected": 5.85,
-        "contribution": 2.5337606837606836,
-        "direction": "under"
-      },
-      {
         "method_family": "PPIFLOW",
         "cohort": "agent",
         "observed": 0,
@@ -185,18 +169,10 @@
       {
         "method_family": "RFDiffusion",
         "cohort": "agent",
-        "observed": 0,
-        "expected": 9.1,
-        "contribution": 9.1,
+        "observed": 7,
+        "expected": 11.55,
+        "contribution": 1.792424242424243,
         "direction": "under"
-      },
-      {
-        "method_family": "RFDiffusion",
-        "cohort": "human",
-        "observed": 26,
-        "expected": 16.9,
-        "contribution": 4.900000000000002,
-        "direction": "over"
       },
       {
         "method_family": "RFPeptides",

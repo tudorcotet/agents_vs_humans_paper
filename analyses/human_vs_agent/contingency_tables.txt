@@ -17,12 +17,12 @@ BindCraft          0      2
 BoltzGen           0      5
 Hallucination      0      8
 Mosaic             0      6
-Other              7      2
+Other              0      2
 PPIFLOW            0      5
 PXDesign          27     11
-RFDiffusion        0     26
+RFDiffusion        7     26
 RFPeptides         1      0
-  chi2=58.807  dof=8  p=7.984e-10
+  chi2=41.402  dof=8  p=1.753e-06
 
 [7] Per-team hit rate (top-100)
              team  is_human  n_lab  n_binders  n_expressed  hit_rate

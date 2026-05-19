@@ -94,8 +94,9 @@ number must split by `is_human`.
   grok-4.1-fast, Gemini 3.1 Pro, GLM 5, GPT 5.2.
 - **MRAZS used Mosaic.** MRAZS ≠ Escalante Bio. Mosaic is a JAX
   composite-objective wrapper maintained by Escalante. Don't conflate.
-- **`Foundry` method label** = "the agent picked its own tools." Bucket
-  as `Other` family. Not a single algorithm.
+- **`Foundry` method label** = the Baker lab's RFdiffusion3 pipeline,
+  under the team's own branding. 17 designs across 5 agent teams. Bucket
+  as `RFDiffusion` family.
 - **Top-100 cherry-pick:** 41 designs were never screened. Filter on
   `submitted_to_lab` and state your denominator explicitly.
 

@@ -41,22 +41,19 @@ BindCraft          0      2
 BoltzGen           0      5
 Hallucination      0      8
 Mosaic             0      6
-Other              7      2
+Other              0      2
 PPIFLOW            0      5
 PXDesign          27     11
-RFDiffusion        0     26
+RFDiffusion        7     26
 RFPeptides         1      0
 ```
-chi2=58.807, dof=8, p=7.984e-10.
+chi2=41.402, dof=8, p=1.753e-06.
 Cells with chi-square contribution > 1.0:
   - PXDesign x agent: observed 27 vs expected 13.3 (over-represented, contribution 14.11)
-  - RFDiffusion x agent: observed 0 vs expected 9.1 (under-represented, contribution 9.10)
   - PXDesign x human: observed 11 vs expected 24.7 (under-represented, contribution 7.60)
-  - RFDiffusion x human: observed 26 vs expected 16.9 (over-represented, contribution 4.90)
-  - Other x agent: observed 7 vs expected 3.1 (over-represented, contribution 4.71)
   - Hallucination x agent: observed 0 vs expected 2.8 (under-represented, contribution 2.80)
-  - Other x human: observed 2 vs expected 5.8 (under-represented, contribution 2.53)
   - Mosaic x agent: observed 0 vs expected 2.1 (under-represented, contribution 2.10)
+  - RFDiffusion x agent: observed 7 vs expected 11.6 (under-represented, contribution 1.79)
   - BoltzGen x agent: observed 0 vs expected 1.8 (under-represented, contribution 1.75)
   - PPIFLOW x agent: observed 0 vs expected 1.8 (under-represented, contribution 1.75)
   - Hallucination x human: observed 8 vs expected 5.2 (over-represented, contribution 1.51)

@@ -17,8 +17,10 @@ Define every term that an external reader might trip over.
 - **Top 100 cherry-pick** — the 100 designs ranked highest by Boltz-2
   ipSAE at submission time, sent to the BLI assay. The remaining 41
   designs were not screened wet-lab.
-- **Foundry (method)** — a method label meaning "the agent chose its own
-  tools." Not a single algorithm. Bucket as `Other` family.
+- **Foundry (method)** — the team-naming for the Baker lab's
+  RFdiffusion3 pipeline. 17 designs across 5 agent teams
+  (claude-sonnet-4.6, qwen-3.5-plus, Gemini 3.1 Pro, GLM 5, GPT 5.2).
+  Buckets into the `RFDiffusion` family.
 
 ## Target & controls
 
@@ -65,7 +67,7 @@ and `method_family` via the rules in `data/designs.csv`. Examples:
 | `mosaic` | `Mosaic` | `Mosaic` |
 | `BoltzGen + Boltz2 + ipSAE` | `BoltzGen+Boltz2+ipSAE` | `BoltzGen` |
 | `AF Hallucination + ProteinMPNN + Pyrosetta + Boltz2` | `AFHall+MPNN+PyR+Boltz2` | `Hallucination` |
-| `Foundry` (any) | `Foundry` | `Other` |
+| `Foundry` (any) | `Foundry` | `RFDiffusion` (Baker lab RFdiffusion3) |
 | anything else | (verbatim) | `Other` |
 
 ## Binding labels

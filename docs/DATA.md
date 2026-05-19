@@ -52,7 +52,7 @@ fighting object dtype.
 |---|---|---|
 | `design_method`              | string | Self-reported method, verbatim. |
 | `design_method_normalized`   | string | Canonicalised label. See [`GLOSSARY.md`](GLOSSARY.md). |
-| `method_family`              | string | `PXDesign` (44), `RFDiffusion` (30), `Other` (25), `BoltzGen` (17), `Hallucination` (8), `Mosaic` (6), `PPIFLOW` (6), `RFPeptides` (3), `BindCraft` (2). |
+| `method_family`              | string | `RFDiffusion` (47, incl. 17 `Foundry` = Baker lab RFdiffusion3), `PXDesign` (44), `BoltzGen` (17), `Hallucination` (8), `Other` (8), `Mosaic` (6), `PPIFLOW` (6), `RFPeptides` (3), `BindCraft` (2). |
 | `sequence`                   | string | Amino acid sequence, uppercase, whitespace stripped. |
 | `sequence_length`            | int    | `len(sequence)`. Range 12..247. |
 

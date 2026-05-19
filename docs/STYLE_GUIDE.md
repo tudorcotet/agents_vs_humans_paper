@@ -79,8 +79,9 @@ Don't put a sentence-long story in a caption. Put it in the body text.
   Gemini 3.1 Pro, GLM 5, GPT 5.2.
 - **MRAZS used Mosaic** (the JAX composite-objective wrapper maintained
   by Escalante Bio). MRAZS ≠ Escalante Bio. Don't conflate.
-- **`Foundry`** is the method label for "agent picked its own tools." It
-  is not a single algorithm. Treat it as the `Other` family.
+- **`Foundry`** is the team-naming for the Baker lab's RFdiffusion3
+  pipeline. Buckets into the `RFDiffusion` family (17 of the 47 in that
+  family carry the `Foundry` label).
 
 ## Citations
 
