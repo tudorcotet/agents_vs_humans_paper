@@ -269,7 +269,7 @@ def fig4_design_methods(df) -> Path:
             vals.append(int((d[mask].category == cat).sum()))
         vals = np.array(vals)
         ax.bar(x, vals, 0.55, bottom=bottoms, label=cat,
-               color=CATEGORY_COLOR[cat], edgecolor="white", linewidth=1.4)
+               color=CATEGORY_COLOR[cat], edgecolor="none")
         for xi, v, b in zip(x, vals, bottoms, strict=False):
             if v > 0:
                 ax.text(xi, b + v / 2, str(v), ha="center", va="center",
