@@ -540,6 +540,71 @@ def fig_epitope(df) -> Path | None:
     return _save(fig, "fig_epitope_regions")
 
 
+def fig_cohort_funnel(df) -> Path | None:
+    """The selection funnel + the gap that collapses (reads cohort_funnel json)."""
+    sp = HERE / "cohort_funnel_summary.json"
+    if not sp.exists():
+        return None
+    j = json.loads(sp.read_text())
+    f = j["funnel"]
+    sv, ex, bo = (f["survived_ipsae_cut"], f["expressed_given_screened"],
+                  f["bound_given_screened"])
+    # cohort cascade counts: submitted -> survived -> expressed -> bound
+    human = [sv["human"][1], sv["human"][0], ex["human"][0], bo["human"][0]]
+    agent = [sv["agent"][1], sv["agent"][0], ex["agent"][0], bo["agent"][0]]
+    stages = ["Submitted", "Survived\nipSAE cut", "Expressed", "Bound"]
+
+    fig, (axf, axg) = plt.subplots(1, 2, figsize=(8.6, 3.8),
+                                   gridspec_kw={"width_ratios": [1.25, 1]})
+    xs = np.arange(len(stages))
+    for label, vals, colour in [("Human", human, HUMAN),
+                                ("Agent", agent, AGENT)]:
+        axf.plot(xs, vals, "-o", lw=2.0, ms=6, color=colour, label=label)
+        for xi, v in zip(xs, vals, strict=True):
+            axf.text(xi, v + 2.5, str(v), ha="center", va="bottom",
+                     fontsize=7, color=colour)
+    axf.set_xticks(xs)
+    axf.set_xticklabels(stages, fontsize=7.5)
+    axf.set_ylabel("Designs remaining")
+    axf.set_ylim(0, max(human) + 14)
+    axf.legend(frameon=False, fontsize=7.5, loc="upper right")
+    _subtitle(axf, "Selection funnel (count remaining)")
+
+    # The decisive contrast: a big, significant survival gap vs a tied hit rate
+    pairs = [
+        ("Survived\nipSAE cut", sv["rate_human"], sv["rate_agent"],
+         sv["fisher_p_two_sided"]),
+        ("Hit rate\n| tested", bo["rate_human"], bo["rate_agent"],
+         bo["fisher_p_two_sided"]),
+    ]
+    gx = np.arange(len(pairs))
+    w = 0.36
+    axg.bar(gx - w / 2, [p[1] for p in pairs], w, color=HUMAN,
+            edgecolor="none", label="Human")
+    axg.bar(gx + w / 2, [p[2] for p in pairs], w, color=AGENT,
+            edgecolor="none", label="Agent")
+    for i, (_, rh, ra, pv) in enumerate(pairs):
+        axg.text(i - w / 2, rh + 0.02, f"{rh:.0%}", ha="center",
+                 va="bottom", fontsize=7)
+        axg.text(i + w / 2, ra + 0.02, f"{ra:.0%}", ha="center",
+                 va="bottom", fontsize=7)
+        tag = f"p={pv:.3f}{'  *' if pv < 0.05 else '  (ns)'}"
+        axg.text(i, max(rh, ra) + 0.11, tag, ha="center", va="bottom",
+                 fontsize=7, color="#5C6773")
+    axg.set_xticks(gx)
+    axg.set_xticklabels([p[0] for p in pairs], fontsize=7.5)
+    axg.set_ylabel("Rate")
+    axg.set_ylim(0, 1.05)
+    axg.legend(frameon=False, fontsize=7.5, loc="upper right")
+    _subtitle(axg, "The decisive gap collapses")
+
+    fig.suptitle("Humans won the proxy, tied on reality", fontsize=11,
+                 fontweight="medium", color=_TITLE_GREY,
+                 fontfamily=["GT Pressura Extended", "Geist", "DejaVu Sans"],
+                 y=1.03)
+    return _save(fig, "fig_cohort_funnel")
+
+
 def _write_report(df, written: list[Path], esm2_ok: bool) -> None:
     scr = df[df.submitted_to_lab.fillna(False)]
     summary = {
@@ -600,7 +665,8 @@ def main() -> None:
         fig7_metric_roc(df),
         fig_identity_heatmap(df),
     ]
-    for builder in (fig_foldseek_clustering, fig_epitope, fig5_esm2_umap):
+    for builder in (fig_foldseek_clustering, fig_epitope, fig5_esm2_umap,
+                    fig_cohort_funnel):
         out = builder(df)
         if out is not None:
             written.append(out)
