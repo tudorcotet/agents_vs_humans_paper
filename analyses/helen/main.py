@@ -75,6 +75,18 @@ CATEGORY_COLOR = {
     "Rational/Hybrid": "#5C6773",
 }
 
+# Bars/histograms: light fill + dark outline, same two cohort hues as the
+# sequence-length figure (Human navy, Agent cyan).
+COHORT_FILL = {"Human": HUMAN_SOFT, "Agent": AGENT_SOFT}
+COHORT_EDGE = {"Human": HUMAN, "Agent": AGENT}
+
+
+def _darken(hex_colour: str, factor: float = 0.6) -> str:
+    import matplotlib.colors as mcolors
+
+    r, g, b = mcolors.to_rgb(hex_colour)
+    return mcolors.to_hex((r * factor, g * factor, b * factor))
+
 
 def _style() -> None:
     apply_theme()
@@ -221,7 +233,7 @@ def fig2_expression_binding(df) -> Path:
     x = np.arange(len(metrics))
     width = 0.36
 
-    for offset, label, colour in [(-width / 2, "Human", HUMAN), (width / 2, "Agent", AGENT)]:
+    for offset, label in [(-width / 2, "Human"), (width / 2, "Agent")]:
         sub = scr[scr.is_human.fillna(False) == (label == "Human")]
         n = len(sub)
         expr_k = int(sub.expressed.fillna(False).sum())
@@ -231,7 +243,8 @@ def fig2_expression_binding(df) -> Path:
         lo = [s[0] - s[1] for s in stats]
         hi = [s[2] - s[0] for s in stats]
         ax.bar(x + offset, heights, width, label=f"{label} (n={n})",
-               color=colour, edgecolor="none")
+               color=COHORT_FILL[label], edgecolor=COHORT_EDGE[label],
+               linewidth=1.0)
         ax.errorbar(x + offset, heights, yerr=[lo, hi], fmt="none",
                     ecolor=INK, elinewidth=0.9, capsize=3)
         for xi, h in zip(x + offset, heights, strict=False):
@@ -261,7 +274,8 @@ def fig4_design_methods(df) -> Path:
             vals.append(int((d[mask].category == cat).sum()))
         vals = np.array(vals)
         ax.bar(x, vals, 0.55, bottom=bottoms, label=cat,
-               color=CATEGORY_COLOR[cat], edgecolor="white", linewidth=0.6)
+               color=CATEGORY_COLOR[cat],
+               edgecolor=_darken(CATEGORY_COLOR[cat]), linewidth=0.9)
         for xi, v, b in zip(x, vals, bottoms, strict=False):
             if v > 0:
                 ax.text(xi, b + v / 2, str(v), ha="center", va="center",
@@ -284,13 +298,15 @@ def fig6_sequence_length(df) -> Path:
     fig, ax = plt.subplots(figsize=(4.6, 3.4))
     bins = np.linspace(df.sequence_length.min(), df.sequence_length.max(), 26)
     xs = np.linspace(df.sequence_length.min(), df.sequence_length.max(), 200)
-    for label, colour in [("Human", HUMAN), ("Agent", AGENT)]:
+    for label in ("Human", "Agent"):
         v = df.loc[df.is_human.fillna(False) == (label == "Human"), "sequence_length"].dropna()
-        ax.hist(v, bins=bins, density=True, color=colour, alpha=0.30,
-                edgecolor=colour, linewidth=0.5)
+        ax.hist(v, bins=bins, density=True, color=COHORT_FILL[label],
+                alpha=0.55, edgecolor=COHORT_EDGE[label], linewidth=1.0)
         kde = gaussian_kde(v)
-        ax.plot(xs, kde(xs), color=colour, lw=1.8, label=f"{label} (n={len(v)}, med={v.median():.0f} aa)")
-        ax.axvline(v.median(), color=colour, ls="--", lw=1.0, alpha=0.8)
+        ax.plot(xs, kde(xs), color=COHORT_EDGE[label], lw=1.8,
+                label=f"{label} (n={len(v)}, med={v.median():.0f} aa)")
+        ax.axvline(v.median(), color=COHORT_EDGE[label], ls="--", lw=1.0,
+                   alpha=0.8)
 
     ax.set_xlabel("Sequence length (aa)")
     ax.set_ylabel("Density")
@@ -387,9 +403,9 @@ def fig5_esm2_umap(df) -> Path | None:
         axt.scatter(xy[m, 0], xy[m, 1], s=22, color=cmap(k % 20), alpha=0.85,
                     edgecolors="white", linewidths=0.4, label=t)
     # Team legend below the panel, multi-column, so the 16 names aren't clipped.
-    axt.legend(frameon=False, fontsize=6, loc="upper center",
-               bbox_to_anchor=(0.5, -0.16), ncol=4, columnspacing=1.0,
-               handletextpad=0.4)
+    axt.legend(frameon=False, fontsize=6, loc="center left",
+               bbox_to_anchor=(1.02, 0.5), ncol=1, handletextpad=0.4,
+               labelspacing=0.6)
     _subtitle(axt, "By team")
     axt.set_xlabel("UMAP-1")
     axt.set_ylabel("UMAP-2")
@@ -513,11 +529,12 @@ def fig_epitope(df) -> Path | None:
     fig, (axf, axb) = plt.subplots(1, 2, figsize=(8.4, 3.4),
                                    gridspec_kw={"width_ratios": [3, 1]})
     x = np.arange(len(resid))
-    for label, mask, colour in [("Human", is_h, HUMAN), ("Agent", ~is_h, AGENT)]:
+    for label, mask in [("Human", is_h), ("Agent", ~is_h)]:
         freq = foot[mask].mean(0)
-        axf.fill_between(x, freq, color=colour, alpha=0.35, step="mid")
-        axf.plot(x, freq, color=colour, lw=1.3, drawstyle="steps-mid",
-                 label=f"{label} (n={mask.sum()})")
+        axf.fill_between(x, freq, color=COHORT_FILL[label], alpha=0.55,
+                         step="mid")
+        axf.plot(x, freq, color=COHORT_EDGE[label], lw=1.3,
+                 drawstyle="steps-mid", label=f"{label} (n={mask.sum()})")
     step = max(1, len(resid) // 10)
     axf.set_xticks(x[::step])
     axf.set_xticklabels(resid[::step], fontsize=6)
@@ -526,8 +543,10 @@ def fig_epitope(df) -> Path | None:
     axf.legend(frameon=False, fontsize=7, loc="upper right")
     _subtitle(axf, "Contact frequency by residue")
 
-    axb.bar(["Human", "Agent"], [n_h, n_a], color=[HUMAN, AGENT],
-            edgecolor="none", width=0.6)
+    axb.bar(["Human", "Agent"], [n_h, n_a],
+            color=[COHORT_FILL["Human"], COHORT_FILL["Agent"]],
+            edgecolor=[COHORT_EDGE["Human"], COHORT_EDGE["Agent"]],
+            linewidth=1.0, width=0.6)
     for i, v in enumerate([n_h, n_a]):
         axb.text(i, v + 0.1, str(v), ha="center", va="bottom", fontsize=8)
     axb.set_ylabel("Distinct epitope patches")
@@ -579,10 +598,10 @@ def fig_cohort_funnel(df) -> Path | None:
     ]
     gx = np.arange(len(pairs))
     w = 0.36
-    axg.bar(gx - w / 2, [p[1] for p in pairs], w, color=HUMAN,
-            edgecolor="none", label="Human")
-    axg.bar(gx + w / 2, [p[2] for p in pairs], w, color=AGENT,
-            edgecolor="none", label="Agent")
+    axg.bar(gx - w / 2, [p[1] for p in pairs], w, color=COHORT_FILL["Human"],
+            edgecolor=COHORT_EDGE["Human"], linewidth=1.0, label="Human")
+    axg.bar(gx + w / 2, [p[2] for p in pairs], w, color=COHORT_FILL["Agent"],
+            edgecolor=COHORT_EDGE["Agent"], linewidth=1.0, label="Agent")
     for i, (_, rh, ra, pv) in enumerate(pairs):
         axg.text(i - w / 2, rh + 0.02, f"{rh:.0%}", ha="center",
                  va="bottom", fontsize=7)
