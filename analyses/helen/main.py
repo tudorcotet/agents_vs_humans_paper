@@ -593,15 +593,15 @@ def fig_hit_pies(df) -> Path:
         ax.set_aspect("equal")
         ax.axis("off")
         ax.legend(wedges, [f"{i}  (n={v})" for i, v in series.items()],
-                  frameon=False, fontsize=6.5, loc="upper center",
+                  frameon=False, fontsize=8, loc="upper center",
                   bbox_to_anchor=(0.5, -0.02), ncol=2, handletextpad=0.4,
                   columnspacing=1.0)
         _subtitle(ax, sub)
 
-    fig.suptitle(f"Where the {n_hits} wet-lab hits came from", fontsize=11,
+    fig.suptitle(f"What produced the {n_hits} binders", fontsize=11,
                  fontweight="medium", color=_TITLE_GREY,
                  fontfamily=["GT Pressura Extended", "Geist", "DejaVu Sans"],
-                 y=1.02)
+                 x=0.5, y=1.02, ha="center")
     return _save(fig, "fig_hit_pies")
 
 
