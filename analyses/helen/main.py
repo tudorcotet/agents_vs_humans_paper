@@ -5,7 +5,7 @@ Each figure is one self-contained SVG in figures/paper/, styled to match the
 hand-authored blog figures (figures/blog/*.html): Agent #30C5F5 (cyan),
 Human #142933 (navy ink), Geist / GT Pressura Extended fonts.
 
-ESM-2 (Fig 5, Fig 7 pLL curve), Foldseek and epitope figures read caches
+ESM-2 (Fig 5, Fig 7 log-lik curve), Foldseek and epitope figures read caches
 written by the sibling scripts (esm2_compute.py, foldseek_cluster.py,
 epitope_cluster.py); those builders are skipped gracefully if a cache is
 absent. Fig 3 (BLI sensorgrams) is excluded by request.
@@ -275,6 +275,8 @@ def fig4_design_methods(df) -> Path:
         for _, mask in cohorts:
             vals.append(int((d[mask].category == cat).sum()))
         vals = np.array(vals)
+        if vals.sum() == 0:  # don't show empty categories in the legend
+            continue
         ax.bar(x, vals, 0.55, bottom=bottoms, label=cat,
                color=CATEGORY_COLOR[cat], edgecolor="none")
         for xi, v, b in zip(x, vals, bottoms, strict=False):
@@ -305,7 +307,7 @@ def fig6_sequence_length(df) -> Path:
                 alpha=0.55, edgecolor=COHORT_EDGE[label], linewidth=1.0)
         kde = gaussian_kde(v)
         ax.plot(xs, kde(xs), color=COHORT_EDGE[label], lw=1.8,
-                label=f"{label} (n={len(v)}, med={v.median():.0f} aa)")
+                label=f"{label} (n={len(v)}, med={v.median():.1f} aa)")
         ax.axvline(v.median(), color=COHORT_EDGE[label], ls="--", lw=1.0,
                    alpha=0.8)
 
@@ -343,11 +345,11 @@ def fig7_metric_roc(df) -> Path:
         ("submitted_ipsae", "ipSAE", True),
         ("boltz2_iptm", "ipTM", True),
         ("boltz2_plddt", "pLDDT (binder)", True),
-        ("pb_boltz2_complex_pde", "iPAE proxy (Boltz-2 PDE)", False),
+        ("pb_boltz2_complex_pde", "Boltz-2 complex PDE", False),
     ]
     colours = [AGENT, "#36B7F6", HUMAN, "#5C6773", "#1FE48F"]
     if pll is not None:
-        specs.append(("esm2_pll", "ESM-2 pLL (650M)", True))
+        specs.append(("esm2_pll", "ESM-2 650M log-lik", True))
 
     fig, ax = plt.subplots(figsize=(4.4, 4.0))
     ax.plot([0, 1], [0, 1], ls="--", lw=0.9, color=GRID)
@@ -717,8 +719,11 @@ def _write_report(df, written: list[Path], esm2_ok: bool) -> None:
         "matplotlibrc Helvetica/DejaVu policy by design. GT Pressura is a "
         "paid face — embedding in distributed artifacts is a licensing call.",
         "- **Fig 3** (BLI sensorgrams): excluded by request.",
-        "- **ESM-2 pLL** is a length-normalized single-pass log-likelihood; true "
-        "masked-marginal is infeasible on CPU/MPS at 650M. Document if revised.",
+        "- **ESM-2 650M log-lik** is the mean per-residue log-likelihood from a "
+        "single unmasked forward pass — NOT a pseudo-log-likelihood "
+        "(masked-marginal). Don't call it PLL in the paper.",
+        "- **Boltz-2 complex PDE** is Predicted Distance Error, used as an "
+        "interface-error signal; it is not iPAE (Predicted Aligned Error).",
         "- **Fig 4 taxonomy** (design_method_normalized → 5-category, Cotet 2025) "
         "is an interpretation; PXDesign and BindCraft bucket as De novo "
         "(BindCraft per the Notion draft's own grouping).",

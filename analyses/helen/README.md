@@ -15,10 +15,12 @@
 ## Run
 
 ```bash
-uv run python analyses/helen/esm2_compute.py     # ESM-2 650M cache (one-time)
-uv run python analyses/helen/foldseek_cluster.py # Foldseek TM cache (one-time)
-uv run python analyses/helen/epitope_cluster.py  # epitope cache (one-time)
-mise run analysis:helen                          # render every SVG
+# one-time heavy caches (PYTHONPATH=. needed outside mise so `scripts` resolves)
+PYTHONPATH=. uv run python analyses/helen/esm2_compute.py     # ESM-2 650M cache
+PYTHONPATH=. uv run python analyses/helen/foldseek_cluster.py # Foldseek TM cache
+PYTHONPATH=. uv run python analyses/helen/epitope_cluster.py  # epitope cache
+mise run analysis:helen                                       # render every SVG
+mise run analysis:helen-funnel                                # funnel analysis
 ```
 
 The three cache scripts are heavy/one-time; `main.py` is deterministic and

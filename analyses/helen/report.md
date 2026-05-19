@@ -24,7 +24,8 @@
 
 - **Fonts** are embedded per-SVG as base64 @font-face (blog Geist + GT Pressura Extended woff2); self-contained, overrides the matplotlibrc Helvetica/DejaVu policy by design. GT Pressura is a paid face — embedding in distributed artifacts is a licensing call.
 - **Fig 3** (BLI sensorgrams): excluded by request.
-- **ESM-2 pLL** is a length-normalized single-pass log-likelihood; true masked-marginal is infeasible on CPU/MPS at 650M. Document if revised.
+- **ESM-2 650M log-lik** is the mean per-residue log-likelihood from a single unmasked forward pass — NOT a pseudo-log-likelihood (masked-marginal). Don't call it PLL in the paper.
+- **Boltz-2 complex PDE** is Predicted Distance Error, used as an interface-error signal; it is not iPAE (Predicted Aligned Error).
 - **Fig 4 taxonomy** (design_method_normalized → 5-category, Cotet 2025) is an interpretation; PXDesign and BindCraft bucket as De novo (BindCraft per the Notion draft's own grouping).
 - **Foldseek/epitope** are screened-only (100/141); the 41 non-screened designs have no ProteinBase CIF.
 - Per-cohort epitope/structure counts inherit the top-100 selection imbalance (65 human / 35 agent).

@@ -7,10 +7,12 @@ for embeddings/scoring. Outputs (cached, idempotent):
 - analyses/helen/esm2_cache.npz
     design_id : (141,) int
     emb       : (141, 1280) float32  — mean-pooled final-layer representation
-    pll       : (141,) float32       — length-normalized single-pass
-                                       log-likelihood (pseudo-log-likelihood
-                                       approximation; true masked-marginal is
-                                       infeasible on CPU for 650M)
+    pll       : (141,) float32       — mean per-residue log-likelihood from a
+                                       SINGLE unmasked forward pass. This is
+                                       NOT a pseudo-log-likelihood: true PLL is
+                                       the masked-marginal sum. Key kept as
+                                       `pll` for the cache; label it honestly
+                                       ("ESM-2 650M log-lik") downstream.
 
 Re-run is a no-op if the cache exists and covers all design_ids.
 """

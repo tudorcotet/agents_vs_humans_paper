@@ -6,7 +6,9 @@ Inputs : data/proteinbase/esmfold/design_NNN.cif (single-chain binder folds)
 Binary : .tools/foldseek/bin/foldseek (local static binary)
 Output : analyses/helen/foldseek_cache.npz
     design_id : (N,) int       — order of the TM matrix
-    tm        : (N, N) float32 — symmetric TM-score (max of the two directions)
+    tm        : (N, N) float32 — symmetric similarity: Foldseek `alntmscore`
+                (TM normalised by ALIGNMENT length, not query/target length),
+                symmetrised as max of the two directions, diagonal forced 1.0.
 
 Deterministic, CPU-only, no network — consistent with the analyses contract.
 Re-run is a no-op if the cache covers the same design set.
@@ -79,6 +81,9 @@ def main() -> None:
             tm[qi, ti] = max(tm[qi, ti], s)
             tm[ti, qi] = max(tm[ti, qi], s)
 
+    # Foldseek self-hits report alntmscore slightly >1 (alignment-length
+    # normalisation); force an exact unit diagonal.
+    np.fill_diagonal(tm, 1.0)
     np.savez(CACHE, design_id=ids, tm=tm)
     print(f"[foldseek] wrote {CACHE} — TM matrix {tm.shape}, "
           f"median off-diag {np.median(tm[~np.eye(len(ids), dtype=bool)]):.3f}")

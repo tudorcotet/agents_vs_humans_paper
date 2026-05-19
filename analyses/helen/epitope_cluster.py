@@ -6,21 +6,28 @@ binder (chain B) heavy atom define that design's epitope footprint. Footprints
 are clustered (Jaccard distance, average linkage) into discrete epitope
 patches; the figure reports how many distinct patches each cohort engages.
 
+The TREM2 chain (A) is NOT numbered identically across designs (8 of the
+100 carry a longer, frame-shifted construct), so footprints are aligned to a
+common reference sequence (the modal TREM2 chain) by pairwise alignment
+before indexing — never by raw author residue number.
+
 Inputs : data/proteinbase/boltz2/design_NNN.cif
 Output : analyses/helen/epitope_cache.npz
     design_id   : (N,) int
-    footprints  : (N, R) bool   — TREM2 residue contacted (R = TREM2 length)
-    trem2_resid : (R,) int      — TREM2 author residue numbers (column order)
+    footprints  : (N, R) bool   — contacted, indexed on the reference TREM2
+    trem2_resid : (R,) int      — 1..R position along the reference TREM2
 
 Deterministic, CPU-only, no network.
 """
 from __future__ import annotations
 
 import re
+from collections import Counter
 from pathlib import Path
 
 import gemmi
 import numpy as np
+from Bio import Align
 
 from scripts.utils import load_designs, repo_root
 
@@ -35,10 +42,27 @@ def _design_id(path: Path) -> int:
 
 
 def _trem2_and_binder(model: gemmi.Model) -> tuple[gemmi.Chain, gemmi.Chain]:
-    """Chain A is TREM2 (longer, fixed across designs); B is the binder."""
+    """Chain A is TREM2; the other chain is the binder."""
     trem2 = next(c for c in model if c.name == "A")
     binder = next(c for c in model if c.name != "A")
     return trem2, binder
+
+
+_ALIGNER = Align.PairwiseAligner(mode="global", match_score=2,
+                                 mismatch_score=-1, open_gap_score=-6,
+                                 extend_gap_score=-1)
+
+
+def _design_to_ref(design_seq: str, ref_seq: str) -> dict[int, int]:
+    """Map design TREM2 residue order-index -> reference position (matched
+    columns only) via global alignment. Robust to the frame-shifted construct."""
+    aln = _ALIGNER.align(design_seq, ref_seq)[0]
+    da, ra = aln.aligned
+    out: dict[int, int] = {}
+    for (d0, d1), (r0, _r1) in zip(da, ra, strict=True):
+        for k in range(int(d1 - d0)):
+            out[int(d0) + k] = int(r0) + k
+    return out
 
 
 def main() -> None:
@@ -55,33 +79,40 @@ def main() -> None:
             print(f"[epitope] cache hit ({CACHE.name}) — skipping")
             return
 
-    # Reference TREM2 residue numbering from the first complex.
-    ref = gemmi.read_structure(str(cifs[0]))[0]
-    trem2_ref, _ = _trem2_and_binder(ref)
-    resids = [r.seqid.num for r in trem2_ref]
-    rindex = {n: k for k, n in enumerate(resids)}
-    foot = np.zeros((len(cifs), len(resids)), dtype=bool)
-
-    for di, path in enumerate(cifs):
+    # Read each complex once; cache (model, trem2 seq, chains).
+    parsed = []
+    seqs = []
+    for path in cifs:
         m = gemmi.read_structure(str(path))[0]
         trem2, binder = _trem2_and_binder(m)
+        seq = gemmi.one_letter_code([r.name for r in trem2]).upper()
+        parsed.append((m, trem2, binder, seq))
+        seqs.append(seq)
+
+    # Reference = the modal TREM2 sequence (92/100 share one construct);
+    # every design is aligned to it so footprints share a common frame.
+    ref_seq = Counter(seqs).most_common(1)[0][0]
+    foot = np.zeros((len(cifs), len(ref_seq)), dtype=bool)
+
+    for di, (m, trem2, binder, seq) in enumerate(parsed):
+        idx_map = _design_to_ref(seq, ref_seq)
         ns = gemmi.NeighborSearch(m, gemmi.UnitCell(), CONTACT_A).populate()
-        for res in trem2:
-            k = rindex.get(res.seqid.num)
-            if k is None:
+        for j, res in enumerate(trem2):
+            rp = idx_map.get(j)
+            if rp is None:
                 continue
             for atom in res:
-                marks = ns.find_atoms(atom.pos, "\0", radius=CONTACT_A)
-                for mk in marks:
-                    cra = mk.to_cra(m)
-                    if cra.chain.name == binder.name:
-                        foot[di, k] = True
+                hit = False
+                for mk in ns.find_atoms(atom.pos, "\0", radius=CONTACT_A):
+                    if mk.to_cra(m).chain.name == binder.name:
+                        hit = True
                         break
-                if foot[di, k]:
+                if hit:
+                    foot[di, rp] = True
                     break
 
     np.savez(CACHE, design_id=ids, footprints=foot,
-             trem2_resid=np.array(resids, dtype=int))
+             trem2_resid=np.arange(1, len(ref_seq) + 1, dtype=int))
     print(f"[epitope] wrote {CACHE} — {foot.shape}, "
           f"mean footprint size {foot.sum(1).mean():.1f} residues")
 
