@@ -1,9 +1,16 @@
-# `analyses/helen/` — manuscript figures
+# `analyses/helen/` — manuscript figures + cohort funnel
 
 ## What this answers
 
-Renders the figures specified in the Notion manuscript draft as single
-self-contained SVGs, styled to match the hand-authored blog figures.
+1. Renders the figures specified in the Notion manuscript draft as single
+   self-contained SVGs, styled to match the hand-authored blog figures.
+2. `cohort_funnel.py` — the selection funnel by cohort
+   (`mise run analysis:helen-funnel` -> `cohort_funnel_report.md` +
+   `cohort_funnel_summary.json`). Shows humans submitted higher-ipSAE
+   designs and so survived the top-100 cut far more (80% vs 58%), yet the
+   lab hit rate is statistically tied (38% vs 34%): the in-silico proxy
+   advantage does not convert to the wet lab. Per-stage Fisher + BH-FDR;
+   see its Caveats (guaranteed-inclusion + method-mix confounds).
 
 ## Run
 

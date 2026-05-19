@@ -1,0 +1,117 @@
+{
+  "funnel": {
+    "survived_ipsae_cut": {
+      "agent": [
+        35,
+        60
+      ],
+      "human": [
+        65,
+        81
+      ],
+      "rate_agent": 0.5833,
+      "rate_human": 0.8025,
+      "odds_ratio_agent_vs_human": 0.3446,
+      "fisher_p_two_sided": 0.00531,
+      "table_agent_pos_neg_human_pos_neg": [
+        [
+          35,
+          25
+        ],
+        [
+          65,
+          16
+        ]
+      ],
+      "bh_q0.10_significant": true
+    },
+    "expressed_given_screened": {
+      "agent": [
+        29,
+        35
+      ],
+      "human": [
+        60,
+        65
+      ],
+      "rate_agent": 0.8286,
+      "rate_human": 0.9231,
+      "odds_ratio_agent_vs_human": 0.4028,
+      "fisher_p_two_sided": 0.18575,
+      "table_agent_pos_neg_human_pos_neg": [
+        [
+          29,
+          6
+        ],
+        [
+          60,
+          5
+        ]
+      ],
+      "bh_q0.10_significant": false
+    },
+    "bound_given_screened": {
+      "agent": [
+        12,
+        35
+      ],
+      "human": [
+        25,
+        65
+      ],
+      "rate_agent": 0.3429,
+      "rate_human": 0.3846,
+      "odds_ratio_agent_vs_human": 0.8348,
+      "fisher_p_two_sided": 0.82847,
+      "table_agent_pos_neg_human_pos_neg": [
+        [
+          12,
+          23
+        ],
+        [
+          25,
+          40
+        ]
+      ],
+      "bh_q0.10_significant": false
+    },
+    "bound_given_submitted": {
+      "agent": [
+        12,
+        60
+      ],
+      "human": [
+        25,
+        81
+      ],
+      "rate_agent": 0.2,
+      "rate_human": 0.3086,
+      "odds_ratio_agent_vs_human": 0.56,
+      "fisher_p_two_sided": 0.17726,
+      "table_agent_pos_neg_human_pos_neg": [
+        [
+          12,
+          48
+        ],
+        [
+          25,
+          56
+        ]
+      ],
+      "bh_q0.10_significant": false
+    }
+  },
+  "ipsae_submitted": {
+    "n_human": 80,
+    "n_agent": 56,
+    "median_human": 0.8319,
+    "median_agent": 0.6859,
+    "mannwhitney_U": 1485.0,
+    "p_two_sided": 0.000849,
+    "rank_biserial_agent_minus_human": -0.3371
+  },
+  "bh_fdr": {
+    "q": 0.1,
+    "family_size": 4
+  }
+}
