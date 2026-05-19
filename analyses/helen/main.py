@@ -67,12 +67,14 @@ METHOD_TO_CATEGORY = {
     "evo+ESM": "Diversified",          # pLM-guided sequence diversification
 }
 CATEGORY_ORDER = ["De novo", "Hallucination", "Optimized", "Diversified", "Rational/Hybrid"]
+# Well-separated brand hues so the *light* fills (see _lighten) stay
+# distinguishable; the saturated hue is used as the outline.
 CATEGORY_COLOR = {
-    "De novo": AGENT,
-    "Hallucination": HUMAN,
-    "Optimized": "#36B7F6",
-    "Diversified": AGENT_SOFT,
-    "Rational/Hybrid": "#5C6773",
+    "De novo": "#30C5F5",        # cyan
+    "Hallucination": "#142933",  # navy ink
+    "Optimized": "#FFB547",      # amber (core.warn)
+    "Diversified": "#1FE48F",    # green (core.good)
+    "Rational/Hybrid": "#5C6773",  # slate
 }
 
 # Bars/histograms: light fill + dark outline, same two cohort hues as the
@@ -81,11 +83,14 @@ COHORT_FILL = {"Human": HUMAN_SOFT, "Agent": AGENT_SOFT}
 COHORT_EDGE = {"Human": HUMAN, "Agent": AGENT}
 
 
-def _darken(hex_colour: str, factor: float = 0.6) -> str:
+def _lighten(hex_colour: str, amount: float = 0.62) -> str:
+    """Blend toward white -> a pale tint for bar fills."""
     import matplotlib.colors as mcolors
 
     r, g, b = mcolors.to_rgb(hex_colour)
-    return mcolors.to_hex((r * factor, g * factor, b * factor))
+    return mcolors.to_hex((r + (1 - r) * amount,
+                           g + (1 - g) * amount,
+                           b + (1 - b) * amount))
 
 
 def _style() -> None:
@@ -274,12 +279,12 @@ def fig4_design_methods(df) -> Path:
             vals.append(int((d[mask].category == cat).sum()))
         vals = np.array(vals)
         ax.bar(x, vals, 0.55, bottom=bottoms, label=cat,
-               color=CATEGORY_COLOR[cat],
-               edgecolor=_darken(CATEGORY_COLOR[cat]), linewidth=0.9)
+               color=_lighten(CATEGORY_COLOR[cat]),
+               edgecolor=CATEGORY_COLOR[cat], linewidth=1.1)
         for xi, v, b in zip(x, vals, bottoms, strict=False):
             if v > 0:
                 ax.text(xi, b + v / 2, str(v), ha="center", va="center",
-                        fontsize=7, color="white" if cat in (HUMAN,) or cat == "Hallucination" else INK)
+                        fontsize=7, color=INK)
         bottoms += vals
 
     ax.set_xticks(x)
