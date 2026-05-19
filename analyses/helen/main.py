@@ -161,10 +161,17 @@ def _embed_fonts(svg_path: Path) -> None:
     svg_path.write_text(svg)
 
 
-def _save(fig, name: str) -> Path:
+def _save(fig, name: str, *, tight: bool = True) -> Path:
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / f"{name}.svg"
-    fig.savefig(path, format="svg", bbox_inches="tight")
+    # tight crop is asymmetric when content (e.g. side legends) is one-sided,
+    # which shifts a figure-centred title. matplotlibrc forces
+    # savefig.bbox=tight, so override it explicitly for the fixed-canvas case.
+    if tight:
+        fig.savefig(path, format="svg", bbox_inches="tight")
+    else:
+        with mpl.rc_context({"savefig.bbox": "standard"}):
+            fig.savefig(path, format="svg")
     plt.close(fig)
     _embed_fonts(path)
     return path
@@ -565,7 +572,6 @@ def fig_hit_pies(df) -> Path:
     d["category"] = d.design_method_normalized.map(METHOD_TO_CATEGORY).fillna(
         "Rational/Hybrid")
     hits = d[d.is_hit.fillna(False)]
-    n_hits = len(hits)
 
     tax = (hits.category.value_counts()
            .reindex(CATEGORY_ORDER).dropna().astype(int))
@@ -576,7 +582,11 @@ def fig_hit_pies(df) -> Path:
     def _autopct(total):
         return lambda p: f"{round(p / 100 * total)}\n({p:.0f}%)"
 
-    fig, (axt, axm) = plt.subplots(1, 2, figsize=(9.2, 4.6))
+    fig, (axt, axm) = plt.subplots(1, 2, figsize=(11.0, 4.2))
+    # Fixed canvas (saved tight=False) so positions are stable. Small wspace
+    # keeps the two pies close; the right band holds the model-type legend.
+    fig.subplots_adjust(left=0.05, right=0.80, top=0.80, bottom=0.06,
+                        wspace=0.55)
     for ax, series, colours, sub in [
         (axt, tax, [CATEGORY_COLOR[c] for c in tax.index],
          "By taxonomy category"),
@@ -593,16 +603,19 @@ def fig_hit_pies(df) -> Path:
         ax.set_aspect("equal")
         ax.axis("off")
         ax.legend(wedges, [f"{i}  (n={v})" for i, v in series.items()],
-                  frameon=False, fontsize=8, loc="upper center",
-                  bbox_to_anchor=(0.5, -0.02), ncol=2, handletextpad=0.4,
-                  columnspacing=1.0)
+                  frameon=False, fontsize=8, loc="center left",
+                  bbox_to_anchor=(1.0, 0.5), ncol=1, handletextpad=0.4,
+                  labelspacing=0.7)
         _subtitle(ax, sub)
 
-    fig.suptitle(f"What produced the {n_hits} binders", fontsize=11,
+    # Centre the title over the two pies (legend-width independent).
+    pt, pm = axt.get_position(), axm.get_position()
+    cx = (pt.x0 + pm.x1) / 2
+    fig.suptitle("Which models generated validated binders", fontsize=13,
                  fontweight="medium", color=_TITLE_GREY,
                  fontfamily=["GT Pressura Extended", "Geist", "DejaVu Sans"],
-                 x=0.5, y=1.02, ha="center")
-    return _save(fig, "fig_hit_pies")
+                 x=cx, y=0.93, ha="center")
+    return _save(fig, "fig_hit_pies", tight=False)
 
 
 def fig_cohort_funnel(df) -> Path | None:
