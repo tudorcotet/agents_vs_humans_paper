@@ -51,3 +51,7 @@ data/_cache/
 .envrc
 *.pem
 .doppler.yaml
+
+# Local tooling / scratch (not committed)
+.tools/
+.firecrawl/

@@ -91,3 +91,11 @@ run = "python -m http.server -d figures/blog 8080"
 # `[tasks."analysis:all"]` above if your analysis is load-bearing for the
 # paper and should run on every `mise run analysis:all`.
 # ---------------------------------------------------------------------------
+
+[tasks."analysis:helen"]
+description = "Render manuscript figures 1/2/4/6/7 as blog-styled SVGs"
+run = "uv run python analyses/helen/main.py"
+
+[tasks."analysis:helen-funnel"]
+description = "Selection funnel by cohort: did humans' ipSAE edge convert?"
+run = "uv run python analyses/helen/cohort_funnel.py"

@@ -1,0 +1,22 @@
+{
+  "n_designs": 141,
+  "n_screened": 100,
+  "n_figures": 11,
+  "figures": [
+    "figures/paper/fig1_ipsae_distribution.svg",
+    "figures/paper/fig2_expression_binding.svg",
+    "figures/paper/fig4_design_methods.svg",
+    "figures/paper/fig6_sequence_length.svg",
+    "figures/paper/fig7_metric_roc.svg",
+    "figures/paper/fig_identity_heatmap.svg",
+    "figures/paper/fig_foldseek_clustering.svg",
+    "figures/paper/fig_epitope_regions.svg",
+    "figures/paper/fig5_esm2_umap.svg",
+    "figures/paper/fig_cohort_funnel.svg",
+    "figures/paper/fig_hit_pies.svg"
+  ],
+  "esm2_model": "esm2_t33_650M_UR50D",
+  "foldseek_done": true,
+  "epitope_done": true,
+  "fig3_status": "excluded by request"
+}
