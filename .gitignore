@@ -29,6 +29,22 @@ analyses/**/_scratch/
 figures/exploration/
 figures/**/*.tmp.*
 
+# Paper build outputs (Design B: only sections/*.md and figures/paper/*.svg are
+# tracked; the build converts them on the fly). Regenerate with `mise run paper:build`.
+paper/sections/*.tex
+paper/paper.pdf
+figures/paper/pdf/
+# latexmk aux + the intermediate main.pdf before it's renamed to paper.pdf
+paper/main.pdf
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/sections/*.aux
+
 # Per-collaborator scratch
 analyses/*/notebooks/.ipynb_checkpoints/
 

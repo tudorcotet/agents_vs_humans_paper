@@ -19,11 +19,21 @@
 \usepackage{natbib}
 \usepackage{authblk}
 
+% Pandoc fragment helpers. Sections are authored in markdown and converted to
+% .tex fragments by `mise run paper:prep`; pandoc's standalone template would
+% normally define these, but \input{}-ed fragments rely on the host preamble.
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+
 % Brand cyan (loosely matches theme/palettes.json — keep in sync if changed)
 \definecolor{adaptyvcyan}{HTML}{30C5F5}
 \hypersetup{colorlinks=true, linkcolor=adaptyvcyan, citecolor=adaptyvcyan, urlcolor=adaptyvcyan}
 
-\graphicspath{{../figures/paper/}{figures/}}
+% Figures are authored as SVG under ../figures/paper/; `mise run paper:prep`
+% converts them to PDF under ../figures/paper/pdf/ (pdflatex cannot embed SVG).
+% Reference figures without an extension so latexmk picks up the .pdf.
+\graphicspath{{../figures/paper/pdf/}{../figures/paper/}{figures/}}
 
 \title{Designing TREM2 binders on a one-day clock:\\
 human teams vs.\ autonomous AI agents}

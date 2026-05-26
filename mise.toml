@@ -38,6 +38,63 @@ description = "Auto-format with ruff"
 run = "uv run ruff format ."
 
 # ---------------------------------------------------------------------------
+# Paper build — markdown sections + SVG figures -> paper/paper.pdf.
+#
+# Single-source design: only `paper/sections/*.md` and `figures/paper/*.svg`
+# are tracked. The build converts them on the fly (Design B), so the .tex and
+# figure PDFs it emits are gitignored. `paper:build` is the CI entrypoint.
+#
+# System dependencies (NOT mise-managed — install out of band):
+#   - TeX Live with latexmk + the packages main.tex \usepackage's
+#       Arch:   pacman -S texlive-basic texlive-latex texlive-latexrecommended \
+#                          texlive-fontsrecommended texlive-mathscience texlive-bibtexextra
+#       CI:     zauguin/install-texlive@v4 (see .github/workflows/paper-build.yml)
+#   - pandoc        (markdown -> LaTeX)         Arch: pacman -S pandoc-cli   CI: apt
+#   - rsvg-convert  (SVG -> PDF, from librsvg)  Arch: pacman -S librsvg      CI: apt librsvg2-bin
+# ---------------------------------------------------------------------------
+
+[tasks."paper:prep"]
+description = "Convert markdown sections -> .tex (pandoc) and SVG figures -> PDF (rsvg-convert)."
+dir = "{{ config_root }}/paper"
+shell = "bash -c"
+run = """
+set -euo pipefail
+for f in sections/*.md; do
+  pandoc "$f" --from gfm --to latex --output "${f%.md}.tex"
+done
+mkdir -p ../figures/paper/pdf
+for f in ../figures/paper/*.svg; do
+  rsvg-convert --format pdf --output "../figures/paper/pdf/$(basename "${f%.svg}").pdf" "$f"
+done
+"""
+sources = ["{{ config_root }}/paper/sections/*.md", "{{ config_root }}/figures/paper/*.svg"]
+outputs = ["{{ config_root }}/paper/sections/*.tex", "{{ config_root }}/figures/paper/pdf/*.pdf"]
+
+[tasks."paper:fast"]
+description = "Compile paper/paper.pdf from existing .tex + figure PDFs (no conversion)."
+dir = "{{ config_root }}/paper"
+shell = "bash -c"
+# When paper:prep is also scheduled (i.e. under paper:build) run it first.
+# Run alone, paper:fast is a pure recompile of already-converted sources.
+wait_for = ["paper:prep"]
+run = """
+set -euo pipefail
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+mv main.pdf paper.pdf
+"""
+sources = [
+  "{{ config_root }}/paper/main.tex",
+  "{{ config_root }}/paper/sections/*.tex",
+  "{{ config_root }}/paper/references.bib",
+  "{{ config_root }}/figures/paper/pdf/*.pdf",
+]
+outputs = ["{{ config_root }}/paper/paper.pdf"]
+
+[tasks."paper:build"]
+description = "Full paper build: prep (md->tex, svg->pdf) then compile. CI entrypoint."
+depends = ["paper:prep", "paper:fast"]
+
+# ---------------------------------------------------------------------------
 # Data — rerun upstream model predictions for the designs missing them.
 #
 # `rerun:typer` fills `data/structures/proteintyper/`,
