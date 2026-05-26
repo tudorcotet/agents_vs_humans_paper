@@ -7,7 +7,9 @@ hand.** If something is wrong, raise it in a PR description.
 
 ```
 data/
-├── designs.csv          ⭐ ONE row per design, 141 rows × 123 cols, all annotations
+├── designs.csv          ⭐ ONE row per design, 141 rows × 356 cols, ALL annotations
+│                          (curated metadata + pb_* + tp_* + b2_*/px_*/chai_*/af2m_*
+│                          + esm_pll_*/netsolp_*/saprot_* + prodigy_*/destress_* per model)
 ├── designs.parquet      same, typed (preferred for code)
 ├── designs.fasta        sequences only; headers: >{id}|{name}|{team}|{method}
 ├── target/

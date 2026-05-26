@@ -81,7 +81,9 @@ upstream pipeline (held back)              ProteinBase public mirror      Protei
         ▼                                          ▼                              ▼
 data/designs.csv + designs.parquet      data/structures/{boltz2,esmfold}/   data/structures/proteintyper/
    ⭐ source of truth (shipped)          data/metrics/pae/                   data/metrics/proteintyper/
-   141 × 123, 42 pb_* cols              data/images/  data/sensorgrams/     data/images/  (≤41 designs)
+   141 × 356 (unified table:           data/images/  data/sensorgrams/     data/images/  (≤41 designs)
+   curated + pb_* + tp_* + 4 complex
+   predictors + 5 scorers)
         │                                100 CIFs + 100 CIFs + 100 PAEs +    ESMFold CIFs + Typer JSON for
         │                                 99 PNGs + 215 sensorgrams           the 41 non-screened designs
         └────────────────────────────────────┬─────────────────────────────────────┘
@@ -114,7 +116,7 @@ via the `pb_*` path columns — keep them in sync if you regenerate one.
 
 | artifact | shipped? |
 |---|---|
-| `data/designs.csv` / `.parquet`           | ✅ 141 × 123, including 42 `pb_*` columns |
+| `data/designs.csv` / `.parquet`           | ✅ 141 × 356 unified table (curated + pb_* + tp_* + 4 complex predictors + 5 scorers) |
 | `data/designs.fasta`                       | ✅ |
 | `data/raw_lab/bli_*.csv`                   | ✅ per-design (100) + per-replicate (215) |
 | `data/target/*.fasta`                      | ✅ Acro TR2-H52H5, 175 aa |

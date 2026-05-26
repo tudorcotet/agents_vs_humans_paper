@@ -64,7 +64,8 @@ df = load_designs(only_hits=True)         # 37 rows
 ```
 agents_vs_humans_paper/
 ├── data/                    ⭐ one CSV, every annotation
-│   ├── designs.csv          one row per design, 141 × 123 (42 pb_* cols, 100/141)
+│   ├── designs.csv          one row per design, 141 × 356 (single unified table:
+│   │                        curated metadata + pb_* + tp_* + 4 complex predictors + 5 scorers)
 │   ├── designs.parquet      same, typed
 │   ├── designs.fasta        sequences only
 │   ├── target/              TREM2 ectodomain construct (Acro TR2-H52H5, 175 aa)
@@ -142,7 +143,7 @@ in [`docs/ANALYSES.md`](docs/ANALYSES.md). Style guide in
   ProteinBase re-fold (`pb_boltz2_*`) is 100/141, screened only. The two
   match closely but not exactly (max |Δ ipSAE| = 0.18). Pick one,
   document which.
-- **ProteinBase enrichment is screened-only.** The 42 `pb_*` columns and
+- **ProteinBase enrichment is screened-only.** The 43 `pb_*` columns and
   the Boltz-2 + ESMFold structures under `data/structures/{boltz2,esmfold}/`
   cover the 100 designs that made the wet lab. The 41 non-screened
   designs are filled in by a local ProteinTyper rerun
