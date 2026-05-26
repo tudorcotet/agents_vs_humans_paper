@@ -67,7 +67,6 @@ jobs:
             caption
             hyperref
             natbib
-            authblk
             preprint
             graphics
             cm-super
