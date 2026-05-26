@@ -58,7 +58,8 @@ fighting object dtype.
 
 ### 3. Modality (141/141)
 
-Classifier ported from the EGFR repo, stripped of EGFR-specific tiers.
+Binary classifier for binding modality (miniprotein / nanobody / antibody),
+calling each design from motif + homology + structure evidence.
 
 | column | type | notes |
 |---|---|---|
@@ -86,7 +87,7 @@ Classifier ported from the EGFR repo, stripped of EGFR-specific tiers.
 
 ### 5. In-silico folding metrics (136/141)
 
-Boltz-2 metrics pulled from the bioArena selection table. 5 designs are
+Boltz-2 metrics pulled from the muni selection table. 5 designs are
 null — all bottom-ranked non-screened (ranks 137–141, `selected=no`) for
 which Boltz-2 didn't produce a useful fold. Null-check before use.
 
@@ -252,8 +253,8 @@ prefer; document which in your analysis.
 | `pb_n_binding_records` | float | Number of binding records in ProteinBase for this design. 100/141. |
 | `pb_any_binding`       | bool  | True if any record reports binding. 100/141. |
 | `pb_n_kd_records`      | float | Number of KD fits. 100/141. |
-| `pb_n_bli_curves`      | float | BLI sensorgrams shipped under `data/proteinbase/sensorgrams/`. 100/141. |
-| `pb_n_spr_curves`      | float | SPR sensorgrams shipped under `data/proteinbase/sensorgrams/`. 100/141. |
+| `pb_n_bli_curves`      | float | BLI sensorgrams shipped under `data/sensorgrams/`. 100/141. |
+| `pb_n_spr_curves`      | float | SPR sensorgrams shipped under `data/sensorgrams/`. 100/141. |
 | `pb_kd_M_mean`         | float | Mean KD across replicates, in **molar** (not nM). 36/141. |
 | `pb_kd_M_min`          | float | Tightest replicate KD, molar. 36/141. |
 | `pb_kd_M_max`          | float | Loosest replicate KD, molar. 36/141. |
@@ -263,13 +264,17 @@ prefer; document which in your analysis.
 | column | type | notes |
 |---|---|---|
 | `pb_id`            | string | ProteinBase slug, e.g. `gentle-bear-dust`. 100/141. |
-| `pb_boltz2_cif`    | string | `data/proteinbase/boltz2/design_NNN.cif`. 100/141. |
-| `pb_esmfold_cif`   | string | `data/proteinbase/esmfold/design_NNN.cif`. 100/141. |
-| `pb_pae_json`      | string | `data/proteinbase/pae/design_NNN.json`. 100/141. |
-| `pb_stylized_png`  | string | `data/proteinbase/images/design_NNN.png`. 99/141. |
+| `pb_boltz2_cif`    | string | `data/structures/boltz2/design_NNN.cif`. 100/141. |
+| `pb_esmfold_cif`   | string | `data/structures/esmfold/design_NNN.cif`. 100/141. |
+| `pb_pae_json`      | string | `data/metrics/pae/design_NNN.json`. 100/141. |
+| `pb_stylized_png`  | string | `data/images/design_NNN.png`. 99/141. |
 
 For sensorgrams (multiple per design, no single path per row), glob
-`data/proteinbase/sensorgrams/design_NNN_rep*.json` instead.
+`data/sensorgrams/design_NNN_rep*.json` instead. The 41 non-screened
+designs get their own ESMFold predictions under
+`data/structures/proteintyper/design_NNN.cif` plus the full
+`TyperJobOutput` under `data/metrics/proteintyper/design_NNN.json` — see
+`scripts/folding/run_proteintyper.py`.
 
 ## Joining with the lab tables
 
@@ -284,19 +289,70 @@ The canonical KD columns in `designs.csv` already apply the
 strata, SPR-only, BLI-only — than the four we shipped, and document
 which.
 
+## `data/grand_metrics.csv` — the wide companion
+
+`mise run build:grand` joins every per-model JSON we re-folded
+(`data/metrics/{boltz2,protenix,chai,af2m}/`) plus the ProteinTyper
+monomer panel plus the ProteinBase scrape into one wide CSV at
+`data/grand_metrics.csv`. Use it when you want every metric one row
+per design without N pandas merges.
+
+**Column-prefix convention.** Two prefixes that look overlapping but
+mean different things:
+
+- **`pb_*`** — _ProteinBase mirror._ Verbatim columns from
+  `designs.csv`, 100/141 coverage (screened designs only). 39 cols.
+  Superset of monomer ProteinTyper fields PLUS ProteinBase's own
+  Boltz-2 complex run, interface residue counts, and wet-lab roll-ups
+  (`pb_n_bli_curves`, `pb_kd_M_*`). When you care about
+  *provenance* — "what did ProteinBase report at scrape time?" — use
+  these.
+
+- **`tp_*`** — _Unified ProteinTyper monomer panel._ Same upstream
+  tool as the typer subset of `pb_*`, but reshaped to one column per
+  monomer metric across all 141 designs:
+  - 41 non-screened → local typer-rerun JSON at
+    `data/metrics/proteintyper/design_NNN.json` (new
+    `sequence.metrics[]` schema; 5 fields populated).
+  - 100 screened → fall back to the matching `pb_<field>` value (same
+    upstream tool, just sourced from ProteinBase's mirror).
+
+  Use `tp_*` when you want one column per metric for all 141 designs
+  without thinking about provenance. Use `pb_*` when you need either
+  the wet-lab / complex / interface extras that aren't in `tp_*`, OR
+  when the difference between "ProteinBase's saved value" and "our
+  fresh typer call" matters.
+
+The four complex predictors land under their own prefixes from our
+Modal rerun: `b2_*` (Boltz-2), `px_*` (Protenix-v2), `chai_*` (Chai-1),
+`af2m_*` (AlphaFold2-Multimer via ColabFold). All four are
+target-vs-binder complexes, all four expose the same Dunbrack-style
+ipSAE / pDockQ / LIS / iPTM / pTM column set.
+
+Two derived consensus columns close out the CSV:
+`ipsae_pass_4folders` (count of {b2, px, chai, af2m} where d0chn_max
+≥ 0.4) and `iptm_pass_4folders` (≥ 0.7). Treat them as a soft
+agreement filter, not a hit call.
+
 ## What's NOT in this CSV
 
 The CSV holds scalars only. The bulk binary artifacts ship alongside it
-under `data/proteinbase/` (see [`data/proteinbase/README.md`](../data/proteinbase/README.md))
-and are addressable via the `pb_boltz2_cif` / `pb_esmfold_cif` /
-`pb_pae_json` / `pb_stylized_png` path columns. For the 100 screened
-designs you get:
+under `data/structures/`, `data/metrics/`, `data/images/`, and
+`data/sensorgrams/`. They are addressable via the `pb_boltz2_cif` /
+`pb_esmfold_cif` / `pb_pae_json` / `pb_stylized_png` path columns. For
+the 100 screened designs you get:
 
-- **Boltz-2 complex CIFs** — `data/proteinbase/boltz2/` (100 files, 14 MB).
-- **ESMFold binder CIFs** — `data/proteinbase/esmfold/` (100 files, 5 MB).
-- **PAE matrices** — `data/proteinbase/pae/` (100 files, 88 MB).
-- **Stylised renders** — `data/proteinbase/images/` (99 files, 27 MB).
-- **Sensorgrams** — `data/proteinbase/sensorgrams/` (215 files: 193 SPR + 22 BLI, 27 MB).
+- **Boltz-2 complex CIFs** — `data/structures/boltz2/` (100 files, 14 MB).
+- **ESMFold binder CIFs** — `data/structures/esmfold/` (100 files, 5 MB).
+- **PAE matrices** — `data/metrics/pae/` (100 files, 88 MB).
+- **Stylised renders** — `data/images/` (99 files, 27 MB).
+- **Sensorgrams** — `data/sensorgrams/` (215 files: 193 SPR + 22 BLI, 27 MB).
+
+For the 41 non-screened designs the local ProteinTyper rerun adds:
+
+- **ESMFold binder CIFs** — `data/structures/proteintyper/` (≤41 files).
+- **Full TyperJobOutput JSON** — `data/metrics/proteintyper/` (≤41 files).
+- **Stylised renders** — `data/images/` (≤41 additional files).
 
 Still not shipped:
 

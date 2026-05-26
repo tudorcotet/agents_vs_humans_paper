@@ -4,10 +4,10 @@ Define every term that an external reader might trip over.
 
 ## Hackathon-specific
 
-- **bioArena** — the platform that hosted the six AI agent teams
+- **muni** — the platform that hosted the six AI agent teams
   end-to-end. Each agent runs an autonomous pipeline (sequence sampling
   + structure prediction + scoring) with tool access. "Agent" in the
-  paper means "an end-to-end pipeline running on bioArena," not "a raw
+  paper means "an end-to-end pipeline running on muni," not "a raw
   language model emitting sequences."
 - **muni** — the partner platform that ran the hackathon alongside
   Adaptyv.

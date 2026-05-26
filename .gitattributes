@@ -33,12 +33,28 @@
 # -----------------------------------------------------------------------------
 # Git LFS — data artefacts (~162 MB, ~620 files)
 # -----------------------------------------------------------------------------
-# ProteinBase mirror
-data/proteinbase/boltz2/*.cif      filter=lfs diff=lfs merge=lfs -text
-data/proteinbase/esmfold/*.cif     filter=lfs diff=lfs merge=lfs -text
-data/proteinbase/pae/*.json        filter=lfs diff=lfs merge=lfs -text
-data/proteinbase/images/*.png      filter=lfs diff=lfs merge=lfs -text
-data/proteinbase/sensorgrams/*.json filter=lfs diff=lfs merge=lfs -text
+# Structure predictions — one subfolder per model. Both rerun outputs (e.g.
+# proteintyper/, protenix/) and the original ProteinBase mirror (boltz2/,
+# esmfold/) live side by side, keyed by `design_NNN`.
+data/structures/boltz2/*.cif         filter=lfs diff=lfs merge=lfs -text
+data/structures/esmfold/*.cif        filter=lfs diff=lfs merge=lfs -text
+data/structures/proteintyper/*.cif   filter=lfs diff=lfs merge=lfs -text
+data/structures/protenix/*.cif       filter=lfs diff=lfs merge=lfs -text
+data/structures/chai/*.cif           filter=lfs diff=lfs merge=lfs -text
+data/structures/af2m/*.pdb           filter=lfs diff=lfs merge=lfs -text
+
+# Per-model raw metrics (PAE matrices, ProteinTyper TyperJobOutput, etc.).
+data/metrics/pae/*.json              filter=lfs diff=lfs merge=lfs -text
+data/metrics/proteintyper/*.json     filter=lfs diff=lfs merge=lfs -text
+data/metrics/protenix/*.json         filter=lfs diff=lfs merge=lfs -text
+data/metrics/boltz2/*.json           filter=lfs diff=lfs merge=lfs -text
+data/metrics/chai/*.json             filter=lfs diff=lfs merge=lfs -text
+data/metrics/af2m/*.json             filter=lfs diff=lfs merge=lfs -text
+
+# Renders + kinetic traces — kept OUTSIDE structures/ because they are not
+# model outputs.
+data/images/*.png                    filter=lfs diff=lfs merge=lfs -text
+data/sensorgrams/*.json              filter=lfs diff=lfs merge=lfs -text
 
 # Top-level parquet (designs.parquet)
 data/*.parquet                     filter=lfs diff=lfs merge=lfs -text

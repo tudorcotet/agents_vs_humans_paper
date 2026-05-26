@@ -38,6 +38,106 @@ description = "Auto-format with ruff"
 run = "uv run ruff format ."
 
 # ---------------------------------------------------------------------------
+# Data — rerun upstream model predictions for the designs missing them.
+#
+# `rerun:typer` fills `data/structures/proteintyper/`,
+# `data/metrics/proteintyper/`, and `data/images/` for the 41 non-screened
+# designs that ProteinBase never folded. Requires three env vars:
+# PROTEINTYPER_SUBMIT_URL, PROTEINTYPER_RETRIEVE_URL, PROTEINTYPER_API_TOKEN.
+# ---------------------------------------------------------------------------
+
+[tasks."rerun:typer"]
+description = "Re-run ProteinTyper (full_monomer recipe) on designs missing predictions"
+run = "uv run python scripts/folding/run_proteintyper.py"
+
+# ---------------------------------------------------------------------------
+# Complex re-scoring vs TREM2 — Modal-detached. Standard multi-model panel
+# (Boltz-2, Protenix-v2, Chai-1, AF2-Multimer), pinned to TREM2.
+#
+# `rerun:complex` fires all three predictors on the 141 designs. Each model
+# runs as its own Modal app under scripts/modal/, detached by default so the
+# job survives client disconnects.
+#
+# Outputs land on the shared Modal Volume `avh-rerun-results` and then are
+# downloaded to:
+#
+#    data/structures/<model>/design_NNN.cif
+#    data/metrics/<model>/design_NNN.json
+#    data/metrics/<model>_summary.csv (per-model headline scores)
+#
+# `build:grand` pools every per-model JSON + the typer monomer panel into
+# `data/grand_metrics.csv` (one row per design × every metric × every model).
+#
+# Auth: `modal token set …` must be configured first
+# (https://modal.com/settings/tokens). The ipSAE / pDockQ helper is
+# inlined into each Modal app so no extra deps beyond `modal`, `pandas`,
+# `gemmi`, `numpy` are needed.
+# ---------------------------------------------------------------------------
+
+[tasks."rerun:complex"]
+description = "Re-score all 141 designs vs TREM2 with Boltz-2 + Protenix-v2 + Chai-1 + AF2-M (Modal --detach)"
+run = "uv run python scripts/data/run_complex.py"
+
+[tasks."rerun:boltz2"]
+description = "Just the Boltz-2 branch of rerun:complex"
+run = "uv run python scripts/data/run_complex.py --models boltz2"
+
+[tasks."rerun:protenix"]
+description = "Just the Protenix branch (defaults to protenix-v2 via HF mirror; PROTENIX_MODEL_NAME to override)"
+run = "uv run python scripts/data/run_protenix.py"
+
+[tasks."rerun:chai"]
+description = "Just the Chai-1 branch of rerun:complex"
+run = "uv run python scripts/data/run_complex.py --models chai"
+
+[tasks."rerun:af2m"]
+description = "Just the AF2-Multimer (ColabFold) branch of rerun:complex"
+run = "uv run python scripts/data/run_complex.py --models af2m"
+
+# ---------------------------------------------------------------------------
+# Post-folding scorers (Modal --detach). Run AFTER `rerun:complex` so the
+# per-model structures exist on the shared volume.
+#
+# `rerun:scorers` fires the full panel (esm_pll, netsolp, saprot, prodigy,
+# destress). Sequence-only scorers (esm_pll, netsolp, saprot) write one
+# `data/metrics/<scorer>/design_NNN.json` per design. PRODIGY and DE-STRESS
+# emit per-(predictor, design) JSONs under `data/metrics/{prodigy,destress}_<model>/`.
+# ---------------------------------------------------------------------------
+
+[tasks."rerun:esm_pll"]
+description = "ESM2 t33 650M masked-marginal PLL on every binder sequence (Modal --detach)"
+run = "uv run python scripts/data/run_complex.py --scorers esm_pll"
+
+[tasks."rerun:netsolp"]
+description = "NetSolP solubility / usability on every binder sequence (Modal --detach)"
+run = "uv run python scripts/data/run_complex.py --scorers netsolp"
+
+[tasks."rerun:saprot"]
+description = "SaProt structure-aware PLL on every binder (uses ESMFold / ProteinTyper monomers; Modal --detach)"
+run = "uv run python scripts/data/run_complex.py --scorers saprot"
+
+[tasks."rerun:prodigy"]
+description = "PRODIGY ΔG/Kd on every complex × every predictor (boltz2/protenix/chai/af2m; Modal --detach)"
+run = "uv run python scripts/data/run_complex.py --scorers prodigy"
+
+[tasks."rerun:destress"]
+description = "DE-STRESS Rosetta + EvoEF2 + BuDEff on every complex × every predictor (Modal --detach)"
+run = "uv run python scripts/data/run_complex.py --scorers destress"
+
+[tasks."rerun:scorers"]
+description = "Fire the full post-folding panel: esm_pll + netsolp + saprot + prodigy + destress (Modal --detach)"
+run = "uv run python scripts/data/run_complex.py --scorers esm_pll netsolp saprot prodigy destress"
+
+[tasks."build:grand"]
+description = "Pool data/metrics/**/*.json into data/grand_metrics.csv (gitignored intermediate)"
+run = "uv run python scripts/data/build_grand_metrics.py"
+
+[tasks."unify:designs"]
+description = "Merge data/grand_metrics.csv columns into data/designs.csv (single canonical table)"
+depends = ["build:grand"]
+run = "uv run python scripts/data/unify_designs.py"
+
+# ---------------------------------------------------------------------------
 # Canonical analyses — re-run after data changes
 #
 # Naming: every analysis is `analysis:<short-name>` and reads its data from

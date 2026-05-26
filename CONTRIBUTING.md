@@ -74,7 +74,7 @@ loader caches and coerces booleans for you — see
 Don't read:
 - `data/raw_lab/bli_results.csv` directly for KDs — `designs.csv` already
   has the canonical aggregate (`kd_arith_mean_nM_all`, `pkd_arith_mean`).
-- `data/proteinbase/sensorgrams/*.json` unless you're plotting raw curves.
+- `data/sensorgrams/*.json` unless you're plotting raw curves.
   For per-design replicate counts use `pb_n_bli_curves` and `pb_n_spr_curves`
   in `designs.csv`.
 

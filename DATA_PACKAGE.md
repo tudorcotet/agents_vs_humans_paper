@@ -20,18 +20,23 @@ The 141 × 123 canonical table includes 42 `pb_*` columns from the
 ProteinBase enrichment, populated for the 100 screened designs. See
 [`docs/DATA.md`](docs/DATA.md) for every column.
 
-## ProteinBase mirror — `data/proteinbase/`
+## Structures, metrics, renders, sensorgrams
 
-100 screened designs only. Non-screened designs are absent. Filter on
-`submitted_to_lab=True` or `pb_id.notna()` before joining.
+Subfolders are keyed by model. Sensorgrams and renders sit *outside*
+`structures/` — a sensorgram is a kinetic trace, a render is a picture;
+neither is a model output. The 100 ProteinBase-mirrored designs cover
+the BLI screened set; the 41 non-screened designs are filled in by a
+ProteinTyper rerun (see `scripts/folding/run_proteintyper.py`).
 
 | path | count | size | what |
 |---|---|---|---|
-| `data/proteinbase/boltz2/design_NNN.cif`   | 100 | 14 MB | Boltz-2 complex predictions (re-fold). Chain A = TREM2, chain B = binder. |
-| `data/proteinbase/esmfold/design_NNN.cif`  | 100 | 5 MB  | ESMFold single-chain (binder only). |
-| `data/proteinbase/pae/design_NNN.json`     | 100 | 88 MB | PAE matrices from Boltz-2, residue × residue, Å. |
-| `data/proteinbase/images/design_NNN.png`   |  99 | 27 MB | Stylised cartoon renders of the ESMFold structure. |
-| `data/proteinbase/sensorgrams/design_NNN_repNN_{spr,bli}.json` | 215 (193 SPR + 22 BLI) | 27 MB | Raw kinetic-curve traces per replicate. |
+| `data/structures/boltz2/design_NNN.cif`        | 100 | 14 MB | Boltz-2 complex predictions. Chain A = TREM2, chain B = binder. |
+| `data/structures/esmfold/design_NNN.cif`       | 100 | 5 MB  | ESMFold single-chain (binder only) — ProteinBase mirror. |
+| `data/structures/proteintyper/design_NNN.cif`  |  ≤41 | — | ESMFold single-chain from the rerun on non-screened designs. |
+| `data/metrics/pae/design_NNN.json`             | 100 | 88 MB | PAE matrices from Boltz-2, residue × residue, Å. |
+| `data/metrics/proteintyper/design_NNN.json`    |  ≤41 | — | Full `TyperJobOutput` from the rerun (design_class, novelty, pLDDT, …). |
+| `data/images/design_NNN.png`                   |  99 + ≤41 | 27 MB + | Stylised cartoon renders of the ESMFold structure. |
+| `data/sensorgrams/design_NNN_repNN_{spr,bli}.json` | 215 (193 SPR + 22 BLI) | 27 MB | Raw kinetic-curve traces per replicate (screened designs only). |
 
 The local paths are columns in `designs.csv`:
 
@@ -46,12 +51,13 @@ Sensorgrams have multiple files per design — glob the folder:
 
 ```python
 from pathlib import Path
-rep_files = sorted(Path('data/proteinbase/sensorgrams').glob('design_017_rep*.json'))
+rep_files = sorted(Path('data/sensorgrams').glob('design_017_rep*.json'))
 ```
 
-Upstream mirror: `https://proteinbase-pub.t3.storage.dev/`. See
-[`data/proteinbase/README.md`](data/proteinbase/README.md) for the JSON
-schemas.
+The screened 100 are mirrored from
+`https://proteinbase-pub.t3.storage.dev/` (ProteinBase public
+collection). The non-screened 41 come from a local ProteinTyper rerun
+that uses the same monomer-ESMFold recipe (target-only MSA).
 
 ## Blog figures — `figures/blog/`
 
@@ -78,8 +84,7 @@ git lfs pull
 
 Without LFS, every CIF / JSON / PNG / parquet / font resolves to a
 ~130-byte pointer stub and analyses fail to read them. The tracked
-patterns are in `.gitattributes`. See
-[`data/proteinbase/README.md`](data/proteinbase/README.md#git-lfs).
+patterns are in `.gitattributes`. See [`data/README.md`](data/README.md#git-lfs).
 
 ## What's not in the package
 
@@ -92,6 +97,10 @@ patterns are in `.gitattributes`. See
 ## One-line summary
 
 `data/designs.csv` (141 × 123, 42 `pb_*` cols) joins to 100 Boltz-2
-CIFs + 100 ESMFold CIFs + 100 PAEs + 99 PNGs + 215 sensorgrams under
-`data/proteinbase/`, plus per-design (100) and per-replicate (215) BLI
-tables under `data/raw_lab/`. ~162 MB via Git LFS. Self-contained.
+CIFs + 100 ESMFold CIFs + 100 PAEs + 99 PNGs + 215 sensorgrams across
+`data/structures/{boltz2,esmfold}/`, `data/metrics/pae/`, `data/images/`,
+and `data/sensorgrams/`, plus per-design (100) and per-replicate (215)
+BLI tables under `data/raw_lab/`. The 41 non-screened designs are filled
+in by `scripts/folding/run_proteintyper.py` into
+`data/structures/proteintyper/` + `data/metrics/proteintyper/`. ~162 MB
+via Git LFS. Self-contained.

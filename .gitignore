@@ -33,10 +33,10 @@ figures/**/*.tmp.*
 analyses/*/notebooks/.ipynb_checkpoints/
 
 # Large derived intermediates (regenerate from data/designs.parquet)
-# NOTE: do NOT ignore data/proteinbase/ — that lives in Git LFS and ships
-# with the repo. Only true scratch/derived dirs go here.
+# NOTE: do NOT ignore data/structures/, data/metrics/, data/sensorgrams/,
+# data/images/ — those live in Git LFS and ship with the repo. Only true
+# scratch/derived dirs go here.
 data/folding/
-data/structures/
 data/_cache/
 
 # Scratch CIFs from local re-folding runs — never commit these.
@@ -55,3 +55,34 @@ data/_cache/
 # Local tooling / scratch (not committed)
 .tools/
 .firecrawl/
+
+# Internal Adaptyv-only docs (URLs, Doppler paths, internal endpoint names).
+# Lives outside the public release; the scripts read everything from env vars.
+docs/INTERNAL.md
+.env.adaptyv
+
+# Runtime logs from background poll / rerun loops — never source.
+.poll.log
+.proteintyper.log
+
+# Derivative intermediates of designs.csv. Every scalar in these files now
+# lives on designs.csv (wide format). The PAE matrices under
+# data/metrics/pae/ stay tracked — they're residue × residue payloads,
+# not scalar.
+data/grand_metrics.csv
+data/metrics/proteintyper/
+data/metrics/boltz2/
+data/metrics/protenix/
+data/metrics/chai/
+data/metrics/af2m/
+data/metrics/esm_pll/
+data/metrics/netsolp/
+data/metrics/saprot/
+data/metrics/prodigy_boltz2/
+data/metrics/prodigy_protenix/
+data/metrics/prodigy_chai/
+data/metrics/prodigy_af2m/
+data/metrics/destress_boltz2/
+data/metrics/destress_protenix/
+data/metrics/destress_chai/
+data/metrics/destress_af2m/

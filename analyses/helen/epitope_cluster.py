@@ -11,7 +11,7 @@ The TREM2 chain (A) is NOT numbered identically across designs (8 of the
 common reference sequence (the modal TREM2 chain) by pairwise alignment
 before indexing — never by raw author residue number.
 
-Inputs : data/proteinbase/boltz2/design_NNN.cif
+Inputs : data/structures/boltz2/design_NNN.cif
 Output : analyses/helen/epitope_cache.npz
     design_id   : (N,) int
     footprints  : (N, R) bool   — contacted, indexed on the reference TREM2
@@ -32,7 +32,7 @@ from Bio import Align
 from scripts.utils import load_designs, repo_root
 
 ROOT = repo_root()
-CIF_DIR = ROOT / "data" / "proteinbase" / "boltz2"
+CIF_DIR = ROOT / "data" / "structures" / "boltz2"
 CACHE = ROOT / "analyses" / "helen" / "epitope_cache.npz"
 CONTACT_A = 5.0  # angstrom, heavy-atom
 

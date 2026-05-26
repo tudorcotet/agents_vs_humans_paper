@@ -2,7 +2,7 @@
 All-vs-all structural clustering of the 100 screened binders via Foldseek
 TM-score.
 
-Inputs : data/proteinbase/esmfold/design_NNN.cif (single-chain binder folds)
+Inputs : data/structures/esmfold/design_NNN.cif (single-chain binder folds)
 Binary : .tools/foldseek/bin/foldseek (local static binary)
 Output : analyses/helen/foldseek_cache.npz
     design_id : (N,) int       — order of the TM matrix
@@ -26,7 +26,7 @@ import numpy as np
 from scripts.utils import repo_root
 
 ROOT = repo_root()
-ESM_DIR = ROOT / "data" / "proteinbase" / "esmfold"
+ESM_DIR = ROOT / "data" / "structures" / "esmfold"
 FOLDSEEK = ROOT / ".tools" / "foldseek" / "bin" / "foldseek"
 CACHE = ROOT / "analyses" / "helen" / "foldseek_cache.npz"
 
