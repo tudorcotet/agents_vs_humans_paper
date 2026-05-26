@@ -1,9 +1,11 @@
 name: Paper build + release
 
-# On every push to main, build paper/paper.pdf from the committed markdown
-# sections + SVG figures and ship it two ways: a workflow artifact (transient)
-# and a GitHub release asset (durable, public download URL). Single-paper repo,
-# so no change-detection/matrix — just one linear build.
+# Build paper/paper.pdf from the committed markdown sections + SVG figures.
+# On push to main (and manual dispatch) the PDF is shipped two ways: a workflow
+# artifact (transient) and a GitHub release asset (durable, public download
+# URL). On pull requests the build still runs and uploads the artifact, but the
+# release/tag steps are skipped — so a PR can verify the build without cutting a
+# release. Single-paper repo, so no change-detection/matrix — one linear build.
 #
 # Local equivalent: `mise run paper:build` (see mise.toml). Design notes live
 # in PAPER_BUILD_CI_PLAN.md.
@@ -11,7 +13,10 @@ name: Paper build + release
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   # Manual re-emit, e.g. after a transient CI failure on an unchanged SHA.
+  # Note: only available once this file is on the default branch.
   workflow_dispatch:
 
 permissions:
@@ -109,6 +114,8 @@ jobs:
           if-no-files-found: error
 
       - name: Create / update GitHub release
+        # Skip on pull requests — PRs verify the build + artifact only, no release.
+        if: github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.stage.outputs.tag }}
