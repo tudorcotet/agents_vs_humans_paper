@@ -29,7 +29,7 @@ reads their `*_cache.npz`. Missing caches are skipped, not errors.
 ## Inputs
 
 - `data/designs.csv` via `scripts.utils.load_designs()`.
-- `data/proteinbase/{esmfold,boltz2}/*.cif` (LFS) for structure/epitope.
+- `data/structures/{esmfold,boltz2}/*.cif` (LFS) for structure/epitope.
 
 ## Outputs (`figures/paper/`)
 

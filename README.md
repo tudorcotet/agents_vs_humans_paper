@@ -2,7 +2,7 @@
 
 On Feb 28 2026, sixteen teams spent a single day in San Francisco designing
 binders against **TREM2**. Ten of those teams were humans. Six were
-autonomous AI agents running on bioArena with no human in the loop.
+autonomous AI agents running on muni with no human in the loop.
 
 141 designs landed. Top 100 by Boltz-2 ipSAE went to the wet lab (BLI).
 The result: **37 binders, 11 non-expressing, 52 non-binders**. This repo
@@ -39,7 +39,7 @@ git lfs pull        # ~162 MB
 
 Without `git lfs pull`, every binary path resolves to a ~130-byte
 pointer stub and the analyses will fail to read them. See
-[`data/proteinbase/README.md`](data/proteinbase/README.md#git-lfs)
+[`data/README.md`](data/README.md) and [`.gitattributes`](.gitattributes)
 for the full list of tracked patterns.
 
 ## Quick start
@@ -70,8 +70,15 @@ agents_vs_humans_paper/
 │   ├── target/              TREM2 ectodomain construct (Acro TR2-H52H5, 175 aa)
 │   ├── controls/            AL002 / VHB937 reference binders
 │   ├── raw_lab/             per-design (100) and per-replicate (215) BLI tables
-│   └── proteinbase/         ProteinBase mirror: 100 CIFs + 100 CIFs + 100 PAEs
-│                            + 99 PNGs + 215 sensorgrams (~161 MB, screened only)
+│   ├── structures/          one subfolder per model
+│   │   ├── boltz2/          100 × Boltz-2 complex CIFs (ProteinBase mirror)
+│   │   ├── esmfold/         100 × ESMFold binder CIFs (ProteinBase mirror)
+│   │   └── proteintyper/    ≤41 × ESMFold binder CIFs (local rerun, fills the gap)
+│   ├── metrics/             per-model raw scalars and matrices
+│   │   ├── pae/             100 × Boltz-2 PAE matrices (residue × residue, Å)
+│   │   └── proteintyper/    ≤41 × full `TyperJobOutput` JSON (design_class, novelty, …)
+│   ├── images/              99 + ≤41 × stylised ESMFold renders (PNG)
+│   └── sensorgrams/         215 × kinetic-curve traces (193 SPR + 22 BLI)
 ├── docs/                    everything you need to collaborate
 │   ├── DATA.md              every column of designs.csv
 │   ├── ANALYSES.md          how to plug yours in
@@ -136,15 +143,19 @@ in [`docs/ANALYSES.md`](docs/ANALYSES.md). Style guide in
   match closely but not exactly (max |Δ ipSAE| = 0.18). Pick one,
   document which.
 - **ProteinBase enrichment is screened-only.** The 42 `pb_*` columns and
-  every artifact under `data/proteinbase/` cover the 100 designs that
-  made the wet lab. The 41 non-screened designs are null across `pb_*`.
-  Filter on `pb_id.notna()` or `submitted_to_lab=True`.
+  the Boltz-2 + ESMFold structures under `data/structures/{boltz2,esmfold}/`
+  cover the 100 designs that made the wet lab. The 41 non-screened
+  designs are filled in by a local ProteinTyper rerun
+  (`data/structures/proteintyper/`, `data/metrics/proteintyper/`) — they
+  still have null `pb_*` scalar columns and no PAE / Boltz-2 complex
+  prediction. Filter on `pb_id.notna()` or `submitted_to_lab=True` if you
+  need the ProteinBase scalar enrichment.
 
 ## Citation
 
 ```bibtex
 @dataset{agents_vs_humans_trem2_2026,
-  author    = {{Adaptyv Bio} and {bioArena}},
+  author    = {{Adaptyv Bio} and {muni}},
   title     = {Agents vs humans on TREM2: a one-day binder design hackathon},
   year      = {2026},
   publisher = {Zenodo},

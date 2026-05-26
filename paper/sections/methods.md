@@ -22,7 +22,7 @@ sequence at `data/target/trem2_construct.fasta`.)
 ## Hackathon cohort design
 
 TBD. (10 human teams = 81 designs; 6 agent teams = 60 designs; 141 total.
-The agent teams were end-to-end autonomous on the bioArena platform with
+The agent teams were end-to-end autonomous on the muni platform with
 tool access — they are not raw language models emitting sequences.)
 
 ## In-silico selection

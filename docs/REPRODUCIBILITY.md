@@ -19,7 +19,7 @@ make analysis-all
 Regenerating `data/designs.csv` itself involves:
 
 1. **Pool raw submissions.** 16 team CSVs → 141 rows, written by the
-   bioArena hackathon organisers. Raw submission CSVs aren't part of
+   muni hackathon organisers. Raw submission CSVs aren't part of
    the public release.
 2. **Folding pipeline.** 141 sequences × 4 models (Boltz-2, AF3, Chai-1
    proxy, ESMFold). ~9 GPU-hours per pass. Outputs ~3 GB of PDB files.
@@ -76,35 +76,39 @@ If diffs appear, the likely culprits:
 ## Data lineage
 
 ```
-upstream pipeline (held back)              ProteinBase public mirror
-        │                                          │
-        ▼                                          ▼
-data/designs.csv + designs.parquet     data/proteinbase/{boltz2,esmfold,pae,
-   ⭐ source of truth (shipped)                    images,sensorgrams}/
-   141 × 123, 42 pb_* cols                100 CIFs + 100 CIFs + 100 PAEs +
-        │                                  99 PNGs + 215 sensorgrams (~161 MB)
-        │                                          │
-        └────────────────┬─────────────────────────┘
-                         │ joined via pb_* path columns
-                         ▼
-            scripts.utils.load_designs()
-                         │
-                         ▼
-            analyses/*/main.py  →  report.md + summary.json
-                         │
-                         ▼
-            figures/paper/*.{png,pdf,svg}   +   figures/blog/*.html (hand-authored)
-                         │
-                         ▼
-            paper/main.tex
+upstream pipeline (held back)              ProteinBase public mirror      ProteinTyper rerun (local)
+        │                                          │                              │
+        ▼                                          ▼                              ▼
+data/designs.csv + designs.parquet      data/structures/{boltz2,esmfold}/   data/structures/proteintyper/
+   ⭐ source of truth (shipped)          data/metrics/pae/                   data/metrics/proteintyper/
+   141 × 123, 42 pb_* cols              data/images/  data/sensorgrams/     data/images/  (≤41 designs)
+        │                                100 CIFs + 100 CIFs + 100 PAEs +    ESMFold CIFs + Typer JSON for
+        │                                 99 PNGs + 215 sensorgrams           the 41 non-screened designs
+        └────────────────────────────────────┬─────────────────────────────────────┘
+                                             │ joined via pb_* path columns
+                                             ▼
+                                scripts.utils.load_designs()
+                                             │
+                                             ▼
+                                analyses/*/main.py  →  report.md + summary.json
+                                             │
+                                             ▼
+                                figures/paper/*.{png,pdf,svg}   +   figures/blog/*.html (hand-authored)
+                                             │
+                                             ▼
+                                paper/main.tex
 ```
 
-The two top-of-pipe sources are independent: `data/designs.csv` is built
-by the bioArena / Adaptyv joint pipeline; `data/proteinbase/` is mirrored
-from `https://proteinbase-pub.t3.storage.dev/` (the same blobs that back
-[proteinbase.bio](https://proteinbase.bio)). The CSV references the
-mirror via the `pb_*` path columns — keep both in sync if you regenerate
-one.
+The three top-of-pipe sources are independent: `data/designs.csv` is
+built by the muni / Adaptyv joint pipeline; the ProteinBase mirror
+under `data/structures/{boltz2,esmfold}/`, `data/metrics/pae/`,
+`data/images/`, and `data/sensorgrams/` is pulled from
+`https://proteinbase-pub.t3.storage.dev/` (the same blobs that back
+[proteinbase.bio](https://proteinbase.bio)); the ProteinTyper rerun fills
+in the 41 non-screened designs by calling a ProteinTyper-compatible HTTP
+endpoint (URLs + token come from env vars, see
+`scripts/folding/run_proteintyper.py`). The CSV references all three
+via the `pb_*` path columns — keep them in sync if you regenerate one.
 
 ## What's shipped vs held back
 
@@ -115,11 +119,13 @@ one.
 | `data/raw_lab/bli_*.csv`                   | ✅ per-design (100) + per-replicate (215) |
 | `data/target/*.fasta`                      | ✅ Acro TR2-H52H5, 175 aa |
 | `data/controls/*.fasta`                    | ✅ AL002 / VHB937 placeholders (patent extract pending) |
-| `data/proteinbase/boltz2/*.cif`            | ✅ 100 Boltz-2 complex CIFs (14 MB) — re-fold |
-| `data/proteinbase/esmfold/*.cif`           | ✅ 100 ESMFold binder CIFs (5 MB) |
-| `data/proteinbase/pae/*.json`              | ✅ 100 PAE matrices (88 MB) |
-| `data/proteinbase/images/*.png`            | ✅ 99 stylised renders (27 MB) |
-| `data/proteinbase/sensorgrams/*.json`      | ✅ 215 kinetic-curve traces (193 SPR + 22 BLI, 27 MB) |
+| `data/structures/boltz2/*.cif`             | ✅ 100 Boltz-2 complex CIFs (14 MB) — re-fold |
+| `data/structures/esmfold/*.cif`            | ✅ 100 ESMFold binder CIFs (5 MB) |
+| `data/structures/proteintyper/*.cif`       | ✅ ≤41 ESMFold binder CIFs from the rerun |
+| `data/metrics/pae/*.json`                  | ✅ 100 PAE matrices (88 MB) |
+| `data/metrics/proteintyper/*.json`         | ✅ ≤41 `TyperJobOutput` JSONs from the rerun |
+| `data/images/*.png`                        | ✅ 99 + ≤41 stylised renders |
+| `data/sensorgrams/*.json`                  | ✅ 215 kinetic-curve traces (193 SPR + 22 BLI, 27 MB) |
 | `figures/blog/*.html`                      | ✅ 7 hand-authored blog figures |
 | AF3 / Chai-1 folds                         | ❌ only Boltz-2 + ESMFold are mirrored |
 | Per-residue scores (pLDDT/ipSAE per-res)   | ❌ recompute from shipped CIFs / PAEs |

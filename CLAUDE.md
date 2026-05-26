@@ -87,7 +87,7 @@ number must split by `is_human`.
   the bare IgSF domain.
 - **Positive controls:** AL002 (Alector, failed Phase 2 in 2024) and
   VHB937 (Novartis, ongoing Phase 2). Sanity check, not a "must beat" bar.
-- **"Agent"** means end-to-end autonomous on the bioArena platform with
+- **"Agent"** means end-to-end autonomous on the muni platform with
   tool access (Boltz, ipSAE, …), **not** "raw LM samples sequences."
   Don't elide.
 - **The 6 agent teams:** claude-sonnet-4.6, qwen-3.5-plus,

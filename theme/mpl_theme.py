@@ -1,6 +1,6 @@
 # pyright: reportMissingTypeStubs=false
 """
-Adaptyv matplotlib theme — bioarena-trem2 (May 2026).
+Adaptyv matplotlib theme — TREM2 manuscript (May 2026).
 
 This is the canonical Python plotting style for this repo. Palettes are
 loaded from `theme/palettes.json` so figures stay 1:1 aligned with the
@@ -234,7 +234,7 @@ def set_adaptyv_style(*, dark: bool = False) -> None:
     })
 
 
-# Backwards-compatible alias used by older scripts ported from egfr2024.
+# Backwards-compatible alias for older matplotlib theme naming conventions.
 set_adaptyv_matplotlib_theme = set_adaptyv_style
 
 

@@ -1,5 +1,5 @@
 """
-Sequence diversity analysis for the bioArena x Adaptyv TREM2 hackathon.
+Sequence diversity analysis for the muni x Adaptyv TREM2 hackathon.
 
 Outputs:
 - data/processed/within_team_identity.csv         (per-team pairwise identity)
