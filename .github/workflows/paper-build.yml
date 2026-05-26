@@ -1,0 +1,129 @@
+name: Paper build + release
+
+# Build paper/paper.pdf from the committed markdown sections + SVG figures.
+# On push to main (and manual dispatch) the PDF is shipped two ways: a workflow
+# artifact (transient) and a GitHub release asset (durable, public download
+# URL). On pull requests the build still runs and uploads the artifact, but the
+# release/tag steps are skipped — so a PR can verify the build without cutting a
+# release. Single-paper repo, so no change-detection/matrix — one linear build.
+#
+# Local equivalent: `mise run paper:build` (see mise.toml). Design notes live
+# in PAPER_BUILD_CI_PLAN.md.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # Manual re-emit, e.g. after a transient CI failure on an unchanged SHA.
+  # Note: only available once this file is on the default branch.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # scoped here: tag + release creation
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The build needs no Git LFS blobs — figures/paper/*.svg are plain
+          # git; data/** (LFS) is never read. Skipping LFS keeps checkout fast.
+          lfs: false
+
+      - name: Set up mise
+        uses: jdx/mise-action@v2
+        with:
+          install: true
+          cache: true
+
+      - name: Install pandoc + librsvg (markdown->tex, svg->pdf)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends pandoc librsvg2-bin
+
+      - name: Set up TeX Live (latexmk + the packages main.tex loads)
+        # zauguin/install-texlive is the maintained replacement for the
+        # marketplace-deprecated, enterprise-blocked teatimeguest action.
+        # It caches ~/texlive so warm runs are fast.
+        uses: zauguin/install-texlive@v4
+        with:
+          packages: >
+            scheme-basic
+            latexmk
+            latex-bin
+            collection-fontsrecommended
+            collection-latexrecommended
+            collection-mathscience
+            microtype
+            geometry
+            booktabs
+            siunitx
+            translations
+            xcolor
+            caption
+            hyperref
+            natbib
+            preprint
+            graphics
+            cm-super
+
+      - name: Build paper.pdf
+        run: mise run paper:build
+
+      - name: Stage release assets
+        id: stage
+        run: |
+          set -euo pipefail
+          [[ -f paper/paper.pdf ]] || { echo "::error::paper/paper.pdf was not produced"; exit 1; }
+
+          out_dir="$RUNNER_TEMP/release"
+          mkdir -p "$out_dir"
+          cp paper/paper.pdf "$out_dir/agents-vs-humans-trem2.pdf"
+
+          date_utc="$(date -u +%Y-%m-%d)"
+          short_sha="$(git rev-parse --short=10 "${{ github.sha }}")"
+          tag="paper/${date_utc}-${short_sha}"
+
+          {
+            echo "commit    : ${{ github.sha }}"
+            echo "tag       : ${tag}"
+            echo "built_utc : $(date -u --iso-8601=seconds)"
+            echo "runner    : ${{ runner.os }} (${{ runner.arch }})"
+            echo "latexmk   : $(latexmk -v 2>/dev/null | head -1 || echo n/a)"
+            echo "pandoc    : $(pandoc --version 2>/dev/null | head -1 || echo n/a)"
+            echo "rsvg      : $(rsvg-convert --version 2>/dev/null || echo n/a)"
+          } > "$out_dir/build-info.txt"
+
+          {
+            echo "out_dir=$out_dir"
+            echo "tag=$tag"
+            echo "pdf=$out_dir/agents-vs-humans-trem2.pdf"
+            echo "info=$out_dir/build-info.txt"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          path: ${{ steps.stage.outputs.out_dir }}
+          if-no-files-found: error
+
+      - name: Create / update GitHub release
+        # Skip on pull requests — PRs verify the build + artifact only, no release.
+        if: github.event_name != 'pull_request'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.stage.outputs.tag }}
+          name: "Paper — ${{ steps.stage.outputs.tag }}"
+          body: |
+            Built from `${{ github.sha }}` on push to `main`.
+
+            See `build-info.txt` for the build environment (compiler + converter versions).
+          files: |
+            ${{ steps.stage.outputs.pdf }}
+            ${{ steps.stage.outputs.info }}
+          fail_on_unmatched_files: true
