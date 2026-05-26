@@ -8,17 +8,21 @@ across ~620 files. Binary artifacts are tracked via Git LFS — run
 
 | path | shape | size | load with |
 |---|---|---|---|
-| `data/designs.csv`              | 141 × 123    | 196 KB | `load_designs()` |
-| `data/designs.parquet`          | 141 × 123    | 128 KB | `load_designs()` (preferred, typed) |
+| `data/designs.csv`              | 141 × 356    | ~1.6 MB | `load_designs()` |
+| `data/designs.parquet`          | 141 × 356    | ~600 KB | `load_designs()` (preferred, typed) |
 | `data/designs.fasta`            | 141 records  | 24 KB  | `Bio.SeqIO.parse(..., 'fasta')` |
 | `data/raw_lab/bli_results.csv`  | 100 rows     | 24 KB  | `pd.read_csv` |
 | `data/raw_lab/bli_replicates.csv` | 215 rows   | 16 KB  | `load_replicates()` |
 | `data/target/trem2_construct.fasta` | 1 record, 175 aa | 1 KB | `Bio.SeqIO.parse(..., 'fasta')` |
 | `data/controls/known_binders.fasta` | 2 records (AL002, VHB937 placeholders) | 1 KB | `Bio.SeqIO.parse(..., 'fasta')` |
 
-The 141 × 123 canonical table includes 42 `pb_*` columns from the
-ProteinBase enrichment, populated for the 100 screened designs. See
-[`docs/DATA.md`](docs/DATA.md) for every column.
+The 141 × 356 unified canonical table includes 43 `pb_*` columns from
+the ProteinBase enrichment (100/141 coverage) plus 16 `tp_*`
+(ProteinTyper monomer), 79 columns across the four complex predictors
+(`b2_*`, `px_*`, `chai_*`, `af2m_*`), and 135 across the five scorers
+(`esm_pll_*`, `netsolp_*`, `saprot_*`, `prodigy_<model>_*`,
+`destress_<model>_*`). See [`docs/DATA.md`](docs/DATA.md) for every
+column.
 
 ## Structures, metrics, renders, sensorgrams
 
@@ -96,7 +100,7 @@ patterns are in `.gitattributes`. See [`data/README.md`](data/README.md#git-lfs)
 
 ## One-line summary
 
-`data/designs.csv` (141 × 123, 42 `pb_*` cols) joins to 100 Boltz-2
+`data/designs.csv` (141 × 356 unified table) joins to 100 Boltz-2
 CIFs + 100 ESMFold CIFs + 100 PAEs + 99 PNGs + 215 sensorgrams across
 `data/structures/{boltz2,esmfold}/`, `data/metrics/pae/`, `data/images/`,
 and `data/sensorgrams/`, plus per-design (100) and per-replicate (215)

@@ -1,12 +1,27 @@
 # `data/designs.csv` — the canonical table
 
-One row per submitted design. **141 rows, 123 columns.** Every analysis
+One row per submitted design. **141 rows, 356 columns.** Every analysis
 in the repo reads from here. The parquet sibling has typed columns and
 is the right thing to load in code; the CSV is the readable copy for
 spreadsheet eyes.
 
-42 of those 123 columns are `pb_*` — the ProteinBase enriched data,
-populated for the 100 screened designs only. See [§11](#11-proteinbase-enriched-data-100141--screened-only).
+The 356 columns split into ~12 conceptual groups:
+
+| group | cols | what / coverage |
+|---|---|---|
+| curated upstream metadata | 83 | identity, modality, sequence, in-silico, selection, wet-lab, KD, homology |
+| `pb_*` ProteinBase mirror | 43 | full ProteinBase scrape, 100/141 (screened only) — see [§11](#11-proteinbase-enriched-data-100141--screened-only) |
+| `tp_*` ProteinTyper monomer | 16 | unified across rerun + PB mirror, 141/141 on the 5 surviving fields |
+| `b2_*` Boltz-2 complex | 19 | our Modal rerun, 141/141 |
+| `px_*` Protenix-v2 complex | 21 | our Modal rerun, 141/141 |
+| `chai_*` Chai-1 complex | 20 | our Modal rerun, 141/141 |
+| `af2m_*` AlphaFold2-Multimer | 19 | our Modal rerun, 141/141 |
+| `esm_pll_*` sequence PLL | 4 | sequence-only, 141/141 |
+| `netsolp_*` solubility | 3 | sequence-only, 141/141 (`usability` empty — ESM2 fallback) |
+| `saprot_*` structure-aware PLL | 4 | 141/141 |
+| `prodigy_<model>_*` × 4 | 20 | binding ΔG / Kd / pKd from each predictor (`dg` null, derivable from Kd) |
+| `destress_<model>_*` × 4 | 104 | Rosetta REF15 + EvoEF2 + biophysics (BuDEff sub-panel empty) from each predictor |
+| consensus | 2 | `ipsae_pass_4folders`, `iptm_pass_4folders` |
 
 ## Load it
 

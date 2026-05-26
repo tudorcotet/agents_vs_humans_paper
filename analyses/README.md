@@ -44,7 +44,7 @@ KDs — `designs.csv` already has the canonical aggregate.
 ```python
 from scripts.utils import load_designs
 
-df = load_designs()                       # 141 × 123, every column
+df = load_designs()                       # 141 × 356, every column
 df = load_designs(only_screened=True)     # 100 designs sent to BLI
 df = load_designs(only_hits=True)         # 37 binders
 df = load_designs(only_human=True)        # 81 human-cohort designs
