@@ -7,8 +7,8 @@ columns, the RunPod regeneration, and the effect (if any) on the manuscript.
 designs, and their derived metric columns were corrupt with them. We regenerated both correctly on
 GPU (Boltz-2 with MSA; AF2-Multimer via ColabFold) and verified the fix. **The manuscript's current
 figures and the Structure & Epitope section are unaffected** — they use the clean competition/legacy
-metrics and the clean Protenix/Chai structures. The corrupt files and columns should be replaced
-before the data package is released.
+metrics and the clean Protenix/Chai structures. The corrupt files **and their derived `b2_*`/`af2m_*`
+columns have now been replaced** with the regenerated structures and recomputed values (§3.5).
 
 ---
 
@@ -36,8 +36,9 @@ files:
   files share one wrong binder have **identical** `b2_iptm` (16 rows all 0.960, 12 all 0.952, …);
   `b2_iptm` correlates with the competition metric `submitted_ipsae` at only **ρ = 0.02** and is a
   **random** binder classifier (AUROC 0.54). AF2M is the same (ρ ≈ 0.00, AUROC 0.57).
-- The two consensus columns **`ipsae_pass_4folders` / `iptm_pass_4folders`** average `b2` and `af2m`
-  in, so they are **partly corrupt**.
+- The two consensus columns **`ipsae_pass_4folders` / `iptm_pass_4folders`** *count*, across
+  {b2, px, chai, af2m}, how many have `ipsae_d0chn_max ≥ 0.4` / `iptm ≥ 0.7` — so with `b2`/`af2m`
+  corrupt they were **partly corrupt**.
 
 ### What was NOT affected (verified clean)
 - **`submitted_ipsae`** — the competition ranking metric (upstream muni pipeline).
@@ -92,6 +93,26 @@ corrupt `data/structures/{boltz2,af2m}/` in the released package.
   structure predictors** (Protenix, Chai, corrected Boltz-2) plus the EvoEF2 energetic hotspots.
   (`results/boltz2_regen_validation.md`.)
 
+## 3.5 Recomputing the derived `b2_*` / `af2m_*` columns
+
+The 19 `b2_*` and 19 `af2m_*` columns (plus the two `*_pass_4folders` consensus columns) in
+`data/designs.{csv,parquet}` were recomputed from the regenerated structures and their PAE, using the
+repo's **own** upstream scorer — `scripts/modal/modal_boltz2_avh.compute_ipsae` (`PAE_CUTOFF=15`,
+`DIST_CUTOFF=8`) imported directly, so there is **zero drift** from the code that produced the clean
+`px_*`/`chai_*` columns. Script: `jobs/recompute_scalars.py` (idempotent; run with `--apply`). Only the
+40 affected columns are touched — every other column round-trips verbatim.
+
+Validation (`jobs/recompute_scalars.py` prints all of this):
+- **iptm reproduces exactly**: recomputed `b2_iptm`/`af2m_iptm` match the independently-extracted native
+  confidence iptm to **max |Δ| = 1×10⁻¹⁶ / 0**.
+- **Agrees with the clean references** (Spearman): `b2_iptm` vs `submitted_ipsae` **0.80**, legacy
+  `boltz2_iptm` **0.83**, `px_iptm` **0.62**, `chai_iptm` **0.53**; `af2m_iptm` vs those **0.71 / 0.68 /
+  0.70 / 0.67**. Against the **old corrupt** columns ρ ≈ 0.0–0.11 (i.e. the values genuinely changed).
+- **Discriminates binders again**: AUROC 0.65 (`iptm`) / 0.66–0.73 (`ipsae_d0chn_max`); corrupt was ~0.54.
+
+The consensus counts shift accordingly (e.g. `ipsae_pass_4folders` now spans 0–4 instead of 1–4). Record
+of the recomputed values: `results/recomputed_scalars.csv`.
+
 ---
 
 ## 4. Impact on the manuscript
@@ -145,16 +166,16 @@ shared provenance or through the design selection. Both are ruled out (`jobs/pro
 - **Experimental results are structure-independent.** Expression, hit rate, and Kd come from BLI, so
   no predicted structure — corrupt or not — can affect them.
 
-The corruption is therefore fully quarantined to the `b2_*`/`af2m_*` rerun columns and their files.
+The corruption was therefore fully quarantined to the `b2_*`/`af2m_*` rerun columns and their files —
+and both the files (§2) and the columns (§3.5) have now been corrected in `data/`.
 
-**What a co-author should double-check** (small, precautionary):
-- Any table, figure, or supplementary analysis that reads **`b2_*`, `af2m_*`, `ipsae_pass_4folders`,
-  `iptm_pass_4folders`, or `data/grand_metrics.csv`** — these carry corrupt values. Re-point them at the
-  clean columns (`submitted_ipsae` / legacy `boltz2_*` / `pb_boltz2_*` / `px_*` / `chai_*`) or the
-  regenerated Boltz-2/AF2M, or drop them.
-- The **Data Availability** deliverable: replace the corrupt `data/structures/{boltz2,af2m}/` files
-  with the regenerated set before publishing, and **report the mapping bug upstream** to the
-  muni/Adaptyv pipeline so the source is fixed, not just this copy.
+**What a co-author should still double-check** (small, precautionary):
+- **`data/grand_metrics.csv`**, *if it is regenerated*: it is a derived wide table (not committed) built
+  by `scripts/data/build_grand_metrics.py` from the per-model JSONs. Its `b2_*`/`af2m_*`/consensus
+  columns will pick up the correction only when rebuilt from corrected per-model metric JSONs; the
+  committed source of truth `data/designs.{csv,parquet}` is already fixed.
+- **Report the mapping bug upstream** to the muni/Adaptyv Modal re-fold step so the binder→design
+  mapping is fixed at the source, not just in this copy.
 
 **Net effect on conclusions:** none. The competition ranking, the hit-rate and affinity results, and
 the structural/epitope conclusions all stand; the regeneration additionally converts a liability
@@ -170,3 +191,5 @@ the structural/epitope conclusions all stand; the regeneration additionally conv
   `infra/af2m_input.csv`; outputs in `data/structures_regen/`
 - Validation: `results/boltz2_regen_validation.md`, `results/boltz2_regen_scalars.csv`,
   `results/epitope_boltz2_regen_freq.csv`, `jobs/regen_boltz2_footprints.py`
+- Column recompute: `jobs/recompute_scalars.py` (patches `data/designs.{csv,parquet}`),
+  `results/recomputed_scalars.csv`
