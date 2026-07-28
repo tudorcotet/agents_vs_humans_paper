@@ -334,8 +334,15 @@ def predict_af2m(pb_id: str, binder_seq: str, target_seq: str) -> dict:
         target_len = len(target_seq)
         binder_len = len(binder_seq)
 
+        import shutil
+
+        # Modal reuses warm containers across .map() inputs, so /tmp survives
+        # between calls. Without the wipe, get_queries() below picks up every
+        # earlier design's fasta and zips[0] returns the wrong complex.
         in_dir = Path("/tmp/in_af")
         out_dir = Path("/tmp/out_af")
+        shutil.rmtree(in_dir, ignore_errors=True)
+        shutil.rmtree(out_dir, ignore_errors=True)
         in_dir.mkdir(parents=True, exist_ok=True)
         out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -379,6 +386,10 @@ def predict_af2m(pb_id: str, binder_seq: str, target_seq: str) -> dict:
         pdb_path = None
         native_iptm = native_ptm = native_plddt = 0.0
         plddt_array = None
+
+        # Tripwire: colabfold names each result zip after the query id.
+        if safe not in str(zips[0]):
+            raise RuntimeError(f"stale output for {pb_id}: got {zips[0]}")
 
         with zipfile.ZipFile(zips[0], "r") as zf:
             for entry in zf.namelist():

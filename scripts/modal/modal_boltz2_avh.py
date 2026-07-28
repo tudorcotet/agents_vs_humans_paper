@@ -349,8 +349,15 @@ def predict_boltz2(pb_id: str, binder_seq: str, target_seq: str) -> dict:
         target_len = len(target_seq)
         binder_len = len(binder_seq)
 
+        import shutil
+
+        # Modal reuses warm containers across .map() inputs, so /tmp survives
+        # between calls. Wipe it or the globs below pick up a previous design's
+        # output and every design after the first gets the wrong binder.
         in_dir = Path("/tmp/in_boltz")
         out_dir = Path("/tmp/out_boltz")
+        shutil.rmtree(in_dir, ignore_errors=True)
+        shutil.rmtree(out_dir, ignore_errors=True)
         in_dir.mkdir(parents=True, exist_ok=True)
         out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -394,6 +401,9 @@ def predict_boltz2(pb_id: str, binder_seq: str, target_seq: str) -> dict:
             return result
 
         cif_path = cif_files[0]
+        # Tripwire: boltz names every output dir after the input yaml stem.
+        if safe not in str(cif_path):
+            raise RuntimeError(f"stale output for {pb_id}: got {cif_path}")
         pae_data = np.load(str(npz_files[0]))
         pae_matrix = pae_data["pae"]
         if pae_matrix.ndim == 3:
