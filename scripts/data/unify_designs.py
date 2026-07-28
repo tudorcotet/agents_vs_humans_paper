@@ -15,6 +15,7 @@ analyses.
 """
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import pandas as pd
@@ -23,6 +24,18 @@ from scripts.utils import repo_root
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument(
+        "--refresh",
+        default="",
+        help=(
+            "Comma-separated column prefixes to take from grand_metrics.csv even "
+            "though designs.csv already has them (e.g. 'prodigy_boltz2_,destress_af2m_'). "
+            "Without this, existing designs.csv columns always win."
+        ),
+    )
+    args = ap.parse_args()
+
     root = repo_root()
     designs_path = root / "data" / "designs.csv"
     grand_path = root / "data" / "grand_metrics.csv"
@@ -41,7 +54,21 @@ def main() -> None:
     grand_merge = grand.drop(columns=overlap)
 
     # Anything in grand still overlapping with designs.csv (e.g. pb_*) — keep
-    # the designs.csv version, drop the grand duplicate.
+    # the designs.csv version, drop the grand duplicate. This is what protects
+    # hand-corrected columns from being clobbered by a rebuild.
+    #
+    # --refresh opts specific prefixes out of that protection: designs.csv drops
+    # its copy so grand's freshly-computed one wins, in place, keeping column
+    # order. Needed when the stale values are the ones in designs.csv — e.g. the
+    # scorer columns computed against structures that have since been replaced.
+    refresh = [p for p in (args.refresh or "").split(",") if p]
+    original_order = list(designs.columns)
+    if refresh:
+        stale = [c for c in designs.columns
+                 if c != "design_id" and c.startswith(tuple(refresh)) and c in grand_merge.columns]
+        print(f"refreshing from grand_metrics:  {len(stale)} cols matching {refresh}")
+        designs = designs.drop(columns=stale)
+
     dup_cols = [c for c in grand_merge.columns if c in designs.columns and c != "design_id"]
     grand_merge = grand_merge.drop(columns=dup_cols)
 
@@ -52,6 +79,13 @@ def main() -> None:
     print(f"net new columns to merge:   {len(grand_merge.columns) - 1}")
 
     unified = designs.merge(grand_merge, on="design_id", how="left")
+    # A refreshed column is dropped then re-merged, which would park it at the
+    # end. Put the pre-existing columns back where they were so the diff is
+    # values-only; genuinely new columns still append.
+    unified = unified[
+        [c for c in original_order if c in unified.columns]
+        + [c for c in unified.columns if c not in original_order]
+    ]
     print(f"unified:               {unified.shape}")
 
     # Sanity: no row count drift.
