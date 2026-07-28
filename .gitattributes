@@ -38,6 +38,7 @@
 # esmfold/) live side by side, keyed by `design_NNN`.
 data/structures/boltz2/*.cif         filter=lfs diff=lfs merge=lfs -text
 data/structures/esmfold/*.cif        filter=lfs diff=lfs merge=lfs -text
+data/structures/esmfold2/*.cif       filter=lfs diff=lfs merge=lfs -text
 data/structures/proteintyper/*.cif   filter=lfs diff=lfs merge=lfs -text
 data/structures/protenix/*.cif       filter=lfs diff=lfs merge=lfs -text
 data/structures/chai/*.cif           filter=lfs diff=lfs merge=lfs -text
@@ -50,6 +51,7 @@ data/metrics/protenix/*.json         filter=lfs diff=lfs merge=lfs -text
 data/metrics/boltz2/*.json           filter=lfs diff=lfs merge=lfs -text
 data/metrics/chai/*.json             filter=lfs diff=lfs merge=lfs -text
 data/metrics/af2m/*.json             filter=lfs diff=lfs merge=lfs -text
+data/metrics/esmfold2/*.json         filter=lfs diff=lfs merge=lfs -text
 
 # Renders + kinetic traces — kept OUTSIDE structures/ because they are not
 # model outputs.

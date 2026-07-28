@@ -109,9 +109,11 @@ run = "uv run python scripts/folding/run_proteintyper.py"
 
 # ---------------------------------------------------------------------------
 # Complex re-scoring vs TREM2 — Modal-detached. Standard multi-model panel
-# (Boltz-2, Protenix-v2, Chai-1, AF2-Multimer), pinned to TREM2.
+# (Boltz-2, Protenix-v2, Chai-1, AF2-Multimer, ESMFold2), pinned to TREM2.
 #
-# `rerun:complex` fires all three predictors on the 141 designs. Each model
+# `rerun:complex` fires all five predictors on the 141 designs — except
+# ESMFold2, which keys on pb_id and so covers the 100 screened designs only
+# (see docs/DATA.md § ESMFold2 coverage). Each model
 # runs as its own Modal app under scripts/modal/, detached by default so the
 # job survives client disconnects.
 #
@@ -132,7 +134,7 @@ run = "uv run python scripts/folding/run_proteintyper.py"
 # ---------------------------------------------------------------------------
 
 [tasks."rerun:complex"]
-description = "Re-score all 141 designs vs TREM2 with Boltz-2 + Protenix-v2 + Chai-1 + AF2-M (Modal --detach)"
+description = "Re-score all 141 designs vs TREM2 with Boltz-2 + Protenix-v2 + Chai-1 + AF2-M + ESMFold2 (Modal --detach)"
 run = "uv run python scripts/data/run_complex.py"
 
 [tasks."rerun:boltz2"]
@@ -150,6 +152,10 @@ run = "uv run python scripts/data/run_complex.py --models chai"
 [tasks."rerun:af2m"]
 description = "Just the AF2-Multimer (ColabFold) branch of rerun:complex"
 run = "uv run python scripts/data/run_complex.py --models af2m"
+
+[tasks."rerun:esmfold2"]
+description = "Just the ESMFold2 branch of rerun:complex (100/141 — screened designs only)"
+run = "uv run python scripts/data/run_complex.py --models esmfold2"
 
 # ---------------------------------------------------------------------------
 # Post-folding scorers (Modal --detach). Run AFTER `rerun:complex` so the
@@ -174,7 +180,7 @@ description = "SaProt structure-aware PLL on every binder (uses ESMFold / Protei
 run = "uv run python scripts/data/run_complex.py --scorers saprot"
 
 [tasks."rerun:prodigy"]
-description = "PRODIGY ΔG/Kd on every complex × every predictor (boltz2/protenix/chai/af2m; Modal --detach)"
+description = "PRODIGY ΔG/Kd on every complex × every predictor (boltz2/protenix/chai/af2m/esmfold2; Modal --detach)"
 run = "uv run python scripts/data/run_complex.py --scorers prodigy"
 
 [tasks."rerun:destress"]

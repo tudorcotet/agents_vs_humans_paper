@@ -8,7 +8,7 @@
 """DE-STRESS structural-stability metrics on pre-computed TREM2 complex structures.
 
 Reads complex structures persisted on the Modal Volume by the complex
-predictors (``structures/{boltz2,protenix,chai,af2m}/<slug>.{cif,pdb}``) and
+predictors (``structures/{boltz2,protenix,chai,af2m,esmfold2}/<slug>.{cif,pdb}``) and
 runs the Wells-Wood DE-STRESS panel:
 
   * PyRosetta REF15 energies (per-residue)
@@ -45,7 +45,7 @@ import modal
 TIMEOUT_MIN = int(os.environ.get("TIMEOUT", 30))
 CONCURRENCY = int(os.environ.get("CONCURRENCY", 10))
 
-ALL_PREDICTORS = ("boltz2", "protenix", "chai", "af2m")
+ALL_PREDICTORS = ("boltz2", "protenix", "chai", "af2m", "esmfold2")
 
 
 # ---------------------------------------------------------------------------
@@ -102,7 +102,7 @@ RESULTS_DIR = f"/{RESULTS_VOLUME_NAME}"
     max_containers=CONCURRENCY,
     volumes={RESULTS_DIR: RESULTS_VOLUME},
 )
-def score_destress(predictor: str, slug: str) -> dict:
+def score_destress(predictor: str, slug: str, force: bool = False) -> dict:
     """Compute Rosetta, EvoEF2, BuDEff, and biophysical metrics for one structure."""
     import shutil
     import subprocess
@@ -112,7 +112,7 @@ def score_destress(predictor: str, slug: str) -> dict:
 
     result_subdir = f"destress_{predictor}"
     result_path = Path(RESULTS_DIR) / result_subdir / f"{slug}.json"
-    if result_path.exists():
+    if result_path.exists() and not force:
         try:
             cached = json.loads(result_path.read_text())
             if cached.get("status") == "ok":
@@ -364,7 +364,7 @@ orchestrator_image = modal.Image.debian_slim(python_version="3.11").pip_install(
     timeout=24 * 3600,
     volumes={RESULTS_DIR: RESULTS_VOLUME},
 )
-def run_batch(predictors: list[str], slugs: list[str]) -> None:
+def run_batch(predictors: list[str], slugs: list[str], force: bool = False) -> None:
     import pandas as pd
 
     RESULTS_VOLUME.reload()
@@ -391,7 +391,9 @@ def run_batch(predictors: list[str], slugs: list[str]) -> None:
                     if data.get("status") == "ok":
                         completed.add(data["slug"])
 
-        pending = [s for s in available if s not in completed]
+    # --force re-scores everything, overwriting in place. Needed when the
+    # cached results were computed against structures since replaced.
+        pending = [s for s in available if force or s not in completed]
         print(f"  {len(completed)} done, {len(pending)} pending")
         if not pending:
             continue
@@ -400,6 +402,7 @@ def run_batch(predictors: list[str], slugs: list[str]) -> None:
             score_destress.map(
                 [predictor] * len(pending),
                 pending,
+                [force] * len(pending),
                 return_exceptions=True,
                 wrap_returned_exceptions=False,
             ),
@@ -432,6 +435,7 @@ def main(
     limit: int | None = None,
     download: bool = False,
     retry_failed: bool = False,
+    force: bool = False,
 ) -> None:
     """Trigger DE-STRESS scoring on persisted complexes, or pull results to disk."""
     import pandas as pd
@@ -456,7 +460,7 @@ def main(
 
     slugs = [f"design_{int(d):03d}" for d in df["design_id"].tolist()]
     print(f"Triggering DE-STRESS batch: {len(slugs)} slugs across predictors={pred_list}")
-    run_batch.remote(pred_list, slugs)
+    run_batch.remote(pred_list, slugs, force)
     print("Done. Pull results with `--download`.")
 
 
