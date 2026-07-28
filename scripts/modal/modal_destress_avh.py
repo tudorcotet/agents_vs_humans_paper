@@ -8,7 +8,7 @@
 """DE-STRESS structural-stability metrics on pre-computed TREM2 complex structures.
 
 Reads complex structures persisted on the Modal Volume by the complex
-predictors (``structures/{boltz2,protenix,chai,af2m}/<slug>.{cif,pdb}``) and
+predictors (``structures/{boltz2,protenix,chai,af2m,esmfold2}/<slug>.{cif,pdb}``) and
 runs the Wells-Wood DE-STRESS panel:
 
   * PyRosetta REF15 energies (per-residue)
@@ -45,7 +45,7 @@ import modal
 TIMEOUT_MIN = int(os.environ.get("TIMEOUT", 30))
 CONCURRENCY = int(os.environ.get("CONCURRENCY", 10))
 
-ALL_PREDICTORS = ("boltz2", "protenix", "chai", "af2m")
+ALL_PREDICTORS = ("boltz2", "protenix", "chai", "af2m", "esmfold2")
 
 
 # ---------------------------------------------------------------------------

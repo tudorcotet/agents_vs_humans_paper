@@ -8,7 +8,7 @@
 """PRODIGY binding-affinity scoring on pre-computed TREM2 complex structures.
 
 Reads complex structures persisted on the Modal Volume by the complex
-predictors (``structures/{boltz2,protenix,chai,af2m}/<slug>.{cif,pdb}``) and
+predictors (``structures/{boltz2,protenix,chai,af2m,esmfold2}/<slug>.{cif,pdb}``) and
 runs PRODIGY's contact-based ΔG / Kd / pKd predictor on each.
 
 Per-model outputs land on the volume:
@@ -56,7 +56,7 @@ RESULTS_VOLUME_NAME = os.environ.get("MODAL_RESULTS_VOLUME", "avh-rerun-results"
 RESULTS_VOLUME = modal.Volume.from_name(RESULTS_VOLUME_NAME, create_if_missing=True)
 RESULTS_DIR = f"/{RESULTS_VOLUME_NAME}"
 
-ALL_PREDICTORS = ("boltz2", "protenix", "chai", "af2m")
+ALL_PREDICTORS = ("boltz2", "protenix", "chai", "af2m", "esmfold2")
 
 
 # ---------------------------------------------------------------------------

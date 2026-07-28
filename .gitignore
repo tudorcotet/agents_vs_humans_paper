@@ -91,6 +91,7 @@ data/metrics/boltz2/
 data/metrics/protenix/
 data/metrics/chai/
 data/metrics/af2m/
+data/metrics/esmfold2/
 data/metrics/esm_pll/
 data/metrics/netsolp/
 data/metrics/saprot/
@@ -98,7 +99,9 @@ data/metrics/prodigy_boltz2/
 data/metrics/prodigy_protenix/
 data/metrics/prodigy_chai/
 data/metrics/prodigy_af2m/
+data/metrics/prodigy_esmfold2/
 data/metrics/destress_boltz2/
 data/metrics/destress_protenix/
 data/metrics/destress_chai/
 data/metrics/destress_af2m/
+data/metrics/destress_esmfold2/

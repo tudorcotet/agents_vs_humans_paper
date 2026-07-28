@@ -57,13 +57,16 @@ import sys
 
 from scripts.utils.load_data import repo_root
 
-MODELS = ("boltz2", "protenix", "chai", "af2m")
+MODELS = ("boltz2", "protenix", "chai", "af2m", "esmfold2")
 
 MODAL_SCRIPTS: dict[str, str] = {
     "boltz2": "scripts/modal/modal_boltz2_avh.py",
     "protenix": "scripts/modal/modal_protenix_avh.py",
     "chai": "scripts/modal/modal_chai1_avh.py",
     "af2m": "scripts/modal/modal_af2m_avh.py",
+    # ESMFold2 keys its inputs on pb_id, so it covers the 100 screened designs
+    # only — the other four are 141/141. See docs/DATA.md § ESMFold2 coverage.
+    "esmfold2": "scripts/modal/modal_esmfold2_avh.py",
 }
 
 # Sequence-only or structure-consuming scorers. Run after the complex

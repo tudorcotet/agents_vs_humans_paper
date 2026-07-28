@@ -60,20 +60,28 @@ from scripts.utils.load_data import repo_root
 # `proteintyper` produces its own folder but those columns are already on
 # designs.csv via build_designs.py — we re-export them with `tp_` here so
 # `grand_metrics.csv` is fully self-contained.
-COMPLEX_MODELS: tuple[str, ...] = ("boltz2", "protenix", "chai", "af2m")
+# The four complex folders the ipSAE/iPTM consensus columns are defined over.
+# Kept fixed so `*_pass_4folders` keeps its documented meaning even after we add
+# ESMFold2 to the per-model column set below.
+CONSENSUS_MODELS: tuple[str, ...] = ("boltz2", "protenix", "chai", "af2m")
+# All complex folders we emit `<prefix>_*` columns for. ESMFold2 gets the same
+# panel but is intentionally NOT part of CONSENSUS_MODELS above.
+COMPLEX_MODELS: tuple[str, ...] = (*CONSENSUS_MODELS, "esmfold2")
 PREFIX: dict[str, str] = {
     "boltz2": "b2",
     "protenix": "px",
     "chai": "chai",
     "af2m": "af2m",
+    "esmfold2": "ef2",
     "proteintyper": "tp",
 }
-# AF2-M writes PDB; the other three write CIF.
+# AF2-M writes PDB; the others (incl. ESMFold2) write CIF.
 STRUCTURE_EXT: dict[str, str] = {
     "boltz2": "cif",
     "protenix": "cif",
     "chai": "cif",
     "af2m": "pdb",
+    "esmfold2": "cif",
 }
 
 # Fields we lift off the typer monomer panel onto the grand row. These are
@@ -124,6 +132,7 @@ EXTRA_FIELDS: dict[str, tuple[str, ...]] = {
     "protenix": ("ranking_score", "model_name"),
     "chai": ("aggregate_score",),
     "af2m": (),
+    "esmfold2": (),
 }
 
 # ---------------------------------------------------------------------------
@@ -355,9 +364,9 @@ def _collect_per_model_scorer(slug: str, scorer: str, model: str) -> dict[str, A
 def _add_consensus(df: pd.DataFrame) -> pd.DataFrame:
     """Cross-folder consensus columns: soft thresholds (ipSAE >= 0.4, iPTM >= 0.7)
     counted across every complex model we re-ran (boltz2, protenix, chai, af2m)."""
-    n = len(COMPLEX_MODELS)
-    ipsae_cols = [f"{PREFIX[m]}_ipsae_d0chn_max" for m in COMPLEX_MODELS]
-    iptm_cols = [f"{PREFIX[m]}_iptm" for m in COMPLEX_MODELS]
+    n = len(CONSENSUS_MODELS)
+    ipsae_cols = [f"{PREFIX[m]}_ipsae_d0chn_max" for m in CONSENSUS_MODELS]
+    iptm_cols = [f"{PREFIX[m]}_iptm" for m in CONSENSUS_MODELS]
     for c in ipsae_cols + iptm_cols:
         if c not in df.columns:
             df[c] = pd.NA
@@ -415,7 +424,10 @@ def main(argv: list[str] | None = None) -> None:
     pb_cols = [c for c in designs.columns
                if c.startswith("pb_") and c not in pb_path_cols]
 
-    keep = meta + pb_cols
+    # dict.fromkeys dedupes while preserving order: `pb_id` is in both meta and
+    # pb_cols, and a duplicate header here makes unify_designs.py graft a stray
+    # `pb_id.N` onto designs.csv on every run.
+    keep = list(dict.fromkeys(meta + pb_cols))
     df = df.merge(designs[keep], on="design_id", how="left", suffixes=("", "_dup"))
     # Drop any *_dup columns that arise when meta names collide (e.g. pb_id).
     df = df.drop(columns=[c for c in df.columns if c.endswith("_dup")])
@@ -430,7 +442,7 @@ def main(argv: list[str] | None = None) -> None:
     df.to_csv(out_path, index=False)
 
     by_model = {m: int((df[f"{PREFIX[m]}_status"] == "ok").sum()) for m in COMPLEX_MODELS}
-    n = len(COMPLEX_MODELS)
+    n = len(CONSENSUS_MODELS)  # consensus columns are named *_pass_{n}folders over the 4 consensus folders
     half = (n + 1) // 2
     by_sequence_scorer = {
         s: int((df[f"{s}_status"] == "ok").sum())

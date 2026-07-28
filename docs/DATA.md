@@ -16,11 +16,12 @@ The 356 columns split into ~12 conceptual groups:
 | `px_*` Protenix-v2 complex | 21 | our Modal rerun, 141/141 |
 | `chai_*` Chai-1 complex | 20 | our Modal rerun, 141/141 |
 | `af2m_*` AlphaFold2-Multimer | 19 | our Modal rerun, 141/141 |
+| `ef2_*` ESMFold2 complex | 19 | our Modal rerun, **100/141** — see [§ESMFold2 coverage](#esmfold2-coverage) |
 | `esm_pll_*` sequence PLL | 4 | sequence-only, 141/141 |
 | `netsolp_*` solubility | 3 | sequence-only, 141/141 (`usability` empty — ESM2 fallback) |
 | `saprot_*` structure-aware PLL | 4 | 141/141 |
-| `prodigy_<model>_*` × 4 | 20 | binding ΔG / Kd / pKd from each predictor (`dg` null, derivable from Kd) |
-| `destress_<model>_*` × 4 | 104 | Rosetta REF15 + EvoEF2 + biophysics (BuDEff sub-panel empty) from each predictor |
+| `prodigy_<model>_*` × 5 | 25 | binding ΔG / Kd / pKd from each predictor (`dg` null, derivable from Kd) |
+| `destress_<model>_*` × 5 | 130 | Rosetta REF15 + EvoEF2 + biophysics (BuDEff sub-panel empty) from each predictor |
 | consensus | 2 | `ipsae_pass_4folders`, `iptm_pass_4folders` |
 
 ## Load it
@@ -307,7 +308,7 @@ which.
 ## `data/grand_metrics.csv` — the wide companion
 
 `mise run build:grand` joins every per-model JSON we re-folded
-(`data/metrics/{boltz2,protenix,chai,af2m}/`) plus the ProteinTyper
+(`data/metrics/{boltz2,protenix,chai,af2m,esmfold2}/`) plus the ProteinTyper
 monomer panel plus the ProteinBase scrape into one wide CSV at
 `data/grand_metrics.csv`. Use it when you want every metric one row
 per design without N pandas merges.
@@ -338,16 +339,35 @@ mean different things:
   when the difference between "ProteinBase's saved value" and "our
   fresh typer call" matters.
 
-The four complex predictors land under their own prefixes from our
+The five complex predictors land under their own prefixes from our
 Modal rerun: `b2_*` (Boltz-2), `px_*` (Protenix-v2), `chai_*` (Chai-1),
-`af2m_*` (AlphaFold2-Multimer via ColabFold). All four are
-target-vs-binder complexes, all four expose the same Dunbrack-style
-ipSAE / pDockQ / LIS / iPTM / pTM column set.
+`af2m_*` (AlphaFold2-Multimer via ColabFold), `ef2_*` (ESMFold2). All
+five are target-vs-binder complexes — chain A the 175-aa TREM2
+construct, chain B the design — and all five expose the same
+Dunbrack-style ipSAE / pDockQ / LIS / iPTM / pTM column set, computed by
+the same `compute_ipsae`.
+
+### ESMFold2 coverage
+
+`ef2_*` is the one predictor that is **not** 141/141. The run that
+produced the shipped data keyed its inputs on `pb_id`, which only the
+100 screened designs have, so the 41 non-screened designs are null
+across every `ef2_*`, `prodigy_esmfold2_*`, and `destress_esmfold2_*`
+column. **State the denominator explicitly** when you report anything
+from `ef2_*`, and filter on `ef2_status == "ok"` rather than assuming
+141.
+
+The keying bug is fixed in `scripts/modal/modal_esmfold2_avh.py` — it
+now emits `design_NNN` slugs for all 141 — so `mise run rerun:esmfold2`
+followed by `mise run build:grand` would close the gap. That re-fold has
+not been run; the 41 stay null until it is.
 
 Two derived consensus columns close out the CSV:
 `ipsae_pass_4folders` (count of {b2, px, chai, af2m} where d0chn_max
 ≥ 0.4) and `iptm_pass_4folders` (≥ 0.7). Treat them as a soft
-agreement filter, not a hit call.
+agreement filter, not a hit call. **They deliberately stay defined over
+the original four** — ESMFold2 is excluded so the columns keep their
+documented meaning and their 141/141 denominator.
 
 ## What's NOT in this CSV
 
