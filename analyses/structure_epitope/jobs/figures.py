@@ -52,7 +52,8 @@ bp = axs[1].boxplot([d1, d0], labels=["non-binder","binder"], patch_artist=True,
 for patch, c in zip(bp["boxes"], [NON, BIND]): patch.set_facecolor(c); patch.set_alpha(0.85)
 for m in bp["medians"]: m.set_color(INK)
 axs[1].set_ylabel("buried surface area (Å²)")
-axs[1].set_title("(b) interface area\nAUROC 0.71, q=0.007", fontsize=8, loc="left")
+_bsa = avi.loc[avi.descriptor == "bsa"].iloc[0]  # derive from source so the title cannot drift from the data
+axs[1].set_title(f"(b) interface area\nAUROC {_bsa.AUROC:.2f}, q={_bsa.q_bh:.3f}", fontsize=8, loc="left")
 # (c) AUROC bars
 a2 = avi.sort_values("AUROC")
 axs[2].barh(a2.descriptor, a2.AUROC, color="#33C4FF"); axs[2].axvline(0.5, color=INK, lw=0.5, ls="--")
@@ -63,14 +64,17 @@ fig.suptitle("Fig 9. Interface size — not epitope or chemistry — separates b
 fig.tight_layout(rect=[0,0,1,0.96]); fig.savefig(FIG / "fig09_interface_features.png", bbox_inches="tight")
 plt.close(fig)
 
-# ---------- Fig 12: metrics vs affinity ----------
+# ---------- Fig 11: metrics vs affinity ----------
 d = desc.merge(meta[["design_id","p_kd","pkd_arith_mean"]], on="design_id")
-df6 = pd.read_parquet(ROOT/"data/designs.parquet")[["design_id","px_ipsae_d0chn_max","sequence_length"]]
+df6 = pd.read_parquet(ROOT/"data/designs.parquet")[["design_id","px_ipsae_d0chn_max","submitted_ipsae","sequence_length"]]
 d = d.merge(df6, on="design_id"); kd = d[d.p_kd==True]
 from scipy import stats
+# five panels: three structural + BOTH ipSAE backbones, so the same score's two answers (Protenix n.s. vs
+# Boltz-2 clearing FDR) sit side by side — the visual evidence for §3's backbone-dependence point.
 panels = [("n_iface_binder","interface size (residues)"),("bsa","buried area (Å²)"),
-          ("sequence_length","binder length (aa)"),("px_ipsae_d0chn_max","Protenix ipSAE (confidence)")]
-fig, axs = plt.subplots(1, 4, figsize=(13, 3.2))
+          ("sequence_length","binder length (aa)"),("px_ipsae_d0chn_max","Protenix ipSAE"),
+          ("submitted_ipsae","Boltz-2 ipSAE (selection metric)")]
+fig, axs = plt.subplots(1, 5, figsize=(16, 3.2))
 for ax, (col, lab) in zip(axs, panels):
     s = kd.dropna(subset=[col,"pkd_arith_mean"])
     cc = [AGENT if c=="agent" else HUMAN for c in s.cohort]
@@ -78,7 +82,7 @@ for ax, (col, lab) in zip(axs, panels):
     rho, p = stats.spearmanr(s[col], s.pkd_arith_mean)
     ax.set_xlabel(lab); ax.set_title(f"ρ={rho:.2f} (p={p:.3f})", fontsize=8.5)
 axs[0].set_ylabel("pKd = −log10(Kd)")
-fig.suptitle("Fig 11. Structural interface size & length track affinity; confidence scores do not (P_kd, n=36; ● human ● agent)",
+fig.suptitle("Fig 11. Structural size & length track affinity; learned confidence largely does not — and the same ipSAE flips with backbone (Protenix vs Boltz-2) (P_kd, n=36; ● human ● agent)",
              fontsize=9, x=0.01, ha="left")
 fig.tight_layout(rect=[0,0,1,0.95]); fig.savefig(FIG / "fig11_metrics_vs_affinity.png", bbox_inches="tight")
 plt.close(fig)
@@ -95,7 +99,7 @@ for i, topo in enumerate(order):
     ax.barh(frac.index, frac[topo], left=left, color=cmap[i], label=topo)
     left += frac[topo].values
 ax.set_xlabel("fraction of screened designs"); ax.legend(ncol=3, fontsize=7, frameon=False, loc="upper center", bbox_to_anchor=(0.5,-0.25))
-ax.set_title("Fig 11. Binder fold by cohort — agents concentrate on helical bundles (structural tool-monoculture)",
+ax.set_title("[DROPPED FIGURE — not in final set] Binder fold by cohort — agents concentrate on helical bundles",
              fontsize=8.5, loc="left")
 fig.tight_layout(); None  # dropped former-Fig11 (fold x cohort), omitted from final set
 plt.close(fig)

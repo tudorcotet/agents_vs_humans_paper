@@ -4,7 +4,11 @@ Code, results, figures, and the draft + SI for the **Structure & Epitope** contr
 Owns **main-text Figures 8–12**, **Supplementary Figures S4–S6**, and **Tables S7–S9**.
 
 Tier A = permissive open-source stack only (Biopython, pydssp, scikit-learn, gemmi, scipy, matplotlib).
-All seeds fixed; re-running reproduces the committed CSVs + figures modulo float formatting. Inputs come
+All seeds fixed. Point estimates (correlations, effect sizes, AUROCs) reproduce exactly; the bootstrap CIs
+and permutation p-values reproduce to about the third decimal but are **not** bitwise-stable — the affinity
+correlations share one RNG stream consumed in tier/metric order, so adding or removing a metric from an
+FDR family shifts the later draws (e.g. changing §3's confidence tier moved the BSA permutation p 0.0023→0.0028
+and its BCa CI 0.185–0.740→0.178–0.724, point estimate unchanged). Figures reproduce modulo float formatting. Inputs come
 from the repo root: `data/designs.{csv,parquet}`, `data/structures/<predictor>/`, `data/raw_lab/`, and
 citations from `references/*.bib`.
 
