@@ -1,0 +1,142 @@
+design_id,n_tip,frac_tip,n_basic,frac_basic,n_cdr_perera,frac_cdr_perera,cohort,is_hit,expressed,p_screened,p_expressed,team,kd_arith_mean_nM_all
+1,5,0.8333333333333334,0,0.0,6,0.5454545454545454,human,False,True,True,True,NovoFy,
+2,5,0.8333333333333334,0,0.0,5,0.45454545454545453,human,False,True,True,True,NovoFy,
+3,6,1.0,0,0.0,8,0.7272727272727273,human,False,True,True,True,NovoFy,
+4,5,0.8333333333333334,2,0.25,7,0.6363636363636364,human,False,False,True,False,NovoFy,
+5,6,1.0,0,0.0,6,0.5454545454545454,human,True,True,True,True,NovoFy,
+6,6,1.0,0,0.0,8,0.7272727272727273,human,True,True,True,True,NovoFy,706.0057
+7,6,1.0,0,0.0,7,0.6363636363636364,human,False,True,True,True,NovoFy,
+8,6,1.0,1,0.125,7,0.6363636363636364,human,False,True,True,True,NovoFy,
+9,6,1.0,0,0.0,8,0.7272727272727273,human,False,True,True,True,NovoFy,
+10,6,1.0,0,0.0,8,0.7272727272727273,human,False,True,True,True,NovoFy,
+11,5,0.8333333333333334,3,0.375,5,0.45454545454545453,human,True,True,True,True,MRAZS,346.10474999999997
+12,3,0.5,2,0.25,2,0.18181818181818182,human,False,True,True,True,MRAZS,
+13,6,1.0,2,0.25,7,0.6363636363636364,human,True,True,True,True,MRAZS,1.2511
+14,5,0.8333333333333334,3,0.375,5,0.45454545454545453,human,True,True,True,True,MRAZS,81.97735
+15,6,1.0,0,0.0,7,0.6363636363636364,human,True,True,True,True,MRAZS,72.87365
+16,6,1.0,3,0.375,8,0.7272727272727273,human,False,True,True,True,MRAZS,
+17,5,0.8333333333333334,2,0.25,8,0.7272727272727273,human,True,True,True,True,MRAZS,1.11345
+18,6,1.0,2,0.25,8,0.7272727272727273,human,False,True,True,True,MRAZS,
+19,0,0.0,0,0.0,0,0.0,human,,,False,False,MRAZS,
+20,0,0.0,0,0.0,0,0.0,human,,,False,False,MRAZS,
+21,5,0.8333333333333334,2,0.25,4,0.36363636363636365,human,True,True,True,True,EuroBros,86.49924999999999
+22,6,1.0,1,0.125,7,0.6363636363636364,human,True,True,True,True,EuroBros,215.597
+23,6,1.0,2,0.25,8,0.7272727272727273,human,True,True,True,True,EuroBros,532.32575
+24,6,1.0,0,0.0,8,0.7272727272727273,human,False,True,True,True,EuroBros,
+25,5,0.8333333333333334,2,0.25,4,0.36363636363636365,human,True,True,True,True,EuroBros,97.1946
+26,6,1.0,0,0.0,7,0.6363636363636364,human,False,True,True,True,EuroBros,
+27,6,1.0,0,0.0,8,0.7272727272727273,human,False,True,True,True,EuroBros,
+28,6,1.0,1,0.125,7,0.6363636363636364,human,False,True,True,True,EuroBros,
+29,6,1.0,0,0.0,7,0.6363636363636364,human,False,True,True,True,EuroBros,
+30,6,1.0,0,0.0,7,0.6363636363636364,human,False,True,True,True,EuroBros,
+31,0,0.0,0,0.0,0,0.0,human,False,False,True,False,DeNovo,
+32,4,0.6666666666666666,0,0.0,4,0.36363636363636365,human,,,False,False,DeNovo,
+33,6,1.0,2,0.25,7,0.6363636363636364,human,True,True,True,True,StanFold,69.7498
+34,6,1.0,1,0.125,6,0.5454545454545454,human,True,True,True,True,StanFold,12.47215
+35,6,1.0,1,0.125,6,0.5454545454545454,human,True,True,True,True,StanFold,27.389000000000003
+36,5,0.8333333333333334,1,0.125,6,0.5454545454545454,human,,,False,False,StanFold,
+37,0,0.0,0,0.0,0,0.0,human,False,True,True,True,StanFold,
+38,6,1.0,2,0.25,7,0.6363636363636364,human,False,True,True,True,StanFold,
+39,6,1.0,1,0.125,6,0.5454545454545454,human,False,True,True,True,StanFold,
+40,6,1.0,0,0.0,8,0.7272727272727273,human,False,True,True,True,StanFold,
+41,0,0.0,0,0.0,0,0.0,human,False,True,True,True,StanFold,
+42,6,1.0,1,0.125,8,0.7272727272727273,human,False,True,True,True,StanFold,
+43,5,0.8333333333333334,1,0.125,6,0.5454545454545454,human,,,False,False,1000Tokens,
+44,0,0.0,0,0.0,0,0.0,human,,,False,False,1000Tokens,
+45,6,1.0,2,0.25,9,0.8181818181818182,human,True,True,True,True,1000Tokens,32.12065
+46,5,0.8333333333333334,1,0.125,4,0.36363636363636365,human,True,True,True,True,1000Tokens,503.49665
+47,5,0.8333333333333334,1,0.125,5,0.45454545454545453,human,True,True,True,True,1000Tokens,46.148300000000006
+48,4,0.6666666666666666,3,0.375,5,0.45454545454545453,human,True,True,True,True,1000Tokens,639.21695
+49,4,0.6666666666666666,0,0.0,2,0.18181818181818182,human,False,True,True,True,1000Tokens,
+50,6,1.0,0,0.0,6,0.5454545454545454,human,False,False,True,False,1000Tokens,
+51,6,1.0,1,0.125,5,0.45454545454545453,human,,,False,False,1000Tokens,
+52,0,0.0,0,0.0,0,0.0,human,False,True,True,True,1000Tokens,
+53,6,1.0,0,0.0,8,0.7272727272727273,human,True,True,True,True,crow,949.04785
+54,5,0.8333333333333334,0,0.0,5,0.45454545454545453,human,False,True,True,True,crow,
+55,6,1.0,1,0.125,8,0.7272727272727273,human,True,True,True,True,crow,591.7795
+56,6,1.0,0,0.0,8,0.7272727272727273,human,False,True,True,True,crow,
+57,6,1.0,0,0.0,6,0.5454545454545454,human,False,True,True,True,crow,
+58,6,1.0,1,0.125,8,0.7272727272727273,human,False,True,True,True,crow,
+59,6,1.0,1,0.125,7,0.6363636363636364,human,False,True,True,True,crow,
+60,6,1.0,1,0.125,7,0.6363636363636364,human,True,True,True,True,crow,1197.53735
+61,6,1.0,1,0.125,8,0.7272727272727273,human,False,True,True,True,crow,
+62,6,1.0,1,0.125,7,0.6363636363636364,human,True,True,True,True,crow,1634.8125999999995
+63,4,0.6666666666666666,1,0.125,4,0.36363636363636365,human,True,True,True,True,BART.bio,1154.57135
+64,3,0.5,2,0.25,3,0.2727272727272727,human,,,False,False,BART.bio,
+65,6,1.0,2,0.25,5,0.45454545454545453,human,False,True,True,True,BART.bio,
+66,3,0.5,1,0.125,3,0.2727272727272727,human,,,False,False,BART.bio,
+67,3,0.5,0,0.0,4,0.36363636363636365,human,,,False,False,BART.bio,
+68,4,0.6666666666666666,2,0.25,5,0.45454545454545453,human,False,True,True,True,BART.bio,
+69,5,0.8333333333333334,3,0.375,6,0.5454545454545454,human,False,True,True,True,BART.bio,
+70,4,0.6666666666666666,0,0.0,4,0.36363636363636365,human,,,False,False,BART.bio,
+71,0,0.0,0,0.0,0,0.0,human,False,False,True,False,BART.bio,
+72,3,0.5,0,0.0,2,0.18181818181818182,human,,,False,False,BART.bio,
+73,5,0.8333333333333334,0,0.0,7,0.6363636363636364,human,False,False,True,False,BraiNSEY,
+74,6,1.0,1,0.125,8,0.7272727272727273,human,True,True,True,True,BraiNSEY,1.9082
+75,6,1.0,1,0.125,8,0.7272727272727273,human,False,True,True,True,BraiNSEY,
+76,5,0.8333333333333334,0,0.0,7,0.6363636363636364,human,False,True,True,True,BraiNSEY,
+77,0,0.0,0,0.0,0,0.0,human,,,False,False,BraiNSEY,
+78,0,0.0,0,0.0,0,0.0,human,,,False,False,BraiNSEY,
+79,0,0.0,0,0.0,0,0.0,human,True,True,True,True,BraiNSEY,21.6617
+80,1,0.16666666666666666,0,0.0,1,0.09090909090909091,human,,,False,False,BraiNSEY,
+81,0,0.0,1,0.125,0,0.0,human,,,False,False,Marcel,
+82,5,0.8333333333333334,2,0.25,5,0.45454545454545453,agent,True,True,True,True,claude-sonnet-4.6,34.906400000000005
+83,0,0.0,1,0.125,0,0.0,agent,,,False,False,claude-sonnet-4.6,
+84,5,0.8333333333333334,2,0.25,5,0.45454545454545453,agent,False,True,True,True,claude-sonnet-4.6,
+85,0,0.0,0,0.0,0,0.0,agent,False,True,True,True,claude-sonnet-4.6,
+86,5,0.8333333333333334,2,0.25,4,0.36363636363636365,agent,True,True,True,True,claude-sonnet-4.6,214.5512
+87,6,1.0,1,0.125,7,0.6363636363636364,agent,True,True,True,True,claude-sonnet-4.6,1062.2436333333333
+88,0,0.0,0,0.0,0,0.0,agent,False,True,True,True,claude-sonnet-4.6,
+89,0,0.0,0,0.0,0,0.0,agent,,,False,False,claude-sonnet-4.6,
+90,3,0.5,0,0.0,3,0.2727272727272727,agent,False,True,True,True,claude-sonnet-4.6,
+91,6,1.0,2,0.25,7,0.6363636363636364,agent,True,True,True,True,claude-sonnet-4.6,204.40915
+92,6,1.0,2,0.25,5,0.45454545454545453,agent,False,True,True,True,qwen-3.5-plus,
+93,5,0.8333333333333334,0,0.0,4,0.36363636363636365,agent,,,False,False,qwen-3.5-plus,
+94,5,0.8333333333333334,0,0.0,4,0.36363636363636365,agent,False,True,True,True,qwen-3.5-plus,
+95,6,1.0,0,0.0,7,0.6363636363636364,agent,True,True,True,True,qwen-3.5-plus,137.75336666666666
+96,3,0.5,0,0.0,4,0.36363636363636365,agent,,,False,False,qwen-3.5-plus,
+97,2,0.3333333333333333,0,0.0,2,0.18181818181818182,agent,,,False,False,qwen-3.5-plus,
+98,6,1.0,3,0.375,8,0.7272727272727273,agent,False,False,True,False,qwen-3.5-plus,
+99,6,1.0,1,0.125,7,0.6363636363636364,agent,False,True,True,True,qwen-3.5-plus,
+100,6,1.0,3,0.375,7,0.6363636363636364,agent,,,False,False,qwen-3.5-plus,
+101,0,0.0,0,0.0,0,0.0,agent,,,False,False,qwen-3.5-plus,
+102,6,1.0,2,0.25,6,0.5454545454545454,agent,True,True,True,True,grok-4.1-fast,6.8485499999999995
+103,5,0.8333333333333334,1,0.125,5,0.45454545454545453,agent,True,True,True,True,grok-4.1-fast,34.53495
+104,6,1.0,1,0.125,6,0.5454545454545454,agent,,,False,False,grok-4.1-fast,
+105,6,1.0,3,0.375,6,0.5454545454545454,agent,False,False,True,False,grok-4.1-fast,
+106,6,1.0,2,0.25,6,0.5454545454545454,agent,False,True,True,True,grok-4.1-fast,
+107,0,0.0,1,0.125,0,0.0,agent,,,False,False,grok-4.1-fast,
+108,3,0.5,0,0.0,2,0.18181818181818182,agent,,,False,False,grok-4.1-fast,
+109,0,0.0,2,0.25,0,0.0,agent,,,False,False,grok-4.1-fast,
+110,0,0.0,0,0.0,0,0.0,agent,,,False,False,grok-4.1-fast,
+111,0,0.0,2,0.25,0,0.0,agent,False,False,True,False,grok-4.1-fast,
+112,2,0.3333333333333333,1,0.125,2,0.18181818181818182,agent,False,True,True,True,Gemini 3.1 Pro,
+113,4,0.6666666666666666,1,0.125,5,0.45454545454545453,agent,False,False,True,False,Gemini 3.1 Pro,
+114,6,1.0,0,0.0,6,0.5454545454545454,agent,False,False,True,False,Gemini 3.1 Pro,
+115,6,1.0,1,0.125,8,0.7272727272727273,agent,False,True,True,True,Gemini 3.1 Pro,
+116,5,0.8333333333333334,0,0.0,6,0.5454545454545454,agent,,,False,False,Gemini 3.1 Pro,
+117,3,0.5,0,0.0,2,0.18181818181818182,agent,,,False,False,Gemini 3.1 Pro,
+118,4,0.6666666666666666,1,0.125,3,0.2727272727272727,agent,,,False,False,Gemini 3.1 Pro,
+119,2,0.3333333333333333,0,0.0,1,0.09090909090909091,agent,,,False,False,Gemini 3.1 Pro,
+120,4,0.6666666666666666,0,0.0,4,0.36363636363636365,agent,False,False,True,False,Gemini 3.1 Pro,
+121,5,0.8333333333333334,0,0.0,4,0.36363636363636365,agent,False,True,True,True,Gemini 3.1 Pro,
+122,3,0.5,4,0.5,3,0.2727272727272727,agent,False,True,True,True,GLM 5,
+123,6,1.0,2,0.25,7,0.6363636363636364,agent,True,True,True,True,GLM 5,1387.39155
+124,5,0.8333333333333334,0,0.0,6,0.5454545454545454,agent,,,False,False,GLM 5,
+125,6,1.0,2,0.25,6,0.5454545454545454,agent,False,True,True,True,GLM 5,
+126,4,0.6666666666666666,0,0.0,5,0.45454545454545453,agent,False,True,True,True,GLM 5,
+127,0,0.0,0,0.0,0,0.0,agent,,,False,False,GLM 5,
+128,4,0.6666666666666666,0,0.0,4,0.36363636363636365,agent,,,False,False,GLM 5,
+129,0,0.0,0,0.0,0,0.0,agent,,,False,False,GLM 5,
+130,0,0.0,1,0.125,0,0.0,agent,,,False,False,GLM 5,
+131,0,0.0,0,0.0,0,0.0,agent,,,False,False,GLM 5,
+132,6,1.0,3,0.375,8,0.7272727272727273,agent,True,True,True,True,GPT 5.2,3.636133333333333
+133,6,1.0,3,0.375,6,0.5454545454545454,agent,False,True,True,True,GPT 5.2,
+134,6,1.0,1,0.125,7,0.6363636363636364,agent,True,True,True,True,GPT 5.2,177.59050000000002
+135,6,1.0,0,0.0,6,0.5454545454545454,agent,,,False,False,GPT 5.2,
+136,4,0.6666666666666666,0,0.0,5,0.45454545454545453,agent,,,False,False,GPT 5.2,
+137,6,1.0,2,0.25,8,0.7272727272727273,agent,True,True,True,True,GPT 5.2,80.96844999999999
+138,6,1.0,3,0.375,7,0.6363636363636364,agent,True,True,True,True,GPT 5.2,46.2453
+139,6,1.0,1,0.125,7,0.6363636363636364,agent,False,True,True,True,GPT 5.2,
+140,3,0.5,0,0.0,3,0.2727272727272727,agent,,,False,False,GPT 5.2,
+141,6,1.0,2,0.25,6,0.5454545454545454,agent,False,True,True,True,GPT 5.2,

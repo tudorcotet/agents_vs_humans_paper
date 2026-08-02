@@ -1,0 +1,57 @@
+family,metric,vs,n,median_diff,rel_pct,prot_gt_pct,wilcoxon_p
+Interface size,buried area (BSA),Chai,141,-418.0,-27.5,18,7.117408390944665e-18
+Interface size,buried area (BSA),ESMFold2,100,-244.9,-15.1,29,1.292953808588655e-08
+Interface size,buried area (BSA),Boltz-2,141,-152.7,-10.0,31,7.841086036928236e-09
+Interface size,buried area (BSA),AF2M,141,-14.5,-1.0,48,0.9286640585087259
+Interface size,binder iface residues,Chai,141,-3.0,-15.0,16,3.476144232044502e-15
+Interface size,binder iface residues,ESMFold2,100,-2.0,-9.5,23,3.291914137282988e-08
+Interface size,binder iface residues,Boltz-2,141,-2.0,-10.0,30,5.3561539370745e-07
+Interface size,binder iface residues,AF2M,141,-1.0,-5.0,38,0.033493158006308185
+Interface size,target iface residues,Chai,141,-4.0,-25.0,23,1.4789773365559358e-12
+Interface size,target iface residues,ESMFold2,100,-3.0,-18.8,33,3.023333816839365e-05
+Interface size,target iface residues,Boltz-2,141,-2.0,-12.5,33,8.670640949055605e-06
+Interface size,target iface residues,AF2M,141,0.0,0.0,47,0.9658892313246442
+Interface chemistry,hydrophobic frac,Chai,141,0.012,2.1,55,0.03940181162864433
+Interface chemistry,hydrophobic frac,ESMFold2,100,0.0,0.0,48,0.5624388708843646
+Interface chemistry,hydrophobic frac,Boltz-2,141,0.006,1.1,50,0.09143580384894602
+Interface chemistry,hydrophobic frac,AF2M,141,-0.005,-0.9,44,0.21261233962015125
+Interface chemistry,polar frac,Chai,141,-0.005,-3.2,36,0.018089135650030556
+Interface chemistry,polar frac,ESMFold2,100,-0.001,-0.7,45,0.4004835904066044
+Interface chemistry,polar frac,Boltz-2,141,-0.005,-3.2,38,0.017142708624447278
+Interface chemistry,polar frac,AF2M,141,-0.007,-4.4,38,0.08741812908697168
+Interface chemistry,charged frac,Chai,141,0.0,0.0,44,0.5225814914485604
+Interface chemistry,charged frac,ESMFold2,100,0.005,2.3,52,0.9431901570473592
+Interface chemistry,charged frac,Boltz-2,141,0.0,0.0,49,0.945996406874547
+Interface chemistry,charged frac,AF2M,141,0.017,7.3,58,0.002922812697203745
+Interface chemistry,H-bond count,Chai,141,-1.0,-14.3,40,0.0011154972234824288
+Interface chemistry,H-bond count,ESMFold2,100,-1.0,-14.3,36,0.004340809878974088
+Interface chemistry,H-bond count,Boltz-2,141,0.0,0.0,45,0.28743147442477945
+Interface chemistry,H-bond count,AF2M,141,-1.0,-14.3,33,0.0005260433424917818
+Interface chemistry,salt bridges,Chai,141,-1.0,-100.0,28,0.00013368747136295538
+Interface chemistry,salt bridges,ESMFold2,100,0.0,0.0,27,0.8888968232975072
+Interface chemistry,salt bridges,Boltz-2,141,0.0,0.0,23,0.009413799985189618
+Interface chemistry,salt bridges,AF2M,141,0.0,0.0,23,0.031059032169453667
+Interface chemistry,H-bond density,Chai,141,0.051,11.6,55,0.24784282434718619
+Interface chemistry,H-bond density,ESMFold2,100,-0.014,-3.4,47,0.3586455629068488
+Interface chemistry,H-bond density,Boltz-2,141,0.074,16.8,56,0.0465209647575534
+Interface chemistry,H-bond density,AF2M,141,-0.088,-20.0,40,0.00015007458366860405
+Secondary structure,interface helix frac,Chai,141,0.008,0.9,53,0.00010139263369610874
+Secondary structure,interface helix frac,ESMFold2,100,0.0,0.0,47,0.2019744815548158
+Secondary structure,interface helix frac,Boltz-2,141,0.0,0.0,41,0.3170644532199749
+Secondary structure,interface helix frac,AF2M,141,0.0,0.0,30,0.03947835691581412
+Secondary structure,interface strand frac,Chai,141,0.0,,14,0.9826441998035331
+Secondary structure,interface strand frac,ESMFold2,100,0.0,,8,0.7775646168566407
+Secondary structure,interface strand frac,Boltz-2,141,0.0,,12,0.78940456804097
+Secondary structure,interface strand frac,AF2M,141,0.0,,15,0.342157200994768
+Contacts ΔG (PRODIGY),PRODIGY pKd,Chai,141,-0.694,-11.8,28,6.982581582187898e-12
+Contacts ΔG (PRODIGY),PRODIGY pKd,Boltz-2,141,0.774,13.1,72,5.021141013066462e-10
+Contacts ΔG (PRODIGY),PRODIGY pKd,AF2M,141,1.056,17.9,78,1.278551903908002e-11
+Confidence: ipTM,ipTM,Chai,141,0.303,38.4,99,3.336190433359539e-24
+Confidence: ipTM,ipTM,Boltz-2,136,-0.077,-9.6,24,2.5986762005346355e-13
+Confidence: ipTM,ipTM,AF2M,141,0.056,7.1,72,4.986826523100551e-07
+Confidence: pLDDT,pLDDT (mean),Chai,141,0.113,13.8,100,6.927404912917555e-25
+Confidence: pLDDT,pLDDT (mean),Boltz-2,141,0.043,5.2,92,1.1022859704860419e-23
+Confidence: pLDDT,pLDDT (mean),AF2M,141,0.066,8.0,99,7.077217113540356e-25
+Confidence: ipSAE,ipSAE,Chai,141,0.167,32.0,91,1.4800835792812487e-19
+Confidence: ipSAE,ipSAE,Boltz-2,136,-0.126,-23.1,16,1.7063126209247361e-15
+Confidence: ipSAE,ipSAE,AF2M,141,0.012,2.2,58,0.337011727173827

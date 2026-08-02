@@ -1,0 +1,15 @@
+tier,metric,n,rho,ci_lo,ci_hi,perm_p,partial_rho_len,rho_human,rho_agent,rho_no_litcopy,q_bh
+Tier1_confidence,submitted_ipsae,36,0.397,0.053,0.646,0.0172,0.297,0.304,0.664,0.401,0.086
+Tier1_confidence,boltz2_iptm,36,0.284,-0.086,0.565,0.0972,0.34,0.176,0.531,0.333,0.243
+Tier1_confidence,boltz2_plddt,36,0.141,-0.247,0.467,0.4128,0.056,-0.01,0.545,0.166,0.6880000000000001
+Tier1_confidence,esm_pll_avg,36,0.087,-0.268,0.417,0.6068,-0.077,0.044,0.182,0.043,0.7371
+Tier1_confidence,saprot_pll_norm,36,0.059,-0.261,0.387,0.7371,-0.097,-0.033,0.308,-0.001,0.7371
+Tier2_structural,bsa,36,0.501,0.185,0.74,0.0023,0.506,0.59,0.406,0.481,0.0092
+Tier2_structural,n_iface_binder,36,0.473,0.232,0.658,0.0037,0.367,0.486,0.357,0.449,0.009866666666666668
+Tier2_structural,n_iface_target,36,0.266,-0.084,0.577,0.1165,0.325,0.384,-0.014,0.229,0.15325714285714284
+Tier2_structural,iface_frac_hydrophobic,36,-0.305,-0.6,0.079,0.0715,-0.412,-0.498,0.049,-0.27,0.11439999999999999
+Tier2_structural,prodigy_protenix_pkd,36,0.523,0.209,0.744,0.0018,0.587,0.706,0.042,0.501,0.0092
+Tier2_structural,prodigy_chai_pkd,36,0.423,0.046,0.695,0.0101,0.434,0.558,0.154,0.391,0.0202
+Tier2_structural,salt_bridges,36,0.072,-0.252,0.366,0.6673,0.328,-0.014,0.011,0.101,0.6673
+Tier2_structural,hbonds,36,0.252,-0.072,0.53,0.1341,0.448,0.31,0.291,0.249,0.15325714285714284
+Tier3_exploratory,sequence_length,36,0.65,0.433,0.788,0.0001,0.0,0.659,0.688,0.632,0.0001
