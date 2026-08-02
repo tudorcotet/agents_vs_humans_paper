@@ -65,11 +65,11 @@ plt.close(fig)
 
 # ---------- Fig 12: metrics vs affinity ----------
 d = desc.merge(meta[["design_id","p_kd","pkd_arith_mean"]], on="design_id")
-df6 = pd.read_parquet(ROOT/"data/designs.parquet")[["design_id","submitted_ipsae","sequence_length"]]
+df6 = pd.read_parquet(ROOT/"data/designs.parquet")[["design_id","px_ipsae_d0chn_max","sequence_length"]]
 d = d.merge(df6, on="design_id"); kd = d[d.p_kd==True]
 from scipy import stats
 panels = [("n_iface_binder","interface size (residues)"),("bsa","buried area (Å²)"),
-          ("sequence_length","binder length (aa)"),("submitted_ipsae","ipSAE (confidence)")]
+          ("sequence_length","binder length (aa)"),("px_ipsae_d0chn_max","Protenix ipSAE (confidence)")]
 fig, axs = plt.subplots(1, 4, figsize=(13, 3.2))
 for ax, (col, lab) in zip(axs, panels):
     s = kd.dropna(subset=[col,"pkd_arith_mean"])

@@ -13,13 +13,15 @@ RNG = np.random.default_rng(20260725)
 NBOOT, NPERM = 5000, 10000
 
 df = pd.read_parquet(ROOT / "data/designs.parquet")
-# §5 uses PROTENIX interface descriptors (the section's primary structural model), not the
-# Protenix+Chai average, for section-wide consistency with §2 (Amy's call).
+# §3 uses PROTENIX throughout for section-wide consistency with §2 (Amy's call): both the interface
+# descriptors AND the learned confidence scores (ipSAE/ipTM/mean-pLDDT) are the Protenix values, so §3's
+# metric comparison is apples-to-apples with §2's discrimination (which is all Protenix). The competition's
+# Boltz-2 ipSAE (submitted_ipsae) is retained alongside as the actual top-100 selection metric, for context.
 desc = pd.read_csv(RES / "interface_descriptors_perpredictor.csv")
 desc = desc[desc.predictor == "protenix"].drop(columns=["predictor"]).reset_index(drop=True)
 meta = pd.read_parquet(ROOT / "analyses/structure_epitope/data/designs_canonical.parquet")
 d = (meta[["design_id","cohort","p_kd","pkd_arith_mean","is_literature_copy"]]
-     .merge(df[["design_id","submitted_ipsae","boltz2_iptm","boltz2_plddt","esm_pll_avg",
+     .merge(df[["design_id","px_ipsae_d0chn_max","px_iptm","px_mean_plddt","submitted_ipsae","esm_pll_avg",
                 "saprot_pll_norm","prodigy_protenix_pkd","prodigy_chai_pkd","sequence_length"]],
             on="design_id")
      .merge(desc[["design_id","bsa","n_iface_binder","n_iface_target","iface_frac_hydrophobic",
@@ -27,7 +29,7 @@ d = (meta[["design_id","cohort","p_kd","pkd_arith_mean","is_literature_copy"]]
 kd = d[d.p_kd == True].copy()
 print(f"P_kd n = {len(kd)}")
 
-TIER1 = ["submitted_ipsae","boltz2_iptm","boltz2_plddt","esm_pll_avg","saprot_pll_norm"]
+TIER1 = ["px_ipsae_d0chn_max","px_iptm","px_mean_plddt","submitted_ipsae","esm_pll_avg","saprot_pll_norm"]
 TIER2 = ["bsa","n_iface_binder","n_iface_target","iface_frac_hydrophobic",
          "prodigy_protenix_pkd","prodigy_chai_pkd","salt_bridges","hbonds"]
 TIER3 = ["sequence_length"]  # exploratory: length is a strong raw confound (verified rho~0.65)
