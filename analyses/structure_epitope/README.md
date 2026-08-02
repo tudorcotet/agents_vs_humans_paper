@@ -10,7 +10,8 @@ citations from `references/*.bib`.
 
 ## Files
 - `drafts/structure_analysis.md` — section draft. `drafts/supplementary_information.md` — SI (figure/table
-  cross-reference + alignment status).
+  cross-reference + alignment status). `drafts/*_illustrated.md` — same content with the figures embedded
+  inline (renders on GitHub).
 - `build_canonical.py` — stage 0 (canonical design table). `reproduce_all.sh` — one-command Tier A pipeline.
 - `jobs/` — 24 analysis + figure/table scripts (pipeline + kinetics, literature, predictor-panel, blender-input prep).
 - `figures/` — rendered 2D figures (see map). `figures/blender/` — 3D-figure pipeline (scripts + `FIGURE_GUIDE.md`
