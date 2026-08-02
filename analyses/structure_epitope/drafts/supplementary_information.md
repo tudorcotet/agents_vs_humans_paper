@@ -1,7 +1,7 @@
 # Supplementary Information — Structure and Epitope Analysis
 
 *Companion to `drafts/structure_analysis.md`. This section owns **main-text Figures 8–12** and
-**Supplementary Figures S4–S6** + **Supplementary Tables S7–S9**. Every supplementary item below is cited
+**Supplementary Figures S4–S7** + **Supplementary Tables S7–S9**. Every supplementary item below is cited
 in the section draft. Rendered figures live in `analyses/structure_epitope/figures/`; table data in
 `analyses/structure_epitope/results/`.*
 
@@ -47,6 +47,16 @@ Our best measured affinity **1.11 nM** (design 17, SPR-kinetic) vs the best prio
 with avidity), on the matched TREM2 19–174 construct.
 *Rendered:* `figS6_literature_kd.png` · *Source:* EXTRA-2 literature-K_D analysis
 (`results/literature_kd_comparison.csv`). **Cited in §3.**
+
+### Fig S7. Tightest binders by measured K_D — top 10 (3D gallery)
+The ten hit binders with the lowest measured K_D (tightest first, 1.11–34.5 nM), each on the shared TREM2
+frame in the Fig 10 gallery style, cohort-coloured (human green / agent blue). This complements the
+ipSAE-ordered **Fig 10a**: K_D order and ipSAE order differ sharply — the tightest binder (design 17,
+1.11 nM) sits at ipSAE leaderboard rank 24, and design 74 (1.91 nM) at rank 78. **Design 79 (rank #7,
+21.66 nM) is flagged** (amber box, †): it is a near-copy of anti-TREM2 scFv-4 (Methods rules-compliance
+note) — an inadvertent positive control, not a de novo design (§3).
+*Rendered:* `figures/blender/sample_renders/figS7_kd_gallery_top10.png` · *Source:*
+`figures/blender/render_gallery.py` (tiles) + `figures/blender/compose_fig10_kd.py` (grid). **Cited in §3.**
 
 ---
 
@@ -101,7 +111,7 @@ Each descriptor's value on Chai / ESMFold2 / Boltz-2 / AF2M relative to Protenix
 
 ## Alignment status (draft ↔ SI ↔ citations)
 
-- **draft ↔ SI: fully aligned.** Every supplementary item (Fig S4–S6, Tables S7–S9) is cited in the draft,
+- **draft ↔ SI: fully aligned.** Every supplementary item (Fig S4–S7, Tables S7–S9) is cited in the draft,
   and every draft supplementary reference resolves — **no dangling references and no orphans**.
 - **Dropped (produced but uncited):** former Fig 11 (fold × cohort) and Figs S4/S7/S8/S9. PNG outputs
   removed; the generation code is retained (shared scripts also make the kept figures) with the dropped

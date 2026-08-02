@@ -182,6 +182,10 @@ the **layout** and consolidates the steps.
    - `sample_renders/fig10_kd_grid.png` — **Kd** leaderboard, tightest 6 binders (`ids=[17,13,74,132,102,34]`).
      Tells §5's story: the tightest binder `design_017` (1.11 nM) sits at ipSAE rank **24**; `design_074`
      (1.91 nM) at rank **78**.
+   - `sample_renders/figS7_kd_gallery_top10.png` — **SI Fig S7**, the **top 10** by Kd (5×2), built by
+     `compose_fig10_kd.py` (reuses these tiles; **design 79 flagged** as the scFv-4 near-copy / inadvertent
+     positive control). Render its extra tiles first:
+     `render_gallery.py -- --ids 17,13,74,132,102,34,79,35,45,103`, then `uv run python compose_fig10_kd.py`.
 
    Label sits ABOVE each tile: **white box, cohort-coloured outline** (human green / agent blue), two lines —
    near-black `Rank #N   Kd = X nM` over a **cohort-coloured** `human|agent · team` (same green/blue,
