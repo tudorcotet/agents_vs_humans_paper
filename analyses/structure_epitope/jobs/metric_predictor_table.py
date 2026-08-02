@@ -149,7 +149,7 @@ L = ["# Per-predictor metric table — AUROC, ρ, and FDR\n",
      "value); **contact motifs are "
      "population enrichment (odds ratios), not a per-design score, so they are reported separately below, "
      "not as AUROC/ρ.** pLDDT is **mean-complex pLDDT** on 0–1 for all three (Protenix rescaled from "
-     "0–100) — a slightly different quantity from §5's Boltz-2 *binder* pLDDT (ρ=0.14).\n"]
+     "0–100) — a slightly different quantity from §3's Boltz-2 *binder* pLDDT (ρ=0.14).\n"]
 
 for analysis, kind, head in [("Binder-vs-non-binder discrimination", "auroc", "AUROC"),
                              ("Affinity (pKd) correlation", "rho", "ρ")]:
