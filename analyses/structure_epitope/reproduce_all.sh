@@ -51,6 +51,7 @@ echo "== Stage 6: figures =="
 run figures              $J/figures.py
 run supp_figures         $J/supp_figures.py
 run supp_figures2        $J/supp_figures2.py
+run fig_auroc_predictor  $J/fig_auroc_by_predictor.py   # Fig S8 (reads results/metric_predictor_table.csv)
 echo "== (optional) reference crystal epitopes — needs refs/*.cif from RCSB =="
 run reference_epitopes   $J/reference_epitopes.py
 

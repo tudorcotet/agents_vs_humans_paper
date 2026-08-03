@@ -3,7 +3,7 @@
 > **Illustrated version** — supplementary figures embedded inline; content is identical to [`supplementary_information.md`](supplementary_information.md).
 
 *Companion to `drafts/structure_analysis.md`. This section owns **main-text Figures 8–12** and
-**Supplementary Figures S4–S7** + **Supplementary Tables S7–S9**. Every supplementary item below is cited
+**Supplementary Figures S4–S8** + **Supplementary Tables S7–S9**. Every supplementary item below is cited
 in the section draft. Rendered figures live in `analyses/structure_epitope/figures/`; table data in
 `analyses/structure_epitope/results/`.*
 
@@ -70,6 +70,18 @@ note) — an inadvertent positive control, not a de novo design (§3).
 
 ![Fig S7](../figures/blender/sample_renders/figS7_kd_gallery_top10.png)
 
+### Fig S8. Binder/non-binder discrimination (AUROC) by metric × predictor
+The section's central classification result as a figure: the learned confidence scores (ipSAE, ipTM, mean
+pLDDT) are strongly **predictor-dependent** — high on the AF3-class Protenix/Chai (ipSAE/ipTM ≈0.77–0.79) but
+falling to ≈0.60–0.66 on the Boltz-2 model the competition selected on (hatched) and on AF2M — whereas
+**buried area (interface size) is nearly flat** across all five predictors (≈0.65–0.72, including the no-MSA
+ESMFold2). Grouped bars, P_expressed (n=89). Point estimates only — the source table carries p-values but no
+confidence intervals. This is the visual form of **Table S8**; ESMFold2 has no learned confidence scores (n/a).
+*Rendered:* `figS8_auroc_by_predictor.png` · *Source:* `jobs/fig_auroc_by_predictor.py`
+(from `results/metric_predictor_table.csv`). **Cited in §2.**
+
+![Fig S8](../figures/figS8_auroc_by_predictor.png)
+
 
 ---
 
@@ -124,7 +136,7 @@ Each descriptor's value on Chai / ESMFold2 / Boltz-2 / AF2M relative to Protenix
 
 ## Alignment status (draft ↔ SI ↔ citations)
 
-- **draft ↔ SI: fully aligned.** Every supplementary item (Fig S4–S7, Tables S7–S9) is cited in the draft,
+- **draft ↔ SI: fully aligned.** Every supplementary item (Fig S4–S8, Tables S7–S9) is cited in the draft,
   and every draft supplementary reference resolves — **no dangling references and no orphans**.
 - **Dropped (produced but uncited):** former Fig 11 (fold × cohort) and Figs S4/S7/S8/S9. PNG outputs
   removed; the generation code is retained (shared scripts also make the kept figures) with the dropped

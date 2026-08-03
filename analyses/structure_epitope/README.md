@@ -37,6 +37,7 @@ citations from `references/*.bib`.
 | Fig S5 | `figures/figS5_method_robustness.png` | `jobs/supp_figures.py` |
 | Fig S6 | `figures/figS6_literature_kd.png` | `jobs/literature_comparison.py` |
 | Fig S7 | `figures/blender/sample_renders/figS7_kd_gallery_top10.png` | blender tiles + `figures/blender/compose_fig10_kd.py` |
+| Fig S8 | `figures/figS8_auroc_by_predictor.png` | `jobs/fig_auroc_by_predictor.py` |
 | Table S7 | `results/predictor_panel.md` | `jobs/predictor_panel.py` |
 | Table S8 | `results/metric_predictor_table.md` | `jobs/metric_predictor_table.py` |
 | Table S9 | `results/metric_predictor_signed_diff.csv` | `jobs/metric_predictor_table.py` |
