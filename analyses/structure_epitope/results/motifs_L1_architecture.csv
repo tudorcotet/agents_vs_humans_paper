@@ -1,0 +1,142 @@
+design_id,iface_helix,iface_strand,iface_loop,n_iface,beta_aug,cohort,is_hit,p_expressed,team,kd_arith_mean_nM_all,architecture
+1,0.9385,0.0,0.0615,16.5,False,human,False,True,NovoFy,,helix
+2,0.899,0.0,0.10099999999999999,19.0,False,human,False,True,NovoFy,,helix
+3,0.969,0.0,0.031,17.0,False,human,False,True,NovoFy,,helix
+4,0.774,0.095,0.1305,17.5,True,human,False,False,NovoFy,,helix
+5,0.972,0.0,0.028,18.0,False,human,True,True,NovoFy,,helix
+6,0.9039999999999999,0.0,0.096,20.0,False,human,True,True,NovoFy,706.0057,helix
+7,0.9039999999999999,0.0,0.096,16.0,False,human,False,True,NovoFy,,helix
+8,0.9375,0.0,0.0625,19.0,False,human,False,True,NovoFy,,helix
+9,0.9545,0.0,0.0455,19.0,False,human,False,True,NovoFy,,helix
+10,0.9195,0.0,0.0805,18.5,False,human,False,True,NovoFy,,helix
+11,0.5855,0.0,0.4145,27.5,False,human,True,True,MRAZS,346.10474999999997,helix
+12,0.675,0.0,0.325,14.5,False,human,False,True,MRAZS,,helix
+13,0.862,0.0,0.138,26.5,False,human,True,True,MRAZS,1.2511,helix
+14,0.7635000000000001,0.0,0.2365,27.5,False,human,True,True,MRAZS,81.97735,helix
+15,0.9544999999999999,0.0,0.0455,22.0,False,human,True,True,MRAZS,72.87365,helix
+16,0.6719999999999999,0.07300000000000001,0.255,27.5,False,human,False,True,MRAZS,,helix
+17,0.7795000000000001,0.0,0.2205,29.5,False,human,True,True,MRAZS,1.11345,helix
+18,0.7835,0.0,0.2165,25.0,False,human,False,True,MRAZS,,helix
+19,0.064,0.563,0.3735,23.0,True,human,,False,MRAZS,,strand
+20,0.0,0.6595,0.3405,16.5,True,human,,False,MRAZS,,strand
+21,0.7695000000000001,0.094,0.136,21.5,False,human,True,True,EuroBros,86.49924999999999,helix
+22,0.93,0.0,0.07,21.5,False,human,True,True,EuroBros,215.597,helix
+23,0.7075,0.0215,0.2705,21.5,False,human,True,True,EuroBros,532.32575,helix
+24,0.9545,0.0,0.0455,19.0,False,human,False,True,EuroBros,,helix
+25,0.758,0.098,0.1435,20.5,False,human,True,True,EuroBros,97.1946,helix
+26,0.5575,0.154,0.2885,26.0,True,human,False,True,EuroBros,,helix
+27,0.9565,0.0,0.0435,20.0,False,human,False,True,EuroBros,,helix
+28,0.8225,0.0,0.1775,16.5,False,human,False,True,EuroBros,,helix
+29,0.938,0.0,0.062,16.0,False,human,False,True,EuroBros,,helix
+30,0.854,0.0,0.14600000000000002,17.0,False,human,False,True,EuroBros,,helix
+31,0.8785000000000001,0.0,0.1215,16.5,False,human,False,False,DeNovo,,helix
+32,0.813,0.0,0.187,20.5,False,human,,False,DeNovo,,helix
+33,0.8875,0.0,0.11249999999999999,31.5,False,human,True,True,StanFold,69.7498,helix
+34,0.942,0.0,0.057999999999999996,25.0,False,human,True,True,StanFold,12.47215,helix
+35,0.9470000000000001,0.0,0.053000000000000005,28.0,False,human,True,True,StanFold,27.389000000000003,helix
+36,0.092,0.4855,0.423,25.0,True,human,,False,StanFold,,strand
+37,0.0835,0.2735,0.643,13.0,True,human,False,True,StanFold,,loop-dominated
+38,0.981,0.0,0.019,26.0,False,human,False,True,StanFold,,helix
+39,0.78,0.0735,0.1465,20.0,False,human,False,True,StanFold,,helix
+40,0.9615,0.0,0.0385,22.0,False,human,False,True,StanFold,,helix
+41,0.044,0.0875,0.8685,23.0,False,human,False,True,StanFold,,loop-dominated
+42,0.46599999999999997,0.2215,0.3125,46.0,True,human,False,True,StanFold,,mixed
+43,0.0,0.646,0.354,24.0,True,human,,False,1000Tokens,,strand
+44,0.098,0.55,0.352,29.5,True,human,,False,1000Tokens,,strand
+45,0.8235,0.0,0.1765,28.5,False,human,True,True,1000Tokens,32.12065,helix
+46,0.9775,0.0,0.0225,22.5,False,human,True,True,1000Tokens,503.49665,helix
+47,1.0,0.0,0.0,22.5,False,human,True,True,1000Tokens,46.148300000000006,helix
+48,0.8475,0.0,0.1525,24.5,False,human,True,True,1000Tokens,639.21695,helix
+49,0.969,0.0,0.031,16.0,False,human,False,True,1000Tokens,,helix
+50,0.916,0.0,0.08399999999999999,24.0,False,human,False,False,1000Tokens,,helix
+51,0.0,0.8374999999999999,0.1625,22.0,True,human,,False,1000Tokens,,strand
+52,0.9165,0.0,0.0835,14.5,False,human,False,True,1000Tokens,,helix
+53,0.9544999999999999,0.0,0.0455,22.0,False,human,True,True,crow,949.04785,helix
+54,0.951,0.0,0.049,20.5,False,human,False,True,crow,,helix
+55,0.9319999999999999,0.0,0.068,22.0,False,human,True,True,crow,591.7795,helix
+56,0.9235,0.0,0.0765,19.5,False,human,False,True,crow,,helix
+57,0.95,0.0,0.05,20.0,False,human,False,True,crow,,helix
+58,0.9205,0.0,0.0795,19.5,False,human,False,True,crow,,helix
+59,0.9455,0.0,0.0545,18.5,False,human,False,True,crow,,helix
+60,0.952,0.0,0.048,21.0,False,human,True,True,crow,1197.53735,helix
+61,0.952,0.0,0.048,21.0,False,human,False,True,crow,,helix
+62,0.9259999999999999,0.0,0.07400000000000001,20.5,False,human,True,True,crow,1634.8125999999995,helix
+63,0.9125,0.0,0.0875,22.5,False,human,True,True,BART.bio,1154.57135,helix
+64,0.804,0.0,0.196,22.0,False,human,,False,BART.bio,,helix
+65,1.0,0.0,0.0,19.5,False,human,False,True,BART.bio,,helix
+66,0.89,0.0,0.11,18.5,False,human,,False,BART.bio,,helix
+67,0.9545,0.0,0.0455,14.5,False,human,,False,BART.bio,,helix
+68,0.8385,0.0,0.1615,21.0,False,human,False,True,BART.bio,,helix
+69,0.817,0.0,0.183,21.0,False,human,False,True,BART.bio,,helix
+70,0.0,0.752,0.248,20.0,True,human,,False,BART.bio,,strand
+71,0.0455,0.5245,0.4295,22.0,True,human,False,False,BART.bio,,strand
+72,0.0295,0.651,0.3195,24.0,True,human,,False,BART.bio,,strand
+73,0.975,0.0,0.025,18.0,False,human,False,False,BraiNSEY,,helix
+74,0.48950000000000005,0.2665,0.244,31.0,True,human,True,True,BraiNSEY,1.9082,strand
+75,0.819,0.0,0.181,25.5,False,human,False,True,BraiNSEY,,helix
+76,0.0,0.5965,0.40349999999999997,31.0,True,human,False,True,BraiNSEY,,strand
+77,0.0,0.1935,0.8065,28.5,True,human,,False,BraiNSEY,,loop-dominated
+78,0.5,0.0415,0.45799999999999996,27.0,False,human,,False,BraiNSEY,,mixed
+79,0.035,0.2635,0.701,28.5,True,human,True,True,BraiNSEY,21.6617,loop-dominated
+80,0.024,0.5185,0.458,26.5,True,human,,False,BraiNSEY,,strand
+81,0.0,0.872,0.128,20.5,True,human,,False,Marcel,,strand
+82,0.8485,0.0,0.15150000000000002,23.0,False,agent,True,True,claude-sonnet-4.6,34.906400000000005,helix
+83,0.5765,0.0,0.4235,15.0,False,agent,,False,claude-sonnet-4.6,,helix
+84,0.462,0.0,0.538,25.5,False,agent,False,True,claude-sonnet-4.6,,loop-dominated
+85,0.473,0.35250000000000004,0.175,21.5,True,agent,False,True,claude-sonnet-4.6,,strand
+86,0.8875,0.0,0.1125,27.0,False,agent,True,True,claude-sonnet-4.6,214.5512,helix
+87,0.873,0.0,0.127,19.5,False,agent,True,True,claude-sonnet-4.6,1062.2436333333333,helix
+88,0.8009999999999999,0.0,0.199,26.0,False,agent,False,True,claude-sonnet-4.6,,helix
+89,0.0705,0.874,0.055999999999999994,26.5,True,agent,,False,claude-sonnet-4.6,,strand
+90,0.9195,0.0,0.0805,18.5,False,agent,False,True,claude-sonnet-4.6,,helix
+91,1.0,0.0,0.0,20.5,False,agent,True,True,claude-sonnet-4.6,204.40915,helix
+92,0.781,0.0,0.219,24.0,False,agent,False,True,qwen-3.5-plus,,helix
+93,0.8795,0.0,0.1205,24.5,False,agent,,False,qwen-3.5-plus,,helix
+94,0.909,0.0,0.091,24.0,False,agent,False,True,qwen-3.5-plus,,helix
+95,1.0,0.0,0.0,20.0,False,agent,True,True,qwen-3.5-plus,137.75336666666666,helix
+96,0.9299999999999999,0.0,0.07,17.5,False,agent,,False,qwen-3.5-plus,,helix
+97,0.716,0.1665,0.1175,35.0,True,agent,,False,qwen-3.5-plus,,helix
+98,0.9425,0.0,0.057499999999999996,26.0,False,agent,False,False,qwen-3.5-plus,,helix
+99,0.7030000000000001,0.0345,0.2625,23.5,False,agent,False,True,qwen-3.5-plus,,helix
+100,0.33199999999999996,0.2925,0.376,31.5,True,agent,,False,qwen-3.5-plus,,strand
+101,0.327,0.4185,0.2545,35.5,True,agent,,False,qwen-3.5-plus,,strand
+102,0.8195,0.0,0.1805,30.0,False,agent,True,True,grok-4.1-fast,6.8485499999999995,helix
+103,0.9775,0.0,0.0225,22.0,False,agent,True,True,grok-4.1-fast,34.53495,helix
+104,0.9775,0.0,0.0225,20.0,False,agent,,False,grok-4.1-fast,,helix
+105,0.875,0.0,0.125,20.0,False,agent,False,False,grok-4.1-fast,,helix
+106,0.9815,0.0,0.0185,26.5,False,agent,False,True,grok-4.1-fast,,helix
+107,0.031,0.5,0.4685,16.0,True,agent,,False,grok-4.1-fast,,strand
+108,0.7895,0.0,0.21050000000000002,14.0,False,agent,,False,grok-4.1-fast,,helix
+109,0.0,0.0,1.0,9.5,False,agent,,False,grok-4.1-fast,,loop-dominated
+110,0.0,0.0,1.0,5.0,False,agent,,False,grok-4.1-fast,,loop-dominated
+111,0.0,0.0,1.0,8.0,False,agent,False,False,grok-4.1-fast,,loop-dominated
+112,0.933,0.0,0.067,15.0,False,agent,False,True,Gemini 3.1 Pro,,helix
+113,0.982,0.0,0.018,22.0,False,agent,False,False,Gemini 3.1 Pro,,helix
+114,0.8665,0.0,0.1335,22.5,False,agent,False,False,Gemini 3.1 Pro,,helix
+115,1.0,0.0,0.0,18.0,False,agent,False,True,Gemini 3.1 Pro,,helix
+116,0.9565,0.0,0.0435,17.0,False,agent,,False,Gemini 3.1 Pro,,helix
+117,0.75,0.0,0.25,14.0,False,agent,,False,Gemini 3.1 Pro,,helix
+118,0.0145,0.5645,0.4215,23.5,True,agent,,False,Gemini 3.1 Pro,,strand
+119,0.972,0.0,0.028,14.0,False,agent,,False,Gemini 3.1 Pro,,helix
+120,0.5215000000000001,0.0,0.4785,19.0,False,agent,False,False,Gemini 3.1 Pro,,helix
+121,0.8634999999999999,0.0,0.1365,21.5,False,agent,False,True,Gemini 3.1 Pro,,helix
+122,0.8434999999999999,0.0,0.1565,32.0,False,agent,False,True,GLM 5,,helix
+123,0.9215,0.0,0.0785,29.0,False,agent,True,True,GLM 5,1387.39155,helix
+124,0.9630000000000001,0.0,0.037,22.5,False,agent,,False,GLM 5,,helix
+125,0.909,0.0,0.091,25.0,False,agent,False,True,GLM 5,,helix
+126,0.8460000000000001,0.0,0.154,22.0,False,agent,False,True,GLM 5,,helix
+127,0.0,0.7755,0.22450000000000003,26.5,True,agent,,False,GLM 5,,strand
+128,0.0,0.853,0.147,13.5,True,agent,,False,GLM 5,,strand
+129,0.0835,0.2915,0.625,17.5,True,agent,,False,GLM 5,,loop-dominated
+130,0.0,0.306,0.694,25.0,True,agent,,False,GLM 5,,loop-dominated
+131,0.0,0.824,0.176,34.5,True,agent,,False,GLM 5,,strand
+132,0.9235,0.0,0.0765,32.5,False,agent,True,True,GPT 5.2,3.636133333333333,helix
+133,0.75,0.0,0.25,28.0,False,agent,False,True,GPT 5.2,,helix
+134,0.9675,0.0,0.0325,27.5,False,agent,True,True,GPT 5.2,177.59050000000002,helix
+135,0.881,0.0,0.119,28.0,False,agent,,False,GPT 5.2,,helix
+136,0.739,0.0,0.261,30.5,False,agent,,False,GPT 5.2,,helix
+137,0.7949999999999999,0.0,0.20500000000000002,34.5,False,agent,True,True,GPT 5.2,80.96844999999999,helix
+138,0.8845000000000001,0.0,0.11549999999999999,25.5,False,agent,True,True,GPT 5.2,46.2453,helix
+139,0.9219999999999999,0.0,0.078,24.5,False,agent,False,True,GPT 5.2,,helix
+140,0.8400000000000001,0.0,0.16,30.0,False,agent,,False,GPT 5.2,,helix
+141,0.5565,0.0,0.4435,29.5,False,agent,False,True,GPT 5.2,,helix

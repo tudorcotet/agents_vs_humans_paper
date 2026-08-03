@@ -1,0 +1,142 @@
+design_id,IgSF,his_tag,stalk,linker,met,cohort,is_hit,expressed,p_screened,p_expressed,team,kd_arith_mean_nM_all,any_stalk,stalk_dominant,any_histag
+1,8.0,0.0,0.0,0.0,0.0,human,False,True,True,True,NovoFy,,False,False,False
+2,8.0,0.0,1.0,0.0,0.0,human,False,True,True,True,NovoFy,,True,False,False
+3,10.0,0.0,0.0,0.0,0.0,human,False,True,True,True,NovoFy,,False,False,False
+4,13.0,0.0,0.0,0.0,0.0,human,False,False,True,False,NovoFy,,False,False,False
+5,10.0,0.0,0.0,0.0,0.0,human,True,True,True,True,NovoFy,,False,False,False
+6,12.0,0.0,0.0,0.0,0.0,human,True,True,True,True,NovoFy,706.0057,False,False,False
+7,10.0,0.0,0.0,0.0,0.0,human,False,True,True,True,NovoFy,,False,False,False
+8,11.0,0.0,0.0,0.0,0.0,human,False,True,True,True,NovoFy,,False,False,False
+9,12.0,0.0,0.0,0.0,0.0,human,False,True,True,True,NovoFy,,False,False,False
+10,10.0,0.0,0.0,0.0,0.0,human,False,True,True,True,NovoFy,,False,False,False
+11,14.0,0.0,0.0,0.0,0.0,human,True,True,True,True,MRAZS,346.10474999999997,False,False,False
+12,7.0,0.0,0.0,0.0,0.0,human,False,True,True,True,MRAZS,,False,False,False
+13,15.0,0.0,0.0,0.0,0.0,human,True,True,True,True,MRAZS,1.2511,False,False,False
+14,14.0,0.0,0.0,0.0,0.0,human,True,True,True,True,MRAZS,81.97735,False,False,False
+15,11.0,0.0,0.0,0.0,0.0,human,True,True,True,True,MRAZS,72.87365,False,False,False
+16,16.0,0.0,0.0,0.0,0.0,human,False,True,True,True,MRAZS,,False,False,False
+17,17.0,0.0,0.0,0.0,0.0,human,True,True,True,True,MRAZS,1.11345,False,False,False
+18,14.0,0.0,0.0,0.0,0.0,human,False,True,True,True,MRAZS,,False,False,False
+19,0.0,0.0,0.0,0.0,0.0,human,,,False,False,MRAZS,,False,False,False
+20,0.0,0.0,0.0,0.0,0.0,human,,,False,False,MRAZS,,False,False,False
+21,14.0,0.0,1.0,0.0,0.0,human,True,True,True,True,EuroBros,86.49924999999999,True,False,False
+22,12.0,0.0,0.0,0.0,0.0,human,True,True,True,True,EuroBros,215.597,False,False,False
+23,15.0,0.0,2.0,0.0,0.0,human,True,True,True,True,EuroBros,532.32575,True,False,False
+24,11.0,0.0,0.0,0.0,0.0,human,False,True,True,True,EuroBros,,False,False,False
+25,13.0,0.0,1.0,0.0,0.0,human,True,True,True,True,EuroBros,97.1946,True,False,False
+26,14.0,0.0,1.0,0.0,0.0,human,False,True,True,True,EuroBros,,True,False,False
+27,11.0,0.0,0.0,0.0,0.0,human,False,True,True,True,EuroBros,,False,False,False
+28,13.0,0.0,0.0,0.0,0.0,human,False,True,True,True,EuroBros,,False,False,False
+29,11.0,0.0,0.0,0.0,0.0,human,False,True,True,True,EuroBros,,False,False,False
+30,9.0,0.0,0.0,0.0,0.0,human,False,True,True,True,EuroBros,,False,False,False
+31,0.0,0.0,0.0,0.0,0.0,human,False,False,True,False,DeNovo,,False,False,False
+32,6.0,0.0,0.0,0.0,0.0,human,,,False,False,DeNovo,,False,False,False
+33,17.0,0.0,0.0,0.0,0.0,human,True,True,True,True,StanFold,69.7498,False,False,False
+34,14.0,0.0,0.0,0.0,0.0,human,True,True,True,True,StanFold,12.47215,False,False,False
+35,16.0,1.0,0.0,0.0,0.0,human,True,True,True,True,StanFold,27.389000000000003,False,False,True
+36,10.0,0.0,0.0,0.0,0.0,human,,,False,False,StanFold,,False,False,False
+37,3.0,0.0,0.0,0.0,0.0,human,False,True,True,True,StanFold,,False,False,False
+38,16.0,0.0,0.0,0.0,0.0,human,False,True,True,True,StanFold,,False,False,False
+39,10.0,0.0,0.0,0.0,0.0,human,False,True,True,True,StanFold,,False,False,False
+40,10.0,0.0,0.0,0.0,0.0,human,False,True,True,True,StanFold,,False,False,False
+41,7.0,0.0,6.0,0.0,0.0,human,False,True,True,True,StanFold,,True,False,False
+42,15.0,0.0,0.0,0.0,0.0,human,False,True,True,True,StanFold,,False,False,False
+43,8.0,0.0,0.0,0.0,0.0,human,,,False,False,1000Tokens,,False,False,False
+44,0.0,0.0,1.0,0.0,0.0,human,,,False,False,1000Tokens,,True,True,False
+45,16.0,0.0,0.0,0.0,0.0,human,True,True,True,True,1000Tokens,32.12065,False,False,False
+46,11.0,0.0,0.0,0.0,0.0,human,True,True,True,True,1000Tokens,503.49665,False,False,False
+47,8.0,0.0,0.0,0.0,0.0,human,True,True,True,True,1000Tokens,46.148300000000006,False,False,False
+48,15.0,0.0,0.0,0.0,0.0,human,True,True,True,True,1000Tokens,639.21695,False,False,False
+49,4.0,0.0,0.0,0.0,0.0,human,False,True,True,True,1000Tokens,,False,False,False
+50,11.0,0.0,0.0,0.0,0.0,human,False,False,True,False,1000Tokens,,False,False,False
+51,8.0,0.0,3.0,0.0,0.0,human,,,False,False,1000Tokens,,True,False,False
+52,0.0,0.0,0.0,0.0,0.0,human,False,True,True,True,1000Tokens,,False,False,False
+53,13.0,0.0,0.0,0.0,0.0,human,True,True,True,True,crow,949.04785,False,False,False
+54,8.0,0.0,0.0,0.0,0.0,human,False,True,True,True,crow,,False,False,False
+55,14.0,0.0,0.0,0.0,0.0,human,True,True,True,True,crow,591.7795,False,False,False
+56,12.0,0.0,0.0,0.0,0.0,human,False,True,True,True,crow,,False,False,False
+57,11.0,0.0,0.0,0.0,0.0,human,False,True,True,True,crow,,False,False,False
+58,13.0,0.0,0.0,0.0,0.0,human,False,True,True,True,crow,,False,False,False
+59,13.0,0.0,0.0,0.0,0.0,human,False,True,True,True,crow,,False,False,False
+60,12.0,0.0,0.0,0.0,0.0,human,True,True,True,True,crow,1197.53735,False,False,False
+61,14.0,0.0,0.0,0.0,0.0,human,False,True,True,True,crow,,False,False,False
+62,12.0,0.0,0.0,0.0,0.0,human,True,True,True,True,crow,1634.8125999999995,False,False,False
+63,8.0,0.0,0.0,0.0,0.0,human,True,True,True,True,BART.bio,1154.57135,False,False,False
+64,11.0,0.0,0.0,0.0,0.0,human,,,False,False,BART.bio,,False,False,False
+65,14.0,0.0,0.0,0.0,0.0,human,False,True,True,True,BART.bio,,False,False,False
+66,8.0,0.0,0.0,0.0,0.0,human,,,False,False,BART.bio,,False,False,False
+67,7.0,0.0,0.0,0.0,0.0,human,,,False,False,BART.bio,,False,False,False
+68,13.0,0.0,0.0,0.0,0.0,human,False,True,True,True,BART.bio,,False,False,False
+69,15.0,0.0,0.0,0.0,0.0,human,False,True,True,True,BART.bio,,False,False,False
+70,6.0,0.0,4.0,0.0,0.0,human,,,False,False,BART.bio,,True,False,False
+71,10.0,0.0,0.0,0.0,0.0,human,False,False,True,False,BART.bio,,False,False,False
+72,3.0,0.0,0.0,0.0,0.0,human,,,False,False,BART.bio,,False,False,False
+73,8.0,0.0,0.0,0.0,0.0,human,False,False,True,False,BraiNSEY,,False,False,False
+74,14.0,0.0,0.0,0.0,0.0,human,True,True,True,True,BraiNSEY,1.9082,False,False,False
+75,15.0,0.0,0.0,0.0,0.0,human,False,True,True,True,BraiNSEY,,False,False,False
+76,13.0,0.0,0.0,0.0,0.0,human,False,True,True,True,BraiNSEY,,False,False,False
+77,14.0,0.0,0.0,0.0,0.0,human,,,False,False,BraiNSEY,,False,False,False
+78,0.0,0.0,0.0,0.0,0.0,human,,,False,False,BraiNSEY,,False,False,False
+79,8.0,0.0,3.0,0.0,0.0,human,True,True,True,True,BraiNSEY,21.6617,True,False,False
+80,1.0,0.0,0.0,0.0,0.0,human,,,False,False,BraiNSEY,,False,False,False
+81,5.0,0.0,0.0,0.0,0.0,human,,,False,False,Marcel,,False,False,False
+82,16.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,claude-sonnet-4.6,34.906400000000005,False,False,False
+83,1.0,0.0,0.0,0.0,0.0,agent,,,False,False,claude-sonnet-4.6,,False,False,False
+84,11.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,claude-sonnet-4.6,,False,False,False
+85,5.0,0.0,7.0,0.0,0.0,agent,False,True,True,True,claude-sonnet-4.6,,True,True,False
+86,13.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,claude-sonnet-4.6,214.5512,False,False,False
+87,12.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,claude-sonnet-4.6,1062.2436333333333,False,False,False
+88,0.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,claude-sonnet-4.6,,False,False,False
+89,2.0,0.0,0.0,0.0,0.0,agent,,,False,False,claude-sonnet-4.6,,False,False,False
+90,6.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,claude-sonnet-4.6,,False,False,False
+91,13.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,claude-sonnet-4.6,204.40915,False,False,False
+92,12.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,qwen-3.5-plus,,False,False,False
+93,10.0,0.0,1.0,0.0,0.0,agent,,,False,False,qwen-3.5-plus,,True,False,False
+94,6.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,qwen-3.5-plus,,False,False,False
+95,10.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,qwen-3.5-plus,137.75336666666666,False,False,False
+96,5.0,0.0,0.0,0.0,0.0,agent,,,False,False,qwen-3.5-plus,,False,False,False
+97,4.0,1.0,0.0,0.0,0.0,agent,,,False,False,qwen-3.5-plus,,False,False,True
+98,19.0,0.0,0.0,0.0,0.0,agent,False,False,True,False,qwen-3.5-plus,,False,False,False
+99,12.0,1.0,0.0,0.0,0.0,agent,False,True,True,True,qwen-3.5-plus,,False,False,True
+100,16.0,0.0,0.0,0.0,0.0,agent,,,False,False,qwen-3.5-plus,,False,False,False
+101,1.0,0.0,0.0,0.0,0.0,agent,,,False,False,qwen-3.5-plus,,False,False,False
+102,16.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,grok-4.1-fast,6.8485499999999995,False,False,False
+103,12.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,grok-4.1-fast,34.53495,False,False,False
+104,11.0,0.0,0.0,0.0,0.0,agent,,,False,False,grok-4.1-fast,,False,False,False
+105,14.0,0.0,0.0,0.0,0.0,agent,False,False,True,False,grok-4.1-fast,,False,False,False
+106,16.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,grok-4.1-fast,,False,False,False
+107,2.0,0.0,0.0,0.0,0.0,agent,,,False,False,grok-4.1-fast,,False,False,False
+108,5.0,0.0,0.0,0.0,0.0,agent,,,False,False,grok-4.1-fast,,False,False,False
+109,9.0,0.0,0.0,0.0,0.0,agent,,,False,False,grok-4.1-fast,,False,False,False
+110,0.0,0.0,0.0,0.0,0.0,agent,,,False,False,grok-4.1-fast,,False,False,False
+111,7.0,0.0,0.0,0.0,0.0,agent,False,False,True,False,grok-4.1-fast,,False,False,False
+112,8.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,Gemini 3.1 Pro,,False,False,False
+113,10.0,0.0,0.0,0.0,0.0,agent,False,False,True,False,Gemini 3.1 Pro,,False,False,False
+114,10.0,0.0,0.0,0.0,0.0,agent,False,False,True,False,Gemini 3.1 Pro,,False,False,False
+115,12.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,Gemini 3.1 Pro,,False,False,False
+116,8.0,0.0,0.0,0.0,0.0,agent,,,False,False,Gemini 3.1 Pro,,False,False,False
+117,5.0,0.0,0.0,0.0,0.0,agent,,,False,False,Gemini 3.1 Pro,,False,False,False
+118,6.0,0.0,0.0,0.0,0.0,agent,,,False,False,Gemini 3.1 Pro,,False,False,False
+119,2.0,0.0,0.0,0.0,0.0,agent,,,False,False,Gemini 3.1 Pro,,False,False,False
+120,5.0,0.0,0.0,0.0,0.0,agent,False,False,True,False,Gemini 3.1 Pro,,False,False,False
+121,8.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,Gemini 3.1 Pro,,False,False,False
+122,17.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,GLM 5,,False,False,False
+123,18.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,GLM 5,1387.39155,False,False,False
+124,9.0,0.0,0.0,0.0,0.0,agent,,,False,False,GLM 5,,False,False,False
+125,16.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,GLM 5,,False,False,False
+126,9.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,GLM 5,,False,False,False
+127,0.0,0.0,0.0,0.0,0.0,agent,,,False,False,GLM 5,,False,False,False
+128,6.0,0.0,0.0,0.0,0.0,agent,,,False,False,GLM 5,,False,False,False
+129,0.0,0.0,0.0,0.0,0.0,agent,,,False,False,GLM 5,,False,False,False
+130,9.0,0.0,0.0,0.0,0.0,agent,,,False,False,GLM 5,,False,False,False
+131,1.0,1.0,11.0,0.0,0.0,agent,,,False,False,GLM 5,,True,True,True
+132,20.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,GPT 5.2,3.636133333333333,False,False,False
+133,26.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,GPT 5.2,,False,False,False
+134,16.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,GPT 5.2,177.59050000000002,False,False,False
+135,10.0,0.0,0.0,0.0,0.0,agent,,,False,False,GPT 5.2,,False,False,False
+136,8.0,0.0,0.0,0.0,0.0,agent,,,False,False,GPT 5.2,,False,False,False
+137,20.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,GPT 5.2,80.96844999999999,False,False,False
+138,15.0,0.0,0.0,0.0,0.0,agent,True,True,True,True,GPT 5.2,46.2453,False,False,False
+139,14.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,GPT 5.2,,False,False,False
+140,4.0,0.0,0.0,0.0,0.0,agent,,,False,False,GPT 5.2,,False,False,False
+141,14.0,0.0,0.0,0.0,0.0,agent,False,True,True,True,GPT 5.2,,False,False,False

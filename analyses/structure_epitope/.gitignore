@@ -1,0 +1,29 @@
+# PyRosetta venv (~1-2 GB, regenerate via pyrosetta-installer)
+.rosetta_venv/
+# derived parquet intermediates (regenerate: build_canonical.py, extract_footprints.py)
+data/designs_canonical.parquet
+results/footprints_long.parquet
+results/footprints_consensus.parquet
+# reference PDBs (re-download from RCSB)
+refs/*.cif
+# Blender render inputs/outputs (regenerate: export_pdbs_for_blender.py; render via operator template)
+figures/blender/pdbs/
+figures/blender/renders/
+figures/blender/*.blend
+figures/blender/*.blend1
+figures/blender/*.MNSession
+# RunPod regeneration: large structures + MSA + shard inputs (regenerable via infra/)
+data/structures_regen/
+infra/target_msa/
+infra/target.a3m
+infra/*_input.csv
+infra/af2m_shard*.csv
+infra/designs_all.json
+figures/blender/sample_renders/tile_*.png
+figures/blender/sample_renders/fig8_face_*.png
+# per-panel render intermediates (regenerate via render_fig8_panels.py / render_fig10b.py / render_fig10c.py)
+figures/blender/sample_renders/fig8p_*.png
+figures/blender/sample_renders/fig10b_design017.png
+figures/blender/sample_renders/fig10c_superposed.png
+figures/blender/fig10b_labels.json
+figures/blender/fig10b_hotspots.json

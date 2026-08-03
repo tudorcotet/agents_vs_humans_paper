@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "n_rows": 141,
+  "n_cols": 362,
+  "source_parquet": "data/designs.parquet",
+  "source_sha256": "60a18a17ae3661e83b6c79820ca48f1dde0d18a9c761b174753b22ad740e8148",
+  "output_sha256": "2a957cd6518c3c6f900f5b958c1736f73e8a9fbc417c57eb6486179ae80f0036",
+  "populations": {
+    "P_all": 141,
+    "P_screened": 100,
+    "P_expressed": 89,
+    "P_kd": 36
+  },
+  "population_tier_counts": {
+    "expressed_nonbinder": 52,
+    "non_screened": 41,
+    "hit_fitted": 36,
+    "screened_not_expressed": 11,
+    "hit_unfittable": 1
+  },
+  "added_columns": [
+    "p_all",
+    "p_screened",
+    "p_expressed",
+    "p_kd",
+    "population_tier",
+    "kd_quality_flag"
+  ],
+  "trem2_numbering": {
+    "construct_len": 175,
+    "chainA_is_target": true,
+    "chainB_is_binder": true,
+    "uniprot": "Q9NZC2",
+    "uniprot_from_construct_pos": "uniprot = construct_pos + 17",
+    "igsf_domain_uniprot": [
+      19,
+      132
+    ],
+    "igsf_domain_construct_pos": [
+      2,
+      115
+    ],
+    "stalk_uniprot": [
+      133,
+      174
+    ],
+    "stalk_construct_pos": [
+      116,
+      157
+    ],
+    "linker_construct_pos": [
+      158,
+      165
+    ],
+    "his_tag_construct_pos": [
+      166,
+      175
+    ]
+  },
+  "notes": [
+    "P_expressed (expressed==True) is the denominator for binder-vs-non-binder comparisons.",
+    "P_kd = 36: 37 hits minus design 5 (NovoFy, binding_label=weak) which has no fittable Kd.",
+    "No interval censoring exists; every fitted Kd is a point estimate from >=2 replicate fits."
+  ]
+}

@@ -1,0 +1,15 @@
+binder,kd_nM,category,assay,immobilized_partner,valency_avidity,fit_type,target_construct,citation,source_verified
+This study (best),1.11,de novo TREM2,BLI/SPR kinetic (see note),design (Twin-Strep C-term),monomer,kinetic,Acro TR2-H52H5 TREM2 19–174,this study,measured; assay label under review (SPR in replicate table)
+This study (median of 36),91.8,de novo TREM2,BLI/SPR kinetic,design (Twin-Strep C-term),monomer,kinetic,Acro TR2-H52H5 TREM2 19–174,this study,measured
+scFv-2,1.0,anti-TREM2 Ab,SPR,TREM2 (biotin/SA chip),scFv oligomer (avidity flag),kinetic,TREM2 19–174,Szykowska 2021,epitope from 6YYE coords; KD from paper
+scFv-4,1.0,anti-TREM2 Ab,SPR,TREM2 (biotin/SA chip),scFv oligomer (avidity flag),kinetic,TREM2 19–174,Szykowska 2021,epitope from 6Y6C coords; KD from paper
+4D9,,anti-TREM2 Ab,?,?,?,?,stalk ~145–153,Schlepckow 2020,CHECK
+AL002,,anti-TREM2 Ab,?,?,?,?,stalk,clinical (Phase 2 fail),CHECK
+VHB937,,anti-TREM2 Ab,?,?,?,?,IgSF (epitope undisclosed),Novartis,no public affinity
+Perera Odesign2,80.0,de novo TREM2,MST,TREM2 labeled (10 nM fixed),monomer,equilibrium,Sino TREM2 19–174,Perera 2026,from register; MST floor ~5 nM
+Perera BindCraft8,370.0,de novo TREM2,MST,TREM2 labeled (10 nM fixed),monomer,equilibrium,Sino TREM2 19–174,Perera 2026,from register
+Adaptyv EGFR (best),1.21,cross-target,?,?,?,?,EGFR,Adaptyv,CHECK — context only
+BindCraft PD-L1,615.0,cross-target,?,?,?,?,PD-L1,BindCraft,CHECK — context only
+BindCraft CD45,14.7,cross-target,?,?,?,?,CD45,BindCraft,CHECK — context only
+BindCraft Der f7,12.8,cross-target,?,?,?,?,Der f7,BindCraft,CHECK — context only
+AlphaProteo (best),0.0085,cross-target,?,?,?,?,various,AlphaProteo,CHECK — context only

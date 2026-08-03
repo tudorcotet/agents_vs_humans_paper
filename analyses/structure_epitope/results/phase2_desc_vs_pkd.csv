@@ -1,0 +1,10 @@
+descriptor,spearman_rho,p,n
+bsa,0.501,0.002,36
+n_iface_binder,0.473,0.004,36
+iface_frac_hydrophobic,-0.305,0.071,36
+n_iface_target,0.266,0.116,36
+iface_frac_polar,0.262,0.122,36
+hbonds,0.252,0.137,36
+hbond_density_per100,0.202,0.238,36
+iface_frac_charged,0.117,0.497,36
+salt_bridges,0.072,0.674,36

@@ -1,0 +1,101 @@
+design_id,pdb,name,leaderboard_rank,submitted_ipsae,cohort,team,is_hit,kd_nM,binder_chain_len,topology
+13,pdbs/design_013.pdb,13_MRAZS_mosaic,1.0,0.945735,human,MRAZS,True,1.2511,93,>=4-helix
+14,pdbs/design_014.pdb,14_MRAZS_mosaic,2.0,0.937456,human,MRAZS,True,81.97735,81,>=4-helix
+16,pdbs/design_016.pdb,16_MRAZS_mosaic,3.0,0.935033,human,MRAZS,False,,89,>=4-helix
+1,pdbs/design_001.pdb,1_NovoFy_RFDiffusion_LigandMPNN_Boltz,4.0,0.927827,human,NovoFy,False,,100,>=4-helix
+35,pdbs/design_035.pdb,35_StanFold_PXDesign_ProteinMPNN,5.0,0.913015,human,StanFold,True,27.389000000000003,100,>=4-helix
+132,pdbs/design_132.pdb,132_GPT_5_2_PXDesign,6.0,0.909331,agent,GPT 5.2,True,3.636133333333333,100,>=4-helix
+102,pdbs/design_102.pdb,102_grok_4_1_fast_PXDesign,7.0,0.907648,agent,grok-4.1-fast,True,6.8485499999999995,100,>=4-helix
+12,pdbs/design_012.pdb,12_MRAZS_PXDesign,8.0,0.904077,human,MRAZS,False,,40,2-helix/hairpin
+45,pdbs/design_045.pdb,45_1000Tokens_PXDesign_Protenix_AF2,9.0,0.903413,human,1000Tokens,True,32.12065,85,>=4-helix
+15,pdbs/design_015.pdb,15_MRAZS_mosaic,10.0,0.90295,human,MRAZS,True,72.87365,91,3-helix bundle
+138,pdbs/design_138.pdb,138_GPT_5_2_PXDesign,11.0,0.900982,agent,GPT 5.2,True,46.2453,90,>=4-helix
+59,pdbs/design_059.pdb,59_crow_RFDiffusion_ProteinMPNN_Boltz2,12.0,0.899928,human,crow,False,,84,>=4-helix
+33,pdbs/design_033.pdb,33_StanFold_PXDesign_ProteinMPNN,13.0,0.898846,human,StanFold,True,69.7498,100,>=4-helix
+10,pdbs/design_010.pdb,10_NovoFy_RFDiffusion_LigandMPNN_Boltz,14.0,0.896484,human,NovoFy,False,,116,>=4-helix
+61,pdbs/design_061.pdb,61_crow_RFDiffusion_ProteinMPNN_Boltz2,15.0,0.892874,human,crow,False,,84,>=4-helix
+92,pdbs/design_092.pdb,92_qwen_3_5_plus_PXDesign,16.0,0.890956,agent,qwen-3.5-plus,False,,90,>=4-helix
+73,pdbs/design_073.pdb,73_BraiNSEY_BoltzGen,17.0,0.887033,human,BraiNSEY,False,,93,>=4-helix
+8,pdbs/design_008.pdb,8_NovoFy_RFDiffusion_LigandMPNN_Boltz,18.0,0.885999,human,NovoFy,False,,56,3-helix bundle
+6,pdbs/design_006.pdb,6_NovoFy_RFDiffusion_LigandMPNN_Boltz,19.0,0.88512,human,NovoFy,True,706.0057,90,>=4-helix
+63,pdbs/design_063.pdb,63_BART_bio_BoltzGen_Boltz2,20.0,0.882017,human,BART.bio,True,1154.57135,80,3-helix bundle
+82,pdbs/design_082.pdb,82_claude_sonnet_4_6_PXDesign,21.0,0.880691,agent,claude-sonnet-4.6,True,34.906400000000005,80,2-helix/hairpin
+141,pdbs/design_141.pdb,141_GPT_5_2_PXDesign,22.0,0.880068,agent,GPT 5.2,False,,90,3-helix bundle
+3,pdbs/design_003.pdb,3_NovoFy_RFDiffusion_LigandMPNN_Boltz,23.0,0.87934,human,NovoFy,False,,116,>=4-helix
+17,pdbs/design_017.pdb,17_MRAZS_mosaic,24.0,0.879268,human,MRAZS,True,1.11345,88,>=4-helix
+34,pdbs/design_034.pdb,34_StanFold_PXDesign_ProteinMPNN,25.0,0.878916,human,StanFold,True,12.47215,100,>=4-helix
+54,pdbs/design_054.pdb,54_crow_RFDiffusion_ProteinMPNN_Boltz2,26.0,0.878717,human,crow,False,,84,>=4-helix
+57,pdbs/design_057.pdb,57_crow_RFDiffusion_ProteinMPNN_Boltz2,27.0,0.875611,human,crow,False,,84,>=4-helix
+75,pdbs/design_075.pdb,75_BraiNSEY_BindCraft,28.0,0.874674,human,BraiNSEY,False,,108,3-helix bundle
+55,pdbs/design_055.pdb,55_crow_RFDiffusion_ProteinMPNN_Boltz2,29.0,0.8736,human,crow,True,591.7795,84,>=4-helix
+18,pdbs/design_018.pdb,18_MRAZS_mosaic,30.0,0.871905,human,MRAZS,False,,60,3-helix bundle
+22,pdbs/design_022.pdb,22_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,31.0,0.868597,human,EuroBros,True,215.597,91,3-helix bundle
+123,pdbs/design_123.pdb,123_GLM_5_PXDesign,32.0,0.866022,agent,GLM 5,True,1387.39155,80,3-helix bundle
+4,pdbs/design_004.pdb,4_NovoFy_RFDiffusion_LigandMPNN_Boltz,33.0,0.865808,human,NovoFy,False,,56,3-helix bundle
+133,pdbs/design_133.pdb,133_GPT_5_2_PXDesign,34.0,0.864449,agent,GPT 5.2,False,,90,3-helix bundle
+38,pdbs/design_038.pdb,38_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,35.0,0.863969,human,StanFold,False,,107,>=4-helix
+79,pdbs/design_079.pdb,79_BraiNSEY_Struct_Evo,36.0,0.862584,human,BraiNSEY,True,21.6617,245,beta/mixed
+27,pdbs/design_027.pdb,27_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,37.0,0.860344,human,EuroBros,False,,131,>=4-helix
+56,pdbs/design_056.pdb,56_crow_RFDiffusion_ProteinMPNN_Boltz2,38.0,0.858365,human,crow,False,,84,>=4-helix
+24,pdbs/design_024.pdb,24_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,39.0,0.855418,human,EuroBros,False,,131,>=4-helix
+134,pdbs/design_134.pdb,134_GPT_5_2_PXDesign,40.0,0.855302,agent,GPT 5.2,True,177.59050000000002,100,>=4-helix
+53,pdbs/design_053.pdb,53_crow_RFDiffusion_ProteinMPNN_Boltz2,41.0,0.854695,human,crow,True,949.04785,84,>=4-helix
+5,pdbs/design_005.pdb,5_NovoFy_RFDiffusion_LigandMPNN_Boltz,42.0,0.85428,human,NovoFy,True,,116,>=4-helix
+60,pdbs/design_060.pdb,60_crow_RFDiffusion_ProteinMPNN_Boltz2,43.0,0.853518,human,crow,True,1197.53735,84,>=4-helix
+58,pdbs/design_058.pdb,58_crow_RFDiffusion_ProteinMPNN_Boltz2,44.0,0.851623,human,crow,False,,84,>=4-helix
+26,pdbs/design_026.pdb,26_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,45.0,0.850362,human,EuroBros,False,,62,alpha+beta
+84,pdbs/design_084.pdb,84_claude_sonnet_4_6_Foundry,46.0,0.848438,agent,claude-sonnet-4.6,False,,84,>=4-helix
+103,pdbs/design_103.pdb,103_grok_4_1_fast_PXDesign,47.0,0.847931,agent,grok-4.1-fast,True,34.53495,100,>=4-helix
+21,pdbs/design_021.pdb,21_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,48.0,0.84706,human,EuroBros,True,86.49924999999999,89,alpha+beta
+48,pdbs/design_048.pdb,48_1000Tokens_PXDesign_Protenix_AF2,49.0,0.846611,human,1000Tokens,True,639.21695,75,3-helix bundle
+7,pdbs/design_007.pdb,7_NovoFy_RFDiffusion_LigandMPNN_Boltz,50.0,0.845749,human,NovoFy,False,,56,3-helix bundle
+2,pdbs/design_002.pdb,2_NovoFy_RFDiffusion_LigandMPNN_Boltz,51.0,0.836407,human,NovoFy,False,,90,>=4-helix
+91,pdbs/design_091.pdb,91_claude_sonnet_4_6_PXDesign,52.0,0.829435,agent,claude-sonnet-4.6,True,204.40915,80,3-helix bundle
+126,pdbs/design_126.pdb,126_GLM_5_PXDesign,53.0,0.827562,agent,GLM 5,False,,80,>=4-helix
+23,pdbs/design_023.pdb,23_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,54.0,0.82745,human,EuroBros,True,532.32575,65,2-helix/hairpin
+46,pdbs/design_046.pdb,46_1000Tokens_PXDesign_Protenix_AF2,55.0,0.826423,human,1000Tokens,True,503.49665,90,>=4-helix
+71,pdbs/design_071.pdb,71_BART_bio_ProteinMPNN_Boltz2,56.0,0.824369,human,BART.bio,False,,120,beta/mixed
+42,pdbs/design_042.pdb,42_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,57.0,0.821186,human,StanFold,False,,123,beta/mixed
+9,pdbs/design_009.pdb,9_NovoFy_RFDiffusion_LigandMPNN_Boltz,58.0,0.819162,human,NovoFy,False,,90,>=4-helix
+95,pdbs/design_095.pdb,95_qwen_3_5_plus_PXDesign,59.0,0.819015,agent,qwen-3.5-plus,True,137.75336666666666,90,3-helix bundle
+39,pdbs/design_039.pdb,39_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,60.0,0.814138,human,StanFold,False,,67,beta/mixed
+94,pdbs/design_094.pdb,94_qwen_3_5_plus_Foundry,61.0,0.81052,agent,qwen-3.5-plus,False,,100,>=4-helix
+106,pdbs/design_106.pdb,106_grok_4_1_fast_PXDesign,62.0,0.801823,agent,grok-4.1-fast,False,,100,>=4-helix
+31,pdbs/design_031.pdb,31_DeNovo_RFDiffusion3_ProteinMPNN_RosettaFold,63.0,0.796808,human,DeNovo,False,,78,>=4-helix
+114,pdbs/design_114.pdb,114_Gemini_3_1_Pro_PXDesign,64.0,0.796481,agent,Gemini 3.1 Pro,False,,80,>=4-helix
+29,pdbs/design_029.pdb,29_EuroBros_RFDiffusion2_with_common_fold_conditionnning_ProteinMPNN_Boltz2,65.0,0.796044,human,EuroBros,False,,65,beta/mixed
+112,pdbs/design_112.pdb,112_Gemini_3_1_Pro_PXDesign,66.0,0.792917,agent,Gemini 3.1 Pro,False,,80,>=4-helix
+30,pdbs/design_030.pdb,30_EuroBros_RFDiffusion2_with_common_fold_conditionnning_ProteinMPNN_Boltz2,67.0,0.792346,human,EuroBros,False,,52,3-helix bundle
+11,pdbs/design_011.pdb,11_MRAZS_PXDesign,68.0,0.792235,human,MRAZS,True,346.10474999999997,80,>=4-helix
+50,pdbs/design_050.pdb,50_1000Tokens_PXDesign_Protenix_AF2,69.0,0.791462,human,1000Tokens,False,,80,>=4-helix
+28,pdbs/design_028.pdb,28_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,70.0,0.788083,human,EuroBros,False,,68,3-helix bundle
+40,pdbs/design_040.pdb,40_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,71.0,0.753918,human,StanFold,False,,62,2-helix/hairpin
+88,pdbs/design_088.pdb,88_claude_sonnet_4_6_Foundry,72.0,0.751047,agent,claude-sonnet-4.6,False,,81,3-helix bundle
+90,pdbs/design_090.pdb,90_claude_sonnet_4_6_PXDesign,73.0,0.750666,agent,claude-sonnet-4.6,False,,80,3-helix bundle
+111,pdbs/design_111.pdb,111_grok_4_1_fast_RFPeptides,74.0,0.748681,agent,grok-4.1-fast,False,,12,loop/other
+98,pdbs/design_098.pdb,98_qwen_3_5_plus_PXDesign,75.0,0.744136,agent,qwen-3.5-plus,False,,90,>=4-helix
+62,pdbs/design_062.pdb,62_crow_RFDiffusion_ProteinMPNN_Boltz2,76.0,0.740593,human,crow,True,1634.8125999999995,84,>=4-helix
+137,pdbs/design_137.pdb,137_GPT_5_2_PXDesign,77.0,0.738767,agent,GPT 5.2,True,80.96844999999999,100,>=4-helix
+74,pdbs/design_074.pdb,74_BraiNSEY_BindCraft,78.0,0.733392,human,BraiNSEY,True,1.9082,112,beta/mixed
+86,pdbs/design_086.pdb,86_claude_sonnet_4_6_PXDesign,79.0,0.731221,agent,claude-sonnet-4.6,True,214.5512,80,3-helix bundle
+68,pdbs/design_068.pdb,68_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,80.0,0.728378,human,BART.bio,False,,62,3-helix bundle
+47,pdbs/design_047.pdb,47_1000Tokens_PXDesign_Protenix_AF2,81.0,0.723769,human,1000Tokens,True,46.148300000000006,85,3-helix bundle
+85,pdbs/design_085.pdb,85_claude_sonnet_4_6_Foundry,82.0,0.7063,agent,claude-sonnet-4.6,False,,65,beta/mixed
+25,pdbs/design_025.pdb,25_EuroBros_AF_Hallucination_ProteinMPNN_Pyrosetta_Boltz2,83.0,0.70384,human,EuroBros,True,97.1946,89,alpha+beta
+113,pdbs/design_113.pdb,113_Gemini_3_1_Pro_PXDesign,84.0,0.702436,agent,Gemini 3.1 Pro,False,,80,>=4-helix
+41,pdbs/design_041.pdb,41_StanFold_Boltzgen,85.0,0.702166,human,StanFold,False,,122,beta/mixed
+52,pdbs/design_052.pdb,52_1000Tokens_BoltzGen_Boltz2,86.0,0.701868,human,1000Tokens,False,,67,>=4-helix
+49,pdbs/design_049.pdb,49_1000Tokens_PXDesign_Protenix_AF2,87.0,0.696936,human,1000Tokens,False,,85,>=4-helix
+120,pdbs/design_120.pdb,120_Gemini_3_1_Pro_Foundry,88.0,0.694386,agent,Gemini 3.1 Pro,False,,65,>=4-helix
+125,pdbs/design_125.pdb,125_GLM_5_PXDesign,89.0,0.686125,agent,GLM 5,False,,80,>=4-helix
+139,pdbs/design_139.pdb,139_GPT_5_2_PXDesign,90.0,0.685601,agent,GPT 5.2,False,,90,3-helix bundle
+65,pdbs/design_065.pdb,65_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,91.0,0.681547,human,BART.bio,False,,62,3-helix bundle
+115,pdbs/design_115.pdb,115_Gemini_3_1_Pro_PXDesign,92.0,0.673624,agent,Gemini 3.1 Pro,False,,80,3-helix bundle
+76,pdbs/design_076.pdb,76_BraiNSEY_BoltzGen,93.0,0.671244,human,BraiNSEY,False,,119,beta/mixed
+121,pdbs/design_121.pdb,121_Gemini_3_1_Pro_Foundry,94.0,0.657119,agent,Gemini 3.1 Pro,False,,65,2-helix/hairpin
+105,pdbs/design_105.pdb,105_grok_4_1_fast_PXDesign,95.0,0.656687,agent,grok-4.1-fast,False,,100,>=4-helix
+122,pdbs/design_122.pdb,122_GLM_5_PXDesign,96.0,0.628205,agent,GLM 5,False,,80,>=4-helix
+87,pdbs/design_087.pdb,87_claude_sonnet_4_6_PXDesign,97.0,0.613104,agent,claude-sonnet-4.6,True,1062.2436333333333,80,>=4-helix
+99,pdbs/design_099.pdb,99_qwen_3_5_plus_Foundry,98.0,0.607256,agent,qwen-3.5-plus,False,,99,alpha+beta
+37,pdbs/design_037.pdb,37_StanFold_PPIFLOW_ProteinMPNN_FAMPNN,99.0,0.566053,human,StanFold,False,,126,beta/mixed
+69,pdbs/design_069.pdb,69_BART_bio_RFDiffusion_ProteinMPNN_Boltz2,100.0,0.547388,human,BART.bio,False,,62,3-helix bundle
