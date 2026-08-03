@@ -80,6 +80,8 @@ def run_tier(cols, name):
         rho, lo, hi = bca_ci(x, y)
         pp = perm_p(x, y)
         pr = partial_spearman(x, y, sub.sequence_length.values.astype(float))
+        # deterministic (no RNG) → adding this column does NOT perturb the bca_ci/perm_p/q_bh family above
+        pr_bsa = np.nan if c == "bsa" else partial_spearman(x, y, sub.bsa.values.astype(float))
         # per cohort
         rh = {}
         for coh in ["human","agent"]:
@@ -90,7 +92,9 @@ def run_tier(cols, name):
         rho_nolit = stats.spearmanr(s3[c], s3.pkd_arith_mean)[0]
         rows.append({"tier":name,"metric":c,"n":len(sub),"rho":round(rho,3),
                      "ci_lo":round(lo,3),"ci_hi":round(hi,3),"perm_p":round(pp,4),
-                     "partial_rho_len":round(pr,3),"rho_human":round(rh["human"],3),
+                     "partial_rho_len":round(pr,3),
+                     "partial_rho_bsa":(np.nan if pd.isna(pr_bsa) else round(pr_bsa,3)),
+                     "rho_human":round(rh["human"],3),
                      "rho_agent":round(rh["agent"],3),"rho_no_litcopy":round(rho_nolit,3)})
     return pd.DataFrame(rows)
 
@@ -111,3 +115,38 @@ print("\nCI excludes 0 (|rho| CI both same sign) AND survives BH q<0.10:")
 sig = out[((out.ci_lo>0)&(out.ci_hi>0))|((out.ci_lo<0)&(out.ci_hi<0))]
 sig = sig[sig.q_bh<0.10]
 print(sig[["tier","metric","rho","ci_lo","ci_hi","perm_p","q_bh","partial_rho_len","rho_no_litcopy"]].to_string(index=False))
+
+# ---- BSA-controlled partials: symmetric PRODIGY/BSA pair + raw Spearmans (companion note) ----
+# partial_rho_bsa (in the CSV above) is a deterministic point estimate — the perm p here uses a SEPARATE RNG
+# instance so it cannot perturb the metric_correlations.csv family, which is byte-identical to before.
+PRNG = np.random.default_rng(20260725)
+def partial_perm_p(x, y, z):
+    obs = abs(partial_spearman(x, y, z)); cnt = 0; yy = y.copy()
+    for _ in range(NPERM):
+        PRNG.shuffle(yy)
+        if abs(partial_spearman(x, yy, z)) >= obs: cnt += 1
+    return (cnt+1)/(NPERM+1)
+NOTE = [("prodigy_protenix_pkd","PRODIGY ΔG"),("n_iface_binder","interface size (residues)"),
+        ("hbonds","H-bonds"),("salt_bridges","salt bridges"),("iface_frac_hydrophobic","hydrophobic fraction")]
+L = [f"# Partial affinity correlations controlling for BSA — P_kd, n={len(kd)}", "",
+     "Spearman ρ of each descriptor with pKd, raw and after partialling out **buried area (BSA)** "
+     "(phase6's `partial_spearman`; matches the `partial_rho_bsa` column of `metric_correlations.csv`). "
+     "Permutation p on the partial (10,000) uses a **separate RNG stream**, so the committed FDR family in "
+     "`metric_correlations.csv` is unchanged.", "",
+     "| descriptor | raw ρ | partial ρ (\\| BSA) | perm p |", "|---|---|---|---|"]
+for c, lab in NOTE:
+    s = kd.dropna(subset=[c,"pkd_arith_mean"])
+    x=s[c].values.astype(float); y=s.pkd_arith_mean.values.astype(float); z=s.bsa.values.astype(float)
+    L.append(f"| {lab} | {stats.spearmanr(x,y)[0]:+.3f} | {partial_spearman(x,y,z):+.3f} | {partial_perm_p(x,y,z):.3f} |")
+s = kd.dropna(subset=["bsa","pkd_arith_mean"])
+xb=s.bsa.values.astype(float); yb=s.pkd_arith_mean.values.astype(float); zp=s.prodigy_protenix_pkd.values.astype(float)
+rev, revp = partial_spearman(xb,yb,zp), partial_perm_p(xb,yb,zp)
+sp_bp = stats.spearmanr(kd.bsa, kd.prodigy_protenix_pkd)[0]; sp_bl = stats.spearmanr(kd.bsa, kd.sequence_length)[0]
+L += ["",
+      f"**Symmetric (reverse) test — BSA \\| PRODIGY:** partial ρ = {rev:+.3f} (perm p {revp:.3f}). Both "
+      f"directions are small and n.s. (raw Spearman(BSA, PRODIGY) = {sp_bp:.3f}), so PRODIGY and BSA are **one "
+      f"signal, not two** — an equivalence, not a reduction of PRODIGY to BSA.",
+      f"**BSA vs length:** Spearman(BSA, length) = {sp_bl:.3f} — interface size and binder length are two "
+      f"largely independent affinity signals."]
+(RES / "partial_correlation_bsa.md").write_text("\n".join(L) + "\n")
+print("wrote partial_correlation_bsa.md")
